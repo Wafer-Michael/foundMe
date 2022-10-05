@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 2602770880
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d194c231a4eccb0c7e5e0e3d70a576d8
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c21d61fe394c58399df3c6fb5c7c99b3
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Maruyama/Texture/flooring_sample-1-950x950.jpg
+Dependencies: []

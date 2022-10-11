@@ -89,7 +89,7 @@ public class Tester_PlayerInputController : MonoBehaviour
         data.startPosition = basePosition;
         data.endPosition = basePosition + m_ovrHand.PointerPose.forward * m_rayDistance;
 
-        Debug.Log("StartPosition:" + data.startPosition);
+        //Debug.Log("StartPosition:" + data.startPosition);
         m_debugText.text = m_displayCountString + "\n" + data.startPosition.ToString();
 
         return data;

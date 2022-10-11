@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_camera: {fileID: 0}
-  m_speed: 60
+  m_speed: 120
 --- !u!1 &1339739145
 GameObject:
   m_ObjectHideFlags: 0

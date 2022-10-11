@@ -51,11 +51,14 @@ public class PlayerInputer : MonoBehaviour
         return moveVec.normalized;
     }
 
-    public Vector3 MouseMoveVec()
+    /// <summary>
+    /// マウスの移動ベクトルの取得
+    /// </summary>
+    /// <returns>マウスの移動ベクトル</returns>
+    public Vector3 CalculateMouseCameraMoveVec()
     {
-        var moveVec = Vector3.zero;
-
-
+        //var moveVec = new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0.0f);
+        var moveVec = new Vector3(0.0f, Input.GetAxis("Mouse X"), 0.0f);
 
         return moveVec;
     }

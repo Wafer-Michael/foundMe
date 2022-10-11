@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class TesterMover : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    float m_speed = 3.0f;
+    public float Speed => m_speed;
+
+    PlayerInputer Inputer { get; set; }
+
+    private void Awake()
+    {
+        Inputer = GetComponent<PlayerInputer>();
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position += (transform.forward * Time.deltaTime);
+        UpdateMove();
+    }
+
+    void UpdateMove()
+    {
+        var moveVec = Inputer.CalculateMoveVector();
+
+        transform.position += moveVec * Speed * Time.deltaTime;
     }
 }

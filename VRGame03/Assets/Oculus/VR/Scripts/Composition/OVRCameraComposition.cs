@@ -25,8 +25,8 @@ using System.Collections;
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
 
 public abstract class OVRCameraComposition : OVRComposition {
-	protected GameObject cameraFramePlaneObject = null;
-	protected float cameraFramePlaneDistance;
+	protected GameObject cameraFramePlaneObject = null;	//カメラフレームのプレーンオブジェクト
+	protected float cameraFramePlaneDistance;			//カメラフレームの距離
 
 	protected readonly bool hasCameraDeviceOpened = false;
 

@@ -29,23 +29,44 @@ using System.Collections;
 
 public abstract class OVRComposition {
 
-	public bool cameraInTrackingSpace = false;
-	public OVRCameraRig cameraRig = null;
+	public bool cameraInTrackingSpace = false;	//カメラのトラッキングスペース
+	public OVRCameraRig cameraRig = null;		//カメラリグ
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="parentObject">親オブジェクト</param>
+	/// <param name="mainCamera">メインカメラ</param>
+	/// <param name="configuration">構成</param>
 	protected OVRComposition(GameObject parentObject, Camera mainCamera, OVRMixedRealityCaptureConfiguration configuration) {
 		RefreshCameraRig(parentObject, mainCamera);
 	}
 
+	/// <summary>
+	/// 構成メソッド
+	/// </summary>
+	/// <returns></returns>
 	public abstract OVRManager.CompositionMethod CompositionMethod();
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="gameObject"></param>
+	/// <param name="mainCamera"></param>
+	/// <param name="configuration">キャプチャ構成</param>
+	/// <param name="trackingOrigin">トラッキング期限</param>
 	public abstract void Update(GameObject gameObject, Camera mainCamera, OVRMixedRealityCaptureConfiguration configuration, OVRManager.TrackingOrigin trackingOrigin);
 	public abstract void Cleanup();
 
+	/// <summary>
+	/// 位置決め
+	/// </summary>
 	public virtual void RecenterPose() { }
 
-	protected bool usingLastAttachedNodePose = false;
-	protected OVRPose lastAttachedNodePose = new OVRPose();            // Sometimes the attach node pose is not readable (lose tracking, low battery, etc.) Use the last pose instead when it happens
+	protected bool usingLastAttachedNodePose = false;		//
+	protected OVRPose lastAttachedNodePose = new OVRPose(); // Sometimes the attach node pose is not readable (lose tracking, low battery, etc.) Use the last pose instead when it happens
 
+	//
 	public void RefreshCameraRig(GameObject parentObject, Camera mainCamera)
 	{
 		OVRCameraRig cameraRig = mainCamera.GetComponentInParent<OVRCameraRig>();
@@ -58,6 +79,12 @@ public abstract class OVRComposition {
 		Debug.Log(cameraRig == null ? "[OVRComposition] CameraRig not found" : "[OVRComposition] CameraRig found");
 	}
 
+	/// <summary>
+	/// カメラのワールド座標の計算
+	/// </summary>
+	/// <param name="extrinsics"></param>
+	/// <param name="mainCamera"></param>
+	/// <returns></returns>
 	public OVRPose ComputeCameraWorldSpacePose(OVRPlugin.CameraExtrinsics extrinsics, Camera mainCamera)
 	{
 		OVRPose trackingSpacePose = ComputeCameraTrackingSpacePose(extrinsics);
@@ -65,6 +92,11 @@ public abstract class OVRComposition {
 		return worldSpacePose;
 	}
 
+	/// <summary>
+	/// カメラトラッキングの計算
+	/// </summary>
+	/// <param name="extrinsics"></param>
+	/// <returns></returns>
 	public OVRPose ComputeCameraTrackingSpacePose(OVRPlugin.CameraExtrinsics extrinsics)
 	{
 		OVRPose trackingSpacePose = new OVRPose();

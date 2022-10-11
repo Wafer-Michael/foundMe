@@ -947,7 +947,7 @@ public static partial class OVRPlugin
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
-	public struct BoundaryGeometry
+	public struct BoundaryGeometry	//ジオメトリ―の境界線
 	{
 		public BoundaryType BoundaryType;
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
@@ -976,22 +976,22 @@ public static partial class OVRPlugin
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CameraIntrinsics
 	{
-		public Bool IsValid;
-		public double LastChangedTimeSeconds;
-		public Fovf FOVPort;
-		public float VirtualNearPlaneDistanceMeters;
-		public float VirtualFarPlaneDistanceMeters;
-		public Sizei ImageSensorPixelResolution;
+		public Bool IsValid;							//有効かどうか
+		public double LastChangedTimeSeconds;			//最後に切り替えた時間
+		public Fovf FOVPort;							//
+		public float VirtualNearPlaneDistanceMeters;	//仮想空間の近い平面距離を設定。
+		public float VirtualFarPlaneDistanceMeters;		//
+		public Sizei ImageSensorPixelResolution;		//イメージの解像度(Resolution)
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	public struct CameraExtrinsics
 	{
-		public Bool IsValid;
-		public double LastChangedTimeSeconds;
-		public CameraStatus CameraStatusData;
-		public Node AttachedToNode;
-		public Posef RelativePose;
+		public Bool IsValid;					//有効かどうか
+		public double LastChangedTimeSeconds;	//最後に切り替えた時間
+		public CameraStatus CameraStatusData;	//
+		public Node AttachedToNode;				//ノードへの添付
+		public Posef RelativePose;				//相対的
 	}
 
 	public enum LayerLayout

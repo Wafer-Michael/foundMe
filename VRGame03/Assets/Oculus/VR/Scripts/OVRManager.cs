@@ -591,8 +591,8 @@ public class OVRManager : MonoBehaviour, OVRMixedRealityCaptureConfiguration
 
 	public enum CompositionMethod
 	{
-		External,
-		Direct
+		External,	//ŠO•t‚¯
+		Direct		//’¼Ú
 	}
 
 	/// <summary>

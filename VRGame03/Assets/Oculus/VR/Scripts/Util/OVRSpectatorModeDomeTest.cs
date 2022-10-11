@@ -59,6 +59,9 @@ public class OVRSpectatorModeDomeTest : MonoBehaviour {
 		OVRPlugin.Media.SetPlatformInitialized();
 		SpectatorCamera = defaultExternalCamera.transform.parent;
 #endif
+
+		
+
 	}
 
 	// Use this for initialization
@@ -199,6 +202,8 @@ public class OVRSpectatorModeDomeTest : MonoBehaviour {
 
 		//OVRPlugin.Media.SetPlatformCameraMode(OVRPlugin.Media.PlatformCameraMode.SpectatorMode);
 
+		//OVRPlugin.Media.
+
 #if OVR_ANDROID_MRC
 		// Trigger to switch between 1st person and spectator mode during casting to phone
 		if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
@@ -296,7 +301,8 @@ public class OVRSpectatorModeDomeTest : MonoBehaviour {
 		if (!defaultExternalCamera)
 		{
 			return;
-		}
+        }
+
 
 #if OVR_ANDROID_MRC
 		if (!OVRPlugin.Media.GetInitialized())

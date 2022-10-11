@@ -44,7 +44,7 @@ using Device = UnityEngine.XR.XRDevice;
 /// <summary>
 /// Miscellaneous extension methods that any script can use.
 /// </summary>
-public static partial class OVRExtensions
+public static partial class OVRExtensions	//Šg’£‹@”\
 {
 	/// <summary>
 	/// Converts the given world-space transform to an OVRPose in tracking space.
@@ -568,12 +568,12 @@ public struct OVRPose
 	/// <summary>
 	/// The position.
 	/// </summary>
-	public Vector3 position;
+	public Vector3 position;		//ˆÊ’u
 
 	/// <summary>
 	/// The orientation.
 	/// </summary>
-	public Quaternion orientation;
+	public Quaternion orientation;	//•ûŒü
 
 	/// <summary>
 	/// Multiplies two poses.

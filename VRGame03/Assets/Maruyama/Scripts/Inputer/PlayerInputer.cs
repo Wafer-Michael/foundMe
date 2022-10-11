@@ -51,6 +51,15 @@ public class PlayerInputer : MonoBehaviour
         return moveVec.normalized;
     }
 
+    public Vector3 MouseMoveVec()
+    {
+        var moveVec = Vector3.zero;
+
+
+
+        return moveVec;
+    }
+
     /// <summary>
     /// ‚Â‚Ü‚Şsˆ×
     /// </summary>

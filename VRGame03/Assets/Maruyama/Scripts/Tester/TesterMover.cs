@@ -23,6 +23,7 @@ public class TesterMover : MonoBehaviour
     void Update()
     {
         UpdateMove();
+        UpdateCameraDirection();
     }
 
     void UpdateMove()
@@ -30,5 +31,10 @@ public class TesterMover : MonoBehaviour
         var moveVec = Inputer.CalculateMoveVector();
 
         transform.position += moveVec * Speed * Time.deltaTime;
+    }
+
+    void UpdateCameraDirection()
+    {
+        
     }
 }

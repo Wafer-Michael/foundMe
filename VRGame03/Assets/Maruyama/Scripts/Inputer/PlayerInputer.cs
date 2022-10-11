@@ -7,10 +7,42 @@ public class PlayerInputer : MonoBehaviour
     [SerializeField]
     OVRHand m_ovrHand;
 
+    /// <summary>
+    /// キーボードからの移動入力処理
+    /// </summary>
+    /// <returns>移動力を返す。</returns>
+    private Vector3 CalculateKeyBoardMoveVector()
+    {
+        var moveVec = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            moveVec += Vector3.forward;
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            moveVec += Vector3.back;
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveVec += Vector3.left;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveVec += Vector3.right;
+        }
+
+        return moveVec;
+    }
+
     public Vector3 CalculateMoveVector()
     {
         var stickVec = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick);
         var moveVec = new Vector3(stickVec.x, 0, stickVec.y);
+        moveVec += CalculateKeyBoardMoveVector();
 
         return moveVec;
     }

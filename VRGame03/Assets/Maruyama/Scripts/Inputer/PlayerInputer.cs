@@ -10,7 +10,7 @@ public class PlayerInputer : MonoBehaviour
     /// <summary>
     /// キーボードからの移動入力処理
     /// </summary>
-    /// <returns>移動力を返す。</returns>
+    /// <returns>移動力を返す</returns>
     private Vector3 CalculateKeyBoardMoveVector()
     {
         var moveVec = Vector3.zero;
@@ -38,13 +38,17 @@ public class PlayerInputer : MonoBehaviour
         return moveVec;
     }
 
+    /// <summary>
+    /// 移動方向を取得
+    /// </summary>
+    /// <returns>移動方向</returns>
     public Vector3 CalculateMoveVector()
     {
         var stickVec = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick);
         var moveVec = new Vector3(stickVec.x, 0, stickVec.y);
         moveVec += CalculateKeyBoardMoveVector();
 
-        return moveVec;
+        return moveVec.normalized;
     }
 
     /// <summary>

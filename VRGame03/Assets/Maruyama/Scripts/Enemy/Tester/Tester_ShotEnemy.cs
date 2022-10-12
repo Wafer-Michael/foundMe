@@ -75,7 +75,7 @@ public class Tester_ShotEnemy : EnemyBase, I_Damaged
 
     public void Damaged(DamageData data)
     {
-
+        gameObject.layer = 0;
     }
 
 }

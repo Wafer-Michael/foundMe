@@ -88,4 +88,8 @@ public class PlayerInputer : MonoBehaviour
             m_ovrHand.GetFingerIsPinching(OVRHand.HandFinger.Thumb);
     }
 
+    static public bool IsShot()
+    {
+        return Input.GetMouseButton(0);
+    }
 }

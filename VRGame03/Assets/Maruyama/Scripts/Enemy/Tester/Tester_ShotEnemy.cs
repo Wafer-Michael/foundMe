@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(TargetManager))]
 [RequireComponent(typeof(EyeSearchRange))]
 [RequireComponent(typeof(RotationController))]
-public class Tester_ShotEnemy : EnemyBase
+public class Tester_ShotEnemy : EnemyBase, I_Damaged
 {
     [SerializeField]
     List<WeaponBase> m_weapons = new List<WeaponBase>();
@@ -16,6 +16,10 @@ public class Tester_ShotEnemy : EnemyBase
 
     [SerializeField]
     List<GameObject> m_searchTargets = new List<GameObject>();
+
+    [SerializeField]
+    bool m_isShot = true;
+    bool IsShot => m_isShot;
 
     private void Awake()
     {
@@ -58,7 +62,7 @@ public class Tester_ShotEnemy : EnemyBase
 
     void Shot()
     {
-        if (!m_targetManager.HasTarget())
+        if (!m_targetManager.HasTarget() || !IsShot)
         {
             return;
         }
@@ -68,4 +72,10 @@ public class Tester_ShotEnemy : EnemyBase
             weapon?.Shot(m_targetManager.CalculateSelfToTargetVector());
         }
     }
+
+    public void Damaged(DamageData data)
+    {
+
+    }
+
 }

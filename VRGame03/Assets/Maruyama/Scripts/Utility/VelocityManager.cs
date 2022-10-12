@@ -4,6 +4,7 @@ using UnityEngine;
 
 //using MaruUtility;
 
+[RequireComponent(typeof(Rigidbody))]
 public class VelocityManager : MonoBehaviour
 {
     #region メンバ変数

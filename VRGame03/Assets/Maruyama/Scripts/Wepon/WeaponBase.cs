@@ -34,6 +34,15 @@ public class WeaponBase : MonoBehaviour
     /// <summary>
     /// 撃つ処理
     /// </summary>
+    /// <returns>生成した弾オブジェクト</returns>
+    public GameObject Shot()
+    {
+        return Shot(transform.forward);
+    }
+
+    /// <summary>
+    /// 撃つ処理
+    /// </summary>
     /// <param name="direction">撃つ方向</param>
     /// <returns>生成した弾オブジェクト</returns>
     public GameObject Shot(Vector3 direction)

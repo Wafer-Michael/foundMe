@@ -30,5 +30,6 @@ public class BulletBase : MonoBehaviour
     public void Shot(Vector3 direction, float weaponSpeed = 1.0f)
     {
         m_velocityManager.velocity = direction.normalized * weaponSpeed * m_param.speed;
+        transform.forward = direction;
     }
 }

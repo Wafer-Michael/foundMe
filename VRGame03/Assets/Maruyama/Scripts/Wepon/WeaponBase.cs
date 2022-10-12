@@ -19,6 +19,18 @@ public class WeaponBase : MonoBehaviour
     private Parametor m_param;  //パラメータ
     public Parametor Param => m_param;
 
+    private GameTimer m_timer = new GameTimer();
+
+    private void Start()
+    {
+        m_timer.ResetTimer(0);
+    }
+
+    private void Update()
+    {
+        m_timer.UpdateTimer();
+    }
+
     /// <summary>
     /// 撃つ処理
     /// </summary>
@@ -26,12 +38,24 @@ public class WeaponBase : MonoBehaviour
     /// <returns>生成した弾オブジェクト</returns>
     public GameObject Shot(Vector3 direction)
     {
+        if (!IsShot())  //撃てないなら撃たない。
+        {
+            return null;
+        }
+
         //弾の生成
         var bulletObject = Instantiate(m_param.prefab, m_param.CreatePosition, Quaternion.identity);
         //弾に撃ったことを伝える。
         var bullet = bulletObject.GetComponent<BulletBase>();
         bullet?.Shot(direction, m_param.speed);
 
+        m_timer.ResetTimer(m_param.interval);   //インターバルカウントの開始
+
         return bulletObject;
+    }
+
+    public bool IsShot()
+    {
+        return m_timer.IsTimeUp;
     }
 }

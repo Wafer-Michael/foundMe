@@ -29,6 +29,6 @@ public class BulletBase : MonoBehaviour
     /// <param name="weaponSpeed">武器ごとの発射スピード</param>
     public void Shot(Vector3 direction, float weaponSpeed = 1.0f)
     {
-        m_velocityManager.velocity = direction * weaponSpeed * m_param.speed;
+        m_velocityManager.velocity = direction.normalized * weaponSpeed * m_param.speed;
     }
 }

@@ -88,8 +88,31 @@ public class PlayerInputer : MonoBehaviour
             m_ovrHand.GetFingerIsPinching(OVRHand.HandFinger.Thumb);
     }
 
+    /// <summary>
+    /// グーポーズ
+    /// </summary>
+    /// <returns></returns>
+    static public bool IsHandRock(OVRHand hand)
+    {
+        const float NearRange = 0.8f;
+
+        return hand.GetFingerPinchStrength(OVRHand.HandFinger.Thumb) >= NearRange;
+    }
+
+
+
+    /// <summary>
+    /// 撃つボタン
+    /// </summary>
+    /// <returns></returns>
     static public bool IsShot()
     {
         return Input.GetMouseButton(0);
     }
+
+    static public bool IsTesterDamage()
+    {
+        return Input.GetMouseButtonDown(1);
+    }
+
 }

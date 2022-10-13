@@ -6,6 +6,11 @@ using UnityEngine;
 public struct DamageData
 {
     public float damageValue;   //ダメージ値
+
+    public DamageData(float value)
+    {
+        this.damageValue = value;
+    }
 }
 
 

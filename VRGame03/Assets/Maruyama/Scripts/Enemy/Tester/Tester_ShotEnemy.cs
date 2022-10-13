@@ -33,6 +33,12 @@ public class Tester_ShotEnemy : EnemyBase, I_Damaged
         UpdateTargetManager();
         UpdateRotation();
         Shot();
+
+        //テスター
+        if (PlayerInputer.IsTesterDamage())
+        {
+            Damaged(new DamageData(1));
+        }
     }
 
     void UpdateTargetManager()
@@ -75,6 +81,11 @@ public class Tester_ShotEnemy : EnemyBase, I_Damaged
 
     public void Damaged(DamageData data)
     {
+        foreach(Transform child in GetComponentInChildren<Transform>())
+        {
+            child.gameObject.layer = 0;
+        }
+
         gameObject.layer = 0;
     }
 

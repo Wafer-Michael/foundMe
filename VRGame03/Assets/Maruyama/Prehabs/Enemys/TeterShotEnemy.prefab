@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 1187930810099542418}
   - component: {fileID: 1187930810099542419}
   - component: {fileID: 5440714127332798326}
+  - component: {fileID: 1456964231224662308}
   m_Layer: 0
   m_Name: TeterShotEnemy
   m_TagString: Untagged
@@ -298,6 +299,7 @@ MonoBehaviour:
   - {fileID: 346683114}
   m_searchTargets:
   - {fileID: 0}
+  m_isShot: 1
 --- !u!114 &1187930810099542418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,3 +345,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rotationSpeed: 3
+--- !u!114 &1456964231224662308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6697233533551285737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: debd413156c18a04caa1828962e5a5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_colorType: 0
+  m_material: {fileID: 0}

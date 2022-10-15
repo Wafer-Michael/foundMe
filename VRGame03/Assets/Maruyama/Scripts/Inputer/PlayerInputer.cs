@@ -92,14 +92,10 @@ public class PlayerInputer : MonoBehaviour
     /// グーポーズ
     /// </summary>
     /// <returns></returns>
-    static public bool IsHandRock(OVRHand hand)
+    static public bool IsHandRock(OVRHand hand, float nearRange = 0.8f)
     {
-        const float NearRange = 0.8f;
-
-        return hand.GetFingerPinchStrength(OVRHand.HandFinger.Thumb) >= NearRange;
+        return hand.GetFingerPinchStrength(OVRHand.HandFinger.Thumb) >= nearRange;
     }
-
-
 
     /// <summary>
     /// 撃つボタン
@@ -110,9 +106,22 @@ public class PlayerInputer : MonoBehaviour
         return Input.GetMouseButton(0);
     }
 
+    //--------------------------------------------------------------------------------------
+    ///	テスト入力
+    //--------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// テストダメージ入力
+    /// </summary>
+    /// <returns></returns>
     static public bool IsTesterDamage()
     {
         return Input.GetMouseButtonDown(1);
+    }
+
+    static public bool IsChangeColor()
+    {
+        return Input.GetKeyDown(KeyCode.P);
     }
 
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandPose : MonoBehaviour
+public class HandPose
 {
     public enum Pose
     {
@@ -14,7 +14,7 @@ public class HandPose : MonoBehaviour
     /// <summary>
     /// 現在のポーズを取得する
     /// </summary>
-    public Pose GetPose(OVRCustomSkeleton skeleton)
+    static public Pose GetPose(OVRCustomSkeleton skeleton)
     {
         System.Byte pose = 0x00; // 曲がっている指
 
@@ -46,7 +46,7 @@ public class HandPose : MonoBehaviour
     /// そのポーズを取っているかを判定する
     /// </summary>
     /// <param name="pose">判定したいポーズ</param>
-    public bool IsPose(Pose pose, OVRCustomSkeleton skeleton)
+    static public bool IsPose(Pose pose, OVRCustomSkeleton skeleton)
     {
         bool result = false;
 

@@ -21,6 +21,8 @@ public class ColorFilterTargeter : MonoBehaviour
     private void Start()
     {
         ChangeColor();
+
+        
     }
 
     /// <summary>

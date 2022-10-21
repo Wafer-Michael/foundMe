@@ -51,11 +51,21 @@ public class ColorFilterManager : SingletonMonoBehaviour<ColorFilterManager>
 
     private void Start()
     {
+        if(m_filter == null)
+        {
+            return;
+        }
+
         ChangeNextColor();
     }
 
     private void Update()
     {
+        if (m_filter == null)
+        {
+            return;
+        }
+
         if (!CanChangeColor())
         {
             return;

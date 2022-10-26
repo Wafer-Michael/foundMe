@@ -1778,6 +1778,7 @@ GameObject:
   - component: {fileID: 1684111137}
   - component: {fileID: 1684111136}
   - component: {fileID: 1684111135}
+  - component: {fileID: 1684111138}
   m_Layer: 5
   m_Name: FingerPitchDebug (1)
   m_TagString: Untagged
@@ -1918,6 +1919,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684111133}
   m_CullTransparentMesh: 1
+--- !u!114 &1684111138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684111133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4a6163814e2b945a9954c1a2986cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_debugSkeleton: {fileID: 1809662276}
+  m_debugText: {fileID: 1684111136}
 --- !u!1001 &1751079628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3003,7 +3018,7 @@ PrefabInstance:
     - target: {fileID: 6697233533551520605, guid: 30fd49b5d0e1f8e439474b0ec563ddf6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.71
+      value: -0.73
       objectReference: {fileID: 0}
     - target: {fileID: 6697233533551520605, guid: 30fd49b5d0e1f8e439474b0ec563ddf6,
         type: 3}
@@ -3013,7 +3028,7 @@ PrefabInstance:
     - target: {fileID: 6697233533551520605, guid: 30fd49b5d0e1f8e439474b0ec563ddf6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.72
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6697233533551520605, guid: 30fd49b5d0e1f8e439474b0ec563ddf6,
         type: 3}

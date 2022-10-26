@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class HandPoseDebug : MonoBehaviour
 {
-    HandPose.Pose pose;
+    private HandPose.Pose m_beforePose = HandPose.Pose.NONE;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    OVRCustomSkeleton m_debugSkeleton;
+
+    [SerializeField]
+    TMPro.TextMeshProUGUI m_debugText;
 
     // Update is called once per frame
     void Update()
     {
-        OVRCustomSkeleton skeleton = new OVRCustomSkeleton();
-        pose = HandPose.GetPose(skeleton);
+        HandPose.Pose pose;
+        pose = HandPose.GetPose(m_debugSkeleton);
+
+        Debug.Log("ÅöÅ`" + pose.ToString() + "ÅöÅ`");
+        m_debugText.text = pose.ToString();
+
+        if (pose != m_beforePose)
+        {
+            m_beforePose = pose;
+        }
     }
 }

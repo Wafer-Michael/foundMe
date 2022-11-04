@@ -78,6 +78,19 @@ public class PlayerInputer : MonoBehaviour
         return true;
     }
 
+    static public bool IsFingerPinch(OVRHand hand, params OVRHand.HandFinger[] handFingers)
+    {
+        foreach (var handFinger in handFingers)
+        {
+            if (!hand.GetFingerIsPinching(handFinger))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /// <summary>
     /// つまむ行為(人差し指と親指)
     /// </summary>

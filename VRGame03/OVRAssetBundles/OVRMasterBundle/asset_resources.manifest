@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 861840740
+CRC: 340708698
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 39b4cb6816dd62e2d2ce79d3c921b80b
+    Hash: fb5f86bb95b9298cec780e91e96a3c1c
   TypeTreeHash:
     serializedVersion: 2
     Hash: f282709b966b22b41d85d7a07f0847fa
@@ -147,4 +147,6 @@ Assets:
 - Assets/Oculus/VR/Resources/Texture2D Blit.shader
 - Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt
 - Assets/Oculus/VR/Resources/Unlit Transparent Color.shader
-Dependencies: []
+Dependencies:
+- E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_shader0
+- E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_ttf0

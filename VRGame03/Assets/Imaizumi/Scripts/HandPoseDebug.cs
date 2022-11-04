@@ -18,7 +18,7 @@ public class HandPoseDebug : MonoBehaviour
         HandPose.Pose pose;
         pose = HandPose.GetPose(m_debugSkeleton);
 
-        Debug.Log("š`" + pose.ToString() + "š`");
+        //Debug.Log("š`" + pose.ToString() + "š`");
         m_debugText.text = pose.ToString();
 
         if (pose != m_beforePose)

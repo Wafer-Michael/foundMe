@@ -34,6 +34,9 @@ public class Tester_PlayerInputController : MonoBehaviour
 
     string m_displayCountString = "";
 
+    [SerializeField]
+    Blink m_blink;
+
     struct LineRendererData {
         public Vector3 startPosition;  //開始位置
         public Vector3 endPosition;    //終了位置
@@ -43,6 +46,11 @@ public class Tester_PlayerInputController : MonoBehaviour
             this.startPosition = startPosition;
             this.endPosition = endPosition;
         }
+    }
+
+    private void Awake()
+    {
+       // m_blink = GetComponent<Blink>();
     }
 
     void Start()
@@ -110,6 +118,8 @@ public class Tester_PlayerInputController : MonoBehaviour
 
     void RayHit()
     {
+        //return;
+
         //var data = CalculateRenderData();
         var ray = new Ray(m_ovrHand.PointerPose.position + m_camera.transform.position, m_ovrHand.PointerPose.forward * m_rayDistance);
 
@@ -120,6 +130,8 @@ public class Tester_PlayerInputController : MonoBehaviour
 
             var forceDirection = otherObject.transform.position - m_ovrHand.PointerPose.position;
             rigit?.AddForce(forceDirection.normalized * m_forcePower);
+
+            m_blink?.StartMove(transform.position, hitInfo.collider.transform.position);
         }
 
     }

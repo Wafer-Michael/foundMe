@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3041433416
+CRC: 1185074552
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f1aa038abe7ee518213471bbfceb9288
+    Hash: 006e6e4685d0ba17e82e26397858d890
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f3d276292fe8d1d68a1f117c59e9ce0d
+    Hash: 5cfde277c59e2844be8c85dba6ef7c0e
 HashAppended: 0
 ClassTypes:
 - Class: 21
@@ -15,17 +15,25 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
-- Class: 84
-  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Oculus/VR/Meshes/OculusTouchForQuestAndRiftS/Materials/OculusTouchForQuestAndRiftS_Material.mat
-- Assets/Oculus/VR/Materials/CubeMaterial.mat
-- Assets/Oculus/VR/Materials/PlainMaterial.mat
+- Assets/Oculus/VR/Materials/BasicHandMaterial.mat
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/lattice.mat
+- Assets/Maruyama/Material/LineRenderMaterial.mat
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/lattice floor.mat
 - Assets/Oculus/VR/Meshes/OculusTouchForRift/Materials/OculusTouchForRift_Material.mat
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/Palletes/base color.mat
+- Assets/Maruyama/Material/ColorFilterMaterial.mat
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/white emision.mat
+- Assets/Maruyama/Material/Enemys/TestShotEnemy_Green.mat
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/window.mat
 - Assets/Oculus/VR/Meshes/OculusTouchForQuest2/Materials/OculusTouchForQuest2_MAT.mat
-- Assets/Oculus/VR/Materials/SelfieImage.mat
+- Assets/Maruyama/Material/StainedGlass.mat
+- Assets/Maruyama/Material/TeserEnemyEyeMaterial.mat
+- Assets/Maruyama/Texture/Materials/flooring_sample-1-950x950.mat
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/Materials/base color.mat
 Dependencies:
+- E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_jpg0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_png0
-- E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_rendertexture0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_tga0

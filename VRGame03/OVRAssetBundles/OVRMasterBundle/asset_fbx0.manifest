@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2442662156
+CRC: 3673212329
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6621030f2fbef7132eb444182f5baf10
+    Hash: 5b455e12edc252db48340a02b9631b78
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 41d943a52ac01a56a4a88ed384921e1f
+    Hash: f991f80580d5c93b0763ecc3a2dc9cfa
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -14,6 +14,10 @@ ClassTypes:
 - Class: 4
   Script: {instanceID: 0}
 - Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
   Script: {instanceID: 0}
 - Class: 43
   Script: {instanceID: 0}
@@ -29,11 +33,24 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/glass_panel_1.fbx
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/floor_2_LOD1.fbx
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/floor_2_no_lattice_LOD1.fbx
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/Sphere_16_extended.fbx
 - Assets/Oculus/VR/Meshes/OculusTouchForQuest2/OculusTouchForQuest2_Right.fbx
-- Assets/Oculus/VR/Meshes/OculusTouchForQuestAndRiftS/OculusTouchForQuestAndRiftS_Left.fbx
 - Assets/Oculus/VR/Meshes/OculusTouchForQuest2/OculusTouchForQuest2_Left.fbx
+- Assets/Oculus/VR/Meshes/OculusTouchForQuestAndRiftS/OculusTouchForQuestAndRiftS_Left.fbx
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/Joint_Y_6.fbx
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/floor_2_no_lattice_LOD0.fbx
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/decorative_wall_1_LOD1.fbx
 - Assets/Oculus/VR/Meshes/OculusTouchForQuestAndRiftS/OculusTouchForQuestAndRiftS_Right.fbx
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/floor_4.fbx
+- Assets/Oculus/VR/Meshes/HandTracking/OculusHand_R.fbx
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/decorative_wall_1_LOD0.fbx
+- Assets/Oculus/VR/Meshes/HandTracking/OculusHand_L.fbx
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/floor_2_blank.fbx
 - Assets/Oculus/VR/Meshes/OculusTouchForRift/left_touch_controller_model_skel.fbx
+- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/floor_2_LOD0.fbx
 - Assets/Oculus/VR/Meshes/OculusTouchForRift/right_touch_controller_model_skel.fbx
 Dependencies:
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_mat0

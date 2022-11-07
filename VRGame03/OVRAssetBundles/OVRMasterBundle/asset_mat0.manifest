@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1185074552
+CRC: 3841006779
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 006e6e4685d0ba17e82e26397858d890
+    Hash: 79f039f1872a918b68b7ae57f909ba49
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5cfde277c59e2844be8c85dba6ef7c0e
@@ -21,6 +21,8 @@ Assets:
 - Assets/Oculus/VR/Materials/BasicHandMaterial.mat
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/lattice.mat
 - Assets/Maruyama/Material/LineRenderMaterial.mat
+- Assets/Free_Assets/Decrepit Dungeon LITE/Materials/Bricks.mat
+- Assets/Free_Assets/Decrepit Dungeon LITE/Materials/Stone_B.mat
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/lattice floor.mat
 - Assets/Oculus/VR/Meshes/OculusTouchForRift/Materials/OculusTouchForRift_Material.mat
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/Palletes/base color.mat

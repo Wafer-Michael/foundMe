@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3088556864
+CRC: 2236519569
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d87f4da7c3a8ae2cfbe4e952e1bb0f2c
+    Hash: c6448280c81851eed989a970e6850208
   TypeTreeHash:
     serializedVersion: 2
     Hash: c21d61fe394c58399df3c6fb5c7c99b3
@@ -15,6 +15,7 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Detail_NRM.png
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/base-color-normal.png
 - Assets/Oculus/VR/Textures/HandTracking/HandTracking_uvmap_2048.png
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/window_big.png
@@ -23,6 +24,11 @@ Assets:
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/window_big_emission_mask.png
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/window_big_transparent_mask.png
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/mettalic.png
+- Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Bricks.png
+- Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Bricks_NRM.png
+- Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Stone_B.png
 - Assets/Oculus/VR/Textures/OculusTouchForRift/touchController_albedo.png
+- Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Stone_B_NRM.png
+- Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Detail.png
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/lattice.png
 Dependencies: []

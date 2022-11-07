@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3738836174
+CRC: 4207782936
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6fc0035cc1297811cc41d8af157ea5bd
+    Hash: 795a95b884310b81d93b08c92f202020
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 9bc7d35b30908f9dcfb1b29ff42051bb
+    Hash: 962aae68ad055c70b47736397f4e9205
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -178,8 +178,9 @@ Assets:
 - Assets/Maruyama/Prehabs/PCUserCamera.prefab
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Prefabs/Corridors/Corridor_2.prefab
 - Assets/Maruyama/Prehabs/Manager/ColorFilterManager.prefab
-- Assets/Oculus/VR/Prefabs/OVRCustomHandPrefab_R.prefab
+- Assets/Free_Assets/Decrepit Dungeon LITE/Prefabs/Floors/Floor_A.prefab
 - Assets/Maruyama/Prehabs/DefaultCanvas.prefab
+- Assets/Oculus/VR/Prefabs/OVRCustomHandPrefab_R.prefab
 - Assets/Maruyama/Prehabs/Enviroment/Plane.prefab
 - Assets/Maruyama/Prehabs/TestCube.prefab
 - Assets/Maruyama/Prehabs/PlayerObject_Test.prefab

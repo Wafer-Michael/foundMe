@@ -8,9 +8,20 @@ using UnityEngine;
 public class RotationController : MonoBehaviour
 {
     [SerializeField]
+    private GameObject m_rotationTarget;
+
+    [SerializeField]
     private float m_rotationSpeed = 3.0f;
 
     private Vector3 m_direct = new Vector3();
+
+    private void Start()
+    {
+        if (!m_rotationTarget)
+        {
+            m_rotationTarget = gameObject;
+        }
+    }
 
     private void Update()
     {
@@ -19,7 +30,7 @@ public class RotationController : MonoBehaviour
 
         if(direct != Vector3.zero)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation,
+            Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation,
                                      Quaternion.LookRotation(direct),
                                      m_rotationSpeed * Time.deltaTime);
         }

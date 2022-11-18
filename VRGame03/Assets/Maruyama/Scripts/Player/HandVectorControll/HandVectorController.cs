@@ -30,7 +30,7 @@ public class HandVectorController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(m_velocity);
+        //Debug.Log(m_velocity);
 
         m_debugText.text = m_velocity.ToString();
     }

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1427743834
+CRC: 3608712157
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4968c57d13103950f9b3c1065a07804e
+    Hash: fcc0df62933adecab77d5df84f2dd55b
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9a2ca7bdbd1871f7131daf57de908e0c
@@ -13,5 +13,5 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Oculus/VR/AudioClips/sfx_belt_in.wav
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Audio/ButtonUp.wav
 Dependencies: []

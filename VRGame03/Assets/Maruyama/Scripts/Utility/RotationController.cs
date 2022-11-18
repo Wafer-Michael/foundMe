@@ -30,7 +30,7 @@ public class RotationController : MonoBehaviour
 
         if(direct != Vector3.zero)
         {
-            Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation,
+            m_rotationTarget.transform.rotation = Quaternion.Lerp(m_rotationTarget.transform.rotation,
                                      Quaternion.LookRotation(direct),
                                      m_rotationSpeed * Time.deltaTime);
         }

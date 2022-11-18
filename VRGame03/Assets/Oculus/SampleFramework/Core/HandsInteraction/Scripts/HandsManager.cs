@@ -217,8 +217,8 @@ namespace OculusSampleFramework
 					_currentHandAlpha = 1.0f;
 					break;
 			}
-			_rightMeshRenderer.sharedMaterial.SetFloat(HandAlphaId, _currentHandAlpha);
-			_leftMeshRenderer.sharedMaterial.SetFloat(HandAlphaId, _currentHandAlpha);
+			//_rightMeshRenderer.sharedMaterial.SetFloat(HandAlphaId, _currentHandAlpha);
+			//_leftMeshRenderer.sharedMaterial.SetFloat(HandAlphaId, _currentHandAlpha);
 		}
 
 		private IEnumerator FindSkeletonVisualGameObjects()

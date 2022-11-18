@@ -1,15 +1,17 @@
 ManifestFileVersion: 0
-CRC: 2236519569
+CRC: 217368567
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c6448280c81851eed989a970e6850208
+    Hash: f15fba2bde8ba5ffcb31f2c0baa217a0
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c21d61fe394c58399df3c6fb5c7c99b3
+    Hash: 8fbbef66ee259249ffe96f6e1a424fc6
 HashAppended: 0
 ClassTypes:
 - Class: 28
+  Script: {instanceID: 0}
+- Class: 89
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -20,6 +22,8 @@ Assets:
 - Assets/Oculus/VR/Textures/HandTracking/HandTracking_uvmap_2048.png
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/window_big.png
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/base-color.png
+- Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Textures/ControllerBoxTextures/controller_plain_Normal.png
+- Assets/Oculus/SampleFramework/Usage/HandsTrainExample/TrainScene/ReflectionProbe-0.png
 - Assets/Maruyama/Texture/StainedGlass.png
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/window_big_emission_mask.png
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/window_big_transparent_mask.png
@@ -31,4 +35,5 @@ Assets:
 - Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Stone_B_NRM.png
 - Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Detail.png
 - Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/lattice.png
+- Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Textures/ControllerBoxTextures/controller_plain_DiffuseGlossiness.png
 Dependencies: []

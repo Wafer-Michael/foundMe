@@ -47,6 +47,8 @@ namespace Oculus.Interaction
         [SerializeField]
         private Color _fingerGlowColorHover;
 
+        public float Count { get; set; }
+
         #region public properties
         public float GlowLerpSpeed
         {
@@ -222,6 +224,8 @@ namespace Oculus.Interaction
         public void InjectAllGrabStrengthIndicator(IHandGrabber handGrab, IInteractor interactor,
             MaterialPropertyBlockEditor handMaterialPropertyBlockEditor)
         {
+            Count++;
+
             InjectHandGrab(handGrab);
             InjectInteractor(interactor);
             InjectHandMaterialPropertyBlockEditor(handMaterialPropertyBlockEditor);

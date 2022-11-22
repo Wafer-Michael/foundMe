@@ -90,6 +90,8 @@ namespace Oculus.Interaction.HandGrab
         private bool _handGrabShouldSelect = false;
         private bool _handGrabShouldUnselect = false;
 
+        public float DebugCount { get; set; }
+
         #region IHandGrabber
         public HandGrabAPI HandGrabApi => _handGrabApi;
         public GrabTypeFlags SupportedGrabTypes => _supportedGrabTypes;
@@ -549,6 +551,8 @@ namespace Oculus.Interaction.HandGrab
         public void InjectAllHandGrabInteractor(HandGrabAPI handGrabApi,
             IHand hand, Rigidbody rigidbody, GrabTypeFlags supportedGrabTypes)
         {
+            DebugCount++;
+
             InjectHandGrabApi(handGrabApi);
             InjectHand(hand);
             InjectRigidbody(rigidbody);

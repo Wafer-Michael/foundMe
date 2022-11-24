@@ -31,14 +31,14 @@ namespace OculusSampleFramework
 
 		private void Awake()
 		{
-			Assert.IsNotNull(_locomotive);
-			Assert.IsNotNull(_cowController);
+			//Assert.IsNotNull(_locomotive);
+			//Assert.IsNotNull(_cowController);
 		}
 		public void StartStopStateChanged(InteractableStateArgs obj)
 		{
 			if (obj.NewInteractableState == InteractableState.ActionState)
 			{
-				_locomotive.StartStopStateChanged();
+				//_locomotive.StartStopStateChanged();
 			}
 		}
 
@@ -46,7 +46,7 @@ namespace OculusSampleFramework
 		{
 			if (obj.NewInteractableState == InteractableState.ActionState)
 			{
-				_locomotive.DecreaseSpeedStateChanged();
+				//_locomotive.DecreaseSpeedStateChanged();
 			}
 		}
 
@@ -54,7 +54,7 @@ namespace OculusSampleFramework
 		{
 			if (obj.NewInteractableState == InteractableState.ActionState)
 			{
-				_locomotive.IncreaseSpeedStateChanged();
+				//_locomotive.IncreaseSpeedStateChanged();
 			}
 		}
 
@@ -62,7 +62,7 @@ namespace OculusSampleFramework
 		{
 			if (obj.NewInteractableState == InteractableState.ActionState)
 			{
-				_locomotive.SmokeButtonStateChanged();
+				//_locomotive.SmokeButtonStateChanged();
 			}
 		}
 
@@ -70,7 +70,7 @@ namespace OculusSampleFramework
 		{
 			if (obj.NewInteractableState == InteractableState.ActionState)
 			{
-				_locomotive.WhistleButtonStateChanged();
+				//_locomotive.WhistleButtonStateChanged();
 			}
 		}
 
@@ -78,7 +78,7 @@ namespace OculusSampleFramework
 		{
 			if (obj.NewInteractableState == InteractableState.ActionState)
 			{
-				_locomotive.ReverseButtonStateChanged();
+				//_locomotive.ReverseButtonStateChanged();
 			}
 		}
 
@@ -94,7 +94,7 @@ namespace OculusSampleFramework
 		{
 			if (obj.NewInteractableState == InteractableState.ActionState)
 			{
-				_cowController.GoMooCowGo();
+				//_cowController.GoMooCowGo();
 			}
 		}
 	}

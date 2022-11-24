@@ -25,12 +25,12 @@ namespace Oculus.Interaction
 {
     public enum PointerEventType
     {
-        Hover,
-        Unhover,
-        Select,
-        Unselect,
-        Move,
-        Cancel
+        Hover,      //G‚ê‚½(Enter)
+        Unhover,    //—£‚ê‚½(Exit)
+        Select,     //’Í‚ñ‚¾(GrabEnter)
+        Unselect,   //˜b‚µ‚½(Relese‚æ‚èŒã)(GrabExit)
+        Move,       //G‚ê‚Ä‚é‚à’Í‚ñ‚Å‚¢‚é‚àí‚ÉŒÄ‚Î‚ê‚é(Update)
+        Cancel      
     }
 
     public struct PointerEvent

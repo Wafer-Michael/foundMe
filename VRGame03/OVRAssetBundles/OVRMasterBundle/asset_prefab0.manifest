@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4247004002
+CRC: 1616009274
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: be68228b5305244d50f0b78f28a081aa
+    Hash: cf7737ce3fbe781b7edae8a935ea22d6
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 3e77b4e57d82d9a26a2f05d81c2be8b2
+    Hash: c387ab71acadd9b6395f8d36b0e50d9a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,17 +25,59 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 65
   Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: cb7623a8f0b49cf4dbaa40aea4d4be64, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 54c16b381e28e8d479237771d234dbae, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 605a8ce1870f78943ac552405ac9888b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 73eac66b128fc8749a21623225c34541, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5cc5c234723e3a54d8dd09b131117743, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 83ffd5d8c717af84394416b29a9135e1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 95090eefe50e77847b9b4f3eec29fea0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ded892ce0d9b4e043844fcfd27b63b7a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 069b40e3538ec5846bcfdcd838058ca0, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 53159ccc00b5ed74b8e54ec5df70448f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 286a680ab908503489d2d5449f01c521, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c9371de340bd2354abd621fadfb9f78d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 85fb71180be543b44a6c8c1e4253dce4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2609c54f376cffc4da1ab9401cc1a36f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a4e71869e3ccfde47a7a16e2f483b328, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e5a3ef75653a3e84281bf84f8b8575c5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f58463a8ddf862a45a7a5dbd85d11ffd, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 120
+  Script: {instanceID: 0}
+- Class: 137
   Script: {instanceID: 0}
 - Class: 222
   Script: {instanceID: 0}
@@ -44,6 +86,8 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: OculusSampleFramework.Interactable/InteractableStateArgsEvent
 - AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.FaceInfo_Legacy
 - AssemblyName: Unity.TextMeshPro
@@ -65,7 +109,11 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.VertexGradient
 - AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.ArgumentCache
+- AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentListenerMode
 - AssemblyName: UnityEngine.TextCoreFontEngineModule
   ClassName: UnityEngine.TextCore.FaceInfo
 - AssemblyName: UnityEngine.TextCoreFontEngineModule
@@ -77,11 +125,23 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Prefabs/FingerTipPokeToolRing.prefab
+- Assets/Maruyama/Prehabs/Button/InteractableToolsSDKDriver.prefab
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Prefabs/FingerTipPokeToolMiddle.prefab
+- Assets/Maruyama/Prehabs/Button/OVRHandPrefab_L.prefab
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Prefabs/FingerTipPokeToolIndex.prefab
+- Assets/Maruyama/Prehabs/Button/HandsManager.prefab
+- Assets/Maruyama/Prehabs/Button/OVRHandPrefab_R.prefab
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Prefabs/RayTool.prefab
 - Assets/VarcanRex/LongSword/Prefabs/LongSword.prefab
 - Assets/Maruyama/Prehabs/DefaultCanvas.prefab
 - Assets/Free_Assets/Decrepit Dungeon LITE/Prefabs/Floors/Floor_A.prefab
+- Assets/Maruyama/Prehabs/Button/NearFieldItems.prefab
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Prefabs/FingerTipPokeToolThumb.prefab
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Prefabs/FingerTipPokeToolPinky.prefab
 Dependencies:
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_fbx0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_mat0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_obj0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_resources
+- E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_wav0

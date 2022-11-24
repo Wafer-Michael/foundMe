@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2583816349
+CRC: 3549994311
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 36f44cb323004b211f9efe2b54483b82
+    Hash: 64872a75e127f77b8b13dd9646e65f78
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 5cfde277c59e2844be8c85dba6ef7c0e
+    Hash: 8b729cfe45825d8374dd6fdab230e70f
 HashAppended: 0
 ClassTypes:
 - Class: 21
@@ -15,17 +15,30 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Oculus/VR/Meshes/OculusTouchForQuestAndRiftS/Materials/OculusTouchForQuestAndRiftS_Material.mat
+- Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Materials/ControllerBox.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/TargetMaterial.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/SystemGestureSkeletonBoneMaterial.mat
 - Assets/Maruyama/Material/LineRenderMaterial.mat
 - Assets/Free_Assets/Decrepit Dungeon LITE/Materials/Bricks.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/SystemGestureHandMaterial.mat
 - Assets/Free_Assets/Decrepit Dungeon LITE/Materials/Stone_B.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/RayMaterial.mat
 - Assets/Oculus/VR/Meshes/OculusTouchForRift/Materials/OculusTouchForRift_Material.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/PokeMaterial.mat
 - Assets/VarcanRex/LongSword/Materials/LongSword.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/DefaultHandMaterial.mat
 - Assets/Oculus/Interaction/Runtime/Materials/OculusHand.mat
 - Assets/Oculus/VR/Meshes/OculusTouchForQuest2/Materials/OculusTouchForQuest2_MAT.mat
+- Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Materials/ControllerBoxButtons.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/SkeletonBoneMaterial.mat
+- Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Materials/ControllerBoxGlow.mat
 Dependencies:
+- E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_jpg0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_png0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_shader0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_tga0

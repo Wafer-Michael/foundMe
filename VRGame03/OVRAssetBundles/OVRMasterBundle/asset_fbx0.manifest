@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1898597595
+CRC: 2122660912
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: db3f843930b4c3a11c45b41792a15206
+    Hash: 71f81d396d5e8aca7333b7f5fbe51f1f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 201247829d3ee1653fd022e2bed167a2
+    Hash: f991f80580d5c93b0763ecc3a2dc9cfa
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -23,11 +23,24 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
 - Class: 90
   Script: {instanceID: 0}
 - Class: 95
   Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Models/ControllerBox.FBX
-Dependencies: []
+- Assets/Oculus/VR/Meshes/OculusTouchForQuest2/OculusTouchForQuest2_Right.fbx
+- Assets/Oculus/VR/Meshes/OculusTouchForQuest2/OculusTouchForQuest2_Left.fbx
+- Assets/Oculus/VR/Meshes/OculusTouchForQuestAndRiftS/OculusTouchForQuestAndRiftS_Left.fbx
+- Assets/Oculus/VR/Meshes/OculusTouchForQuestAndRiftS/OculusTouchForQuestAndRiftS_Right.fbx
+- Assets/Oculus/VR/Meshes/HandTracking/OculusHand_R.fbx
+- Assets/Oculus/VR/Meshes/HandTracking/OculusHand_L.fbx
+- Assets/Oculus/VR/Meshes/OculusTouchForRift/left_touch_controller_model_skel.fbx
+- Assets/Free_Assets/Decrepit Dungeon LITE/Meshes/Floors.fbx
+- Assets/Oculus/VR/Meshes/OculusTouchForRift/right_touch_controller_model_skel.fbx
+Dependencies:
+- E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_mat0

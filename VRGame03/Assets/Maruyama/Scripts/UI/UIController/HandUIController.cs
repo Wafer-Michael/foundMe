@@ -2,12 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIController : MonoBehaviour
+public class HandUIController : MonoBehaviour
 {
     [SerializeField]
     private List<VRUI> m_uis = new List<VRUI>();
-    
-    
+
+    private OVRHand m_hand;
+    private void Awake()
+    {
+        m_hand = GetComponent<OVRHand>();
+    }
+    private void Update()
+    {
+        if(PlayerInputer.IsVRUIOpenAndClose()){
+
+        }
+    }
 
     private void Open()
     {

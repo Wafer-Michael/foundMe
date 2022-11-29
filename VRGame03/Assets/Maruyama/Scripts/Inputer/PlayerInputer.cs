@@ -63,6 +63,11 @@ public class PlayerInputer : MonoBehaviour
         return moveVec;
     }
 
+    static public bool IsVRUIOpenAndClose()
+    {
+        return true;
+    }
+
     /// <summary>
     /// ‚Â‚Ü‚Şsˆ×
     /// </summary>

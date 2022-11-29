@@ -166,6 +166,15 @@ public class StateMachine<NodeType, EnumType, TransitionType>
     }
 
     /// <summary>
+    /// ステートの強制変更
+    /// </summary>
+    /// <param name="type">変更したいステート</param>
+    public void ForceChangeState(EnumType type)
+    {
+        m_stateMachine.ChangeState(type);
+    }
+
+    /// <summary>
     /// 外部からUpdateをする。(主にこれを利用するStateManagerクラス)
     /// </summary>
     public void OnUpdate()

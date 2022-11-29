@@ -2,17 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIStator : MonoBehaviour
+using StateType = AIStator_StateType;
+using TransitionMember = AIStator_TransitionMember;
+
+public enum AIStator_StateType 
 {
-    // Start is called before the first frame update
-    void Start()
+    None,
+    Patrol,
+}
+
+public struct AIStator_TransitionMember
+{
+
+}
+
+public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
+{
+    EnemyBase m_enemy;
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+
+        m_enemy = GetComponent<EnemyBase>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        CreateNode();
+        CreateEdge();
+    }
+
+    protected override void CreateNode()
+    {
+        m_stateMachine.AddNode(StateType.None, null);
+
+        m_stateMachine.AddNode(StateType.Patrol, new StateNode.Patrol(m_enemy));
+    }
+
+    protected override void CreateEdge()
+    {
+
     }
 }

@@ -67,7 +67,7 @@ public abstract class EnemyStateNodeBase<EnemyType> : NodeBase<EnemyType>
 	/// <summary>
 	/// 切り替えるコンポーネントの準備
 	/// </summary>
-	protected abstract void ReserveChangeComponents();
+	protected virtual void ReserveChangeComponents() { }
 
 	/// <summary>
 	/// 開始と終了時に切り替えるコンポーネントの追加

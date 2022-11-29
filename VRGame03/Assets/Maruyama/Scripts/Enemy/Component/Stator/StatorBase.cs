@@ -63,9 +63,9 @@ public abstract class StatorBase<OwnerType, EnumType, TransitionMember> : MonoBe
         return m_stateMachine.GetNowType();
     }
 
-    public TransitionMember GetTransitionMember()
+    public ref TransitionMember GetTransitionMember()
     {
-        return m_stateMachine.GetTransitionStructMember();
+        return ref m_stateMachine.GetTransitionStructMember();
     }
 
 }

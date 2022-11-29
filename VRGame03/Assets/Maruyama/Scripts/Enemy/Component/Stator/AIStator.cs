@@ -42,6 +42,17 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 
     protected override void CreateEdge()
     {
+        //None
+        m_stateMachine.AddEdge(StateType.None, StateType.Patrol, IsGameStartTransition, (int)StateType.Patrol);
+    }
 
+    //--------------------------------------------------------------------------------------
+    ///	‘JˆÚğŒ
+    //--------------------------------------------------------------------------------------
+
+    bool IsGameStartTransition(ref TransitionMember member)
+    {
+        var gameManager = GameManagerComponent.Instance;
+        return gameManager.CurrentState == GameManagerComponent.GameState.Game;
     }
 }

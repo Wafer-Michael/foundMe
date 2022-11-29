@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3796351034
+CRC: 107408248
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -16,6 +16,8 @@ AssetBundleManifest:
         Dependency_3: asset_controller0
         Dependency_4: asset_mat0
         Dependency_5: asset_fbx0
+        Dependency_6: asset_wav0
+        Dependency_7: asset_fbx0
     Info_2:
       Name: asset_asset0
       Dependencies: {}
@@ -25,9 +27,7 @@ AssetBundleManifest:
         Dependency_0: asset_resources
         Dependency_1: asset_mat0
         Dependency_2: asset_fbx0
-        Dependency_3: asset_wav0
-        Dependency_4: asset_obj0
-        Dependency_5: asset_fbx0
+        Dependency_3: asset_obj0
     Info_4:
       Name: asset_controller0
       Dependencies:

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1616009274
+CRC: 1514016013
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cf7737ce3fbe781b7edae8a935ea22d6
+    Hash: 04510288d2d9620c14f5719f3acf470c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c387ab71acadd9b6395f8d36b0e50d9a
+    Hash: d72a6fe1ad0b94c221ba168863e1e3bf
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,10 +25,6 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 65
   Script: {instanceID: 0}
-- Class: 82
-  Script: {instanceID: 0}
-- Class: 83
-  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
@@ -38,25 +34,15 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 54c16b381e28e8d479237771d234dbae, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 605a8ce1870f78943ac552405ac9888b, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 73eac66b128fc8749a21623225c34541, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5cc5c234723e3a54d8dd09b131117743, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 83ffd5d8c717af84394416b29a9135e1, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 95090eefe50e77847b9b4f3eec29fea0, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: ded892ce0d9b4e043844fcfd27b63b7a, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 069b40e3538ec5846bcfdcd838058ca0, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 53159ccc00b5ed74b8e54ec5df70448f, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 286a680ab908503489d2d5449f01c521, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -86,8 +72,6 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
-- AssemblyName: Assembly-CSharp
-  ClassName: OculusSampleFramework.Interactable/InteractableStateArgsEvent
 - AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.FaceInfo_Legacy
 - AssemblyName: Unity.TextMeshPro
@@ -109,11 +93,7 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.VertexGradient
 - AssemblyName: UnityEngine.CoreModule
-  ClassName: UnityEngine.Events.ArgumentCache
-- AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
-- AssemblyName: UnityEngine.CoreModule
-  ClassName: UnityEngine.Events.PersistentListenerMode
 - AssemblyName: UnityEngine.TextCoreFontEngineModule
   ClassName: UnityEngine.TextCore.FaceInfo
 - AssemblyName: UnityEngine.TextCoreFontEngineModule
@@ -136,7 +116,6 @@ Assets:
 - Assets/VarcanRex/LongSword/Prefabs/LongSword.prefab
 - Assets/Maruyama/Prehabs/DefaultCanvas.prefab
 - Assets/Free_Assets/Decrepit Dungeon LITE/Prefabs/Floors/Floor_A.prefab
-- Assets/Maruyama/Prehabs/Button/NearFieldItems.prefab
 - Assets/Oculus/SampleFramework/Core/HandsInteraction/Prefabs/FingerTipPokeToolThumb.prefab
 - Assets/Oculus/SampleFramework/Core/HandsInteraction/Prefabs/FingerTipPokeToolPinky.prefab
 Dependencies:
@@ -144,4 +123,3 @@ Dependencies:
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_mat0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_obj0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_resources
-- E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_wav0

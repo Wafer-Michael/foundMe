@@ -63,6 +63,16 @@ public class PlayerInputer : MonoBehaviour
         return moveVec;
     }
 
+    static public bool IsVRUIOpen()
+    {
+        return true;
+    }
+
+    static public bool IsVRUIClose()
+    {
+        return true;
+    }
+
     /// <summary>
     /// Ç¬Ç‹Çﬁçsà◊
     /// </summary>
@@ -89,6 +99,12 @@ public class PlayerInputer : MonoBehaviour
         }
 
         return true;
+    }
+
+    static public bool IsDebugPitch(OVRHand hand)
+    {
+        return hand.GetFingerIsPinching(OVRHand.HandFinger.Index) &&
+            hand.GetFingerIsPinching(OVRHand.HandFinger.Thumb);
     }
 
     /// <summary>

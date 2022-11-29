@@ -28,19 +28,12 @@ public class TouchButton_Hijack : TouchBottunEventBase
 
     public void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    Hijack();
-        //}
+        
     }
 
     public override void Touch(InteractableStateArgs obj)
     {
-        //アクションステートなら
-        if (obj.NewInteractableState == InteractableState.ActionState)
-        {
-            Hijack(); //ハイジャック
-        }
+        Hijack(); //ハイジャック
     }
 
     private void Hijack()

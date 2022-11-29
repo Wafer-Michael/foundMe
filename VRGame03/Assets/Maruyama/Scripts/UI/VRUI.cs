@@ -8,10 +8,10 @@ using OculusSampleFramework;
 public class VRUI : MonoBehaviour, I_VRUI
 {
     [SerializeField]
-    protected UnityEvent m_open;    //開くイベント群
+    protected UnityEvent m_open;                           //開くイベント群
 
     [SerializeField]
-    protected UnityEvent m_close;   //閉じるイベント群
+    protected UnityEvent m_close;                          //閉じるイベント群
 
     [SerializeField]
     protected UnityEvent<InteractableStateArgs> m_touch;   //タッチイベント群

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 598295044
+CRC: 3804870635
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 57b3308e935f2213ec2ca04f084a1e6a
+    Hash: 9cf07f9a23add5ec1775d76dd23e53dc
   TypeTreeHash:
     serializedVersion: 2
-    Hash: aed45236a55f91f229bd51b4dd4c798a
+    Hash: 103e37362b0381ab206002020b3ff0a3
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -70,9 +70,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 9067480af55f5874d8f613b16812f968, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: ff74bea5d3b9b3447b288a9da32aca9c, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 2864da2f393a3e948bb12ec4ac9b1782, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 54c16b381e28e8d479237771d234dbae, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6b2e2aacf4e98d0499bc198fd139c86d, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 605a8ce1870f78943ac552405ac9888b, type: 3}
 - Class: 114
@@ -92,9 +96,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 83ffd5d8c717af84394416b29a9135e1, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 1c2810bd5af4c144798d020fd38bf03f, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: ae43f25c06eb2d9408a201216b4c3ed7, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 95090eefe50e77847b9b4f3eec29fea0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a6aeba7ef1bbcbc43a976f7b019ae5ef, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 86bd0d3098d25db4c9c839739557480b, type: 3}
 - Class: 114
@@ -107,8 +115,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 674a40251fe8ad841b18517ac5209957, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ded892ce0d9b4e043844fcfd27b63b7a, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 069b40e3538ec5846bcfdcd838058ca0, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 194b7d1054b8fa64b9bdcea46d06c3a1, type: 3}
 - Class: 114
@@ -127,8 +133,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 5178bc8574ce2bf4388e787a2e2af326, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: c5af6ab9d1bd4a47970ad151090281f3, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 53159ccc00b5ed74b8e54ec5df70448f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: b14164f8f23faae4293baeb84485b3d6, type: 3}
 - Class: 114
@@ -169,6 +173,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: a1e477b940c8a084ab4f2dda703b49ef, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: a4e71869e3ccfde47a7a16e2f483b328, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e3a54182cc576074fbee995f26dbe6c5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: e5a3ef75653a3e84281bf84f8b8575c5, type: 3}
 - Class: 114
@@ -213,3 +219,4 @@ Dependencies:
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_mat0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_prefab0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_resources
+- E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_wav0

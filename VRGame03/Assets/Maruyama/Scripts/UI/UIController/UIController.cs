@@ -5,19 +5,22 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [SerializeField]
-    VRUI m_ui;
-    public void Open()
+    private List<VRUI> m_uis = new List<VRUI>();
+    
+    
+
+    private void Open()
     {
-        m_ui.Open();
+        foreach(var ui in m_uis){
+            ui.Open();
+        }
     }
 
-    public void Close()
+    private void Close()
     {
-        m_ui.Close();
-    }
-
-    public void Touch()
-    {
-        //m_ui.Touch();
+        foreach(var ui in m_uis)
+        {
+            ui.Close();
+        }
     }
 }

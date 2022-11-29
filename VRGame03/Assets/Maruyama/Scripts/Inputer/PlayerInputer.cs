@@ -91,6 +91,12 @@ public class PlayerInputer : MonoBehaviour
         return true;
     }
 
+    static public bool IsDebugPitch(OVRHand hand)
+    {
+        return hand.GetFingerIsPinching(OVRHand.HandFinger.Index) &&
+            hand.GetFingerIsPinching(OVRHand.HandFinger.Thumb);
+    }
+
     /// <summary>
     /// つまむ行為(人差し指と親指)
     /// </summary>

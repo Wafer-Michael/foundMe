@@ -141,10 +141,10 @@ namespace OculusSampleFramework
 
 	public enum InteractableState
 	{
-		Default = 0,
-		ProximityState, // in proximity -- close enough
-		ContactState, // contact has been made
-		ActionState, // interactable activates
+		Default = 0,									//ProxmityStateから変更された時
+		ProximityState, // in proximity -- close enough	//近くまで来た時(Trigger範囲に触れた)
+		ContactState, // contact has been made			//ボタン本体に触れた時
+		ActionState, // interactable activates			//ボタンを押した時
 	}
 
 	public class InteractableStateArgs : EventArgs

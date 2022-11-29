@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3549994311
+CRC: 3426963694
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 64872a75e127f77b8b13dd9646e65f78
+    Hash: f23dcbf4baadeeeeda486df7d2fb9ea1
   TypeTreeHash:
     serializedVersion: 2
     Hash: 8b729cfe45825d8374dd6fdab230e70f
@@ -20,7 +20,6 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Oculus/VR/Meshes/OculusTouchForQuestAndRiftS/Materials/OculusTouchForQuestAndRiftS_Material.mat
-- Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Materials/ControllerBox.mat
 - Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/TargetMaterial.mat
 - Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/SystemGestureSkeletonBoneMaterial.mat
 - Assets/Maruyama/Material/LineRenderMaterial.mat

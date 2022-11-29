@@ -14,8 +14,20 @@ public class HandUIController : MonoBehaviour
     }
     private void Update()
     {
-        if(PlayerInputer.IsVRUIOpenAndClose()){
+        if(PlayerInputer.IsVRUIOpen())
+        {
+            foreach(var ui in m_uis)
+            {
+                ui.Open();
+            }
+        }
 
+        if (PlayerInputer.IsVRUIClose())
+        {
+            foreach (var ui in m_uis)
+            {
+                ui.Close();
+            }
         }
     }
 

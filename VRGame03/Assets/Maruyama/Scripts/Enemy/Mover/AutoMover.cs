@@ -32,7 +32,6 @@ public class AutoMover : MonoBehaviour
 
     private EnemyVelocityManager m_velocityManager;
 
-    private TestSetForwardVelocity m_testRotate;
     private RotationController m_rotationController;
 
     bool IsRotation { get; set; } = false;
@@ -40,7 +39,6 @@ public class AutoMover : MonoBehaviour
     private void Awake()
     {
         m_rotationController = GetComponent<RotationController>();
-        m_testRotate = GetComponent<TestSetForwardVelocity>();
         m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
@@ -78,7 +76,6 @@ public class AutoMover : MonoBehaviour
         var position = CalculatePosition();
 
         var direction = position - transform.position;
-        m_testRotate.Direction = direction;
         m_rotationController.SetDirect(direction);
         transform.position = position;
     }
@@ -88,7 +85,6 @@ public class AutoMover : MonoBehaviour
         var targetPosition = CalculatePosition();
 
         var toTargetVec = targetPosition - transform.position;
-        m_testRotate.Direction = toTargetVec;
         m_rotationController.SetDirect(toTargetVec);
 
         var force = CalcuVelocity.CalucArriveVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);

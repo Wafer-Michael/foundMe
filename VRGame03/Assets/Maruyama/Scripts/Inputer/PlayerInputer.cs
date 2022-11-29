@@ -63,7 +63,12 @@ public class PlayerInputer : MonoBehaviour
         return moveVec;
     }
 
-    static public bool IsVRUIOpenAndClose()
+    static public bool IsVRUIOpen()
+    {
+        return true;
+    }
+
+    static public bool IsVRUIClose()
     {
         return true;
     }

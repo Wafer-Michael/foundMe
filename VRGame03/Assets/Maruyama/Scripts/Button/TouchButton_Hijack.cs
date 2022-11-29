@@ -31,6 +31,16 @@ public class TouchButton_Hijack : TouchBottunEventBase
         
     }
 
+    public void Open()
+    {
+        //gameObject.SetActive(true);
+    }
+
+    public void Close()
+    {
+        //gameObject.SetActive(false);
+    }
+
     public override void Touch(InteractableStateArgs obj)
     {
         Hijack(); //ハイジャック

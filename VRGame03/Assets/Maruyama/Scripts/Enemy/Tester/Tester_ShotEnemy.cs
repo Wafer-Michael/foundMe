@@ -63,7 +63,7 @@ public class Tester_ShotEnemy : EnemyBase, I_Damaged
             return;
         }
 
-        m_rotationController.SetDirect(m_targetManager.CalculateSelfToTargetVector());
+        m_rotationController.SetDirection(m_targetManager.CalculateSelfToTargetVector());
     }
 
     void Shot()

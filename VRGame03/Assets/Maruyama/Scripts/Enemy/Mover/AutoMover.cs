@@ -76,7 +76,7 @@ public class AutoMover : MonoBehaviour
         var position = CalculatePosition();
 
         var direction = position - transform.position;
-        m_rotationController.SetDirect(direction);
+        m_rotationController.SetDirection(direction);
         transform.position = position;
     }
 
@@ -85,7 +85,7 @@ public class AutoMover : MonoBehaviour
         var targetPosition = CalculatePosition();
 
         var toTargetVec = targetPosition - transform.position;
-        m_rotationController.SetDirect(toTargetVec);
+        m_rotationController.SetDirection(toTargetVec);
 
         var force = CalcuVelocity.CalucArriveVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
         m_velocityManager.AddForce(force);
@@ -196,6 +196,6 @@ public class AutoMover : MonoBehaviour
             IsRotation = false;
         }
 
-        m_rotationController.SetDirect(direction);
+        m_rotationController.SetDirection(direction);
     }
 }

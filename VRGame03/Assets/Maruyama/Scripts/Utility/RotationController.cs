@@ -7,11 +7,20 @@ using UnityEngine;
 /// </summary>
 public class RotationController : MonoBehaviour
 {
+    enum RotationType { 
+        Lerp,
+        Uniform,
+    }
+
+
     [SerializeField]
     private GameObject m_rotationTarget;
 
     [SerializeField]
     private float m_rotationSpeed = 3.0f;
+
+    [SerializeField]
+    private RotationType m_type = RotationType.Lerp;
 
     private Vector3 m_direct = new Vector3();
 
@@ -38,11 +47,11 @@ public class RotationController : MonoBehaviour
 
     #region アクセッサ
 
-    public void SetDirect(Vector3 direct)
+    public void SetDirection(Vector3 direct)
     {
         m_direct = direct;
     }
-    public Vector3 GetDirect()
+    public Vector3 GetDirection()
     {
         return m_direct;
     }

@@ -125,9 +125,9 @@ public class StateMachine<NodeType, EnumType, TransitionType>
     /// <param name="to">遷移先のタイプ</param>
     /// <param name="isTransitionFunc">遷移条件</param>
     /// <param name="priority">優先度(Default: 0)</param>
-    public void AddEdge(EnumType from, EnumType to, EdgeBase<EnumType, TransitionType>.IsTransitionFunc isTransitionFunc, int priority = 0)
+    public void AddEdge(EnumType from, EnumType to, EdgeBase<EnumType, TransitionType>.IsTransitionFunc isTransitionFunc, int priority = 0, bool isEndTransition = false)
     {
-        m_stateMachine.AddEdge(from, to, isTransitionFunc, priority);
+        m_stateMachine.AddEdge(from, to, isTransitionFunc, priority, isEndTransition);
     }
 
     /// <summary>

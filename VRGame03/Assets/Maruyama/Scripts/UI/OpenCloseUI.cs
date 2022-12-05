@@ -12,7 +12,6 @@ public class OpenCloseUI : TouchBottunEventBase
     private bool m_isDraw = false;
     public bool IsDraw()
     {
-        Debug.Log(m_isDraw);
         return m_isDraw;
     }
 

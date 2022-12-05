@@ -128,7 +128,7 @@ public class AutoMover : MonoBehaviour
             m_nowIndex = nextIndex;
             nextIndex = GetNextIndex();
 
-            Debug.Log($"始まり {m_nowIndex},終わり {nextIndex}");
+            //Debug.Log($"始まり {m_nowIndex},終わり {nextIndex}");
         }
 
         return Vector3.Lerp(m_transforms[m_nowIndex].position, m_transforms[nextIndex].position, m_countRange / length);

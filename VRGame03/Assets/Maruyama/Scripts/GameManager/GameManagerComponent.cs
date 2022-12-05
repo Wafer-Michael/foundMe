@@ -45,10 +45,15 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
         {
             GameState.Reserve => null,
             GameState.Game => null,
-            GameState.GameOver => null,
+            GameState.GameOver => GameOver_Start,
             _ => null
         };
 
         function?.Invoke();
+    }
+
+    private void GameOver_Start()
+    {
+
     }
 }

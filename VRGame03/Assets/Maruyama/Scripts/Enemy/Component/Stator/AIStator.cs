@@ -9,6 +9,8 @@ public enum AIStator_StateType
 {
     None,
     Patrol,
+    Find,   //発見
+    Buttle, //攻撃
 }
 
 public struct AIStator_TransitionMember
@@ -16,15 +18,25 @@ public struct AIStator_TransitionMember
 
 }
 
+[RequireComponent(typeof(EyeSearchRange))]
 public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 {
-    EnemyBase m_enemy;
+    private EnemyBase m_enemy;
+    private EyeSearchRange m_eyeRange;
+
+    [SerializeField]
+    private List<GameObject> m_observeIsInEyeTargetObjects = new List<GameObject>();
+
+    private ObserveIsInEyeTargets m_observeIsInEyeTargets;  //視界範囲に入ったらターゲット判定を取るターゲット
 
     protected override void Awake()
     {
         base.Awake();
 
         m_enemy = GetComponent<EnemyBase>();
+        m_eyeRange = GetComponent<EyeSearchRange>();
+
+        m_observeIsInEyeTargets = new ObserveIsInEyeTargets(m_observeIsInEyeTargetObjects, m_eyeRange);
     }
 
     private void Start()
@@ -35,15 +47,20 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 
     protected override void CreateNode()
     {
-        m_stateMachine.AddNode(StateType.None, null);
+        m_stateMachine.AddNode(StateType.None, null);   //None
 
-        m_stateMachine.AddNode(StateType.Patrol, new StateNode.Patrol(m_enemy));
+        m_stateMachine.AddNode(StateType.Patrol, new StateNode.Patrol(m_enemy));    //Patrol
+
+        m_stateMachine.AddNode(StateType.Find, new StateNode.Find(m_enemy));        //Find
     }
 
     protected override void CreateEdge()
     {
         //None
         m_stateMachine.AddEdge(StateType.None, StateType.Patrol, IsGameStartTransition, (int)StateType.Patrol);
+
+        //Patrol
+        m_stateMachine.AddEdge(StateType.Patrol, StateType.Find, IsFindState, (int)StateType.Find);
     }
 
     //--------------------------------------------------------------------------------------
@@ -54,5 +71,20 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
     {
         var gameManager = GameManagerComponent.Instance;
         return gameManager.CurrentState == GameManagerComponent.GameState.Game;
+    }
+
+    bool IsFindState(ref TransitionMember member)
+    {
+        var targets = m_observeIsInEyeTargets.SearchIsInEyeTargets();
+        foreach(var target in targets)
+        {
+            var targeted = target.GetComponent<Targeted>();
+            if (targeted && targeted.IsTarget())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

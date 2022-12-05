@@ -19,7 +19,7 @@ public class PlayerStatus : MonoBehaviour, I_Damaged
         if(IsDeath())
         {
             m_param.hp = 0.0f;
-            //ゲームオーバー処理
+            GameManagerComponent.Instance.ChangeState(GameManagerComponent.GameState.GameOver);     //ゲームオーバー処理
         }
 
         Debug.Log("hp: " + m_param.hp.ToString());

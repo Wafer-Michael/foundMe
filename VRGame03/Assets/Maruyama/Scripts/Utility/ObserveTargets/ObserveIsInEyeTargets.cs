@@ -53,6 +53,7 @@ public class ObserveIsInEyeTargets
 
             //ターゲットが視界内なら、配列に入れる。
             if (m_eyeRange.IsInEyeRange(target.transform.position)) {
+                //Debug.Log("ターゲット追加");
                 result.Add(target);
             }
         }

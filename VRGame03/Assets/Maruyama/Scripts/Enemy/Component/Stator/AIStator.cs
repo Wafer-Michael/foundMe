@@ -10,6 +10,7 @@ public enum AIStator_StateType
     None,
     Patrol,
     Find,   //”­Œ©
+    Chase,  //’Ç]
     Buttle, //UŒ‚
 }
 
@@ -24,19 +25,12 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
     private EnemyBase m_enemy;
     private EyeSearchRange m_eyeRange;
 
-    [SerializeField]
-    private List<GameObject> m_observeIsInEyeTargetObjects = new List<GameObject>();
-
-    private ObserveIsInEyeTargets m_observeIsInEyeTargets;  //‹ŠE”ÍˆÍ‚É“ü‚Á‚½‚çƒ^[ƒQƒbƒg”»’è‚ğæ‚éƒ^[ƒQƒbƒg
-
     protected override void Awake()
     {
         base.Awake();
 
         m_enemy = GetComponent<EnemyBase>();
         m_eyeRange = GetComponent<EyeSearchRange>();
-
-        m_observeIsInEyeTargets = new ObserveIsInEyeTargets(m_observeIsInEyeTargetObjects, m_eyeRange);
     }
 
     private void Start()
@@ -52,6 +46,8 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
         m_stateMachine.AddNode(StateType.Patrol, new StateNode.Patrol(m_enemy));    //Patrol
 
         m_stateMachine.AddNode(StateType.Find, new StateNode.Find(m_enemy));        //Find
+
+        m_stateMachine.AddNode(StateType.Chase, new StateNode.Chase(m_enemy));      //Chase
     }
 
     protected override void CreateEdge()
@@ -60,7 +56,10 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
         m_stateMachine.AddEdge(StateType.None, StateType.Patrol, IsGameStartTransition, (int)StateType.Patrol);
 
         //Patrol
-        m_stateMachine.AddEdge(StateType.Patrol, StateType.Find, IsFindState, (int)StateType.Find);
+        //m_stateMachine.AddEdge(StateType.Patrol, StateType.Find, IsFindState, (int)StateType.Find);
+        m_stateMachine.AddEdge(StateType.Patrol, StateType.Chase, IsFindState, (int)StateType.Chase);
+
+        //Find
     }
 
     //--------------------------------------------------------------------------------------
@@ -75,7 +74,7 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 
     bool IsFindState(ref TransitionMember member)
     {
-        var targets = m_observeIsInEyeTargets.SearchIsInEyeTargets();
+        var targets = m_enemy.GetObserveIsInEyeTargets().SearchIsInEyeTargets();
         foreach(var target in targets)
         {
             var targeted = target.GetComponent<Targeted>();

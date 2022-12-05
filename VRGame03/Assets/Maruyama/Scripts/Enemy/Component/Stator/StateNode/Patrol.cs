@@ -17,7 +17,7 @@ namespace StateNode
         public override bool OnUpdate()
         {
             //“G‚ÌŠÄŽ‹
-            //Debug.Log("Patrol");
+            Debug.Log("Patrol");
             return false;
         }
     }

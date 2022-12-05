@@ -63,13 +63,15 @@ namespace StateNode
                     return;
                 }
 
+                const float AttackValue = 1.0f;
                 var damaged = target.GetComponent<I_Damaged>();
-                damaged?.Damaged(new DamageData(1.0f));
+                damaged?.Damaged(new DamageData(AttackValue));
             };
 
             m_taskList.DefineTask(TaskEnum.Attack, attackFunc, null, null);
 
-            m_taskList.DefineTask(TaskEnum.Wait, new TaskNode.Task_Wait(3.0f));
+            const float WaitTime = 3.0f;
+            m_taskList.DefineTask(TaskEnum.Wait, new TaskNode.Task_Wait(WaitTime));
         }
 
         private void SelectTask()

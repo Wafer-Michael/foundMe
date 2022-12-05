@@ -44,7 +44,7 @@ namespace StateNode
             base.ReserveChangeComponents();
 
             var owner = GetOwner();
-            AddChangeComp(owner.GetComponent<AutoMover>(), false, true);    //将来的に消す。
+            AddChangeComp(owner.GetComponent<AutoMover>(), false, false);    //将来的に消す。
         }
 
         public override void OnStart()
@@ -54,6 +54,8 @@ namespace StateNode
             SettingStartTarget();    //ターゲットの設定。
 
             m_stateMachine.ChangeState(StateType.Normal, (int)StateType.Normal);
+
+            Debug.Log("ChaseStart");
         }
 
         public override bool OnUpdate()

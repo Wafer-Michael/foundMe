@@ -24,6 +24,7 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 {
     private EnemyBase m_enemy;
     private EyeSearchRange m_eyeRange;
+    private TargetManager m_targetManager;
 
     protected override void Awake()
     {
@@ -31,6 +32,7 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 
         m_enemy = GetComponent<EnemyBase>();
         m_eyeRange = GetComponent<EyeSearchRange>();
+        m_targetManager = GetComponent<TargetManager>();
     }
 
     private void Start()
@@ -48,6 +50,8 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
         m_stateMachine.AddNode(StateType.Find, new StateNode.Find(m_enemy));        //Find
 
         m_stateMachine.AddNode(StateType.Chase, new StateNode.Chase(m_enemy));      //Chase
+
+        m_stateMachine.AddNode(StateType.Buttle, new StateNode.Buttle(m_enemy));    //Buttle
     }
 
     protected override void CreateEdge()
@@ -59,12 +63,20 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
         //m_stateMachine.AddEdge(StateType.Patrol, StateType.Find, IsFindState, (int)StateType.Find);
         m_stateMachine.AddEdge(StateType.Patrol, StateType.Chase, IsFindState, (int)StateType.Chase);
 
-        //Find
+        //Chase
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Buttle, IsButtleState, (int)StateType.Buttle);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Patrol, IsTrue, (int)StateType.Patrol, true);
+
+        //Buttle
+        m_stateMachine.AddEdge(StateType.Buttle, StateType.Chase, IsTrue, (int)StateType.Chase, true);
     }
 
     //--------------------------------------------------------------------------------------
     ///	‘JˆÚğŒ
     //--------------------------------------------------------------------------------------
+
+    //–³ğŒ‚Åtrue‚É‚µ‚½‚¢ê‡B
+    bool IsTrue(ref TransitionMember member) { return true; }
 
     bool IsGameStartTransition(ref TransitionMember member)
     {
@@ -82,6 +94,21 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
             {
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    bool IsButtleState(ref TransitionMember member)
+    {
+        var target = m_targetManager.GetCurrentTarget();
+        if (!target) {
+            return false;
+        }
+
+        const float AttackRange = 2.0f;
+        if(m_eyeRange.IsInEyeRange(target, AttackRange)) {
+            return true;
         }
 
         return false;

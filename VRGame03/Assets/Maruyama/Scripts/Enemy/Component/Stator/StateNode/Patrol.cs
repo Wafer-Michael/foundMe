@@ -14,6 +14,14 @@ namespace StateNode
             m_targetManager = owner.GetComponent<TargetManager>();
         }
 
+        protected override void ReserveChangeComponents()
+        {
+            base.ReserveChangeComponents();
+
+            var owner = GetOwner();
+            AddChangeComp(owner.GetComponent<AutoMover>(), true, false);    //«—ˆ“I‚ÉÁ‚·B
+        }
+
         public override bool OnUpdate()
         {
             //“G‚ÌŠÄ‹

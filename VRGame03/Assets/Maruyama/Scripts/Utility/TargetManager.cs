@@ -18,12 +18,14 @@ public struct TargetData
     public GameObject target;       //ターゲットのゲームオブジェクト
     public float priority;          //優先度
     public TargetLostData lostData; //見失ったときのデータ
+    public Targeted targeted;
 
     public TargetData(GameObject target)
     {
         this.target = target;
         this.priority = 0;
         this.lostData = new TargetLostData();
+        targeted = target ? target.GetComponent<Targeted>() : null;
     }
 }
 
@@ -33,6 +35,17 @@ public struct TargetData
 public class TargetManager : MonoBehaviour
 {
     public TargetData m_currentData;    //現在のターゲット
+
+    private void Update()
+    {
+        //if (HasTarget() && m_currentData.targeted)
+        //{
+        //    if (!m_currentData.targeted.IsTarget())
+        //    {
+        //        SetCurrentTarget(null);
+        //    }
+        //}
+    }
 
     /// <summary>
     /// ターゲットを持っているかどうか

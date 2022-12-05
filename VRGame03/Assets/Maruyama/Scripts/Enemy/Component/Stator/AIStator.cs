@@ -65,14 +65,18 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 
         //Chase
         m_stateMachine.AddEdge(StateType.Chase, StateType.Buttle, IsButtleState, (int)StateType.Buttle);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Patrol, IsTrue, (int)StateType.Patrol, true);
 
         //Buttle
-        m_stateMachine.AddEdge(StateType.Buttle, StateType.Chase, (ref TransitionMember member) => { return true; } , (int)StateType.Chase, true);
+        m_stateMachine.AddEdge(StateType.Buttle, StateType.Chase, IsTrue, (int)StateType.Chase, true);
     }
 
     //--------------------------------------------------------------------------------------
     ///	‘JˆÚğŒ
     //--------------------------------------------------------------------------------------
+
+    //–³ğŒ‚Åtrue‚É‚µ‚½‚¢ê‡B
+    bool IsTrue(ref TransitionMember member) { return true; }
 
     bool IsGameStartTransition(ref TransitionMember member)
     {

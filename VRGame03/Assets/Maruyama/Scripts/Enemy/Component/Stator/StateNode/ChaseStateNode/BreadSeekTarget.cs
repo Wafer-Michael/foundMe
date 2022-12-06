@@ -80,6 +80,8 @@ namespace StateNode
             }
 
             m_rotationCtrl = owner.GetComponent<RotationController>();
+
+            Debug.Log("Å£Start_BreadCrumbSeek");
         }
 
         public override bool OnUpdate()

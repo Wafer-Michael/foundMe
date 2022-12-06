@@ -9,14 +9,18 @@ public class ClearFlag : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("TriggerEnter");
+
         //ジャック中なら判定をしない
         if (m_jackController.IsJack) {
+            Debug.Log("NowHijack");
             return;
         }
 
         //playerでないなら反応しない。
-        var player = other.GetComponent<PCPlayer>();
+        var player = other.GetComponentInParent<PCPlayer>();
         if (!player) {
+            Debug.Log("NotPlayer");
             return;
         }
 

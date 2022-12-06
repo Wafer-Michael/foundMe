@@ -8,14 +8,12 @@ public class TesterMover : MonoBehaviour
     float m_speed = 3.0f;
     public float Speed => m_speed;
 
-    PlayerInputer Inputer { get; set; }
-
     [SerializeField]
     Camera m_camera;
 
     private void Awake()
     {
-        Inputer = GetComponent<PlayerInputer>();
+
     }
 
     void Start()
@@ -29,12 +27,11 @@ public class TesterMover : MonoBehaviour
     void Update()
     {
         UpdateMove();
-        //UpdateCameraDirection();
     }
 
     void UpdateMove()
     {
-        var moveVec = Inputer.CalculateMoveVector();
+        var moveVec = PlayerInputer.CalculateMoveVector();
         var cnvartVec = maru.Utility.ConvartCameraVec(moveVec, m_camera, gameObject);
 
         transform.position += cnvartVec * Speed * Time.deltaTime;

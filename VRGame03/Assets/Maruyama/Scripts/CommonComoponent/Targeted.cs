@@ -17,7 +17,7 @@ public class Targeted : MonoBehaviour
     {
         if(m_isTargetEvent == null)
         {
-            Debug.Log("Null‚Å‚·");
+            //Debug.Log("Null‚Å‚·");
             return true;
         }
 

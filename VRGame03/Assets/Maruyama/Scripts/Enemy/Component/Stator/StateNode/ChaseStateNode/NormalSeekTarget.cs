@@ -29,6 +29,13 @@ namespace StateNode
             m_param.turingPower = 1.0f;
         }
 
+        public override void OnStart()
+        {
+            base.OnStart();
+
+            Debug.Log("Å£Start_NormalSeek");
+        }
+
         public override bool OnUpdate()
         {
             Debug.Log("Å£NormalSeek");

@@ -24,7 +24,7 @@ namespace StateNode
 
         //private ChaseTarget m_chaseTarget;
         //private WaitTimer m_waitTimer;
-        private EnemyVelocityManager m_velocityManager;
+        private VelocityManager m_velocityManager;
         private TargetManager m_targetManager;
         private BreadCrumb m_bread;
         private RotationController m_rotationCtrl;
@@ -46,7 +46,7 @@ namespace StateNode
             m_eye = owner.GetComponent<EyeSearchRange>();
             //m_chaseTarget = owner.GetComponent<ChaseTarget>();
             //m_waitTimer = owner.GetComponent<WaitTimer>();
-            m_velocityManager = owner.GetComponent<EnemyVelocityManager>();
+            m_velocityManager = owner.GetComponent<VelocityManager>();
             m_targetManager = owner.GetComponent<TargetManager>();
         }
         #endregion
@@ -80,6 +80,8 @@ namespace StateNode
             }
 
             m_rotationCtrl = owner.GetComponent<RotationController>();
+
+            Debug.Log("Å£Start_BreadCrumbSeek");
         }
 
         public override bool OnUpdate()
@@ -89,6 +91,8 @@ namespace StateNode
             }
 
             UpdateMove();
+
+            Debug.Log("BreadCrumbSeek");
 
             m_timer.UpdateTimer();
             return m_timer.IsTimeUp;    //åoâﬂéûä‘Ç™èIóπÇµÇΩÇÁtrue

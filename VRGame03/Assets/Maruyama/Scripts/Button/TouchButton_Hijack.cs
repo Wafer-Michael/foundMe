@@ -20,7 +20,7 @@ public class TouchButton_Hijack : TouchBottunEventBase
         //null‚¾‚Á‚½‚ç‚Æ‚è‚ ‚¦‚¸Player
         if(Target == null)
         {
-            m_target = FindObjectOfType<Player>().gameObject;
+            m_target = FindObjectOfType<PlayerBase>().gameObject;
         }
 
         m_hijackController = Target.GetComponent<HijackController>();

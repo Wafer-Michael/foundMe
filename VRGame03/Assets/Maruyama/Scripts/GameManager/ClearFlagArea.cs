@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearFlag : MonoBehaviour
+public class ClearFlagArea : MonoBehaviour
 {
     [SerializeField]
     HijackController m_jackController;

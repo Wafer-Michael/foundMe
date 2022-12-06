@@ -43,6 +43,12 @@ public class HijackController : MonoBehaviour
 
     GameTimer m_timer;  //タイマー
 
+    private bool m_isJack;  //ジャック中かどうか
+    public bool IsJack {
+        private set => m_isJack = value; 
+        get => m_isJack;
+    }
+
     private void Awake()
     {
         m_timer = new GameTimer(0.0f);    
@@ -78,6 +84,7 @@ public class HijackController : MonoBehaviour
     {
         transform.position = m_camBackData.position;
         transform.forward = m_camBackData.forward;
+        IsJack = false;
     }
 
     /// <summary>
@@ -90,6 +97,7 @@ public class HijackController : MonoBehaviour
         Warp(target);
 
         m_timer.ResetTimer(m_param.time);    //タイマースタート
+        IsJack = true;
     }
 
     /// <summary>

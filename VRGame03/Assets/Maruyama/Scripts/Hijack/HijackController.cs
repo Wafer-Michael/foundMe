@@ -43,7 +43,7 @@ public class HijackController : MonoBehaviour
 
     GameTimer m_timer;  //タイマー
 
-    private bool m_isJack;  //ジャック中かどうか
+    private bool m_isJack = false;  //ジャック中かどうか
     public bool IsJack {
         private set => m_isJack = value; 
         get => m_isJack;

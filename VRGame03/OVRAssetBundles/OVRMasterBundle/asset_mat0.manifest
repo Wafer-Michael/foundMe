@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 909909660
+CRC: 3426963694
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 84e8c9d9908d89577d6dfb422740b542
+    Hash: f23dcbf4baadeeeeda486df7d2fb9ea1
   TypeTreeHash:
     serializedVersion: 2
     Hash: 8b729cfe45825d8374dd6fdab230e70f
@@ -20,30 +20,22 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Oculus/VR/Meshes/OculusTouchForQuestAndRiftS/Materials/OculusTouchForQuestAndRiftS_Material.mat
-- Assets/Oculus/VR/Materials/BasicHandMaterial.mat
 - Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/TargetMaterial.mat
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/lattice.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/SystemGestureSkeletonBoneMaterial.mat
 - Assets/Maruyama/Material/LineRenderMaterial.mat
 - Assets/Free_Assets/Decrepit Dungeon LITE/Materials/Bricks.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/SystemGestureHandMaterial.mat
 - Assets/Free_Assets/Decrepit Dungeon LITE/Materials/Stone_B.mat
-- Assets/Maruyama/Scripts/Hand/TestMad.mat
 - Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/RayMaterial.mat
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/lattice floor.mat
 - Assets/Oculus/VR/Meshes/OculusTouchForRift/Materials/OculusTouchForRift_Material.mat
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/Palletes/base color.mat
 - Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/PokeMaterial.mat
-- Assets/Maruyama/Material/ColorFilterMaterial.mat
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/white emision.mat
-- Assets/Maruyama/Material/Enemys/TestShotEnemy_Green.mat
-- Assets/Maruyama/Scripts/Hand/ShereMad.mat
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Materials/window.mat
-- Assets/Maruyama/Material/StainedGlass.mat
-- Assets/Maruyama/Material/TeserEnemyEyeMaterial.mat
-- Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Materials/ControllerBoxButtons.mat
-- Assets/Maruyama/Texture/Materials/flooring_sample-1-950x950.mat
+- Assets/VarcanRex/LongSword/Materials/LongSword.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/DefaultHandMaterial.mat
+- Assets/Oculus/Interaction/Runtime/Materials/OculusHand.mat
 - Assets/Oculus/VR/Meshes/OculusTouchForQuest2/Materials/OculusTouchForQuest2_MAT.mat
+- Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Materials/ControllerBoxButtons.mat
+- Assets/Oculus/SampleFramework/Core/HandsInteraction/Materials/SkeletonBoneMaterial.mat
 - Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Materials/ControllerBoxGlow.mat
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Models/Materials/base color.mat
 Dependencies:
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_jpg0
 - E:/Document/Graduation/Project/VRGame03/VRGame03/OVRAssetBundles/OVRMasterBundle/asset_png0

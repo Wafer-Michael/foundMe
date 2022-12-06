@@ -32,7 +32,6 @@ public class AutoMover : MonoBehaviour
 
     private EnemyVelocityManager m_velocityManager;
 
-    private TestSetForwardVelocity m_testRotate;
     private RotationController m_rotationController;
 
     bool IsRotation { get; set; } = false;
@@ -40,7 +39,6 @@ public class AutoMover : MonoBehaviour
     private void Awake()
     {
         m_rotationController = GetComponent<RotationController>();
-        m_testRotate = GetComponent<TestSetForwardVelocity>();
         m_velocityManager = GetComponent<EnemyVelocityManager>();
     }
 
@@ -78,8 +76,7 @@ public class AutoMover : MonoBehaviour
         var position = CalculatePosition();
 
         var direction = position - transform.position;
-        m_testRotate.Direction = direction;
-        m_rotationController.SetDirect(direction);
+        m_rotationController.SetDirection(direction);
         transform.position = position;
     }
 
@@ -88,8 +85,7 @@ public class AutoMover : MonoBehaviour
         var targetPosition = CalculatePosition();
 
         var toTargetVec = targetPosition - transform.position;
-        m_testRotate.Direction = toTargetVec;
-        m_rotationController.SetDirect(toTargetVec);
+        m_rotationController.SetDirection(toTargetVec);
 
         var force = CalcuVelocity.CalucArriveVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
         m_velocityManager.AddForce(force);
@@ -132,7 +128,7 @@ public class AutoMover : MonoBehaviour
             m_nowIndex = nextIndex;
             nextIndex = GetNextIndex();
 
-            Debug.Log($"始まり {m_nowIndex},終わり {nextIndex}");
+            //Debug.Log($"始まり {m_nowIndex},終わり {nextIndex}");
         }
 
         return Vector3.Lerp(m_transforms[m_nowIndex].position, m_transforms[nextIndex].position, m_countRange / length);
@@ -200,6 +196,6 @@ public class AutoMover : MonoBehaviour
             IsRotation = false;
         }
 
-        m_rotationController.SetDirect(direction);
+        m_rotationController.SetDirection(direction);
     }
 }

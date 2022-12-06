@@ -1,39 +1,33 @@
 ManifestFileVersion: 0
-CRC: 217368567
+CRC: 3643496171
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f15fba2bde8ba5ffcb31f2c0baa217a0
+    Hash: bb2fd0ad3a04ad70e130ebcba0087e80
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8fbbef66ee259249ffe96f6e1a424fc6
+    Hash: e6e651bdddca608c77d51fff2e12d033
 HashAppended: 0
 ClassTypes:
 - Class: 28
   Script: {instanceID: 0}
 - Class: 89
   Script: {instanceID: 0}
-- Class: 213
-  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Detail_NRM.png
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/base-color-normal.png
-- Assets/Oculus/VR/Textures/HandTracking/HandTracking_uvmap_2048.png
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/window_big.png
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/base-color.png
 - Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Textures/ControllerBoxTextures/controller_plain_Normal.png
+- Assets/VarcanRex/LongSword/Textures/SwordA_v004_Default_Emission.png
 - Assets/Oculus/SampleFramework/Usage/HandsTrainExample/TrainScene/ReflectionProbe-0.png
-- Assets/Maruyama/Texture/StainedGlass.png
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/window_big_emission_mask.png
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/window_big_transparent_mask.png
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/mettalic.png
+- Assets/VarcanRex/LongSword/Textures/SwordA_v004_Default_Normal.png
 - Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Bricks.png
+- Assets/VarcanRex/LongSword/Textures/SwordA_v004_Default_AlbedoTransparency.png
 - Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Bricks_NRM.png
 - Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Stone_B.png
 - Assets/Oculus/VR/Textures/OculusTouchForRift/touchController_albedo.png
 - Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Stone_B_NRM.png
+- Assets/Oculus/Interaction/Runtime/Textures/fingers_glow_mask.png
 - Assets/Free_Assets/Decrepit Dungeon LITE/Textures/Detail.png
-- Assets/Free_Assets/Sci-Fi Styled Modular Pack/Textures/lattice.png
 - Assets/Oculus/SampleFramework/Usage/HandsTrainExample/Textures/ControllerBoxTextures/controller_plain_DiffuseGlossiness.png
+- Assets/VarcanRex/LongSword/Textures/SwordA_v004_Default_MetallicSmoothness.png
 Dependencies: []

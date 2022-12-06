@@ -13,6 +13,7 @@ namespace StateNode
         None,
         Normal,     //通常シーク
         BreadCrumb, //ブレッドクラム
+        Lost,       //見失った
     }
 
     public struct Chase_TransitionMember {
@@ -27,13 +28,15 @@ namespace StateNode
         private float m_lostSeekTime = 10.0f; //ロストしてから一定時間追従する時間
 
         private TargetManager m_targetManager;  //ターゲット監視
+        private EyeSearchRange m_eyeRange;
 
-        StateMachine m_stateMachine = new StateMachine();
+        private StateMachine m_stateMachine = new StateMachine();
 
         public Chase(EnemyBase owner) :
             base(owner)
         {
             m_targetManager = owner.GetComponent<TargetManager>();
+            m_eyeRange = owner.GetComponent<EyeSearchRange>();
 
             CreateNode();
             CreateEdge();
@@ -85,16 +88,48 @@ namespace StateNode
             m_stateMachine.AddNode(StateType.Normal, new StateNode.NormalSeekTarget(GetOwner()));
 
             m_stateMachine.AddNode(StateType.BreadCrumb, new StateNode.BreadSeekTarget(GetOwner(), m_nearRange, m_maxSpeed, m_turningPower, m_lostSeekTime));
+
+            m_stateMachine.AddNode(StateType.Lost, null);
         }
 
         void CreateEdge()
         {
-            
+            //Normal
+            m_stateMachine.AddEdge(StateType.Normal, StateType.BreadCrumb, IsBreadCrumb, (int)StateType.BreadCrumb);
+
+            //BreadCrumb
+            m_stateMachine.AddEdge(StateType.BreadCrumb, StateType.Normal, IsNormal, (int)StateType.Normal);
+            m_stateMachine.AddEdge(StateType.BreadCrumb, StateType.Lost, IsTrue, (int)StateType.Lost, true);
         }
 
         private bool IsEnd() {
-            //ターゲットがいないなら終了
-            return !m_targetManager.HasTarget(); 
-        }   
+            //ターゲットがいないなら終了、又は、StateTypeがLost
+            return !m_targetManager.HasTarget() || m_stateMachine.GetNowType() == StateType.Lost; 
+        }
+
+        private bool IsTrue(ref TransitionMember member) { return true; }
+        
+        private bool IsNormal(ref TransitionMember member)
+        {
+            var target = m_targetManager.GetCurrentTarget();
+            if (!target) {
+                return false;
+            }
+
+            //視界内なら遷移可能
+            return m_eyeRange.IsInEyeRange(target);
+        }
+
+        private bool IsBreadCrumb(ref TransitionMember member)
+        {
+            var target = m_targetManager.GetCurrentTarget();
+            if (!target)
+            {
+                return false;
+            }
+
+            //視界外なら遷移可能
+            return !m_eyeRange.IsInEyeRange(target);
+        }
     }
 }

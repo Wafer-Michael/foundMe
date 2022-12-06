@@ -4,7 +4,7 @@ using UnityEngine;
 
 using System;
 
-public class Player : MonoBehaviour
+public class PlayerBase : MonoBehaviour
 {
     
 }

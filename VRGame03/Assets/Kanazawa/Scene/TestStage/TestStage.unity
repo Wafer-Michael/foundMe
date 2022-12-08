@@ -2467,11 +2467,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PCPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 8837664280284090127, guid: 4b103371f0bb1ce45baadfa000183e4c,
-        type: 3}
-      propertyPath: m_TargetDisplay
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b103371f0bb1ce45baadfa000183e4c, type: 3}
 --- !u!1 &1201100505

@@ -10,8 +10,16 @@ public class SenceController : MonoBehaviour
         Scene,
     }
 
-    static string[] DEFAULT_NORMAL_LAYERS = new string[] { "L_Obstacle" };
-    static string[] DEFAULT_SENCE_LAYERS = new string[] { "L_Obstacle" };
+    static string[] DEFAULT_NORMAL_LAYERS = new string[] { 
+        "Default", "TransparentFX", "longer Raycast", "Water", "UI", 
+        "L_Normal",
+        "L_Player", "L_Obstacle" 
+    };
+    static string[] DEFAULT_SENCE_LAYERS = new string[] {
+        "Default", "TransparentFX", "longer Raycast", "Water", "UI", 
+        "L_Sencer",
+        "L_Player", "L_Obstacle"
+    };
 
     [SerializeField]
     private Camera m_camera;
@@ -29,10 +37,15 @@ public class SenceController : MonoBehaviour
     private float m_senceTime = 10.0f;
 
     [SerializeField]
-    private float m_recastTime = 3.0f;
+    private float m_recastTime = 1.0f;
 
     private GameTimer m_timer = new GameTimer();
     private GameTimer m_recastTimer = new GameTimer();
+
+    private void Start()
+    {
+        EndSence();
+    }
 
     private void Update()
     {

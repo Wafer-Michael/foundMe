@@ -57,15 +57,19 @@ public class HijackController : MonoBehaviour
     private void Start()
     {
         m_timer.ResetTimer(m_param.time);
+        m_camBackData.position = transform.position;
     }
 
     private void Update()
     {
-        m_timer.UpdateTimer();
-
-        if (m_timer.IsTimeUp)   //タイムアップしたら、TimeOver処理
+        if (IsJack)
         {
-            TimeOver();
+            m_timer.UpdateTimer();
+
+            if (m_timer.IsTimeUp)   //タイムアップしたら、TimeOver処理
+            {
+                TimeOver();
+            }
         }
     }
 

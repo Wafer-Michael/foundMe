@@ -12,8 +12,8 @@ TagManager:
   - 
   - Water
   - UI
-  - L_PCOnly
-  - L_VROnly
+  - L_Normal
+  - L_Sencer
   - L_Player
   - L_Obstacle
   - 

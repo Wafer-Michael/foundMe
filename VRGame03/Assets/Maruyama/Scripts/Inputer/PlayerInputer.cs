@@ -63,6 +63,11 @@ public class PlayerInputer : MonoBehaviour
         return moveVec;
     }
 
+    static public bool IsSence()
+    {
+        return Input.GetKeyDown(KeyCode.F);
+    }
+
     static public bool IsVRUIOpen()
     {
         return true;

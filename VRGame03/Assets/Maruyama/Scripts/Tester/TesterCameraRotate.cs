@@ -33,7 +33,7 @@ public class TesterCameraRotate : MonoBehaviour
 
     void UpdateCameraRotate()
     {
-        var moveVec = Inputer.CalculateMouseCameraMoveVec();
+        var moveVec = PlayerInputer.CalculateMouseCameraMoveVec();
 
         m_camera.transform.Rotate(moveVec * Speed * Time.deltaTime);
     }

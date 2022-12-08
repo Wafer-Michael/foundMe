@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Linq;
+
 //--------------------------------------------------------------------------------------
 /// 監視対象が視界範囲にいるかどうかを判断するクラス
 //--------------------------------------------------------------------------------------
@@ -59,6 +61,35 @@ public class ObserveIsInEyeTargets
         }
 
         return result;
+    }
+
+    float IsNearTarget(GameObject left, GameObject right)
+    {
+        var toLeftRange = Vector3.Magnitude(left.transform.position - m_eyeRange.transform.position);
+        var toRightRange = Vector3.Magnitude(right.transform.position - m_eyeRange.transform.position);
+
+        //return toLeftRange.CompareTo(toRightRange);
+
+        return toLeftRange - toRightRange;
+    }
+
+    public GameObject SerachNearIsInEyeTarget()
+    {
+        var targets = SearchIsInEyeTargets();
+
+        //ソート
+        targets.OrderBy(value => (value.transform.position - m_eyeRange.transform.position).magnitude);
+
+        foreach(var target in targets)
+        {
+            //ターゲットがターゲティング状態なら
+            var targeted = target.GetComponent<Targeted>();
+            if (targeted.IsTarget()) {
+                return target;
+            }
+        }
+
+        return null;
     }
 
     //--------------------------------------------------------------------------------------

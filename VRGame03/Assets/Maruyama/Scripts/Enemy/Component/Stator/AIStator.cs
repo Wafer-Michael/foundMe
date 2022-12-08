@@ -10,6 +10,7 @@ public enum AIStator_StateType
     None,
     Patrol,
     Find,   //”­Œ©
+    Chase,  //’Ç]
     Buttle, //UŒ‚
 }
 
@@ -23,11 +24,7 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 {
     private EnemyBase m_enemy;
     private EyeSearchRange m_eyeRange;
-
-    [SerializeField]
-    private List<GameObject> m_observeIsInEyeTargetObjects = new List<GameObject>();
-
-    private ObserveIsInEyeTargets m_observeIsInEyeTargets;  //‹ŠE”ÍˆÍ‚É“ü‚Á‚½‚çƒ^[ƒQƒbƒg”»’è‚ğæ‚éƒ^[ƒQƒbƒg
+    private TargetManager m_targetManager;
 
     protected override void Awake()
     {
@@ -35,8 +32,7 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 
         m_enemy = GetComponent<EnemyBase>();
         m_eyeRange = GetComponent<EyeSearchRange>();
-
-        m_observeIsInEyeTargets = new ObserveIsInEyeTargets(m_observeIsInEyeTargetObjects, m_eyeRange);
+        m_targetManager = GetComponent<TargetManager>();
     }
 
     private void Start()
@@ -52,6 +48,10 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
         m_stateMachine.AddNode(StateType.Patrol, new StateNode.Patrol(m_enemy));    //Patrol
 
         m_stateMachine.AddNode(StateType.Find, new StateNode.Find(m_enemy));        //Find
+
+        m_stateMachine.AddNode(StateType.Chase, new StateNode.Chase(m_enemy));      //Chase
+
+        m_stateMachine.AddNode(StateType.Buttle, new StateNode.Buttle(m_enemy));    //Buttle
     }
 
     protected override void CreateEdge()
@@ -60,12 +60,23 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
         m_stateMachine.AddEdge(StateType.None, StateType.Patrol, IsGameStartTransition, (int)StateType.Patrol);
 
         //Patrol
-        m_stateMachine.AddEdge(StateType.Patrol, StateType.Find, IsFindState, (int)StateType.Find);
+        //m_stateMachine.AddEdge(StateType.Patrol, StateType.Find, IsFindState, (int)StateType.Find);
+        m_stateMachine.AddEdge(StateType.Patrol, StateType.Chase, IsFindState, (int)StateType.Chase);
+
+        //Chase
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Buttle, IsButtleState, (int)StateType.Buttle);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.Patrol, IsTrue, (int)StateType.Patrol, true);
+
+        //Buttle
+        m_stateMachine.AddEdge(StateType.Buttle, StateType.Chase, IsTrue, (int)StateType.Chase, true);
     }
 
     //--------------------------------------------------------------------------------------
     ///	‘JˆÚğŒ
     //--------------------------------------------------------------------------------------
+
+    //–³ğŒ‚Åtrue‚É‚µ‚½‚¢ê‡B
+    bool IsTrue(ref TransitionMember member) { return true; }
 
     bool IsGameStartTransition(ref TransitionMember member)
     {
@@ -75,7 +86,7 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 
     bool IsFindState(ref TransitionMember member)
     {
-        var targets = m_observeIsInEyeTargets.SearchIsInEyeTargets();
+        var targets = m_enemy.GetObserveIsInEyeTargets().SearchIsInEyeTargets();
         foreach(var target in targets)
         {
             var targeted = target.GetComponent<Targeted>();
@@ -83,6 +94,21 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
             {
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    bool IsButtleState(ref TransitionMember member)
+    {
+        var target = m_targetManager.GetCurrentTarget();
+        if (!target) {
+            return false;
+        }
+
+        const float AttackRange = 2.0f;
+        if(m_eyeRange.IsInEyeRange(target, AttackRange)) {
+            return true;
         }
 
         return false;

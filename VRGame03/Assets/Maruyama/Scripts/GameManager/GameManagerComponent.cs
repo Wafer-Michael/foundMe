@@ -8,6 +8,7 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
         Reserve,    //準備
         Game,       //ゲーム
         GameOver,   //ゲームオーバー
+        Clear,      //クリア
     }
 
     private GameState m_currentState = GameState.Reserve;
@@ -45,10 +46,15 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
         {
             GameState.Reserve => null,
             GameState.Game => null,
-            GameState.GameOver => null,
+            GameState.GameOver => GameOver_Start,
             _ => null
         };
 
         function?.Invoke();
+    }
+
+    private void GameOver_Start()
+    {
+
     }
 }

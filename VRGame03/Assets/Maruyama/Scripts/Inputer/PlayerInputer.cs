@@ -11,7 +11,7 @@ public class PlayerInputer : MonoBehaviour
     /// キーボードからの移動入力処理
     /// </summary>
     /// <returns>移動力を返す</returns>
-    private Vector3 CalculateKeyBoardMoveVector()
+    static private Vector3 CalculateKeyBoardMoveVector()
     {
         var moveVec = Vector3.zero;
 
@@ -42,7 +42,7 @@ public class PlayerInputer : MonoBehaviour
     /// 移動方向を取得
     /// </summary>
     /// <returns>移動方向</returns>
-    public Vector3 CalculateMoveVector()
+    static public Vector3 CalculateMoveVector()
     {
         var stickVec = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick);
         var moveVec = new Vector3(stickVec.x, 0, stickVec.y);
@@ -55,7 +55,7 @@ public class PlayerInputer : MonoBehaviour
     /// マウスの移動ベクトルの取得
     /// </summary>
     /// <returns>マウスの移動ベクトル</returns>
-    public Vector3 CalculateMouseCameraMoveVec()
+    static public Vector3 CalculateMouseCameraMoveVec()
     {
         //var moveVec = new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0.0f);
         var moveVec = new Vector3(0.0f, Input.GetAxis("Mouse X"), 0.0f);

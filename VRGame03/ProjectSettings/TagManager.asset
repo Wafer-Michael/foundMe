@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - T_Wall
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - L_PCOnly
   - L_VROnly
   - L_Player
-  - 
+  - L_Obstacle
   - 
   - 
   - 

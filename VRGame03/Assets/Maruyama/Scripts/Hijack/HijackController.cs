@@ -26,6 +26,11 @@ public class HijackController : MonoBehaviour
         public Vector3 forward;
     }
 
+    [SerializeField]
+    GameObject m_modelObject;
+
+    [SerializeField]
+    GameObject m_modelParentObject;
 
     [SerializeField]
     Parametor m_param;  //パラメータ
@@ -97,6 +102,11 @@ public class HijackController : MonoBehaviour
     /// <param name="target">ハイジャックターゲット</param>
     public void StartHijack(GameObject target)
     {
+        //Jack中なら処理を飛ばす。
+        if (IsJack) {   
+            return;
+        }
+
         SaveCamBackData();
         Warp(target);
 

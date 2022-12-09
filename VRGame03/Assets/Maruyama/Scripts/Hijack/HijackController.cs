@@ -26,6 +26,11 @@ public class HijackController : MonoBehaviour
         public Vector3 forward;
     }
 
+    [SerializeField]
+    GameObject m_modelObject;
+
+    [SerializeField]
+    GameObject m_modelParentObject;
 
     [SerializeField]
     Parametor m_param;  //ƒpƒ‰ƒ[ƒ^

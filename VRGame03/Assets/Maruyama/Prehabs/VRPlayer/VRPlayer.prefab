@@ -9463,7 +9463,7 @@ MonoBehaviour:
   m_modelObject: {fileID: 0}
   m_modelParentObject: {fileID: 0}
   m_param:
-    time: 5
+    time: 20
 --- !u!114 &1265826101323917844
 MonoBehaviour:
   m_ObjectHideFlags: 0

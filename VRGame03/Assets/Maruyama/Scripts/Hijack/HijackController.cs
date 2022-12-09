@@ -97,6 +97,11 @@ public class HijackController : MonoBehaviour
     /// <param name="target">ハイジャックターゲット</param>
     public void StartHijack(GameObject target)
     {
+        //Jack中なら処理を飛ばす。
+        if (IsJack) {   
+            return;
+        }
+
         SaveCamBackData();
         Warp(target);
 

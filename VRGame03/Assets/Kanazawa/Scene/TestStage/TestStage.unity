@@ -3016,7 +3016,7 @@ PrefabInstance:
     - target: {fileID: 1265826101323917833, guid: 24db731a343f0bf4fa1c3e03dc894f31,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.6
+      value: -9.7
       objectReference: {fileID: 0}
     - target: {fileID: 1265826101323917833, guid: 24db731a343f0bf4fa1c3e03dc894f31,
         type: 3}
@@ -3128,6 +3128,21 @@ PrefabInstance:
       propertyPath: m_hijackTarget
       value: 
       objectReference: {fileID: 1404502751}
+    - target: {fileID: 8865522660314954930, guid: 24db731a343f0bf4fa1c3e03dc894f31,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8865522660314954930, guid: 24db731a343f0bf4fa1c3e03dc894f31,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8865522660314954930, guid: 24db731a343f0bf4fa1c3e03dc894f31,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.08
+      objectReference: {fileID: 0}
     - target: {fileID: 8865522660418337645, guid: 24db731a343f0bf4fa1c3e03dc894f31,
         type: 3}
       propertyPath: m_closeUIs.Array.size

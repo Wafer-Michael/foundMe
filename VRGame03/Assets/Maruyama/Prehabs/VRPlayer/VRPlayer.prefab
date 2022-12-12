@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 404309618}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9460,10 +9460,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2810bd5af4c144798d020fd38bf03f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_modelObject: {fileID: 0}
-  m_modelParentObject: {fileID: 0}
+  m_modelObject: {fileID: 404309617}
+  m_modelParentObject: {fileID: 1265826101323917832}
   m_param:
-    time: 20
+    time: 5
 --- !u!114 &1265826101323917844
 MonoBehaviour:
   m_ObjectHideFlags: 0

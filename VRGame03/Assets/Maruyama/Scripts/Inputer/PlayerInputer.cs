@@ -140,6 +140,11 @@ public class PlayerInputer : MonoBehaviour
         return Input.GetMouseButton(0);
     }
 
+    static public bool IsForceStopJack()
+    {
+        return true;
+    }
+
     //--------------------------------------------------------------------------------------
     ///	ƒeƒXƒg“ü—Í
     //--------------------------------------------------------------------------------------

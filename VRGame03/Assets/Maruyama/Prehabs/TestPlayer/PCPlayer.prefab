@@ -159,7 +159,6 @@ GameObject:
   - component: {fileID: 689963722}
   - component: {fileID: 689963725}
   - component: {fileID: 689963724}
-  - component: {fileID: 689963723}
   m_Layer: 11
   m_Name: MapUIModel
   m_TagString: Untagged
@@ -232,19 +231,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &689963723
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689963721}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &809669422
 GameObject:
   m_ObjectHideFlags: 0

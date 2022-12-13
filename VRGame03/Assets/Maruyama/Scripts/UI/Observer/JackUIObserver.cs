@@ -26,7 +26,7 @@ namespace UIObserver {
 
         private void ChangeUI(bool isJack)
         {
-            NormalUIs.SetActive(!isJack);
+            //NormalUIs.SetActive(!isJack);
             JackUIs.SetActive(isJack);
         }
     }

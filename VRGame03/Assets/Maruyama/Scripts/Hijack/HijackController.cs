@@ -108,6 +108,11 @@ public class HijackController : MonoBehaviour
         CamBack();
     }
 
+    public void ForceCamBack()
+    {
+        CamBack();
+    }
+
     /// <summary>
     /// ハイジャックをやめて元に戻る。
     /// </summary>

@@ -78,6 +78,11 @@ public class PlayerInputer : MonoBehaviour
         return true;
     }
 
+    static public bool IsDebugKeyDown(KeyCode key)
+    {
+        return Input.GetKeyDown(key);
+    }
+
     /// <summary>
     /// ‚Â‚Ü‚Şsˆ×
     /// </summary>

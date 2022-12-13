@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
 /// 乗っ取り制御
 /// </summary>
 public class HijackController : MonoBehaviour
 {
+    [System.Serializable]
+    public class ParentParingData
+    {
+        private GameObject parentObject;
+        public GameObject ParentObject { get => parentObject; set => parentObject = value; }
+        public GameObject selfObject;
+    }
+
     /// <summary>
     /// パラメータ
     /// </summary>
@@ -33,6 +42,9 @@ public class HijackController : MonoBehaviour
     private GameObject m_modelParentObject; //モデルの親オブジェクト
 
     [SerializeField]
+    private List<ParentParingData> m_parentParingDatas = new List<ParentParingData>();
+
+    [SerializeField]
     Parametor m_param;  //パラメータ
     public Parametor Param {
         get => m_param;
@@ -48,11 +60,16 @@ public class HijackController : MonoBehaviour
 
     private GameTimer m_timer;      //タイマー
 
-    private bool m_isJack = false;  //ジャック中かどうか
+    //ジャック中を表す。
+    private UniRx.ReactiveProperty<bool> m_isJack = new UniRx.ReactiveProperty<bool>(false);
+    public System.IObservable<bool> IsJackObserver => m_isJack;
     public bool IsJack {
-        private set => m_isJack = value; 
-        get => m_isJack;
+        private set => m_isJack.Value = value; 
+        get => m_isJack.Value;
     }
+
+    [SerializeField]
+    private GameObject DebugHiJackGameObject;
 
     private void Awake()
     {
@@ -67,15 +84,13 @@ public class HijackController : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerInputer.IsDebugKeyDown(KeyCode.K))
+        {
+            StartHijack(DebugHiJackGameObject);
+        }
+
         if (IsJack)
         {
-            //戻るボタンを押したら、
-            if (true)
-            {
-                //CamBack()する。
-                //その後の処理を省く
-            }
-
             m_timer.UpdateTimer();
 
             if (m_timer.IsTimeUp)   //タイムアップしたら、TimeOver処理
@@ -101,7 +116,15 @@ public class HijackController : MonoBehaviour
         transform.position = m_camBackData.position;
         transform.forward = m_camBackData.forward;
 
-        m_modelObject.transform.parent = m_modelParentObject.transform;    //モデルの親を戻す。
+        foreach(var data in m_parentParingDatas)
+        {
+            if(data.ParentObject == null) {
+                continue;
+            }
+
+            data.selfObject.transform.parent = data.ParentObject.transform;
+        }
+
         IsJack = false;
     }
 
@@ -117,7 +140,12 @@ public class HijackController : MonoBehaviour
         }
 
         SaveCamBackData();
-        m_modelObject.transform.parent = null;  //モデルの親子関係を外す。
+        
+        foreach(var data in m_parentParingDatas)
+        {
+            data.ParentObject = data.selfObject.transform.parent.gameObject;
+            data.selfObject.transform.parent = null;
+        }
         Warp(target);
 
         m_timer.ResetTimer(m_param.time);       //タイマースタート

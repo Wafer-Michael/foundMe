@@ -29,5 +29,10 @@ namespace UIObserver {
             //NormalUIs.SetActive(!isJack);
             JackUIs.SetActive(isJack);
         }
+
+        public void TouchReturnBottuon(OculusSampleFramework.InteractableStateArgs obj)
+        {
+            m_jackController.ForceCamBack();
+        }
     }
 }

@@ -69,6 +69,13 @@ public class HijackController : MonoBehaviour
     {
         if (IsJack)
         {
+            //戻るボタンを押したら、
+            if (true)
+            {
+                //CamBack()する。
+                //その後の処理を省く
+            }
+
             m_timer.UpdateTimer();
 
             if (m_timer.IsTimeUp)   //タイムアップしたら、TimeOver処理

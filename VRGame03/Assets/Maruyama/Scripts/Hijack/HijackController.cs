@@ -27,10 +27,10 @@ public class HijackController : MonoBehaviour
     }
 
     [SerializeField]
-    GameObject m_modelObject;       //モデルのオブジェクト
+    private GameObject m_modelObject;       //モデルのオブジェクト
 
     [SerializeField]
-    GameObject m_modelParentObject; //モデルの親オブジェクト
+    private GameObject m_modelParentObject; //モデルの親オブジェクト
 
     [SerializeField]
     Parametor m_param;  //パラメータ
@@ -46,7 +46,7 @@ public class HijackController : MonoBehaviour
         set => m_camBackData = value;
     }
 
-    GameTimer m_timer;  //タイマー
+    private GameTimer m_timer;      //タイマー
 
     private bool m_isJack = false;  //ジャック中かどうか
     public bool IsJack {

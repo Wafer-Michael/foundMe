@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
 /// 乗っ取り制御
 /// </summary>
@@ -48,10 +49,12 @@ public class HijackController : MonoBehaviour
 
     private GameTimer m_timer;      //タイマー
 
-    private bool m_isJack = false;  //ジャック中かどうか
+    //ジャック中を表す。
+    private UniRx.ReactiveProperty<bool> m_isJack = new UniRx.ReactiveProperty<bool>(false);
+    public System.IObservable<bool> IsJackObserver => m_isJack;
     public bool IsJack {
-        private set => m_isJack = value; 
-        get => m_isJack;
+        private set => m_isJack.Value = value; 
+        get => m_isJack.Value;
     }
 
     private void Awake()

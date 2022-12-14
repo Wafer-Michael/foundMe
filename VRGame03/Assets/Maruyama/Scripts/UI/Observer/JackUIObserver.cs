@@ -27,17 +27,22 @@ namespace UIObserver {
 
             var childMembers = m_jackUIs.GetComponentsInChildren<Renderer>();  //JackUIs
             m_jackUIChildRenders = new List<Renderer>(childMembers);
+
+            foreach (var child in m_jackUIChildRenders)
+            {
+                child.enabled = false;
+            }
         }
 
         private void ChangeUI(bool isJack)
         {
             //NormalUIs.SetActive(!isJack);
-            m_jackUIs.SetActive(isJack);
+            //m_jackUIs.SetActive(isJack);
 
-            //foreach(var child in m_jackUIChildRenders)
-            //{
-            //    child.enabled = isJack;
-            //}
+            foreach (var child in m_jackUIChildRenders)
+            {
+                child.enabled = isJack;
+            }
         }
 
         public void TouchReturnBottuon(OculusSampleFramework.InteractableStateArgs obj)

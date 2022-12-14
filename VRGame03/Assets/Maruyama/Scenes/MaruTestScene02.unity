@@ -1879,15 +1879,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1423005493, guid: 4b103371f0bb1ce45baadfa000183e4c, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1423005494, guid: 4b103371f0bb1ce45baadfa000183e4c, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: bf9521c3a17b08a49a9e497035edcb09,
-        type: 2}
     - target: {fileID: 3491293274646688484, guid: 4b103371f0bb1ce45baadfa000183e4c,
         type: 3}
       propertyPath: m_RootOrder
@@ -1947,11 +1938,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PCPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8837664280284090127, guid: 4b103371f0bb1ce45baadfa000183e4c,
-        type: 3}
-      propertyPath: m_TargetDisplay
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b103371f0bb1ce45baadfa000183e4c, type: 3}

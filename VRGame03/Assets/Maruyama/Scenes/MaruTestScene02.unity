@@ -2280,10 +2280,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1630492990, guid: 2b298673dbeaf8c408ea99b4f92abd6e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443003821786294349, guid: 2b298673dbeaf8c408ea99b4f92abd6e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8820933301283187625, guid: 2b298673dbeaf8c408ea99b4f92abd6e,
         type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820933301283187625, guid: 2b298673dbeaf8c408ea99b4f92abd6e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8820933301283187630, guid: 2b298673dbeaf8c408ea99b4f92abd6e,
         type: 3}

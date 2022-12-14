@@ -560,6 +560,7 @@ MonoBehaviour:
   - L_Normal
   - L_Player
   - L_Obstacle
+  - L_PCOnly
   m_senceEyeLayerStrings:
   - Default
   - TransparentFX
@@ -569,6 +570,7 @@ MonoBehaviour:
   - L_Sencer
   - L_Player
   - L_Obstacle
+  - L_PCOnly
   m_senceTime: 10
   m_recastTime: 1
 --- !u!54 &1423005493

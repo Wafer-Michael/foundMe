@@ -16,6 +16,16 @@ public class EnemyBase : MonoBehaviour
     {
         m_eyeRange = GetComponent<EyeSearchRange>();
 
+        //playerをターゲットに設定する仮処理
+        if (m_observeIsInEyeTargetObjects.Count == 0)
+        {
+            var players = FindObjectsOfType<PlayerBase>();
+            foreach(var player in players)
+            {
+                m_observeIsInEyeTargetObjects.Add(player.gameObject);
+            }
+        }
+
         m_observeIsInEyeTargets = new ObserveIsInEyeTargets(m_observeIsInEyeTargetObjects, m_eyeRange);
     }
 

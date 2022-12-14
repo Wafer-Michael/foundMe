@@ -10,6 +10,7 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
         public float degree;   //‰ñ“]‚³‚¹‚½‚¢Šp“x
         public float speed;    //‰ñ“]‚³‚¹‚é‘¬“x
         public RotationController rotationControllerAxis;   //‰ñ“]‚³‚¹‚½‚¢²
+        public float openIdleTime;
 
         public float Radian => degree * Mathf.Deg2Rad; 
         public Vector3 DefaultDirection { get; set; }        //‰Šú•ûŒü
@@ -51,6 +52,8 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
         m_param.DefaultDirection = Param.rotationControllerAxis.gameObject.transform.forward;   //‰Šú•ûŒü‚ğæ“¾
 
         CreateNode();
+
+        CreateEdge();
     }
     private void Update()
     {
@@ -71,6 +74,22 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
         m_stateMachine.AddNode(State.Idle, null);
 
         m_stateMachine.AddNode(State.Open, new StateNode.Door_Open(this));  //ƒhƒA‚ğŠJ‚­
+
+        m_stateMachine.AddNode(State.OpenIdle, new StateNode.Door_OpenIdle(this));    //ŠJ‚¢‚½ó‘Ô
+
+        m_stateMachine.AddNode(State.Close, new StateNode.Door_Close(this)); //•Â‚¶‚½ó‘Ô
+    }
+
+    private void CreateEdge()
+    {
+        m_stateMachine.AddEdge(State.Open, State.OpenIdle, IsTrue, (int)State.OpenIdle, true);
+
+        m_stateMachine.AddEdge(State.OpenIdle, State.Close, IsTrue, (int)State.Close, true);
+    }
+
+    private bool IsTrue(ref TransitionMember member)
+    {
+        return true;
     }
 
     public void Access(GameObject other)
@@ -141,6 +160,50 @@ namespace StateNode
         }
 
         private bool IsEnd()
+        {
+            return !GetOwner().Param.rotationControllerAxis.IsRotation;
+        }
+    }
+
+
+    class Door_OpenIdle : EnemyStateNodeBase<OpenDoor>
+    {
+        private GameTimer m_timer = new GameTimer();
+
+        public Door_OpenIdle(OpenDoor owner) :
+             base(owner)
+        { }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+
+            m_timer.ResetTimer(GetOwner().Param.openIdleTime);
+        }
+
+        public override bool OnUpdate()
+        {
+            m_timer.UpdateTimer();
+
+            return m_timer.IsTimeUp;
+        }
+    }
+
+    class Door_Close : EnemyStateNodeBase<OpenDoor>
+    {
+        private GameTimer m_timer = new GameTimer();
+
+        public Door_Close(OpenDoor owner) :
+             base(owner)
+        { }
+
+        public override void OnStart()
+        {
+            var param = GetOwner().Param;
+            param.rotationControllerAxis.SetDirection(param.DefaultDirection);
+        }
+
+        public override bool OnUpdate()
         {
             return !GetOwner().Param.rotationControllerAxis.IsRotation;
         }

@@ -32,12 +32,12 @@ namespace UIObserver {
         private void ChangeUI(bool isJack)
         {
             //NormalUIs.SetActive(!isJack);
-            //m_jackUIs.SetActive(isJack);
+            m_jackUIs.SetActive(isJack);
 
-            foreach(var child in m_jackUIChildRenders)
-            {
-                child.enabled = isJack;
-            }
+            //foreach(var child in m_jackUIChildRenders)
+            //{
+            //    child.enabled = isJack;
+            //}
         }
 
         public void TouchReturnBottuon(OculusSampleFramework.InteractableStateArgs obj)

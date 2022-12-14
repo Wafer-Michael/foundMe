@@ -207,6 +207,7 @@ MonoBehaviour:
     degree: 90
     speed: 5
     rotationControllerAxis: {fileID: 8820933301283187628}
+    openIdleTime: 3
 --- !u!114 &8820933301283187628
 MonoBehaviour:
   m_ObjectHideFlags: 0

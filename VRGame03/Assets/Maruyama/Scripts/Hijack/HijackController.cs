@@ -118,6 +118,10 @@ public class HijackController : MonoBehaviour
     /// </summary>
     private void CamBack()
     {
+        if (!IsJack) {  //ジャック状態ならやる必要がない。
+            return;
+        }
+
         transform.position = m_camBackData.position;
         transform.forward = m_camBackData.forward;
 

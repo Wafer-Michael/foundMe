@@ -11,10 +11,12 @@ namespace UIObserver {
         private HijackController m_jackController;
 
         [SerializeField]
-        private GameObject NormalUIs;   //通常時のUI配列
+        private GameObject m_normalUIs;   //通常時のUI配列
 
         [SerializeField]
-        private GameObject JackUIs;     //ジャック中に表示するUI群
+        private GameObject m_jackUIs;     //ジャック中に表示するUI群
+
+        private List<Renderer> m_jackUIChildRenders = new List<Renderer>();
 
         private void Awake()
         {
@@ -22,12 +24,20 @@ namespace UIObserver {
             m_jackController.IsJackObserver.
                 Subscribe(isJack => ChangeUI(isJack)).
                 AddTo(this);
+
+            var childMembers = m_jackUIs.GetComponentsInChildren<Renderer>();  //JackUIs
+            m_jackUIChildRenders = new List<Renderer>(childMembers);
         }
 
         private void ChangeUI(bool isJack)
         {
             //NormalUIs.SetActive(!isJack);
-            JackUIs.SetActive(isJack);
+            //m_jackUIs.SetActive(isJack);
+
+            foreach(var child in m_jackUIChildRenders)
+            {
+                child.enabled = isJack;
+            }
         }
 
         public void TouchReturnBottuon(OculusSampleFramework.InteractableStateArgs obj)

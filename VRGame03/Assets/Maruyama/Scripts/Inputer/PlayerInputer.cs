@@ -83,6 +83,11 @@ public class PlayerInputer : MonoBehaviour
         return Input.GetKeyDown(key);
     }
 
+    static public bool IsAccess()
+    {
+        return Input.GetKeyDown(KeyCode.F);
+    }
+
     /// <summary>
     /// ‚Â‚Ü‚Şsˆ×
     /// </summary>

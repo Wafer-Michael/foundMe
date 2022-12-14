@@ -9,4 +9,6 @@ public interface I_InputAccess
     /// </summary>
     /// <param name="other">アクセス者</param>
     public void Access(GameObject other);
+
+    public GameObject GetGameObject();
 }

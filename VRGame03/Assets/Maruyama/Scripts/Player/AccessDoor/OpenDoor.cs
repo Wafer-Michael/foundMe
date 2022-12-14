@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RotationController))]
-public class OpenDoor : MonoBehaviour
+public class OpenDoor : MonoBehaviour, I_InputAccess
 {
     [System.Serializable]
     public struct Parametor {
@@ -54,10 +54,10 @@ public class OpenDoor : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerInputer.IsDebugKeyDown(KeyCode.Y))
-        {
-            Open(FindObjectOfType<PCPlayer>().gameObject);
-        }
+        //if (PlayerInputer.IsDebugKeyDown(KeyCode.Y))
+        //{
+        //    Open(FindObjectOfType<PCPlayer>().gameObject);
+        //}
 
         //var requesterToOwner = transform.position - FindObjectOfType<PCPlayer>().gameObject.transform.position;
         //float newDot = Vector3.Dot(requesterToOwner, transform.forward);
@@ -72,6 +72,13 @@ public class OpenDoor : MonoBehaviour
 
         m_stateMachine.AddNode(State.Open, new StateNode.Door_Open(this));  //ƒhƒA‚ðŠJ‚­
     }
+
+    public void Access(GameObject other)
+    {
+        Open(other);
+    }
+
+    public GameObject GetGameObject() => gameObject;
 
     public void Open(GameObject other)
     {

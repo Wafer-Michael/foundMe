@@ -1939,11 +1939,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PCPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 8837664280284090127, guid: 4b103371f0bb1ce45baadfa000183e4c,
-        type: 3}
-      propertyPath: m_TargetDisplay
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b103371f0bb1ce45baadfa000183e4c, type: 3}
 --- !u!1001 &3584230654892313354
@@ -1953,6 +1948,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1674401311}
     m_Modifications:
+    - target: {fileID: 1191196262, guid: 2446b64b1db070243878dad1f0b8e106, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3584230654882087815, guid: 2446b64b1db070243878dad1f0b8e106,
         type: 3}
       propertyPath: m_observeIsInEyeTargetObjects.Array.data[0]

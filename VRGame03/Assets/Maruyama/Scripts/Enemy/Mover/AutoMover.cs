@@ -56,6 +56,11 @@ public class AutoMover : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (m_transforms.Count == 0)
+        {
+            return;
+        }
+
         if (IsRotation)
         {
             RotationUpdate();

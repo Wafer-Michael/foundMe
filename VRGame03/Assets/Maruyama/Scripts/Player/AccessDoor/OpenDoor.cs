@@ -69,6 +69,7 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
         m_stateMachine.OnUpdate();
     }
 
+    
     private void CreateNode()
     {
         m_stateMachine.AddNode(State.Idle, null);
@@ -85,6 +86,8 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
         m_stateMachine.AddEdge(State.Open, State.OpenIdle, IsTrue, (int)State.OpenIdle, true);
 
         m_stateMachine.AddEdge(State.OpenIdle, State.Close, IsTrue, (int)State.Close, true);
+
+        m_stateMachine.AddEdge(State.Close, State.Idle, IsTrue, (int)State.Idle, true);
     }
 
     private bool IsTrue(ref TransitionMember member)

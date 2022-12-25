@@ -4,16 +4,18 @@ using UnityEngine;
 
 using MaruUtility;
 
+[RequireComponent(typeof(VelocityManager))]
+[RequireComponent(typeof(RotationController))]
 public class AutoMover : MonoBehaviour
 {
     enum MoveType
     {
-        Transform,
         Velocity,
+        Transform,
     }
 
     [SerializeField]
-    MoveType m_moveType = MoveType.Transform;
+    MoveType m_moveType = MoveType.Velocity;
 
     [SerializeField]
     private float m_moveSpeedPerSecond = 1.0f;
@@ -30,7 +32,7 @@ public class AutoMover : MonoBehaviour
 
     private bool m_isBack = false;
 
-    private EnemyVelocityManager m_velocityManager;
+    private VelocityManager m_velocityManager;
 
     private RotationController m_rotationController;
 
@@ -39,7 +41,7 @@ public class AutoMover : MonoBehaviour
     private void Awake()
     {
         m_rotationController = GetComponent<RotationController>();
-        m_velocityManager = GetComponent<EnemyVelocityManager>();
+        m_velocityManager = GetComponent<VelocityManager>();
     }
 
     // Start is called before the first frame update
@@ -51,12 +53,7 @@ public class AutoMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
-        if (m_transforms.Count == 0)
+        if (IsNotMove())
         {
             return;
         }
@@ -64,16 +61,39 @@ public class AutoMover : MonoBehaviour
         if (IsRotation)
         {
             RotationUpdate();
-            return;
+            //return;
         }
 
-        System.Action action = m_moveType switch {
+        System.Action action = m_moveType switch
+        {
             MoveType.Transform => TransformMove,
             MoveType.Velocity => VelocityMove,
             _ => null
         };
 
         action?.Invoke();
+    }
+
+    private void FixedUpdate()
+    {
+        //if (IsNotMove())
+        //{
+        //    return;
+        //}
+
+        //if (IsRotation)
+        //{
+        //    RotationUpdate();
+        //    //return;
+        //}
+
+        //System.Action action = m_moveType switch {
+        //    MoveType.Transform => TransformMove,
+        //    MoveType.Velocity => VelocityMove,
+        //    _ => null
+        //};
+
+        //action?.Invoke();
     }
 
     private void TransformMove()
@@ -87,13 +107,37 @@ public class AutoMover : MonoBehaviour
 
     private void VelocityMove()
     {
-        var targetPosition = CalculatePosition();
+        var targetPosition = CalculateVelocityNextPosition();
 
         var toTargetVec = targetPosition - transform.position;
         m_rotationController.SetDirection(toTargetVec);
 
-        var force = CalcuVelocity.CalucArriveVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
+        const float NearRange = 2.0f;
+        var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
+        //var force = CalcuVelocity.CalucNearArriveFarSeek(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond, NearRange);
         m_velocityManager.AddForce(force);
+    }
+
+    private Vector3 CalculateVelocityNextPosition()
+    {
+        if (m_transforms.Count == 1)
+        {
+            return m_transforms[0].position;
+        }
+
+        int nextIndex = GetNextIndex();
+
+        var nextPosition = m_transforms[nextIndex].position;
+
+        var distance = (nextPosition - transform.position).magnitude;
+
+        var changeRange = m_moveSpeedPerSecond * Time.deltaTime;
+        if (distance <= changeRange)
+        {
+            m_nowIndex = nextIndex;
+        }
+
+        return nextPosition;
     }
 
     private Vector3 CalculatePosition()
@@ -171,6 +215,11 @@ public class AutoMover : MonoBehaviour
     private bool IsNotMove()
     {
         if (m_transforms.Count == 0)
+        {
+            return true;
+        }
+
+        if(m_transforms[0] == null || m_transforms[m_nowIndex] == null)
         {
             return true;
         }

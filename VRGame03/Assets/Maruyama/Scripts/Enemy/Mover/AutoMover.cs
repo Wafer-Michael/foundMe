@@ -10,8 +10,8 @@ public class AutoMover : MonoBehaviour
 {
     enum MoveType
     {
-        Transform,
         Velocity,
+        Transform,
     }
 
     [SerializeField]
@@ -53,11 +53,6 @@ public class AutoMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
         if (IsNotMove())
         {
             return;
@@ -69,13 +64,36 @@ public class AutoMover : MonoBehaviour
             //return;
         }
 
-        System.Action action = m_moveType switch {
+        System.Action action = m_moveType switch
+        {
             MoveType.Transform => TransformMove,
             MoveType.Velocity => VelocityMove,
             _ => null
         };
 
         action?.Invoke();
+    }
+
+    private void FixedUpdate()
+    {
+        //if (IsNotMove())
+        //{
+        //    return;
+        //}
+
+        //if (IsRotation)
+        //{
+        //    RotationUpdate();
+        //    //return;
+        //}
+
+        //System.Action action = m_moveType switch {
+        //    MoveType.Transform => TransformMove,
+        //    MoveType.Velocity => VelocityMove,
+        //    _ => null
+        //};
+
+        //action?.Invoke();
     }
 
     private void TransformMove()
@@ -89,15 +107,37 @@ public class AutoMover : MonoBehaviour
 
     private void VelocityMove()
     {
-
-
-        var targetPosition = CalculatePosition();
+        var targetPosition = CalculateVelocityNextPosition();
 
         var toTargetVec = targetPosition - transform.position;
         m_rotationController.SetDirection(toTargetVec);
 
-        var force = CalcuVelocity.CalucArriveVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
+        const float NearRange = 2.0f;
+        var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
+        //var force = CalcuVelocity.CalucNearArriveFarSeek(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond, NearRange);
         m_velocityManager.AddForce(force);
+    }
+
+    private Vector3 CalculateVelocityNextPosition()
+    {
+        if (m_transforms.Count == 1)
+        {
+            return m_transforms[0].position;
+        }
+
+        int nextIndex = GetNextIndex();
+
+        var nextPosition = m_transforms[nextIndex].position;
+
+        var distance = (nextPosition - transform.position).magnitude;
+
+        var changeRange = m_moveSpeedPerSecond * Time.deltaTime;
+        if (distance <= changeRange)
+        {
+            m_nowIndex = nextIndex;
+        }
+
+        return nextPosition;
     }
 
     private Vector3 CalculatePosition()

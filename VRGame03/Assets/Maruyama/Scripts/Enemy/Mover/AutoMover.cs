@@ -4,6 +4,8 @@ using UnityEngine;
 
 using MaruUtility;
 
+[RequireComponent(typeof(VelocityManager))]
+[RequireComponent(typeof(RotationController))]
 public class AutoMover : MonoBehaviour
 {
     enum MoveType
@@ -13,7 +15,7 @@ public class AutoMover : MonoBehaviour
     }
 
     [SerializeField]
-    MoveType m_moveType = MoveType.Transform;
+    MoveType m_moveType = MoveType.Velocity;
 
     [SerializeField]
     private float m_moveSpeedPerSecond = 1.0f;
@@ -30,7 +32,7 @@ public class AutoMover : MonoBehaviour
 
     private bool m_isBack = false;
 
-    private EnemyVelocityManager m_velocityManager;
+    private VelocityManager m_velocityManager;
 
     private RotationController m_rotationController;
 
@@ -39,7 +41,7 @@ public class AutoMover : MonoBehaviour
     private void Awake()
     {
         m_rotationController = GetComponent<RotationController>();
-        m_velocityManager = GetComponent<EnemyVelocityManager>();
+        m_velocityManager = GetComponent<VelocityManager>();
     }
 
     // Start is called before the first frame update
@@ -56,7 +58,7 @@ public class AutoMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (m_transforms.Count == 0)
+        if (IsNotMove())
         {
             return;
         }
@@ -64,7 +66,7 @@ public class AutoMover : MonoBehaviour
         if (IsRotation)
         {
             RotationUpdate();
-            return;
+            //return;
         }
 
         System.Action action = m_moveType switch {
@@ -87,6 +89,8 @@ public class AutoMover : MonoBehaviour
 
     private void VelocityMove()
     {
+
+
         var targetPosition = CalculatePosition();
 
         var toTargetVec = targetPosition - transform.position;
@@ -171,6 +175,11 @@ public class AutoMover : MonoBehaviour
     private bool IsNotMove()
     {
         if (m_transforms.Count == 0)
+        {
+            return true;
+        }
+
+        if(m_transforms[0] == null || m_transforms[m_nowIndex] == null)
         {
             return true;
         }

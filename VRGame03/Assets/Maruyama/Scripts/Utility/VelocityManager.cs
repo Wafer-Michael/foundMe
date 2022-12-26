@@ -59,7 +59,7 @@ public class VelocityManager : MonoBehaviour
             return;
         }
 
-        var force = maru.CalculateVelocity.CalucSeekVec(velocity, -velocity, velocity.magnitude * m_deselerationPower);
+        var force = maru.CalculateVelocity.SeekVec(velocity, -velocity, velocity.magnitude * m_deselerationPower);
         AddForce(force);
         //Debug.Log(velocity.magnitude);
 

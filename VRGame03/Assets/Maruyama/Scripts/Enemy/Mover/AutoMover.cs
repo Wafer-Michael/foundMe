@@ -112,7 +112,7 @@ public class AutoMover : MonoBehaviour
         var toTargetVec = targetPosition - transform.position;
         m_rotationController.SetDirection(toTargetVec);
 
-        var force = maru.CalculateVelocity.CalucSeekVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
+        var force = maru.CalculateVelocity.SeekVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
         
         m_velocityManager.AddForce(force);
     }

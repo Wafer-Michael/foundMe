@@ -112,7 +112,7 @@ public class AutoMover : MonoBehaviour
         var toTargetVec = targetPosition - transform.position;
         m_rotationController.SetDirection(toTargetVec);
 
-        const float NearRange = 2.0f;
+        //const float NearRange = 2.0f;
         var force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
         //var force = CalcuVelocity.CalucNearArriveFarSeek(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond, NearRange);
         m_velocityManager.AddForce(force);

@@ -25,6 +25,15 @@ namespace StateNode
             DefineTask();
         }
 
+        protected override void ReserveChangeComponents()
+        {
+            base.ReserveChangeComponents();
+
+            var owner = GetOwner();
+
+            //AddChangeComp(owner.GetComponent<VelocityManager>(), false, true);
+        }
+
         public override void OnStart()
         {
             base.OnStart();

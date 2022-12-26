@@ -38,6 +38,19 @@ public class SparseGraph<NodeType, EdgeType>
         return m_nodes; 
     }
 
+    public int GetNumNode() {
+        return m_nodes.Count;
+    }
+
+    /// <summary>
+    /// 同じインデックスのノードが存在するかどうか
+    /// </summary>
+    /// <param name="index">インデックス</param>
+    /// <returns>存在するならtrue</returns>
+    public bool IsSomeIndexNode(int index) {
+        return (index >= m_nodes.Count);
+    }
+
     public EdgeType AddEdge(EdgeType edge)
     {
         int fromIndex = edge.GetFromIndex();
@@ -79,6 +92,34 @@ public class SparseGraph<NodeType, EdgeType>
         return m_edgesMap;
     }
 
+    public int GetNumEdge(int index) {
+        if (!m_edgesMap.ContainsKey(index)) {   //キーが存在しないなら
+            return 0;
+        }
+
+        return m_edgesMap[index].Count;
+    }
+
+    /// <summary>
+    /// 同じエッジが存在するかどうか
+    /// </summary>
+    /// <param name="fromIndex"></param>
+    /// <param name="toIndex"></param>
+    /// <returns>同じエッジが存在するならtrue</returns>
+    public bool IsSomeIndexEdge(int fromIndex, int toIndex) {
+        if (!m_edgesMap.ContainsKey(fromIndex)) {   //キーが存在しないなら
+            return false;
+        }
+
+        foreach(var edge in m_edgesMap[fromIndex]) {
+            if(edge.GetToIndex() == toIndex) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /// <summary>
     /// 次に追加するノードのインデックスを取得
     /// </summary>
@@ -86,4 +127,6 @@ public class SparseGraph<NodeType, EdgeType>
     public int GetNextNodeIndex() { return m_nodes.Count; }
 
     public bool IsActive() { return m_isActive; }
+
+    public bool IsEmpty() { return m_nodes.Count == 0; }
 }

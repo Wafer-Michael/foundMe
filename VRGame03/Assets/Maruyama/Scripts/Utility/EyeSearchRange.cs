@@ -156,7 +156,7 @@ public class EyeSearchRange : MonoBehaviour
         int obstacleLayer = LayerMask.GetMask(m_rayObstacleLayerStrings);
         var toVec = targetPosition - transform.position;
 
-        const float SphereRange = 1.0f;
+        const float SphereRange = 0.5f;
         var colliders = Physics.OverlapSphere(transform.position, SphereRange, obstacleLayer);  //オブジェクトに接触時に透けるバグ解消用
         //RaycastHit[] hits = Physics.SphereCastAll(m_centerObject.transform.position, SphereRange, toVec, obstacleLayer);
         RaycastHit hitData;
@@ -165,8 +165,8 @@ public class EyeSearchRange : MonoBehaviour
         //Collider[] hits = Physics.OverlapSphere(playerTrans.position, 0.1f, layerMask, QueryTriggerInteraction.Collide);
         //RaycastHit[] hits2 = Physics.SphereCastAll(playerTrans.position, 0.1f, playerTrans.forward, 0.3f, layerMask, QueryTriggerInteraction.Collide);
 
-        //if (!Physics.Linecast(m_centerObject.transform.position, targetPosition, obstacleLayer) && colliders.Length == 0)
-        if (!hit && colliders.Length == 0)
+        if (!Physics.Linecast(m_centerObject.transform.position, targetPosition, obstacleLayer) && colliders.Length == 0)
+        //if (!hit && colliders.Length == 0)
         {
             return true;
         }

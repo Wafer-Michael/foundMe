@@ -55,7 +55,7 @@ namespace StateNode
             var toVec = target.transform.position - GetOwner().transform.position;
             float maxSpeed = m_param.maxSpeed;
             float turningPower = m_param.turingPower;
-            Vector3 force = MaruUtility.CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toVec, maxSpeed);
+            Vector3 force = maru.CalculateVelocity.CalucSeekVec(m_velocityManager.velocity, toVec, maxSpeed);
             m_velocityManager.AddForce(force * turningPower);
 
             m_rotationController.SetDirection(m_velocityManager.velocity);

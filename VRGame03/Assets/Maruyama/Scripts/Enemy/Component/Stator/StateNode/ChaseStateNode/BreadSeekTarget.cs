@@ -111,7 +111,7 @@ namespace StateNode
         {
             var toVec = m_targetPosition - GetOwner().transform.position;
             var maxSpeed = m_maxSpeed;// * m_statusManager.GetBuffParametor().SpeedBuffMultiply;
-            Vector3 force = CalcuVelocity.CalucSeekVec(m_velocityManager.velocity, toVec, maxSpeed);
+            Vector3 force = maru.CalculateVelocity.CalucSeekVec(m_velocityManager.velocity, toVec, maxSpeed);
             m_velocityManager.AddForce(force * m_turningPower);
 
             m_rotationCtrl.SetDirection(m_velocityManager.velocity);

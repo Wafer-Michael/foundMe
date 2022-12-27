@@ -31,9 +31,17 @@ public struct OutOfTargetData
 
 public class DebugDrawComponent : MonoBehaviour
 {
+    enum DrawType
+    {
+        Cube,
+        Sphere,
+    }
 
 
     #region メンバ変数
+
+    [SerializeField]
+    DrawType m_drawType = DrawType.Cube;
 
     [Header("セレクト時のみ範囲を表示するかどうか"),SerializeField]
     private bool m_isSelectDrawGizmos = false;
@@ -44,7 +52,7 @@ public class DebugDrawComponent : MonoBehaviour
     protected Vector3 m_cubeSize = new Vector3();   //Gizmoの生成サイズ
 
     [SerializeField]
-    protected float m_shpereRadius = 0.5f;          //スフィアの半径
+    protected float m_sphereRadius = 0.5f;          //スフィアの半径
 
 
     #endregion
@@ -75,8 +83,25 @@ public class DebugDrawComponent : MonoBehaviour
     private void DrawGizmos()
     {
         Gizmos.color = m_gizmosColor;
+
+        Action drawFunc = m_drawType switch {
+            DrawType.Cube => CubeDraw,
+            DrawType.Sphere => SphereDraw,
+            _ => null
+        };
+
+        drawFunc?.Invoke();
+    }
+
+    private void CubeDraw()
+    {
         var cubeSize = m_cubeSize * 2.0f;
         Gizmos.DrawCube(transform.position, cubeSize);
+    }
+
+    private void SphereDraw()
+    {
+        Gizmos.DrawSphere(transform.position, m_sphereRadius);
     }
 
     #endregion

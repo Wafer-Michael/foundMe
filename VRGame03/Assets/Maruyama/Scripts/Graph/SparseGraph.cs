@@ -6,8 +6,8 @@ using UnityEngine;
 ///	(2022/12/26)ç≈êVÉOÉâÉt
 //--------------------------------------------------------------------------------------
 public class SparseGraph<NodeType, EdgeType>
-    where NodeType : GraphNode, new()
-    where EdgeType : GraphEdge, new()
+    where NodeType : GraphNode
+    where EdgeType : GraphEdge
 {
     private bool m_isActive;
 

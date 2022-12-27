@@ -68,6 +68,7 @@ namespace Factory
 		/// <summary>
 		/// パラメータ
 		/// </summary>
+		[System.Serializable]
 		public struct Parametor
 		{
 			public float intervalRange;     //ノードの間隔距離(5.0f)

@@ -31,7 +31,7 @@ public struct OutOfTargetData
 
 public class DebugDrawComponent : MonoBehaviour
 {
-    enum DrawType
+    public enum DrawType
     {
         Cube,
         Sphere,
@@ -41,18 +41,39 @@ public class DebugDrawComponent : MonoBehaviour
     #region メンバ変数
 
     [SerializeField]
-    DrawType m_drawType = DrawType.Cube;
+    private DrawType m_drawType = DrawType.Cube;
+    public DrawType drawType {
+        get => m_drawType;
+        set => m_drawType = value;
+    }
 
     [Header("セレクト時のみ範囲を表示するかどうか"),SerializeField]
     private bool m_isSelectDrawGizmos = false;
+    public bool IsSelectDrawGizmos {
+        get => m_isSelectDrawGizmos;
+        set => m_isSelectDrawGizmos = value;
+    }
+
     [Header("生成範囲表示カラー"),SerializeField]
     private Color m_gizmosColor = new Color(1.0f, 0, 0, 0.3f);
+    public Color GizmosColor {
+        get => m_gizmosColor;
+        set => m_gizmosColor = value;
+    }
 
     [SerializeField]
     protected Vector3 m_cubeSize = new Vector3();   //Gizmoの生成サイズ
+    public Vector3 CubeSize {
+        get => m_cubeSize;
+        set => m_cubeSize = value;
+    }
 
     [SerializeField]
     protected float m_sphereRadius = 0.5f;          //スフィアの半径
+    public float SphereRadius {
+        get => m_sphereRadius;
+        set => m_sphereRadius = value;
+    }
 
 
     #endregion

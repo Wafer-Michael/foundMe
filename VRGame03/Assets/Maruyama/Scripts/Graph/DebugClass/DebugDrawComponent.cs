@@ -29,7 +29,7 @@ public struct OutOfTargetData
 
 #endregion
 
-public class RandomPositionEnemyGenerator : MonoBehaviour
+public class DebugDrawComponent : MonoBehaviour
 {
 
 
@@ -41,7 +41,10 @@ public class RandomPositionEnemyGenerator : MonoBehaviour
     private Color m_gizmosColor = new Color(1.0f, 0, 0, 0.3f);
 
     [SerializeField]
-    protected Vector3 m_cubeSize = new Vector3();  //ランダムに生成する時の最大距離
+    protected Vector3 m_cubeSize = new Vector3();   //Gizmoの生成サイズ
+
+    [SerializeField]
+    protected float m_shpereRadius = 0.5f;          //スフィアの半径
 
 
     #endregion

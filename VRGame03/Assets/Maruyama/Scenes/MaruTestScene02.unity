@@ -834,8 +834,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isSelectDrawGizmos: 0
   m_gizmosColor: {r: 1, g: 0, b: 0, a: 0.3}
-  m_centerPosition: {x: 0, y: 0, z: 0}
-  m_cubeSize: {x: 10, y: 0, z: 10}
+  m_cubeSize: {x: 2, y: 0, z: 2}
+  m_shpereRadius: 0.5
 --- !u!1 &1084175450
 GameObject:
   m_ObjectHideFlags: 0

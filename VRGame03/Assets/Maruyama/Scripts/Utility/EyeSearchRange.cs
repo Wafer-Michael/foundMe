@@ -160,7 +160,7 @@ public class EyeSearchRange : MonoBehaviour
         var colliders = Physics.OverlapSphere(transform.position, SphereRange, obstacleLayer);  //オブジェクトに接触時に透けるバグ解消用
         //RaycastHit[] hits = Physics.SphereCastAll(m_centerObject.transform.position, SphereRange, toVec, obstacleLayer);
         RaycastHit hitData;
-        var hit = Physics.Raycast(m_centerObject.transform.position, toVec, out hitData, 1000.0f, obstacleLayer);
+        var hit = Physics.Raycast(m_centerObject.transform.position, toVec, out hitData, m_param.range, obstacleLayer);
 
         //Collider[] hits = Physics.OverlapSphere(playerTrans.position, 0.1f, layerMask, QueryTriggerInteraction.Collide);
         //RaycastHit[] hits2 = Physics.SphereCastAll(playerTrans.position, 0.1f, playerTrans.forward, 0.3f, layerMask, QueryTriggerInteraction.Collide);

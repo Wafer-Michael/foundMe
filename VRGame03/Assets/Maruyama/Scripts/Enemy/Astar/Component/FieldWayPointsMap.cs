@@ -14,7 +14,11 @@ public class FieldWayPointsMap : MonoBehaviour
     [SerializeField]
     private Factory.WayPointsMap_FloodFill.Parametor m_factoryParametor;    //ウェイポイント生成用パラメータ
 
-    private WayPointsMap m_wayPointsMap;    //ウェイポイントマップ
+    private WayPointsMap m_wayPointsMap;        //ウェイポイントマップ
+
+    private DebugGraphDraw m_debugGraphDraw;    //グラフのデバッグ表示用
+    [SerializeField]
+    private GameObject m_debugNodePrefab;       //デバッグ用のノードPrefab
 
     private void Awake()
     {
@@ -23,14 +27,10 @@ public class FieldWayPointsMap : MonoBehaviour
         //初期ノード生成
         m_factoryParametor.rect = CalculateFieldRect();
         m_wayPointsMap.CreateWayPointsMap(m_factoryParametor);
-    }
 
-    private void Update()
-    {
-        foreach(var node in m_wayPointsMap.GetGraph().GetNodes())
-        {
-            
-        }
+        //グラフのデバッグ表示
+        m_debugGraphDraw = new DebugGraphDraw(this, m_wayPointsMap.GetGraph());
+        m_debugGraphDraw.CreateDebugNodes();
     }
 
     /// <summary>

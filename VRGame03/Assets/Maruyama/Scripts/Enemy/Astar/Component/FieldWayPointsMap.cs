@@ -79,5 +79,6 @@ public class FieldWayPointsMap : MonoBehaviour
         var scale = new Vector3(fScale, 0.0f, fScale);
         m_debugGraphDraw = new DebugGraphDraw(this, m_wayPointsMap.GetGraph());
         m_debugGraphDraw.CreateDebugNodes(m_debugNodePrefab, scale, DebugDrawComponent.DrawType.Sphere);
+        m_debugGraphDraw.CreateDebugEdges(m_debugNodePrefab, new Color(1.0f, 1.0f, 1.0f, 0.3f));
     }
 }

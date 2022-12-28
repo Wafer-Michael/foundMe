@@ -43,7 +43,7 @@ namespace Factory
 		struct DataByDirectionType
 		{
 			public Vector3 direction; //方向
-			public int plusIndex;  //加算するノードインデックス
+			public int plusIndex;	  //加算するノードインデックス
 		};
 
 		/// <summary>
@@ -51,9 +51,9 @@ namespace Factory
 		/// </summary>
 		struct OpenData
 		{
-			public AstarNode parentNode;    //自分の前のノード
+			public AstarNode parentNode;  //自分の前のノード
 			public AstarNode selfNode;    //自分自身のノード
-			public bool isActive;                          //ノードが生きているかどうか
+			public bool isActive;         //ノードが生きているかどうか
 
 			public OpenData(
 				AstarNode parentNode,
@@ -134,7 +134,8 @@ namespace Factory
 
 			//障害物に当たっていたら(先に障害物判定をしないと、エッジと共有しているためバグる(修正検討中))
 			//障害物のレイヤー判定
-			if (isRayHit = maru.UtilityObstacle.IsRayObstacle(startPosition, targetPosition)) {
+			isRayHit = maru.UtilityObstacle.IsRayObstacle(startPosition, targetPosition);
+			if (isRayHit) {
 				return false;   //生成できない
 			}
 
@@ -207,7 +208,7 @@ namespace Factory
 				if (IsNodeCreate(openData, graph, parametor,ref isRayHit))
 				{
 					var node = graph.AddNode(openData.selfNode); //グラフにノード追加
-					m_openDataQueue.Enqueue(openData);                 //生成キューにOpenDataを追加
+					m_openDataQueue.Enqueue(openData);           //生成キューにOpenDataを追加
 				}
 
 				//エッジの生成条件がそろっているなら
@@ -215,6 +216,7 @@ namespace Factory
 				{
 					var fromNode = graph.GetNode(parentNode.GetIndex());
 					var toNode = graph.GetNode(selfNode.GetIndex());
+
 					graph.AddEdge(new AstarEdge(fromNode, toNode));   //グラフにエッジ追加
 				}
 			}
@@ -258,7 +260,7 @@ namespace Factory
 				Vector3 startPosition = parent.GetPosition();			//開始位置
 				Vector3 targetPosition = startPosition + (direction * parametor.intervalRange);	//生成位置
 
-				var newNode = new AstarNode(index, targetPosition);	//新規ノードの作成
+				var newNode = new AstarNode(index, targetPosition);		//新規ノードの作成
 
 				var newOpenData = new OpenData(parent, newNode);		//新規データ作成
 				result.Add(newOpenData);
@@ -280,6 +282,7 @@ namespace Factory
 			m_plusIndexMapByDirection = SettingIndexByDirection(parametor); //方向別の加算するインデックス数をセッティング
 
 			var baseStartPosition = parametor.rect.CalculateStartPosition();
+			baseStartPosition.y = parametor.createHeight;	//高さの設定
 
 			m_openDataQueue.Clear();
 			var newNode = new AstarNode(0, baseStartPosition);

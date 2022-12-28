@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using GraphType = SparseGraph<AstarNode, AstarEdge>;
+using DrawType = DebugDrawComponent.DrawType;
 
 public class DebugGraphDraw
 {
@@ -11,6 +12,9 @@ public class DebugGraphDraw
 
     readonly private GraphType m_graph;    //グラフ
 
+    private GameObject m_nodeParentObject;
+    private GameObject m_edgeParentObject;
+
     private List<GameObject> m_nodes = new List<GameObject>();  //デバッグ用のノード
     private List<GameObject> m_edges = new List<GameObject>();  //デバッグ用のエッジ
 
@@ -18,13 +22,30 @@ public class DebugGraphDraw
     {
         m_owner = owner;
         m_graph = graph;
+
+        m_nodeParentObject = new GameObject("DebugNodes");
+        m_edgeParentObject = new GameObject("DeubgEdges");
     }
 
-    public void CreateDebugNodes(GameObject prefab)
+    public void CreateDebugNodes(GameObject prefab, Vector3? scale = null, DrawType drawType = DrawType.Cube, Color? color = null)
     {
         foreach (var node in m_graph.GetNodes())
         {
-            var drawObject = Object.Instantiate(prefab, node.GetPosition(), Quaternion.identity);
+            var drawObject = Object.Instantiate(prefab, node.GetPosition(), Quaternion.identity, m_nodeParentObject.transform);
+            //スケール設定
+            if (scale != null) {
+                drawObject.transform.localScale = (Vector3)scale;
+            }
+
+            //ドロータイプを設定する。
+            var debugDrawComponent = drawObject.GetComponent<DebugDrawComponent>();
+            if (debugDrawComponent) {
+                debugDrawComponent.drawType = drawType;
+                if (color != null) {
+                    debugDrawComponent.GizmosColor = (Color)color;
+                }
+            }
+            
             m_nodes.Add(drawObject);
         }
     }
@@ -38,9 +59,11 @@ public class DebugGraphDraw
                 var fromNode = m_graph.GetNode(edge.GetFromIndex());
                 var toNode = m_graph.GetNode(edge.GetToIndex());
 
+                var halfRange = (toNode.GetPosition() - fromNode.GetPosition()).magnitude * 0.5f;  //エッジ間の距離の半分
                 var position = (fromNode.GetPosition() + toNode.GetPosition()) / 2.0f;
 
-                var drawObject = Object.Instantiate(prefab, position, Quaternion.identity);
+                var drawObject = Object.Instantiate(prefab, position, Quaternion.identity, m_edgeParentObject.transform);
+                drawObject.transform.localScale = new Vector3(halfRange, 0.0f, halfRange);  //スケール設定
                 m_edges.Add(drawObject);
             }
         }

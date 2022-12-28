@@ -109,12 +109,12 @@ public class DebugDrawComponent : MonoBehaviour
 
     private void CubeDraw()
     {
-        var cubeSize = transform.lossyScale * 1.0f;
-        Gizmos.DrawCube(transform.position, cubeSize);
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);    //マトリックス設定
+        Gizmos.DrawCube(Vector3.zero, Vector3.one);
     }
 
     private void SphereDraw()
-    {
+    {   
         Gizmos.DrawSphere(transform.position, m_sphereRadius);
     }
 

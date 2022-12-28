@@ -50,7 +50,7 @@ public class DebugGraphDraw
         }
     }
 
-    public void CreateDebugEdges(GameObject prefab)
+    public void CreateDebugEdges(GameObject prefab, Color? color = null)
     {
         foreach(var pair in m_graph.GetEdgesMap())
         {
@@ -59,11 +59,21 @@ public class DebugGraphDraw
                 var fromNode = m_graph.GetNode(edge.GetFromIndex());
                 var toNode = m_graph.GetNode(edge.GetToIndex());
 
-                var halfRange = (toNode.GetPosition() - fromNode.GetPosition()).magnitude * 0.5f;  //エッジ間の距離の半分
+                var toNodeVec = toNode.GetPosition() - fromNode.GetPosition();
+                var halfRange = toNodeVec.magnitude * 0.5f;  //エッジ間の距離の半分
                 var position = (fromNode.GetPosition() + toNode.GetPosition()) / 2.0f;
 
                 var drawObject = Object.Instantiate(prefab, position, Quaternion.identity, m_edgeParentObject.transform);
-                drawObject.transform.localScale = new Vector3(halfRange, 0.0f, halfRange);  //スケール設定
+                drawObject.transform.localScale = new Vector3(0.25f, 0.0f, halfRange);  //スケール設定
+                drawObject.transform.forward = toNodeVec.normalized;
+
+                var debugDraw = drawObject.GetComponent<DebugDrawComponent>();
+                if (debugDraw) {
+                    if(color != null) {
+                        debugDraw.GizmosColor = (Color)color;
+                    }
+                }
+
                 m_edges.Add(drawObject);
             }
         }

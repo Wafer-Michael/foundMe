@@ -30,7 +30,7 @@ public class FieldWayPointsMap : MonoBehaviour
 
         //グラフのデバッグ表示
         m_debugGraphDraw = new DebugGraphDraw(this, m_wayPointsMap.GetGraph());
-        m_debugGraphDraw.CreateDebugNodes();
+        m_debugGraphDraw.CreateDebugNodes(m_debugNodePrefab);
     }
 
     /// <summary>

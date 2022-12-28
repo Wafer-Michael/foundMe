@@ -27,11 +27,20 @@ public class SparseGraph<NodeType, EdgeType>
     }
 
     public NodeType GetNode(int index) {
-        if (index >= m_nodes.Count) {   //ノード数より大きいインデックスを指定したらnullを返す。
-            return null;
+        foreach(var node in m_nodes)
+        {
+            if(node.GetIndex() == index) {
+                return node;
+            }
         }
 
-        return m_nodes[index];
+        return null;
+
+        //if (index >= m_nodes.Count) {   //ノード数より大きいインデックスを指定したらnullを返す。
+        //    return null;
+        //}
+
+        //return m_nodes[index];
     }
 
     public List<NodeType> GetNodes() { 
@@ -48,7 +57,15 @@ public class SparseGraph<NodeType, EdgeType>
     /// <param name="index">インデックス</param>
     /// <returns>存在するならtrue</returns>
     public bool IsSomeIndexNode(int index) {
-        return (index >= m_nodes.Count);
+        foreach (var node in m_nodes)
+        {
+            if(node.GetIndex() == index)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public EdgeType AddEdge(EdgeType edge)

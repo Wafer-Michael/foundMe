@@ -4,54 +4,6 @@ using UnityEngine;
 
 using GraphType = SparseGraph<AstarNode, AstarEdge>;
 
-namespace maru
-{
-	public struct Rect
-	{
-		public Vector3 centerPosition;  //中心位置
-		public float width;             //横のサイズ
-		public float depth;             //奥行のサイズ
-
-		public Rect(Vector3 centerPosition, float width, float depth)
-		{
-			this.centerPosition = centerPosition;
-			this.width = width;
-			this.depth = depth;
-		}
-
-		public Vector3 CalculateStartPosition()
-		{
-			var position = centerPosition;
-			var scale = new Vector3(width, 0.0f, depth);
-			var halfScale = scale * 0.5f;
-			float x = position.x - halfScale.x;
-			float y = position.y;
-			float z = position.z - halfScale.z;
-			var startPosition = new Vector3(x, y, z);
-
-			return startPosition;
-		}
-
-		public bool IsInRect(Vector3 position)
-		{
-			var rectStartPosition = CalculateStartPosition();
-
-			if (position.x >= rectStartPosition.x &&
-				position.x <= rectStartPosition.x + this.width &&
-				position.z >= rectStartPosition.z &&
-				position.z <= rectStartPosition.z + this.depth
-			){
-				return true;
-			}
-
-			return false;
-		}
-
-	}
-
-}
-
-
 namespace Factory
 {
 	public class WayPointsMap_FloodFill : MonoBehaviour
@@ -91,7 +43,7 @@ namespace Factory
 		struct DataByDirectionType
 		{
 			public Vector3 direction; //方向
-			public int plusIndex;  //加算するノードインデックス
+			public int plusIndex;	  //加算するノードインデックス
 		};
 
 		/// <summary>
@@ -99,9 +51,9 @@ namespace Factory
 		/// </summary>
 		struct OpenData
 		{
-			public AstarNode parentNode;    //自分の前のノード
+			public AstarNode parentNode;  //自分の前のノード
 			public AstarNode selfNode;    //自分自身のノード
-			public bool isActive;                          //ノードが生きているかどうか
+			public bool isActive;         //ノードが生きているかどうか
 
 			public OpenData(
 				AstarNode parentNode,
@@ -116,6 +68,7 @@ namespace Factory
 		/// <summary>
 		/// パラメータ
 		/// </summary>
+		[System.Serializable]
 		public struct Parametor
 		{
 			public float intervalRange;     //ノードの間隔距離(5.0f)
@@ -181,7 +134,8 @@ namespace Factory
 
 			//障害物に当たっていたら(先に障害物判定をしないと、エッジと共有しているためバグる(修正検討中))
 			//障害物のレイヤー判定
-			if (isRayHit = maru.UtilityObstacle.IsRayObstacle(startPosition, targetPosition)) {
+			isRayHit = maru.UtilityObstacle.IsRayObstacle(startPosition, targetPosition);
+			if (isRayHit) {
 				return false;   //生成できない
 			}
 
@@ -254,7 +208,7 @@ namespace Factory
 				if (IsNodeCreate(openData, graph, parametor,ref isRayHit))
 				{
 					var node = graph.AddNode(openData.selfNode); //グラフにノード追加
-					m_openDataQueue.Enqueue(openData);                 //生成キューにOpenDataを追加
+					m_openDataQueue.Enqueue(openData);           //生成キューにOpenDataを追加
 				}
 
 				//エッジの生成条件がそろっているなら
@@ -262,6 +216,7 @@ namespace Factory
 				{
 					var fromNode = graph.GetNode(parentNode.GetIndex());
 					var toNode = graph.GetNode(selfNode.GetIndex());
+
 					graph.AddEdge(new AstarEdge(fromNode, toNode));   //グラフにエッジ追加
 				}
 			}
@@ -305,7 +260,7 @@ namespace Factory
 				Vector3 startPosition = parent.GetPosition();			//開始位置
 				Vector3 targetPosition = startPosition + (direction * parametor.intervalRange);	//生成位置
 
-				var newNode = new AstarNode(index, targetPosition);	//新規ノードの作成
+				var newNode = new AstarNode(index, targetPosition);		//新規ノードの作成
 
 				var newOpenData = new OpenData(parent, newNode);		//新規データ作成
 				result.Add(newOpenData);
@@ -327,6 +282,7 @@ namespace Factory
 			m_plusIndexMapByDirection = SettingIndexByDirection(parametor); //方向別の加算するインデックス数をセッティング
 
 			var baseStartPosition = parametor.rect.CalculateStartPosition();
+			baseStartPosition.y = parametor.createHeight;	//高さの設定
 
 			m_openDataQueue.Clear();
 			var newNode = new AstarNode(0, baseStartPosition);

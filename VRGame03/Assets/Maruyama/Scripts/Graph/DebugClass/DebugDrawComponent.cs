@@ -62,13 +62,6 @@ public class DebugDrawComponent : MonoBehaviour
     }
 
     [SerializeField]
-    protected Vector3 m_cubeSize = new Vector3();   //Gizmoの生成サイズ
-    public Vector3 CubeSize {
-        get => m_cubeSize;
-        set => m_cubeSize = value;
-    }
-
-    [SerializeField]
     protected float m_sphereRadius = 0.5f;          //スフィアの半径
     public float SphereRadius {
         get => m_sphereRadius;
@@ -116,7 +109,7 @@ public class DebugDrawComponent : MonoBehaviour
 
     private void CubeDraw()
     {
-        var cubeSize = m_cubeSize * 2.0f;
+        var cubeSize = transform.lossyScale * 1.0f;
         Gizmos.DrawCube(transform.position, cubeSize);
     }
 

@@ -16,9 +16,14 @@ public class FieldWayPointsMap : MonoBehaviour
 
     private WayPointsMap m_wayPointsMap;        //ウェイポイントマップ
 
+    [SerializeField]
+    private bool m_isDebugDraw = true;
+
     private DebugGraphDraw m_debugGraphDraw;    //グラフのデバッグ表示用
     [SerializeField]
     private GameObject m_debugNodePrefab;       //デバッグ用のノードPrefab
+    [SerializeField]
+    private float m_debugNodeScaleAdjust = 0.95f;   //デバッグ用のノード表示の大きさ調整(少し小さめにするとわかりやすい)
 
     private void Awake()
     {
@@ -29,8 +34,7 @@ public class FieldWayPointsMap : MonoBehaviour
         m_wayPointsMap.CreateWayPointsMap(m_factoryParametor);
 
         //グラフのデバッグ表示
-        m_debugGraphDraw = new DebugGraphDraw(this, m_wayPointsMap.GetGraph());
-        m_debugGraphDraw.CreateDebugNodes(m_debugNodePrefab);
+        CreateGraphDebugDraw();
     }
 
     /// <summary>
@@ -57,4 +61,23 @@ public class FieldWayPointsMap : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     private float GetFloorScaleAdjust() { return m_isPlane ? 10 : 1; }
+
+
+    //--------------------------------------------------------------------------------------
+    /// デバッグ
+    //--------------------------------------------------------------------------------------
+
+    private void CreateGraphDebugDraw()
+    {
+        if (!m_isDebugDraw) {
+            return;
+        }
+
+        //グラフのデバッグ表示
+        var intervalRange = m_factoryParametor.intervalRange;
+        var fScale = intervalRange * m_debugNodeScaleAdjust;    //縦横のスケールを調整
+        var scale = new Vector3(fScale, 0.0f, fScale);
+        m_debugGraphDraw = new DebugGraphDraw(this, m_wayPointsMap.GetGraph());
+        m_debugGraphDraw.CreateDebugNodes(m_debugNodePrefab, scale, DebugDrawComponent.DrawType.Sphere);
+    }
 }

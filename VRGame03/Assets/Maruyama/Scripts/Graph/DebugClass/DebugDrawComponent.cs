@@ -37,37 +37,55 @@ public class DebugDrawComponent : MonoBehaviour
         Sphere,
     }
 
+    [System.Serializable]
+    public struct Parametor
+    {
+        public bool isSelectDraw;   //選択中に表示するかどうか
+        public DrawType drawType;   //表示タイプ
+        public Color color;         //色
+        public float sphereRadius;  //スフィア表示時の半径
+
+        public Parametor(
+            DrawType drawType,
+            Color color,
+            float sphereRadius
+        ) {
+            this.drawType = drawType;
+            this.color = color;
+            this.sphereRadius = sphereRadius;
+            isSelectDraw = false;
+        }
+    }
 
     #region メンバ変数
 
-    [SerializeField]
-    private DrawType m_drawType = DrawType.Cube;
     public DrawType drawType {
-        get => m_drawType;
-        set => m_drawType = value;
+        get => m_param.drawType;
+        set => m_param.drawType = value;
     }
 
-    [Header("セレクト時のみ範囲を表示するかどうか"),SerializeField]
-    private bool m_isSelectDrawGizmos = false;
-    public bool IsSelectDrawGizmos {
-        get => m_isSelectDrawGizmos;
-        set => m_isSelectDrawGizmos = value;
+    public bool IsSelectDraw {
+        get => m_param.isSelectDraw;
+        set => m_param.isSelectDraw = value;
     }
 
-    [Header("生成範囲表示カラー"),SerializeField]
-    private Color m_gizmosColor = new Color(1.0f, 0, 0, 0.3f);
     public Color GizmosColor {
-        get => m_gizmosColor;
-        set => m_gizmosColor = value;
+        get => m_param.color;
+        set => m_param.color = value;
+    }
+
+    public float SphereRadius {
+        get => m_param.sphereRadius;
+        set => m_param.sphereRadius = value;
     }
 
     [SerializeField]
-    protected float m_sphereRadius = 0.5f;          //スフィアの半径
-    public float SphereRadius {
-        get => m_sphereRadius;
-        set => m_sphereRadius = value;
+    private Parametor m_param = new Parametor(DrawType.Cube, new Color(0.0f, 0.0f, 1.0f, 0.3f), 0.5f);  //パラメータ
+    public Parametor Param  //パラメータのプロパティ
+    {
+        set => m_param = value;
+        get => m_param;
     }
-
 
     #endregion
 
@@ -76,7 +94,7 @@ public class DebugDrawComponent : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         //セレクト時のみ表示だったら
-        if (m_isSelectDrawGizmos)
+        if (IsSelectDraw)
         {
             DrawGizmos();
         }
@@ -85,7 +103,7 @@ public class DebugDrawComponent : MonoBehaviour
     private void OnDrawGizmos()
     {
         //セレクト時のみ表示で無かったら
-        if (!m_isSelectDrawGizmos)
+        if (!IsSelectDraw)
         {
             DrawGizmos();
         }
@@ -96,9 +114,9 @@ public class DebugDrawComponent : MonoBehaviour
     /// </summary>
     private void DrawGizmos()
     {
-        Gizmos.color = m_gizmosColor;
+        Gizmos.color = GizmosColor;
 
-        Action drawFunc = m_drawType switch {
+        Action drawFunc = drawType switch {
             DrawType.Cube => CubeDraw,
             DrawType.Sphere => SphereDraw,
             _ => null
@@ -115,7 +133,7 @@ public class DebugDrawComponent : MonoBehaviour
 
     private void SphereDraw()
     {   
-        Gizmos.DrawSphere(transform.position, m_sphereRadius);
+        Gizmos.DrawSphere(transform.position, SphereRadius);
     }
 
     #endregion

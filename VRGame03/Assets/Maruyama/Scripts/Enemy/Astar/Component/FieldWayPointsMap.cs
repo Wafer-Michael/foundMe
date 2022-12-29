@@ -19,11 +19,18 @@ public class FieldWayPointsMap : MonoBehaviour
     [SerializeField]
     private bool m_isDebugDraw = true;
 
-    private DebugGraphDraw m_debugGraphDraw;    //グラフのデバッグ表示用
+    private DebugGraphDraw m_debugGraphDraw;        //グラフのデバッグ表示用
+
     [SerializeField]
-    private GameObject m_debugNodePrefab;       //デバッグ用のノードPrefab
+    private GameObject m_debugNodePrefab;           //デバッグ用のノードPrefab
+
     [SerializeField]
     private float m_debugNodeScaleAdjust = 0.95f;   //デバッグ用のノード表示の大きさ調整(少し小さめにするとわかりやすい)
+
+    //ノードのデバッグ表示用のパラメータ
+    [SerializeField]
+    private DebugDrawComponent.Parametor m_debugNodeDrawParametor =
+    new DebugDrawComponent.Parametor(DebugDrawComponent.DrawType.Sphere, new Color(0.0f, 0.0f, 1.0f, 0.3f), 0.5f);
 
     private void Awake()
     {
@@ -78,7 +85,7 @@ public class FieldWayPointsMap : MonoBehaviour
         var fScale = intervalRange * m_debugNodeScaleAdjust;    //縦横のスケールを調整
         var scale = new Vector3(fScale, 0.0f, fScale);
         m_debugGraphDraw = new DebugGraphDraw(this, m_wayPointsMap.GetGraph());
-        m_debugGraphDraw.CreateDebugNodes(m_debugNodePrefab, scale, DebugDrawComponent.DrawType.Sphere);
+        m_debugGraphDraw.CreateDebugNodes(m_debugNodePrefab, scale, m_debugNodeDrawParametor);
         m_debugGraphDraw.CreateDebugEdges(m_debugNodePrefab, new Color(1.0f, 1.0f, 1.0f, 0.3f));
     }
 }

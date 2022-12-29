@@ -14,23 +14,7 @@ public class FieldWayPointsMap : MonoBehaviour
     [SerializeField]
     private Factory.WayPointsMap_FloodFill.Parametor m_factoryParametor;    //ウェイポイント生成用パラメータ
 
-    private WayPointsMap m_wayPointsMap;        //ウェイポイントマップ
-
-    [SerializeField]
-    private bool m_isDebugDraw = true;
-
-    private DebugGraphDraw m_debugGraphDraw;        //グラフのデバッグ表示用
-
-    [SerializeField]
-    private GameObject m_debugNodePrefab;           //デバッグ用のノードPrefab
-
-    [SerializeField]
-    private float m_debugNodeScaleAdjust = 0.95f;   //デバッグ用のノード表示の大きさ調整(少し小さめにするとわかりやすい)
-
-    //ノードのデバッグ表示用のパラメータ
-    [SerializeField]
-    private DebugDrawComponent.Parametor m_debugNodeDrawParametor =
-    new DebugDrawComponent.Parametor(DebugDrawComponent.DrawType.Sphere, new Color(0.0f, 0.0f, 1.0f, 0.3f), 0.5f);
+    private WayPointsMap m_wayPointsMap;            //ウェイポイントマップ
 
     private void Awake()
     {
@@ -70,9 +54,26 @@ public class FieldWayPointsMap : MonoBehaviour
     private float GetFloorScaleAdjust() { return m_isPlane ? 10 : 1; }
 
 
+
     //--------------------------------------------------------------------------------------
     /// デバッグ
     //--------------------------------------------------------------------------------------
+
+    [SerializeField]
+    private bool m_isDebugDraw = true;              //デバッグ表示を行うかどうか
+
+    private DebugGraphDraw m_debugGraphDraw;        //グラフのデバッグ表示用
+
+    [SerializeField]
+    private GameObject m_debugNodePrefab;           //デバッグ用のノードPrefab
+
+    [SerializeField]
+    private float m_debugNodeScaleAdjust = 0.95f;   //デバッグ用のノード表示の大きさ調整(少し小さめにするとわかりやすい)
+
+    //ノードのデバッグ表示用のパラメータ
+    [SerializeField]
+    private DebugDrawComponent.Parametor m_debugNodeDrawParametor =
+    new DebugDrawComponent.Parametor(DebugDrawComponent.DrawType.Sphere, new Color(0.0f, 0.0f, 1.0f, 0.3f), 0.5f);
 
     private void CreateGraphDebugDraw()
     {

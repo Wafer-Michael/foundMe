@@ -8,8 +8,7 @@ public class WayPointsMap
 {
     private GraphType m_graph;  //グラフデータ
 
-    public WayPointsMap()
-    {
+    public WayPointsMap() {
         m_graph = new GraphType();
     }
 

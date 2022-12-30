@@ -42,8 +42,6 @@ public class DebugGraphDraw
         Vector3? scale = null,
         DebugDrawComponent.Parametor? drawParam = null
     ) {
-        
-
         foreach (var node in m_graph.GetNodes())
         {
             var drawObject = Object.Instantiate(prefab, node.GetPosition(), Quaternion.identity, m_nodeParentObject.transform);
@@ -62,8 +60,6 @@ public class DebugGraphDraw
                     debugDrawComponent.Param = drawParam.Value;
                 }
             }
-
-
 
             m_nodes.Add(drawObject);
         }

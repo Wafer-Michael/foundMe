@@ -29,23 +29,38 @@ public class DebugGraphDraw
 
     public void CreateDebugNodes(GameObject prefab, Vector3? scale = null, DrawType drawType = DrawType.Cube, Color? color = null)
     {
+        var passColor = new Color(0.0f, 0.0f, 0.0f, 0.3f);
+        if(color != null) {
+            passColor = color.Value;
+        }
+
+        CreateDebugNodes(prefab, scale, new DebugDrawComponent.Parametor(drawType, passColor, 0.5f));
+    }
+
+    public void CreateDebugNodes(
+        GameObject prefab, 
+        Vector3? scale = null,
+        DebugDrawComponent.Parametor? drawParam = null
+    ) {
         foreach (var node in m_graph.GetNodes())
         {
             var drawObject = Object.Instantiate(prefab, node.GetPosition(), Quaternion.identity, m_nodeParentObject.transform);
             //スケール設定
-            if (scale != null) {
+            if (scale != null)
+            {
                 drawObject.transform.localScale = (Vector3)scale;
             }
 
-            //ドロータイプを設定する。
-            var debugDrawComponent = drawObject.GetComponent<DebugDrawComponent>();
-            if (debugDrawComponent) {
-                debugDrawComponent.drawType = drawType;
-                if (color != null) {
-                    debugDrawComponent.GizmosColor = (Color)color;
+            if(drawParam != null)
+            {
+                //ドロータイプを設定する。
+                var debugDrawComponent = drawObject.GetComponent<DebugDrawComponent>();
+                if (debugDrawComponent)
+                {
+                    debugDrawComponent.Param = drawParam.Value;
                 }
             }
-            
+
             m_nodes.Add(drawObject);
         }
     }

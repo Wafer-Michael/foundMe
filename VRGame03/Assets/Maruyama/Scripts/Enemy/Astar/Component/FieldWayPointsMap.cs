@@ -5,15 +5,12 @@ using UnityEngine;
 //--------------------------------------------------------------------------------------
 /// フィールド用のウェイポイントマップ
 //--------------------------------------------------------------------------------------
-public class FieldWayPointsMap : MonoBehaviour
+public class FieldWayPointsMap : FieldMapBase
 {
-    [SerializeField]
-    private GameObject m_floorObject;       //ウェイポイントを展開したい床オブジェクト
-    private bool m_isPlane = true;          //床オブジェクトがプレーンかどうか
-
     [SerializeField]
     private Factory.WayPointsMap_FloodFill.Parametor m_factoryParametor;    //ウェイポイント生成用パラメータ
 
+        //エリア分けマップ
     private WayPointsMap m_wayPointsMap;            //ウェイポイントマップ
 
     private void Awake()
@@ -21,38 +18,14 @@ public class FieldWayPointsMap : MonoBehaviour
         m_wayPointsMap = new WayPointsMap();
 
         //初期ノード生成
-        m_factoryParametor.rect = CalculateFieldRect();
+        if (HasFloorObject()) { //床設定しているなら、それに合わせたrectを生成する。
+            m_factoryParametor.rect = CalculateFloorRect();
+        }
         m_wayPointsMap.CreateWayPointsMap(m_factoryParametor);
 
         //グラフのデバッグ表示
         CreateGraphDebugDraw();
     }
-
-    /// <summary>
-    /// フィールド用の四角範囲データを計算
-    /// </summary>
-    /// <returns></returns>
-    private maru.Rect CalculateFieldRect() 
-    {
-        //床オブジェクトの設定がしてあるなら、床に合わせたrectを生成
-        if (m_floorObject)
-        {
-            var rect = new maru.Rect();
-            rect.centerPosition = m_floorObject.transform.position;
-            rect.width = m_floorObject.transform.localScale.x * GetFloorScaleAdjust();
-            rect.depth = m_floorObject.transform.localScale.z * GetFloorScaleAdjust();
-            return rect;
-        }
-
-        return m_factoryParametor.rect; //そうでないなら、Serializeで設定した大きさ
-    }
-
-    /// <summary>
-    /// 床データのスケールの調整(planeかboxで全然違う大きさだから)
-    /// </summary>
-    /// <returns></returns>
-    private float GetFloorScaleAdjust() { return m_isPlane ? 10 : 1; }
-
 
 
     //--------------------------------------------------------------------------------------
@@ -73,7 +46,7 @@ public class FieldWayPointsMap : MonoBehaviour
     //ノードのデバッグ表示用のパラメータ
     [SerializeField]
     private DebugDrawComponent.Parametor m_debugNodeDrawParametor =
-    new DebugDrawComponent.Parametor(DebugDrawComponent.DrawType.Sphere, new Color(0.0f, 0.0f, 1.0f, 0.3f), 0.5f);
+        new DebugDrawComponent.Parametor(DebugDrawComponent.DrawType.Sphere, new Color(0.0f, 0.0f, 1.0f, 0.3f), 0.5f);
 
     private void CreateGraphDebugDraw()
     {

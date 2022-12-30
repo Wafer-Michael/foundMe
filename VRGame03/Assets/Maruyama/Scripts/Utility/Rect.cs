@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace maru
 {
+	[System.Serializable]
 	public struct Rect
 	{
 		public Vector3 centerPosition;  //’†SˆÊ’u

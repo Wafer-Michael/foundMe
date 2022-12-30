@@ -1287,6 +1287,11 @@ MonoBehaviour:
     centerPosition: {x: 0, y: 0.15, z: 0}
   m_debugDrawPrefab: {fileID: 8958858368370622777, guid: 4f3e52e92c45a0849a99053237d1de87,
     type: 3}
+  m_debugDrawParam:
+    isSelectDraw: 0
+    drawType: 0
+    color: {r: 0, g: 0, b: 0, a: 0.39215687}
+    sphereRadius: 0
 --- !u!4 &1524006490
 Transform:
   m_ObjectHideFlags: 0

@@ -31,6 +31,8 @@ public struct OutOfTargetData
 
 public class DebugDrawComponent : MonoBehaviour
 {
+    public static readonly Parametor DEFAULT_PARAMETOR = new Parametor(DrawType.Cube, new Color(0.0f, 0.0f, 0.0f, 0.3f), 0.5f);
+
     public enum DrawType
     {
         Cube,

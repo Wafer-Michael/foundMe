@@ -9,7 +9,7 @@ public abstract class CoordinatorBase
 {
     protected List<I_FactionMember> m_members;  //ファクションに所属するメンバー
 
-    private TupleSpace m_tupleSpace;            //タプルスペース
+    private Tuple.TupleSpace m_tupleSpace;      //タプルスペース
 
     private CoordinatorBase m_parent;           //親コーディネータ
 
@@ -19,7 +19,7 @@ public abstract class CoordinatorBase
 
     public CoordinatorBase() {
         m_members = new List<I_FactionMember>();
-        m_tupleSpace = new TupleSpace();
+        m_tupleSpace = new Tuple.TupleSpace();
         m_parent = null;
         m_children = new List<CoordinatorBase>();
     }
@@ -56,7 +56,7 @@ public abstract class CoordinatorBase
 
     public List<I_FactionMember> GetMembers() { return m_members; }
 
-    public TupleSpace GetTupleSpace() { return m_tupleSpace; }
+    public Tuple.TupleSpace GetTupleSpace() { return m_tupleSpace; }
 
     public void SetParent(CoordinatorBase parent) {
         //nullでないなら、親にchildを設定する。

@@ -18,6 +18,10 @@ public class AstarNode : GraphNode
     [SerializeField]
     private Parametor m_param;  //パラメータ
 
+    private I_GraphNode m_parent;   //親ノード
+
+    #region コンストラクタ
+
     public AstarNode(int index) :
         this(index, Vector3.zero)
     { }
@@ -27,6 +31,8 @@ public class AstarNode : GraphNode
     {
         m_param.position = position;
     }
+
+    #endregion
 
     //--------------------------------------------------------------------------------------
     /// アクセッサ
@@ -44,5 +50,9 @@ public class AstarNode : GraphNode
 
     public void SetPosition(Vector3 position) { m_param.position = position; }
     public Vector3 GetPosition() => m_param.position;
+
+    public void SetParent(I_GraphNode node) { m_parent = node; }
+
+    public I_GraphNode GetGraphNode() { return m_parent; }
 
 }

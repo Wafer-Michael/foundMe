@@ -11,7 +11,7 @@ public class FactionCoordinator : CoordinatorBase
     public FactionCoordinator() :
         base()
     {
-        m_coodinatorMap = new Dictionary<System.Type, CoordinatorBase>();
+        m_coodinatorsMap = new Dictionary<System.Type, List<CoordinatorBase>>();
     }
 
     #endregion

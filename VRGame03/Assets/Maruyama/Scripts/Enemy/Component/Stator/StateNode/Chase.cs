@@ -28,6 +28,8 @@ namespace StateNode
 
         private TargetManager m_targetManager;  //ターゲット監視
         private EyeSearchRange m_eyeRange;
+        private VelocityManager m_velocityManager;
+        private WallAvoid m_wallAvoid;
 
         private StateMachine m_stateMachine = new StateMachine();
 
@@ -36,6 +38,8 @@ namespace StateNode
         {
             m_targetManager = owner.GetComponent<TargetManager>();
             m_eyeRange = owner.GetComponent<EyeSearchRange>();
+            m_velocityManager = owner.GetComponent<VelocityManager>();
+            m_wallAvoid = owner.GetComponent<WallAvoid>();
 
             CreateNode();
             CreateEdge();
@@ -55,6 +59,8 @@ namespace StateNode
 
             SettingStartTarget();    //ターゲットの設定。
 
+            m_wallAvoid.TakeAvoidVector();
+
             m_stateMachine.ChangeState(StateType.Normal, (int)StateType.Normal);
 
             Debug.Log("ChaseStart");
@@ -64,6 +70,8 @@ namespace StateNode
         {
             m_stateMachine.OnUpdate();
 
+            WallAvoidUpdate();
+
             return IsEnd();
         }
 
@@ -72,6 +80,15 @@ namespace StateNode
             base.OnExit();
 
             m_stateMachine.ForceChangeState(StateType.None);
+        }
+
+        /// <summary>
+        /// 壁回避
+        /// </summary>
+        private void WallAvoidUpdate()
+        {
+            //var force = maru.CalculateVelocity.SeekVec(m_velocityManager.velocity, m_wallAvoid.TakeAvoidVector(), m_maxSpeed);
+            m_velocityManager.AddForce(m_wallAvoid.TakeAvoidVector());
         }
 
         private void SettingStartTarget()

@@ -12,7 +12,8 @@ namespace StateNode
     {
         None,
         Normal,     //通常シーク
-        BreadCrumb, //ブレッドクラム
+        //BreadCrumb, //ブレッドクラム
+        Astar,      //Astarを利用した追従
         Lost,       //見失った
     }
 
@@ -22,9 +23,7 @@ namespace StateNode
 
     public class Chase : EnemyStateNodeBase<EnemyBase>
     {
-        private float m_nearRange = 3.0f;
         private float m_maxSpeed = 2.0f;
-        private float m_turningPower = 1.0f;  //旋回する力
         private float m_lostSeekTime = 10.0f; //ロストしてから一定時間追従する時間
 
         private TargetManager m_targetManager;  //ターゲット監視
@@ -87,7 +86,11 @@ namespace StateNode
 
             m_stateMachine.AddNode(StateType.Normal, new StateNode.NormalSeekTarget(GetOwner()));
 
-            m_stateMachine.AddNode(StateType.BreadCrumb, new StateNode.BreadSeekTarget(GetOwner(), m_nearRange, m_maxSpeed, m_turningPower, m_lostSeekTime));
+            //m_stateMachine.AddNode(StateType.BreadCrumb, new StateNode.BreadSeekTarget(GetOwner(), m_nearRange, m_maxSpeed, m_turningPower, m_lostSeekTime));
+
+            var astarSeekParam = AstarSeek.DEFAULT_PARAMETOR;
+            astarSeekParam.maxSpeed = m_maxSpeed;
+            m_stateMachine.AddNode(StateType.Astar, new StateNode.AstarSeekTarget(GetOwner(), astarSeekParam, m_lostSeekTime));
 
             m_stateMachine.AddNode(StateType.Lost, null);
         }
@@ -95,11 +98,14 @@ namespace StateNode
         void CreateEdge()
         {
             //Normal
-            m_stateMachine.AddEdge(StateType.Normal, StateType.BreadCrumb, IsBreadCrumb, (int)StateType.BreadCrumb);
+            //m_stateMachine.AddEdge(StateType.Normal, StateType.BreadCrumb, IsBreadCrumb, (int)StateType.BreadCrumb);
+            m_stateMachine.AddEdge(StateType.Normal, StateType.Astar, IsAstar, (int)StateType.Astar);
 
-            //BreadCrumb
-            m_stateMachine.AddEdge(StateType.BreadCrumb, StateType.Normal, IsNormal, (int)StateType.Normal);
-            m_stateMachine.AddEdge(StateType.BreadCrumb, StateType.Lost, IsTrue, (int)StateType.Lost, true);
+            //Astar
+            m_stateMachine.AddEdge(StateType.Astar, StateType.Normal, IsNormal, (int)StateType.Normal);
+            m_stateMachine.AddEdge(StateType.Astar, StateType.Lost, IsTrue, (int)StateType.Lost, true);
+
+            //Lost
         }
 
         private bool IsEnd() {
@@ -120,7 +126,7 @@ namespace StateNode
             return m_eyeRange.IsInEyeRange(target);
         }
 
-        private bool IsBreadCrumb(ref TransitionMember member)
+        private bool IsAstar(ref TransitionMember member)
         {
             var target = m_targetManager.GetCurrentTarget();
             if (!target)

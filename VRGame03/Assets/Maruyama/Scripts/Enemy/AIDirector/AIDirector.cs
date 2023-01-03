@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIDirector : MonoBehaviour
+public class AIDirector : SingletonMonoBehaviour<AIDirector>
 {
     private List<EnemyBase> m_members = new List<EnemyBase>();
 
@@ -14,10 +14,15 @@ public class AIDirector : MonoBehaviour
 
     private List<FactionCoordinator> m_factionCoordinators = new List<FactionCoordinator>();    //ファクションコーディネーター群
 
-    private void Awake()
+    protected override void Awake()
     {
-        NullCheck();
+        base.Awake();
 
+        NullCheck();
+    }
+
+    public void Start()
+    {
         //ウェイポイントにエリア情報を割り当てる。
         SettingArea();
     }
@@ -67,6 +72,10 @@ public class AIDirector : MonoBehaviour
     }
 
     public List<FactionCoordinator> GetFactionCoordinators() { return m_factionCoordinators; }
+
+    public CellMap GetAreaCellMap() { return m_areaMap.GetCellMap(); }
+
+    public WayPointsMap GetWayPointsMap() { return m_wayPointsMap.GetWayPointsMap(); }
 
     //--------------------------------------------------------------------------------------
     /// 初期セッティング

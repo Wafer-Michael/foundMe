@@ -642,6 +642,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709577376}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &787053677 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3584230654882087822, guid: 2446b64b1db070243878dad1f0b8e106,
+    type: 3}
+  m_PrefabInstance: {fileID: 3584230654892313354}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &787053690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787053677}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9063f0e2db4239439c9db90a6b641fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_param:
+    nearRange: 2
+    maxSpeed: 5
 --- !u!1 &993133827
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +793,7 @@ MonoBehaviour:
   m_floorObject: {fileID: 1848881413}
   m_isPlane: 1
   m_factoryParametor:
-    intervalRange: 5
+    intervalRange: 3
     rect:
       centerPosition: {x: 0, y: 0, z: 0}
       width: 0

@@ -7,6 +7,9 @@ namespace maru
     public static class UtilityObstacle
     {
         [SerializeField]
+        public static readonly string DEFAULT_RAY_OBSTACLE_LAYER = "L_Obstacle";
+
+        [SerializeField]
         public static string[] DEFAULT_RAY_OBSTACLE_LAYER_STRINGS = new string[] { "L_Obstacle" };
 
         public static bool IsRayObstacle(Vector3 startPosition, Vector3 targetPosition, float sphereRange = 0.1f)

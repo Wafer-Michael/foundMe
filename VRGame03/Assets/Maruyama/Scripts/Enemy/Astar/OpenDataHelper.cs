@@ -25,14 +25,29 @@ public class OpenData
 
     public float GetSumRange() { return range + heuristic; }
 
-    public static bool operator ==(OpenData left, OpenData right) {
-        //親と自分自身が同じなら
-        return ( left.parent == right.parent &&
-                 left.node == right.node);
-    }
+    //public static bool operator ==(OpenData left, OpenData right) {
+    //    //親と自分自身が同じなら
 
-    public static bool operator !=(OpenData left, OpenData right) { 
-        return !(left == right); 
+    //    if(left.parent == null && right.parent == null) {
+    //        return left.node == right.node;
+    //    }
+
+    //    if(left.parent == null || right.parent == null) {
+    //        return false;
+    //    }
+
+    //    return ( left.parent == right.parent &&
+    //             left.node == right.node);
+    //}
+
+    //public static bool operator !=(OpenData left, OpenData right) { 
+    //    return !(left == right); 
+    //}
+
+    public bool IsEqual(OpenData other)
+    {
+        return (this.parent == other.parent &&
+                this.node == other.node);
     }
 
     public void move(OpenData other)
@@ -169,7 +184,7 @@ public class OpenDataHelper
     {
         foreach(var data in openDatas)
         {
-            if(data == openData) {
+            if(data.IsEqual(openData)) {
                 return true;
             }
         }

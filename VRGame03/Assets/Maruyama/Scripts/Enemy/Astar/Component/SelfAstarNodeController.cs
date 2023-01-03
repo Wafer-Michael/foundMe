@@ -28,7 +28,7 @@ public class SelfAstarNodeController : MonoBehaviour
         }
 
         if (HasNode()) {
-            Debug.Log("Åö" + GetNode().GetIndex().ToString());
+            //Debug.Log("Åö" + GetNode().GetIndex().ToString());
         }
     }
 

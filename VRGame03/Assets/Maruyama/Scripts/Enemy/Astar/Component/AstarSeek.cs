@@ -8,6 +8,8 @@ using GraphType = SparseGraph<AstarNode, AstarEdge>;
 [RequireComponent(typeof(TargetManager))]
 public class AstarSeek : MonoBehaviour
 {
+    public static readonly Parametor DEFAULT_PARAMETOR = new Parametor(1.0f, 5.0f);
+
     [System.Serializable]
     public struct Parametor
     {
@@ -26,14 +28,19 @@ public class AstarSeek : MonoBehaviour
 
     private TargetManager m_targetManager;
     private VelocityManager m_velocityManager;
+    private RotationController m_rotationController;
 
     [SerializeField]
-    private Parametor m_param = new Parametor(2.0f, 5.0f);
+    private Parametor m_param = DEFAULT_PARAMETOR;
 
     private void Awake()
     {
         m_targetManager = GetComponent<TargetManager>();
         m_velocityManager = GetComponent<VelocityManager>();
+        m_rotationController = GetComponent<RotationController>();
+
+        m_route = new Stack<AstarNode>();
+        m_currentNode = null;
     }
 
     public void Update()
@@ -43,6 +50,7 @@ public class AstarSeek : MonoBehaviour
         }
 
         UpdateMove();
+        UpdateRotation();
 
         if(IsNextRoute()) { //éüÇÃÉãÅ[ÉgÇ…ëJà⁄â¬î\Ç»ÇÁ
             NextRoute();
@@ -59,6 +67,11 @@ public class AstarSeek : MonoBehaviour
 
         var force = maru.CalculateVelocity.SeekVec(m_velocityManager.velocity, toVec.normalized, m_param.maxSpeed);
         m_velocityManager.AddForce(force);
+    }
+
+    private void UpdateRotation()
+    {
+        m_rotationController.SetDirection(m_velocityManager.velocity);
     }
 
     private bool IsNextRoute()
@@ -121,5 +134,9 @@ public class AstarSeek : MonoBehaviour
 
     public float GetMaxSpeed() { return m_param.maxSpeed; }
 
-    public bool IsEnd() { return m_route.Count == 0 || m_currentNode == null; }
+    public bool IsEnd() { return m_currentNode == null; }
+
+    public void SetParametor(Parametor parametor) { m_param = parametor; }
+
+    public Parametor GetParametor() { return m_param; }
 }

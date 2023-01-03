@@ -74,7 +74,7 @@ public class WallAvoid : MonoBehaviour
     {
         AvoidUpdate();
 
-        Debug.Log("Åö" + TakeAvoidVector().ToString());
+        //Debug.Log("Åö" + TakeAvoidVector().ToString());
     }
 
     void SettingDefaultTacticles()

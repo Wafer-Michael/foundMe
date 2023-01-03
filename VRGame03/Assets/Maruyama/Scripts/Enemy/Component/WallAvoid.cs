@@ -16,7 +16,7 @@ public class WallAvoidTacticle
     { }
 
     public WallAvoidTacticle(float degree) :
-        this(5.0f, degree)
+        this(2.0f, degree)
     { }
 
     public WallAvoidTacticle(float range, float degree)
@@ -37,7 +37,7 @@ public class WallAvoidTacticle
 //--------------------------------------------------------------------------------------
 public class WallAvoid : MonoBehaviour
 {
-    public static readonly Parametor DEFAULT_PARAMETOR = new Parametor(5.0f, 0.75f, new Vector3(0.0f, -0.35f, 0.0f));
+    public static readonly Parametor DEFAULT_PARAMETOR = new Parametor(2.0f, 0.1f, new Vector3(0.0f, -0.35f, 0.0f));
 
     //--------------------------------------------------------------------------------------
     ///	ï«âÒîÉpÉâÉÅÅ[É^

@@ -129,13 +129,14 @@ namespace StateNode
         private bool IsAstar(ref TransitionMember member)
         {
             var target = m_targetManager.GetCurrentTarget();
-            if (!target)
-            {
+            if (!target) {
                 return false;
             }
 
+            return maru.UtilityObstacle.IsRayObstacle(GetOwner().transform.position, target.transform.position);
+
             //Ž‹ŠEŠO‚È‚ç‘JˆÚ‰Â”\
-            return !m_eyeRange.IsInEyeRange(target);
+            //return !m_eyeRange.IsInEyeRange(target);
         }
     }
 }

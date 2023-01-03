@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 3584230654882087813}
   - component: {fileID: 1191196262}
   - component: {fileID: 1191196261}
+  - component: {fileID: 817784176}
   m_Layer: 0
   m_Name: Handy
   m_TagString: Untagged
@@ -298,7 +299,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &1191196261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +312,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409c1bd0d8ab0c64395e1296f1610e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &817784176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584230654882087822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c772eae57ede1469c3e257962f6ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isMover: 1
 --- !u!1001 &3584230654710838421
 PrefabInstance:
   m_ObjectHideFlags: 0

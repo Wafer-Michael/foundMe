@@ -52,7 +52,8 @@ public class AstarNode : GraphNode
     public Vector3 GetPosition() => m_param.position;
 
     public void SetParent(I_GraphNode node) { m_parent = node; }
+    public I_GraphNode GetParent() { return m_parent; }
 
-    public I_GraphNode GetGraphNode() { return m_parent; }
+    //public I_GraphNode GetGraphNode() { return m_parent; }
 
 }

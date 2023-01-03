@@ -2077,8 +2077,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_param:
-    avoidRange: 5
-    avoidPower: 0.75
+    avoidRange: 2
+    avoidPower: 0.1
     offset: {x: 0, y: -0.35, z: 0}
 --- !u!1 &2098763161
 GameObject:

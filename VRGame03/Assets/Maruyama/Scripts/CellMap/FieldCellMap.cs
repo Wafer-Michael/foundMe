@@ -9,12 +9,18 @@ public class FieldCellMap : FieldMapBase
 
     private CellMap m_cellMap;  //セルマップ
 
+    [SerializeField]
+    private bool m_isDebug = true;
+
     private void Awake()
     {
         m_cellMap = new CellMap();
 
         CreateCells();  //セルの生成
-        CreateDebugDrawObjects();   //デバッグ表示
+
+        if (m_isDebug) {
+            CreateDebugDrawObjects();   //デバッグ表示
+        }
     }
 
     private void CreateCells()

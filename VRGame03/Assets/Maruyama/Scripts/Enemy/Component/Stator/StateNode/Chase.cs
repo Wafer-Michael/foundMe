@@ -70,7 +70,7 @@ namespace StateNode
         {
             m_stateMachine.OnUpdate();
 
-            WallAvoidUpdate();
+            //WallAvoidUpdate();
 
             return IsEnd();
         }

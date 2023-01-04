@@ -32,10 +32,6 @@ public class MeshExploder : MonoBehaviour
 
     private void Explode(Transform target)
     {
-        //const float DestroyTime = 5.0f;
-        //Transform clone = Instantiate(m_exploPrefab, target.position, Quaternion.identity) as Transform;
-        //Destroy(clone.gameObject, DestroyTime);
-
         //ÉÅÉbÉVÉÖÇÃéÊìæ
         Mesh mesh = target.GetComponent<MeshFilter>().mesh;
         Vector3[] vertices = mesh.vertices;
@@ -52,10 +48,12 @@ public class MeshExploder : MonoBehaviour
             // TODO: inherit speed, spin...?
             Vector3 averageNormal = (normals[triangles[i]] + normals[triangles[i + 1]] + normals[triangles[i + 2]]).normalized;
             Vector3 size = target.GetComponent<Renderer>().bounds.size;
+            Debug.Log("Åö" + size.ToString());
             float extrudeSize = ((size.x + size.y + size.z) / 3) * 0.3f;
             CreateMeshPiece(extrudeSize, target.transform.position, target.GetComponent<Renderer>().material, index, averageNormal, vertices[triangles[i]], vertices[triangles[i + 1]], vertices[triangles[i + 2]], uvs[triangles[i]], uvs[triangles[i + 1]], uvs[triangles[i + 2]]);
             index++;
         }
+
         // destroy original
         Destroy(target.gameObject);
     }
@@ -155,7 +153,7 @@ public class MeshExploder : MonoBehaviour
 
         CalculateMeshTangents(mesh);
 
-        go.AddComponent<Rigidbody>();
+        //go.AddComponent<Rigidbody>();
         MeshCollider meshCollider = go.AddComponent<MeshCollider>();
 
         meshCollider.sharedMesh = mesh;

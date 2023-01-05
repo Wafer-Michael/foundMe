@@ -5,11 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public struct DamageData
 {
-    public float damageValue;   //ダメージ値
+    public float damageValue;       //ダメージ値
+    public GameObject attacker;     //ダメージを与えて来た相手
 
-    public DamageData(float value)
+    public DamageData(float value, GameObject attacker)
     {
         this.damageValue = value;
+        this.attacker = attacker;
     }
 }
 

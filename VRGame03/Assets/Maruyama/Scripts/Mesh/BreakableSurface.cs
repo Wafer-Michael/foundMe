@@ -57,11 +57,25 @@ namespace GK {
 			}
 		}
 
-		void Start() {
+        private void Awake()
+        {
+
+		}
+
+        void Start() {
 			//age = 0;
 
 			Reload();
 		}
+
+		/// <summary>
+		/// 壊れて弾ける
+		/// </summary>
+		public void BreakSplit()
+        {
+			Rigidbody.isKinematic = false;
+			Collider.enabled = false;
+        }
 
 		public void Reload() {
 			var pos = transform.position;
@@ -127,6 +141,10 @@ namespace GK {
 			return mean + stddev * randStdNormal;
 		}
 
+		/// <summary>
+		/// メッシュが割れる処理
+		/// </summary>
+		/// <param name="position">当たった場所</param>
 		public void Break(Vector2 position) {
 			var area = Area;
 			if (area > MinBreakArea) {
@@ -174,8 +192,8 @@ namespace GK {
 					}
 				}
 
-				gameObject.SetActive(false);
-				Destroy(gameObject);
+                gameObject.SetActive(false);
+                Destroy(gameObject);
 			}
 		}
 
@@ -260,4 +278,5 @@ namespace GK {
 			return mesh;
 		}
 	}
+
 }

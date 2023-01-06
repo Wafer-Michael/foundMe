@@ -37,7 +37,7 @@ public class Tester_ShotEnemy : EnemyBase, I_Damaged
         //テスター
         if (PlayerInputer.IsTesterDamage())
         {
-            Damaged(new DamageData(1));
+            Damaged(new DamageData(1, this.gameObject));
         }
     }
 

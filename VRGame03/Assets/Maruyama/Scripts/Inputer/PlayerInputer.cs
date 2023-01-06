@@ -150,6 +150,11 @@ public class PlayerInputer : MonoBehaviour
         return Input.GetMouseButton(0);
     }
 
+    static public bool IsShotDown()
+    {
+        return Input.GetMouseButtonDown(0);
+    }
+
     static public bool IsForceStopJack()
     {
         return true;

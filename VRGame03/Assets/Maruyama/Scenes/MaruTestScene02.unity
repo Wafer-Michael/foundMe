@@ -1746,7 +1746,7 @@ MonoBehaviour:
   Thickness: 1
   MinBreakArea: 0.01
   m_minImpactToBreak: 1
-  m_isCollision: 0
+  m_isCollision: 1
 --- !u!23 &1592338105
 MeshRenderer:
   m_ObjectHideFlags: 0

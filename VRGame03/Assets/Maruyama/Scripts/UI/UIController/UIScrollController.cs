@@ -13,16 +13,13 @@ public class UIScrollController : MonoBehaviour
     private Vector2 m_minScope = new Vector2(-0.1f, -0.1f); //“®‚¯‚éÅ¬‹——£
 
     private Vector3 m_initializePosition;
-    private GameObject m_initializeObject;
+    public Vector3 InitializePosition => m_initializePosition;
 
     private bool m_isTouch = false;
 
     private void Awake()
     {
         m_initializePosition = transform.position;
-        m_initializeObject = new GameObject("TouchUIInitialize");
-        m_initializeObject.transform.position = transform.position;
-        m_initializeObject.transform.rotation = transform.rotation;
     }
 
     /// <summary>

@@ -23,11 +23,19 @@ public class UIScrollController : MonoBehaviour
         m_initializeObject.transform.rotation = transform.rotation;
     }
 
+    /// <summary>
+    /// UnityEentWrapに登録する
+    /// </summary>
+    /// <param name="pointerEvent"></param>
     public void Touch_Select(PointerEvent pointerEvent)
     {
         m_isTouch = true;
     }
 
+    /// <summary>
+    /// UnityEvetWrapに登録する
+    /// </summary>
+    /// <param name="pointerEvent"></param>
     public void Touch_Mover(PointerEvent pointerEvent)
     {
         if (!m_isTouch) {   //タッチ中でないなら
@@ -37,11 +45,20 @@ public class UIScrollController : MonoBehaviour
         transform.position = CalculatePosition(pointerEvent);
     }
 
+    /// <summary>
+    /// UnityEventWrapに登録する
+    /// </summary>
+    /// <param name="pointerEvent"></param>
     public void Touch_UnSelect(PointerEvent pointerEvent)
     {
         m_isTouch = false;
     }
 
+    /// <summary>
+    /// 位置の計算
+    /// </summary>
+    /// <param name="pointerEvent">ポインターイベント</param>
+    /// <returns>計算した位置</returns>
     public Vector3 CalculatePosition(PointerEvent pointerEvent)
     {
         var toPoint = m_initializeObject.transform.InverseTransformPoint(pointerEvent.Pose.position);

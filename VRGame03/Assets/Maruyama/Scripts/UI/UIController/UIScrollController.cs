@@ -13,6 +13,7 @@ public class UIScrollController : MonoBehaviour
     private Vector2 m_minScope = new Vector2(-0.1f, -0.1f); //“®‚¯‚éÅ¬‹——£
 
     private Vector3 m_initializePosition;
+    public Vector3 InitializePosition => m_initializePosition;
 
     private bool m_isTouch = false;
 

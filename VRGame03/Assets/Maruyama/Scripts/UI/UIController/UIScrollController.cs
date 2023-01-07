@@ -12,21 +12,19 @@ public class UIScrollController : MonoBehaviour
     [SerializeField]
     private Vector3 m_minScope = new Vector3(-0.0f, 0.0f, 0.0f); //動ける最小距離
 
-    private Vector3 m_initializePosition;
     private GameObject m_initializeObject;
-    private PointerEvent m_selectPoint;    //選択時のポイント
 
     private bool m_isTouch = false;
 
     private void Awake()
     {
-        m_initializePosition = transform.position;
-        m_initializeObject = Instantiate(new GameObject(), transform.position, transform.rotation);
+        m_initializeObject = new GameObject("TouchUIInitialize");
+        m_initializeObject.transform.position = transform.position;
+        m_initializeObject.transform.rotation = transform.rotation;
     }
 
     public void Touch_Select(PointerEvent pointerEvent)
     {
-        m_selectPoint = pointerEvent;
         m_isTouch = true;
     }
 

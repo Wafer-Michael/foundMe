@@ -7,10 +7,10 @@ using Oculus.Interaction;
 public class UIScrollController : MonoBehaviour
 {
     [SerializeField]
-    private Vector3 m_maxScope = new Vector3(+0.0f, 0.0f, 0.0f); //動ける最大距離
+    private Vector2 m_maxScope = new Vector2(+0.1f, +0.1f); //動ける最大距離
 
     [SerializeField]
-    private Vector3 m_minScope = new Vector3(-0.0f, 0.0f, 0.0f); //動ける最小距離
+    private Vector2 m_minScope = new Vector2(-0.1f, -0.1f); //動ける最小距離
 
     private GameObject m_initializeObject;
 
@@ -44,29 +44,11 @@ public class UIScrollController : MonoBehaviour
 
     public Vector3 CalculatePosition(PointerEvent pointerEvent)
     {
-        var result = pointerEvent.Pose.position;
-
         var toPoint = m_initializeObject.transform.InverseTransformPoint(pointerEvent.Pose.position);
 
-        //x方面クランプ
-
-        if (toPoint.x > m_maxScope.x) {
-            toPoint.x = m_maxScope.x;
-        }
-
-        if (toPoint.x < m_minScope.x) {
-            toPoint.x = m_minScope.x;
-        }
-
-        ////y方面クランプ
-
-        if (toPoint.y > m_maxScope.y) {
-            toPoint.y = m_maxScope.y;
-        }
-
-        if (toPoint.y < m_minScope.y) {
-            toPoint.y = m_minScope.y;
-        }
+        //それぞれのクランプ
+        toPoint.x = Mathf.Clamp(toPoint.x, m_minScope.x, m_maxScope.x);
+        toPoint.y = Mathf.Clamp(toPoint.y, m_minScope.y, m_maxScope.y);
 
         return m_initializeObject.transform.position + (transform.rotation * toPoint);
     }

@@ -2429,7 +2429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44621a8723923204591b333047d8b3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxRange: 5
+  m_maxScope: {x: 0, y: 0}
+  m_minScope: {x: 0, y: 0}
 --- !u!1 &1825055822
 GameObject:
   m_ObjectHideFlags: 0
@@ -3400,7 +3401,19 @@ MonoBehaviour:
         m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4171210594521207821}
+        m_TargetAssemblyTypeName: UIScrollController, Assembly-CSharp
+        m_MethodName: Touch_UnSelect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenMove:
     m_PersistentCalls:
       m_Calls:
@@ -3431,7 +3444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44621a8723923204591b333047d8b3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxRange: 5
+  m_maxScope: {x: 0.1, y: 0}
+  m_minScope: {x: 0, y: 0}
 --- !u!82 &4479599010021651757
 AudioSource:
   m_ObjectHideFlags: 0

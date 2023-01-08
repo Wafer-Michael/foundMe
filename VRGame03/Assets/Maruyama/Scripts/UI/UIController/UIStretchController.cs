@@ -46,6 +46,9 @@ public class UIStretchController : MonoBehaviour
     [SerializeField]
     private BoxProximityField m_boxProximityField;  //UIの当たり判定フィールド
 
+    [SerializeField]
+    private bool m_isInitializeMinSize = false;     //初期設定で最小サイズに合わせるかどうか
+
     private void Awake()
     {
         if (IsNullFaild()) {   //スプライトレンダーが存在しないなら処理をしない。
@@ -54,6 +57,12 @@ public class UIStretchController : MonoBehaviour
         }
 
         m_initializePosition = m_spriteRender.transform.position;   //初期位置設定
+
+        //初期設定で最小サイズに合わせるなら。
+        if (m_isInitializeMinSize) {
+            var size = CalculateSize(m_param.minSizeRatio);
+            m_spriteRender.size = size;
+        }
     }
 
     public void Tocuch_Mover(PointerEvent pointer)
@@ -74,9 +83,18 @@ public class UIStretchController : MonoBehaviour
     /// <returns></returns>
     private Vector2 CalculateSize(in PointerEvent pointer)
     {
-        var ratio = CalculatePositionRatio(pointer);
-        var clampRatio = Mathf.Clamp(ratio, MinSizeRatio, MaxSizeRatio);
-        var range = clampRatio * GetMaxLocalRange();
+        var ratio = CalculatePositionRatio_Clamp(pointer);
+        return CalculateSize(ratio);
+    }
+
+    /// <summary>
+    /// サイズを取得する
+    /// </summary>
+    /// <param name="ratio">大きさの割合</param>
+    /// <returns></returns>
+    private Vector2 CalculateSize(float ratio)
+    {
+        var range = ratio * GetMaxLocalRange();
         var currentSize = m_spriteRender.size;  //現在のサイズ
 
         Vector2 size = GetStretchType() switch
@@ -110,6 +128,17 @@ public class UIStretchController : MonoBehaviour
         };
 
         return range / maxRange;
+    }
+
+    /// <summary>
+    /// 現在タッチした位置が、どの位置にいるかをクランプして割合で返す。
+    /// </summary>
+    /// <param name="pointer"></param>
+    /// <returns></returns>
+    public float CalculatePositionRatio_Clamp(in PointerEvent pointer)
+    {
+        float ratio = CalculatePositionRatio(pointer);
+        return Mathf.Clamp(ratio, MinSizeRatio, MaxSizeRatio);
     }
 
     /// <summary>

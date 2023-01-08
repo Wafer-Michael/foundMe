@@ -165,7 +165,7 @@ public class Board : MonoBehaviour
     }
 
     /// <summary>
-    /// UVの生成
+    /// UVの生成(現在使用していない)
     /// </summary>
     protected virtual void CreateUVs()
     {

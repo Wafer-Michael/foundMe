@@ -1005,7 +1005,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1, y: 2.52}
+  m_Size: {x: 3, y: 2.52}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1056,8 +1056,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_param:
-    minSize: 0.25
-    maxSize: 1
+    minSizeRatio: 0.25
+    maxSizeRatio: 1
     stretchType: 0
   m_spriteRender: {fileID: 301178698}
   m_boxProximityField: {fileID: 946763784}

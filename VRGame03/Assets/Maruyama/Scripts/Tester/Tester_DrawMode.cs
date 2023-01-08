@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Tester_DrawMode : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private SpriteRenderer m_spriteRender;
+
+    private void Awake()
     {
-        
+        m_spriteRender = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            m_spriteRender.size += Vector2.right;
+        }
     }
 }

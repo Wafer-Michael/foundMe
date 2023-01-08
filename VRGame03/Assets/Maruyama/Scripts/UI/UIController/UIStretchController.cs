@@ -74,11 +74,9 @@ public class UIStretchController : MonoBehaviour
     /// <returns></returns>
     private Vector2 CalculateSize(in PointerEvent pointer)
     {
-        //var range = CalculateInitializeToCurrentRange(pointer);
         var ratio = CalculatePositionRatio(pointer);
         var clampRatio = Mathf.Clamp(ratio, MinSizeRatio, MaxSizeRatio);
-        Debug.Log("clampRatio: " + m_boxProximityField.transform.localScale.x.ToString());
-        var range = clampRatio * m_boxProximityField.transform.localScale.x;
+        var range = clampRatio * GetMaxLocalRange();
         var currentSize = m_spriteRender.size;  //現在のサイズ
 
         Vector2 size = GetStretchType() switch
@@ -92,26 +90,26 @@ public class UIStretchController : MonoBehaviour
     }
 
     /// <summary>
-    /// 初期位置から現在の位置までの距離を計算して返す。
-    /// </summary>
-    /// <returns>初期位置から現在の位置までの距離</returns>
-    private float CalculateInitializeToCurrentRange(in PointerEvent pointer)
-    {
-        var toInitializeVec = m_initializePosition - pointer.Pose.position;
-        return toInitializeVec.magnitude;
-    }
-
-    /// <summary>
     /// 現在タッチした位置が、どの位置にいるかを割合で返す。
     /// </summary>
     /// <returns></returns>
     private float CalculatePositionRatio(in PointerEvent pointer)
     {
-        var scale = m_boxProximityField.transform.lossyScale;
-        var startPosition = CalculateFieldLeftPosition();
-        var range = pointer.Pose.position.x - startPosition.x;
+        var maxRange = GetMaxLossyRange();
 
-        return range / scale.x;
+        Vector3 startPosition = GetStretchType() switch {
+            StretchType.Horizontal => CalculateFieldLeftPosition(),
+            StretchType.Vertical => CalculateFieldUpPosition(),
+            _ => Vector3.zero
+        };
+
+        var range = GetStretchType() switch { 
+            StretchType.Horizontal => pointer.Pose.position.x - startPosition.x,
+            StretchType.Vertical => pointer.Pose.position.y - startPosition.y,
+            _ => 0.0f
+        };
+
+        return range / maxRange;
     }
 
     /// <summary>
@@ -123,6 +121,39 @@ public class UIStretchController : MonoBehaviour
         var position = m_boxProximityField.transform.position;
         var halfSize = m_boxProximityField.transform.lossyScale.x * 0.5f;
         return position + -Vector3.right * halfSize;
+    }
+
+    /// <summary>
+    /// フィールドの上端の位置を取得
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 CalculateFieldUpPosition()
+    {
+        var position = m_boxProximityField.transform.position;
+        var halfSize = m_boxProximityField.transform.lossyScale.y * 0.5f;
+        return position + Vector3.up * halfSize;
+    }
+
+    private float GetMaxLossyRange()
+    {
+        float range = GetStretchType() switch { 
+            StretchType.Horizontal => m_boxProximityField.transform.lossyScale.x,
+            StretchType.Vertical => m_boxProximityField.transform.lossyScale.y,
+            _ => 0.0f
+        };
+
+        return range;
+    }
+
+    private float GetMaxLocalRange()
+    {
+        float range = GetStretchType() switch { 
+            StretchType.Horizontal => m_boxProximityField.transform.localScale.x,
+            StretchType.Vertical => m_boxProximityField.transform.localScale.y,
+            _ => 0.0f
+        };
+
+        return range;
     }
 
     //--------------------------------------------------------------------------------------

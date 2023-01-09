@@ -65,6 +65,16 @@ public class UIStretchController : MonoBehaviour
         }
     }
 
+    public void StretchUpdate(float ratio)
+    {
+        if (IsNullFaild()) {   //スプライトレンダーが存在しないなら処理をしない。
+            return;
+        }
+
+        var size = CalculateSize(ratio);
+        m_spriteRender.size = size;
+    }
+
     public void Tocuch_Mover(PointerEvent pointer)
     {
         if (IsNullFaild()) {   //スプライトレンダーが存在しないなら処理をしない。
@@ -188,6 +198,19 @@ public class UIStretchController : MonoBehaviour
     //--------------------------------------------------------------------------------------
     /// アクセッサ
     //--------------------------------------------------------------------------------------
+
+    //現在のRatioを取得
+    public float GetCurrentRatio()
+    {
+        float ratio = GetStretchType() switch
+        {
+            StretchType.Horizontal => m_spriteRender.size.x / GetMaxLocalRange(),
+            StretchType.Vertical => m_spriteRender.size.y / GetMaxLocalRange(),
+            _ => 0.0f
+        };
+
+        return ratio;
+    }
 
     public float MinSizeRatio
     {

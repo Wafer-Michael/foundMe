@@ -26,15 +26,27 @@ public class UIStretchRangeEvent : MonoBehaviour
     [SerializeField]
     private UnityEvent m_failureEvents;
 
+    [SerializeField]
     private UIStretchController m_stretchController;
 
     private void Awake()
     {
-        m_stretchController = GetComponent<UIStretchController>();
+        if (!m_stretchController) {
+            m_stretchController = GetComponentInParent<UIStretchController>();
+        }
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void Touch_UnSelect(PointerEvent pointer)
     {
+        if (!enabled) {
+            return;
+        }
+
         //一定以上伸ばしていたら、イベントを呼び出す。
         if (IsOverRange(pointer)) {
             m_sucessEvents?.Invoke();

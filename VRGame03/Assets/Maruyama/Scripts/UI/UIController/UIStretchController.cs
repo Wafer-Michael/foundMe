@@ -40,6 +40,8 @@ public class UIStretchController : MonoBehaviour
 
     private Vector3 m_initializePosition;           //初期位置
 
+    private Vector3 m_initializeFieldLossyScale;    //初期フィールドサイズ
+
     [SerializeField]
     private SpriteRenderer m_spriteRender;          //スプライトレンダー
 
@@ -56,7 +58,9 @@ public class UIStretchController : MonoBehaviour
             return;
         }
 
-        m_initializePosition = m_spriteRender.transform.position;   //初期位置設定
+        m_initializePosition = m_spriteRender.transform.position;               //初期位置設定
+        m_initializeFieldLossyScale = m_boxProximityField.transform.lossyScale; //初期フィールドのワールドスケール
+        MaxSizeScale = m_boxProximityField.transform.localScale;                     //最大サイズスケール
 
         //初期設定で最小サイズに合わせるなら。
         if (m_isInitializeMinSize) {
@@ -104,7 +108,7 @@ public class UIStretchController : MonoBehaviour
     /// <returns></returns>
     private Vector2 CalculateSize(float ratio)
     {
-        var range = ratio * GetMaxLocalRange();
+        var range = ratio * GetMaxSize();
         var currentSize = m_spriteRender.size;  //現在のサイズ
 
         Vector2 size = GetStretchType() switch
@@ -155,10 +159,11 @@ public class UIStretchController : MonoBehaviour
     /// フィールドの左端の位置を取得
     /// </summary>
     /// <returns></returns>
-    private Vector3 CalculateFieldLeftPosition()
+    public Vector3 CalculateFieldLeftPosition()
     {
         var position = m_boxProximityField.transform.position;
-        var halfSize = m_boxProximityField.transform.lossyScale.x * 0.5f;
+        var halfSize = m_initializeFieldLossyScale.x * 0.5f;
+        //var halfSize = GetMaxSize() * 0.5f;
         return position + -Vector3.right * halfSize;
     }
 
@@ -166,29 +171,19 @@ public class UIStretchController : MonoBehaviour
     /// フィールドの上端の位置を取得
     /// </summary>
     /// <returns></returns>
-    private Vector3 CalculateFieldUpPosition()
+    public Vector3 CalculateFieldUpPosition()
     {
         var position = m_boxProximityField.transform.position;
-        var halfSize = m_boxProximityField.transform.lossyScale.y * 0.5f;
+        var halfSize = m_initializeFieldLossyScale.y * 0.5f;
+        //var halfSize = GetMaxSize() * 0.5f;
         return position + Vector3.up * halfSize;
     }
 
-    private float GetMaxLossyRange()
+    public float GetMaxLossyRange()
     {
         float range = GetStretchType() switch { 
-            StretchType.Horizontal => m_boxProximityField.transform.lossyScale.x,
-            StretchType.Vertical => m_boxProximityField.transform.lossyScale.y,
-            _ => 0.0f
-        };
-
-        return range;
-    }
-
-    private float GetMaxLocalRange()
-    {
-        float range = GetStretchType() switch { 
-            StretchType.Horizontal => m_boxProximityField.transform.localScale.x,
-            StretchType.Vertical => m_boxProximityField.transform.localScale.y,
+            StretchType.Horizontal => m_initializeFieldLossyScale.x,
+            StretchType.Vertical => m_initializeFieldLossyScale.y,
             _ => 0.0f
         };
 
@@ -204,12 +199,26 @@ public class UIStretchController : MonoBehaviour
     {
         float ratio = GetStretchType() switch
         {
-            StretchType.Horizontal => m_spriteRender.size.x / GetMaxLocalRange(),
-            StretchType.Vertical => m_spriteRender.size.y / GetMaxLocalRange(),
+            StretchType.Horizontal => m_spriteRender.size.x / GetMaxSize(),
+            StretchType.Vertical => m_spriteRender.size.y / GetMaxSize(),
             _ => 0.0f
         };
 
         return ratio;
+    }
+
+    private Vector3 MaxSizeScale { get; set; }
+
+    public float GetMaxSize()
+    {
+        float range = GetStretchType() switch
+        {
+            StretchType.Horizontal => MaxSizeScale.x,
+            StretchType.Vertical => MaxSizeScale.y,
+            _ => 0.0f
+        };
+
+        return range;
     }
 
     public float MinSizeRatio

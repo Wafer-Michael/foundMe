@@ -48,7 +48,6 @@ public class StretchUIChildObject : MonoBehaviour
         var range = maxOffsetRange * ratio;
 
         var position = m_parent.CalculateFieldLeftPosition() + (offsetVec.normalized * range);
-        //position += m_initializePosition;
         m_fadeObject.transform.position = position;
     }
 

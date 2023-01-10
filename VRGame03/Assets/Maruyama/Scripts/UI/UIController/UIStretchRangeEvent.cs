@@ -69,6 +69,4 @@ public class UIStretchRangeEvent : MonoBehaviour
 
     public float GetRatioRange() { return m_param.rangeRatio; }
 
-    //public float GetMaxRange() { return m_param.rangeRatio * m_stretchController.GetMaxSize(); }
-
 }

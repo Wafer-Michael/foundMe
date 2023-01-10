@@ -4,6 +4,7 @@ Shader "Custom/GlassShader"
     {
         _BaseColor("Base Color", color) = (1,1,1,1)
         _Adjustment("Rim Effect", Range(-1,1)) = 0.25
+        _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic("Metallic", Range(0,1)) = 0.0
     }
         SubShader
@@ -11,7 +12,7 @@ Shader "Custom/GlassShader"
         Tags { "Queue" = "Transparent" }
         LOD 200
 
-        Cull Off
+        //Cull Off
         CGPROGRAM
 
 #pragma surface surf Standard alpha:fade
@@ -25,6 +26,7 @@ Shader "Custom/GlassShader"
 
         fixed4 _BaseColor;
         float _Adjustment;
+        half _Glossiness;
         half _Metallic;
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -39,6 +41,7 @@ Shader "Custom/GlassShader"
             float border = 1 - abs(dot(IN.viewDir, IN.worldNormal));
             float alpha = (border * (1 - _Adjustment) + _Adjustment);
             o.Alpha = _BaseColor.a * alpha;
+            o.Smoothness = _Glossiness;
             o.Metallic = _Metallic;
         }
         ENDCG

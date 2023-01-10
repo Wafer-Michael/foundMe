@@ -1,0 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// ƒWƒƒƒbƒN‚³‚ê‚éŽÒ
+/// </summary>
+public class Jackable : MonoBehaviour
+{
+    
+}

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Oculus.Interaction;
 
+
 public class UIStretchRangeEvent : MonoBehaviour
 {
     public static readonly Parametor DEFAULT_PARAMETOR = new Parametor()
@@ -61,5 +62,13 @@ public class UIStretchRangeEvent : MonoBehaviour
         float ratio = m_stretchController.CalculatePositionRatio_Clamp(pointer);
         return ratio >= m_param.rangeRatio;
     }
+
+    //--------------------------------------------------------------------------------------
+    /// アクセッサ
+    //--------------------------------------------------------------------------------------
+
+    public float GetRatioRange() { return m_param.rangeRatio; }
+
+    //public float GetMaxRange() { return m_param.rangeRatio * m_stretchController.GetMaxSize(); }
 
 }

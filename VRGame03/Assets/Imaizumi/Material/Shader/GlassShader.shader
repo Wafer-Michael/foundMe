@@ -2,33 +2,26 @@ Shader "Custom/GlassShader"
 {
     Properties
     {
-        _BaseColor ("Base Color", color) = (1,1,1,1) 
-        _Adjustment("Adjustment", Float) = 0.0
-        _MainTex ("Albedo (RGB)", 2D) = "white" {}
-        _Glossiness ("Smoothness", Range(0,1)) = 0.5
-        _Metallic ("Metallic", Range(0,1)) = 0.0
+        _BaseColor("Base Color", color) = (1,1,1,1)
+        _Adjustment("Rim Effect", Range(-1,1)) = 0.25
     }
-    SubShader
+        SubShader
     {
         Tags { "Queue" = "Transparent" }
         LOD 200
 
+        Cull Off
         CGPROGRAM
-        // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard alpha:fade
-        #pragma target 3.0
 
-        sampler2D _MainTex;
+#pragma surface surf Standard alpha:fade
+        #pragma target 3.0
 
         struct Input
         {
-            float2 uv_MainTex;
             float3 worldNormal;
             float3 viewDir;
         };
 
-        half _Glossiness;
-        half _Metallic;
         fixed4 _BaseColor;
         float _Adjustment;
 
@@ -41,14 +34,10 @@ Shader "Custom/GlassShader"
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            // Albedo comes from a texture tinted by color
-            //fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
             o.Albedo = _BaseColor.rgb;
-            // Metallic and smoothness come from slider variables
-            o.Metallic = _Metallic;
-            o.Smoothness = _Glossiness;
-            float alpha = 1 - abs(dot(IN.viewDir, IN.worldNormal));
-            o.Alpha = _BaseColor.a * _Adjustment;
+            float border = 1 - abs(dot(IN.viewDir, IN.worldNormal));
+            float alpha = (border * (1 - _Adjustment) + _Adjustment);
+            o.Alpha = _BaseColor.a * alpha;
         }
         ENDCG
     }

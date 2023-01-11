@@ -21,7 +21,7 @@ public class StretchUIChildObject : MonoBehaviour
 
     private bool m_isUpdate = true;
     public bool IsUpdate() { return m_isUpdate; }
-    public void SetIsUpdate(bool isUpdate) { m_isUpdate = isUpdate; }
+    public void SetIsUpdate(bool isUpdate) { m_isUpdate = isUpdate; Debug.Log("ÅöFInish"); }
 
     public void Awake()
     {
@@ -70,6 +70,14 @@ public class StretchUIChildObject : MonoBehaviour
         m_fadeScaleComponent?.SetMaxRange(m_maxSize);
         m_fadeScaleComponent?.FadeStart();
         m_isUpdate = false;
+    }
+
+    private void OnDisable()
+    {
+        if (!IsUpdate())
+        {
+
+        }
     }
 
     //--------------------------------------------------------------------------------------

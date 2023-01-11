@@ -1803,7 +1803,7 @@ PrefabInstance:
     - target: {fileID: 495516821662793156, guid: 802f95579eb721d45a5a1dec93b98f7d,
         type: 3}
       propertyPath: m_TargetDisplay
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 495516821662793156, guid: 802f95579eb721d45a5a1dec93b98f7d,
         type: 3}
@@ -4531,7 +4531,7 @@ GameObject:
   - component: {fileID: 1274776387}
   - component: {fileID: 1274776386}
   m_Layer: 11
-  m_Name: Plane
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6154,7 +6154,7 @@ PrefabInstance:
     - target: {fileID: 495516821662793156, guid: 802f95579eb721d45a5a1dec93b98f7d,
         type: 3}
       propertyPath: m_TargetDisplay
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 495516821662793156, guid: 802f95579eb721d45a5a1dec93b98f7d,
         type: 3}

@@ -7,5 +7,12 @@ using UnityEngine;
 /// </summary>
 public class Jackable : MonoBehaviour
 {
-    
+    [SerializeField]
+    private Camera m_eyeCamera; //視界カメラ
+
+    //--------------------------------------------------------------------------------------
+    /// アクセッサ
+    //--------------------------------------------------------------------------------------
+
+    public Camera GetEyeCamera() { return m_eyeCamera; }
 }

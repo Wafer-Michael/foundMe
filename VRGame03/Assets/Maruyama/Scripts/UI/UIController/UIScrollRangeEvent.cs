@@ -62,6 +62,6 @@ public class UIScrollRangeEvent : MonoBehaviour
     /// アクセッサ
     //--------------------------------------------------------------------------------------
 
-    private float GetRange() { return m_range; }
+    public float GetRange() { return m_range; }
 
 }

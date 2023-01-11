@@ -60,8 +60,11 @@ public class UIStretchController : MonoBehaviour
 
         m_initializePosition = m_spriteRender.transform.position;               //初期位置設定
         m_initializeFieldLossyScale = m_boxProximityField.transform.lossyScale; //初期フィールドのワールドスケール
-        MaxSizeScale = m_boxProximityField.transform.localScale;                     //最大サイズスケール
+        MaxSizeScale = m_boxProximityField.transform.localScale;                //最大サイズスケール
+    }
 
+    private void Start()
+    {
         //初期設定で最小サイズに合わせるなら。
         if (m_isInitializeMinSize) {
             var size = CalculateSize(m_param.minSizeRatio);

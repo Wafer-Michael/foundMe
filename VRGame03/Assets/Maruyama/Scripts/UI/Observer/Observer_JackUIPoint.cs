@@ -6,50 +6,40 @@ using UniRx;
 
 public class Observer_JackUIPoint : MonoBehaviour
 {
-    public struct Data
-    {
-        public Jackable jakable;
-        public JackPointUI ui;
-
-        public Data(Jackable jackable, JackPointUI ui)
-        {
-            this.jakable = jackable;
-            this.ui = ui;
-        }
-    }
-
-    private List<Data> m_datas = new List<Data>();
-
-    private List<JackPointUI> m_observeUIs = new List<JackPointUI>();
+    [SerializeField]
+    private Factory_Touch_JackUI m_factory;             //UI生成クラス
 
     [SerializeField]
-    private Factory_Touch_JackUI m_factory;
+    private JackCameraUI m_cameraUI;                    //ジャック先を表示するUI
 
-    [SerializeField]
-    private JackCameraUI m_cameraUI;               //ジャック先を表示するUI
-
-    private JackPointUI m_currentPointUI = null;   //現在選択中のUI
+    private Selectable_VRUI m_currentPointUI = null;    //現在選択中のUI
 
     private void Start()
     {
-        m_observeUIs = m_factory.GetJackPointUIs();
+        var pairDatas = m_factory.GetPariDatas();
 
-        foreach (var ui in m_observeUIs)
+        foreach (var data in pairDatas)
         {
-            m_datas.Add(new Data(ui.GetJakable(), ui));
+            var ui = data.ui;
+            var jakable = data.jakable;
 
             //切り替わったときに呼びたい処理の登録
             ui.ObservableIsSelect
                 .Skip(1)
-                .Subscribe(value => ui.GetJakable().UISelectEvent(value))
+                .Subscribe(value => jakable.UISelectEvent(value))
                 .AddTo(this);
 
-            ui.AddSelectEvent(TouchEvent);
+            ui.AddSelectEvent(TouchEvent);  //タッチした時に呼び出したい処理
         }
     }
 
-    private void TouchEvent(JackPointUI pointUI)
+    private void TouchEvent(Selectable_VRUI pointUI)
     {
+        if(m_currentPointUI == null) {
+            m_currentPointUI = pointUI;
+            return;
+        }
+
         //同じならcurrentをnullに変えて処理を終了
         if(m_currentPointUI == pointUI) {
             m_currentPointUI = null;

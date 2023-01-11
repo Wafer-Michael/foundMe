@@ -8,10 +8,10 @@ using UnityEngine;
 public class Jackable : MonoBehaviour
 {
     [SerializeField]
-    private Camera m_eyeCamera; //視界カメラ
+    private Camera m_eyeCamera;             //視界カメラ
 
     [SerializeField]
-    private RenderTexture m_renderTexture;
+    private RenderTexture m_renderTexture;  //レンダーテクスチャ
 
     public void UISelectEvent(bool isSelect)
     {

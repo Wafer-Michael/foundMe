@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Factory_Touch_JackUI : MonoBehaviour
 {
+    public struct PairData
+    {
+        public Jackable jakable;
+        public JackPointUI ui;
+
+        public PairData(Jackable jackable, JackPointUI ui)
+        {
+            this.jakable = jackable;
+            this.ui = ui;
+        }
+    }
+
     private const float PlaneAdjust = 10.0f;    //プレーンを使用したときの調整用数値
 
     [SerializeField]
@@ -23,7 +35,8 @@ public class Factory_Touch_JackUI : MonoBehaviour
 
     private List<Jackable> m_jackables = new List<Jackable>();          //全てのジャックオブジェクト
 
-    private List<JackPointUI> m_jackPointUIs = new List<JackPointUI>(); //生成したポイントUI
+    private List<PairData> m_pairDatas = new List<PairData>();          //生成したポイントのペアデータ配列
+   // private List<JackPointUI> m_jackPointUIs = new List<JackPointUI>(); //生成したポイントUI
 
     private void Awake()
     {
@@ -41,6 +54,10 @@ public class Factory_Touch_JackUI : MonoBehaviour
             var newObject = Instantiate(m_createPrefab, position, Quaternion.identity, transform);
             newObject.transform.localRotation = Quaternion.identity;
 
+            var jackUI = newObject.GetComponent<JackPointUI>();    //JackPointUI取得
+
+            m_pairDatas.Add(new PairData(jack, jackUI));
+
             //ハッキングされる対象のセッティング
             SettingJakable(newObject, jack);
         }
@@ -51,7 +68,7 @@ public class Factory_Touch_JackUI : MonoBehaviour
         var jackUI = target.GetComponent<JackPointUI>();    //JackPointUI取得
         jackUI?.SetJakable(jackable);                       //ジャックされる者を設定
 
-        m_jackPointUIs.Add(jackUI);     //生成したジャックポイントをメンバとして保存。
+        //m_jackPointUIs.Add(jackUI);     //生成したジャックポイントをメンバとして保存。
     }
 
     /// <summary>
@@ -87,6 +104,8 @@ public class Factory_Touch_JackUI : MonoBehaviour
     /// アクセッサ
     //--------------------------------------------------------------------------------------
 
-    public List<JackPointUI> GetJackPointUIs() { return m_jackPointUIs; }
+    //public List<JackPointUI> GetJackPointUIs() { return m_jackPointUIs; }
+
+    public List<PairData> GetPariDatas() { return m_pairDatas; }
 
 }

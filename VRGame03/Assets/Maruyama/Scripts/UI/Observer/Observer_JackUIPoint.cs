@@ -37,16 +37,33 @@ public class Observer_JackUIPoint : MonoBehaviour
     {
         if(m_currentPointUI == null) {
             m_currentPointUI = pointUI;
+            m_cameraUI.FadeStart(FadeObject.FadeType.FadeOut);
             return;
         }
 
         //同じならcurrentをnullに変えて処理を終了
         if(m_currentPointUI == pointUI) {
-            m_currentPointUI = null;
+            Close();
             return;
         }
 
         m_currentPointUI.SetIsSelect(false);
         m_currentPointUI = pointUI; //現在選択中のUIを設定
     }
+
+    /// <summary>
+    /// 親UIが閉じた時にリセット処理
+    /// </summary>
+    public void Close()
+    {
+        if (IsClose()) {    //閉じているなら処理をしない
+            return;
+        }
+
+        m_currentPointUI.SetIsSelect(false);
+        m_currentPointUI = null;
+        m_cameraUI.FadeStart(FadeObject.FadeType.FadeIn);
+    }
+
+    public bool IsClose() { return m_currentPointUI == null; }
 }

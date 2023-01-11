@@ -13,12 +13,12 @@ public class SenceController : MonoBehaviour
     static string[] DEFAULT_NORMAL_LAYERS = new string[] { 
         "Default", "TransparentFX", "longer Raycast", "Water", "UI", 
         "L_Normal",
-        "L_Player", "L_Obstacle" 
+        "L_Player", "L_Obstacle" , "L_PCOnly"
     };
     static string[] DEFAULT_SENCE_LAYERS = new string[] {
         "Default", "TransparentFX", "longer Raycast", "Water", "UI", 
         "L_Sencer",
-        "L_Player", "L_Obstacle"
+        "L_Player", "L_Obstacle", "L_PCOnly"
     };
 
     [SerializeField]

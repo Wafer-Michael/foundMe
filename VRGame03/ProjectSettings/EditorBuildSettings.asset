@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Maruyama/Scenes/MaruTestScene.unity
     guid: 63984c2b2031fd94fa95aafcf719a321
-  - enabled: 1
+  - enabled: 0
     path: Assets/Maruyama/Scenes/MaruTestScene02.unity
     guid: d068f6088ca2d7141a7d1491baa5aa15
   - enabled: 0
     path: Assets/Oculus/SampleFramework/Usage/HandsInteractionTrainScene.unity
     guid: a9c41884ef0c347628dfd8a4af4a022e
+  - enabled: 1
+    path: Assets/Kanazawa/Scene/TestStage/TestStage.unity
+    guid: c9fd4033daa71424f9e087b94905a54f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260,
       type: 2}

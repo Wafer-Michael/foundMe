@@ -47,10 +47,10 @@ namespace maru
 		/// <param name="maxSpeed">最大速度</param>
 		/// <param name="maxTurningDegree">最大旋回角度</param>
 		/// <returns>「ターゲットの方向のベクトル」- 「現在の速度」</returns>
-		static public Vector3 CalucSeekVec(Vector3 velocity, Vector3 toVec, float maxSpeed)
+		static public Vector3 SeekVec(Vector3 velocity, Vector3 toVec, float maxSpeed, float forceMultipier = 0.025f)
 		{
 			Vector3 desiredVelocity = toVec.normalized * maxSpeed;  //希望のベクトル
-			return (desiredVelocity - velocity);
+			return (desiredVelocity - velocity) * forceMultipier;
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace maru
 		/// <param name="maxSpeed">最大速度</param>
 		/// <param name="decl"></param>
 		/// <returns>到着ベクトルを返す(近づくと小さくなるベクトル)を返す</returns>
-		static public Vector3 CalucArriveVec(Vector3 velocity, Vector3 toVec, float maxSpeed, float decl = 3.0f)
+		static public Vector3 ArriveVec(Vector3 velocity, Vector3 toVec, float maxSpeed, float forceMultipier = 0.025f, float decl = 3.0f)
 		{
 			float dist = toVec.magnitude;
 			if (dist > 0)
@@ -71,10 +71,10 @@ namespace maru
 				//指定された減速で目標に到達する式
 				float speed = dist / (decl * DecelerationTweaker);
 				speed = Mathf.Min(speed, maxSpeed);
-				Vector3 desiredVelocity = toVec * speed / dist; //希望のベクトル
-				Vector3 steerVec = desiredVelocity - velocity;  //ステアリングベクトル
+				Vector3 desiredVelocity = toVec.normalized * speed / dist;  //希望のベクトル
+				Vector3 steerVec = desiredVelocity - velocity;              //ステアリングベクトル
 
-				return steerVec;
+				return steerVec * forceMultipier;
 			}
 
 			return new Vector3(0, 0, 0);
@@ -89,17 +89,17 @@ namespace maru
 		/// <param name="nearRange">計算を切り替える距離</param>
 		/// <param name="decl"></param>
 		/// <returns>計算されたベクトル</returns>
-		static public Vector3 CalucNearArriveFarSeek(Vector3 velocity, Vector3 toVec,
-			float maxSpeed, float nearRange, float decl = 3.0f)
+		static public Vector3 NearArriveFarSeek(Vector3 velocity, Vector3 toVec,
+			float maxSpeed, float nearRange, float forceMultipier = 0.025f, float decl = 3.0f)
 		{
 			float range = toVec.magnitude;
 			if (range <= nearRange)
 			{  //近くにいたら
-				return CalucArriveVec(velocity, toVec, maxSpeed, decl);
+				return ArriveVec(velocity, toVec, maxSpeed, forceMultipier, decl);
 			}
 			else
 			{  //遠くにいたら
-				return CalucSeekVec(velocity, toVec, maxSpeed);
+				return SeekVec(velocity, toVec, maxSpeed, forceMultipier);
 			}
 		}
 
@@ -116,7 +116,7 @@ namespace maru
         {
 			if(targetVelocityManager == null)
             {
-				return CalucSeekVec(velocity, toVec, maxSpeed);
+				return SeekVec(velocity, toVec, maxSpeed);
             }
 			var targetObj = targetVelocityManager.gameObject;
 			var targetVelocity = targetVelocityManager.velocity;
@@ -126,7 +126,7 @@ namespace maru
 			var desiredPosition = targetObj.transform.position + (targetVelocity * aheadTime * turningPower); //目的のポジション
 			var desiredVec = desiredPosition - selfObj.transform.position; //希望のベクトル
 
-			return CalucSeekVec(velocity, desiredVec, maxSpeed);
+			return SeekVec(velocity, desiredVec, maxSpeed);
         }
 
 		/// <summary>
@@ -150,7 +150,7 @@ namespace maru
 			//Dotは差が開いている程、値が小さくなる。
 			if (IsFront(selfObj.transform.forward,toVec) && IsMinSubForward(relativeHeading, subPursuitTargetForward))
 			{
-				return CalucSeekVec(velocity, toVec, maxSpeed);
+				return SeekVec(velocity, toVec, maxSpeed);
 			}
 			else
 			{   //フォワードの差が開いていたら、予測Seek

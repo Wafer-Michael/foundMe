@@ -17,6 +17,7 @@ public class VelocityManager : MonoBehaviour
     private bool m_isDeseleration = false;  //減速中かどうか
     public bool IsDeseleration => m_isDeseleration;
     private float m_deselerationPower = 1.0f;
+    //private Vector3 m_deseleratironDirection = Vector3.zero;
 
     #endregion
 
@@ -29,9 +30,6 @@ public class VelocityManager : MonoBehaviour
 
     private void Update()
     {
-        //減速処理
-        Deseleration();
-
         m_velocity.y += m_rigid.velocity.y - m_velocity.y;  //重力分加算する。
         //m_velocity += m_force * Time.deltaTime;
         m_velocity += m_force;
@@ -43,6 +41,9 @@ public class VelocityManager : MonoBehaviour
         m_rigid.velocity = m_velocity;
 
         ResetForce();
+
+        //減速処理
+        Deseleration();
     }
 
     #endregion
@@ -58,13 +59,14 @@ public class VelocityManager : MonoBehaviour
             return;
         }
 
-        var force = maru.CalculateVelocity.CalucSeekVec(velocity, -velocity, velocity.magnitude * m_deselerationPower);
+        var force = maru.CalculateVelocity.SeekVec(velocity, -velocity, velocity.magnitude * m_deselerationPower);
         AddForce(force);
+        //Debug.Log(velocity.magnitude);
 
-        const float stopSpeed = 0.3f;
+        const float stopSpeed = 0.5f;
         if (velocity.magnitude <= stopSpeed) {
             m_isDeseleration = false;
-            ResetVelocity();
+            ResetAll();
         }
     }
 
@@ -113,6 +115,7 @@ public class VelocityManager : MonoBehaviour
     public void StartDeseleration(float power = 1.0f)
     {
         m_isDeseleration = true;
+        //m_deseleratironDirection = -velocity;
         m_deselerationPower = power;
     }
 

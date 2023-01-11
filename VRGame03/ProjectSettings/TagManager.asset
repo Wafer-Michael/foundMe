@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - T_Wall
+  - Explodable
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - L_Sencer
   - L_Player
   - L_Obstacle
-  - 
-  - 
+  - L_PCOnly
+  - L_Map
   - 
   - 
   - 

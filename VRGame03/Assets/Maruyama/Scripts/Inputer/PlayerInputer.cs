@@ -78,6 +78,16 @@ public class PlayerInputer : MonoBehaviour
         return true;
     }
 
+    static public bool IsDebugKeyDown(KeyCode key)
+    {
+        return Input.GetKeyDown(key);
+    }
+
+    static public bool IsAccess()
+    {
+        return Input.GetKeyDown(KeyCode.F);
+    }
+
     /// <summary>
     /// Ç¬Ç‹Çﬁçsà◊
     /// </summary>
@@ -138,6 +148,16 @@ public class PlayerInputer : MonoBehaviour
     static public bool IsShot()
     {
         return Input.GetMouseButton(0);
+    }
+
+    static public bool IsShotDown()
+    {
+        return Input.GetMouseButtonDown(0);
+    }
+
+    static public bool IsForceStopJack()
+    {
+        return true;
     }
 
     //--------------------------------------------------------------------------------------

@@ -76,16 +76,6 @@ public class FadeScaleObject : FadeObject
         }
 
         FinishEvent(scale);
-
-        //float finishRatio = m_fadeType == FadeType.FadeOut ? 1.0f : 0.0f;
-
-        //m_fadeObject.transform.localScale = new Vector3(finishRatio * m_maxRange, scale.y, scale.z);        
-
-        //m_isFinish = true;
-
-        //m_isFading = false;
-
-        //m_finishEvent.Invoke();
     }
 
     private void FinishEvent(Vector3 scale)

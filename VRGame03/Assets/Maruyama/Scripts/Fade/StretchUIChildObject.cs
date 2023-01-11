@@ -72,4 +72,12 @@ public class StretchUIChildObject : MonoBehaviour
         m_isUpdate = false;
     }
 
+    //--------------------------------------------------------------------------------------
+    /// アクセッサ
+    //--------------------------------------------------------------------------------------
+
+    public void SetParent(UIStretchController parent) { m_parent = parent; }
+
+    public UIStretchController GetParent() { return m_parent; }
+
 }

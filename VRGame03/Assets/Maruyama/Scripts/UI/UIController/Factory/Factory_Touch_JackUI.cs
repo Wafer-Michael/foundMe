@@ -10,17 +10,20 @@ public class Factory_Touch_JackUI : MonoBehaviour
     private GameObject m_floor;
 
     [SerializeField]
-    private GameObject m_mapObject; //MapVisual
+    private GameObject m_mapObject;     //MapVisual
 
     [SerializeField]
-    private GameObject m_prefab;
+    private UIStretchController m_stretchParent; //伸縮の親クラス
+
+    [SerializeField]
+    private GameObject m_createPrefab;   
 
     [SerializeField]
     private float m_depthAdjust = -0.005f;
 
     private List<Jackable> m_jackables = new List<Jackable>();
 
-    private void Start()
+    private void Awake()
     {
         //フィールド上のジャックUIを全て取得
         m_jackables = new List<Jackable>(FindObjectsOfType<Jackable>());
@@ -33,8 +36,23 @@ public class Factory_Touch_JackUI : MonoBehaviour
 
             var position = m_mapObject.transform.position + (transform.rotation * offset);
 
-            var newObj = Instantiate(m_prefab, position, Quaternion.identity, transform);
-            newObj.transform.localRotation = Quaternion.identity;
+            var newObject = Instantiate(m_createPrefab, position, Quaternion.identity, transform);
+            newObject.transform.localRotation = Quaternion.identity;
+
+            //伸縮の設定
+            SettingStretchChild(newObject);
+        }
+    }
+
+    /// <summary>
+    /// 伸縮の親設定
+    /// </summary>
+    /// <param name="target"></param>
+    private void SettingStretchChild(GameObject target)
+    {
+        foreach(var child in target.GetComponentsInChildren<StretchUIChildObject>())
+        {
+            child.SetParent(m_stretchParent);
         }
     }
 

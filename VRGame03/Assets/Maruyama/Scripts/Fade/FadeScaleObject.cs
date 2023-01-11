@@ -29,10 +29,13 @@ public class FadeScaleObject : FadeObject
     [SerializeField]
     private UnityEvent m_finishEvent;
 
+    private Vector3 m_startScale;       //スタートスケール
+
     public override void FadeStart()
     {
         if (!m_isFading)
         {
+            m_startScale = m_fadeObject.transform.localScale;
             StartCoroutine(Fading(m_fadeTime));
         }
     }
@@ -72,15 +75,29 @@ public class FadeScaleObject : FadeObject
             yield return null;
         }
 
+        FinishEvent(scale);
+
+        //float finishRatio = m_fadeType == FadeType.FadeOut ? 1.0f : 0.0f;
+
+        //m_fadeObject.transform.localScale = new Vector3(finishRatio * m_maxRange, scale.y, scale.z);        
+
+        //m_isFinish = true;
+
+        //m_isFading = false;
+
+        //m_finishEvent.Invoke();
+    }
+
+    private void FinishEvent(Vector3 scale)
+    {
         float finishRatio = m_fadeType == FadeType.FadeOut ? 1.0f : 0.0f;
 
-        m_fadeObject.transform.localScale = new Vector3(finishRatio * m_maxRange, scale.y, scale.z);        
+        m_fadeObject.transform.localScale = new Vector3(finishRatio * m_maxRange, scale.y, scale.z);
 
         m_isFinish = true;
 
         m_isFading = false;
 
-        Debug.Log("★★★");
         m_finishEvent.Invoke();
     }
 
@@ -98,5 +115,15 @@ public class FadeScaleObject : FadeObject
         {
             FadeStart();
         }
+    }
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        FinishEvent(m_startScale);
     }
 }

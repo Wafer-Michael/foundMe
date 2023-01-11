@@ -670,7 +670,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6607027632873407575}
-        m_TargetAssemblyTypeName: JackPointUI, Assembly-CSharp
+        m_TargetAssemblyTypeName: Selectable_VRUI, Assembly-CSharp
         m_MethodName: SelectEventsInvoke
         m_Mode: 1
         m_Arguments:

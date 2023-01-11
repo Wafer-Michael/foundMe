@@ -21,7 +21,9 @@ public class Factory_Touch_JackUI : MonoBehaviour
     [SerializeField]
     private float m_depthAdjust = -0.005f;
 
-    private List<Jackable> m_jackables = new List<Jackable>();
+    private List<Jackable> m_jackables = new List<Jackable>();          //全てのジャックオブジェクト
+
+    private List<JackPointUI> m_jackPointUIs = new List<JackPointUI>(); //生成したポイントUI
 
     private void Awake()
     {
@@ -39,21 +41,17 @@ public class Factory_Touch_JackUI : MonoBehaviour
             var newObject = Instantiate(m_createPrefab, position, Quaternion.identity, transform);
             newObject.transform.localRotation = Quaternion.identity;
 
-            //伸縮の設定
-            SettingStretchChild(newObject);
+            //ハッキングされる対象のセッティング
+            SettingJakable(newObject, jack);
         }
     }
 
-    /// <summary>
-    /// 伸縮の親設定
-    /// </summary>
-    /// <param name="target"></param>
-    private void SettingStretchChild(GameObject target)
+    private void SettingJakable(GameObject target, Jackable jackable)
     {
-        foreach(var child in target.GetComponentsInChildren<StretchUIChildObject>())
-        {
-            child.SetParent(m_stretchParent);
-        }
+        var jackUI = target.GetComponent<JackPointUI>();    //JackPointUI取得
+        jackUI?.SetJakable(jackable);                       //ジャックされる者を設定
+
+        m_jackPointUIs.Add(jackUI);     //生成したジャックポイントをメンバとして保存。
     }
 
     /// <summary>
@@ -84,5 +82,11 @@ public class Factory_Touch_JackUI : MonoBehaviour
 
         return offset;
     }
+
+    //--------------------------------------------------------------------------------------
+    /// アクセッサ
+    //--------------------------------------------------------------------------------------
+
+    public List<JackPointUI> GetJackPointUIs() { return m_jackPointUIs; }
 
 }

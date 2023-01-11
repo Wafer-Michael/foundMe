@@ -84,10 +84,10 @@ public class HijackController : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerInputer.IsDebugKeyDown(KeyCode.K))
-        {
-            StartHijack(DebugHiJackGameObject);
-        }
+        //if (PlayerInputer.IsDebugKeyDown(KeyCode.K))
+        //{
+        //    StartHijack(DebugHiJackGameObject);
+        //}
 
         if (IsJack)
         {

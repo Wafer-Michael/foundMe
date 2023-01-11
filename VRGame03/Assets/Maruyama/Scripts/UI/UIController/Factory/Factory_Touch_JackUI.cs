@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Factory_Touch_JackUI : MonoBehaviour
 {
+    /// <summary>
+    /// ペアデータ
+    /// </summary>
     public struct PairData
     {
-        public Jackable jakable;
-        public JackPointUI ui;
+        public Jackable jakable;    //ジャックされる者
+        public JackPointUI ui;      //UI
 
         public PairData(Jackable jackable, JackPointUI ui)
         {
@@ -36,7 +39,6 @@ public class Factory_Touch_JackUI : MonoBehaviour
     private List<Jackable> m_jackables = new List<Jackable>();          //全てのジャックオブジェクト
 
     private List<PairData> m_pairDatas = new List<PairData>();          //生成したポイントのペアデータ配列
-   // private List<JackPointUI> m_jackPointUIs = new List<JackPointUI>(); //生成したポイントUI
 
     private void Awake()
     {
@@ -56,19 +58,8 @@ public class Factory_Touch_JackUI : MonoBehaviour
 
             var jackUI = newObject.GetComponent<JackPointUI>();    //JackPointUI取得
 
-            m_pairDatas.Add(new PairData(jack, jackUI));
-
-            //ハッキングされる対象のセッティング
-            SettingJakable(newObject, jack);
+            m_pairDatas.Add(new PairData(jack, jackUI));           //ペアデータの生成
         }
-    }
-
-    private void SettingJakable(GameObject target, Jackable jackable)
-    {
-        var jackUI = target.GetComponent<JackPointUI>();    //JackPointUI取得
-        jackUI?.SetJakable(jackable);                       //ジャックされる者を設定
-
-        //m_jackPointUIs.Add(jackUI);     //生成したジャックポイントをメンバとして保存。
     }
 
     /// <summary>
@@ -103,8 +94,6 @@ public class Factory_Touch_JackUI : MonoBehaviour
     //--------------------------------------------------------------------------------------
     /// アクセッサ
     //--------------------------------------------------------------------------------------
-
-    //public List<JackPointUI> GetJackPointUIs() { return m_jackPointUIs; }
 
     public List<PairData> GetPariDatas() { return m_pairDatas; }
 

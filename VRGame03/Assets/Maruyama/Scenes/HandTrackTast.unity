@@ -2882,8 +2882,8 @@ MonoBehaviour:
   m_maxRange: 1
   m_fadeObject: {fileID: 8311126197411080847}
   m_fadeTime: 0.25
-  m_playOnAwake: 0
-  m_fadeType: 0
+  m_playOnAwake: 1
+  m_fadeType: 1
   m_finishEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5160,6 +5160,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5804005}
+        m_TargetAssemblyTypeName: Observer_JackUIPoint, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1630411991
 GameObject:
   m_ObjectHideFlags: 0
@@ -5204,7 +5216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5da8662b909b1f4badad57ec1de7e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_renderTexture: {fileID: 8400000, guid: bd3d9bae62b809b4d92af930bfc4ffbc, type: 2}
+  m_fadeComponent: {fileID: 824133435}
 --- !u!1 &1707300996
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class Observer_JackUIPoint : MonoBehaviour
     private JackCameraUI m_cameraUI;                    //ジャック先を表示するUI
 
     [SerializeField]
-    private HijackController m_jackController;          //ジャックコントローラー
+    private JackController m_jackController;            //ジャックコントローラー
 
     private Selectable_VRUI m_currentPointUI = null;    //現在選択中のUI
 

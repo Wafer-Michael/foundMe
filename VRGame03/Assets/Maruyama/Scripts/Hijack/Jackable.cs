@@ -14,7 +14,7 @@ public class Jackable : MonoBehaviour
     private RenderTexture m_renderTexture;  //レンダーテクスチャ
 
     [SerializeField]
-    private Vector3 m_positionOffset = new Vector3(0.0f, 0.5f, 0.0f);
+    private Vector3 m_positionOffset = new Vector3(0.0f, 0.0f, 0.0f);
     public Vector3 PositionOffset => m_positionOffset;
 
     public void UISelectEvent(bool isSelect)

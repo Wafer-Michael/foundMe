@@ -10125,7 +10125,6 @@ MonoBehaviour:
   - selfObject: {fileID: 1072241223460904568}
   m_param:
     time: 20
-  DebugHiJackGameObject: {fileID: 8224273512155053553}
 --- !u!114 &1265826101323917844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41704,7 +41703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8065842068419391622
 Transform:
   m_ObjectHideFlags: 0
@@ -41728,7 +41727,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8065842068419391625}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9af9ea683544b184083cef283557012d, type: 3}
   m_Name: 
@@ -43187,7 +43186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8771881615457280979
 Transform:
   m_ObjectHideFlags: 0

@@ -12,6 +12,9 @@ public class Observer_JackUIPoint : MonoBehaviour
     [SerializeField]
     private JackCameraUI m_cameraUI;                    //ジャック先を表示するUI
 
+    [SerializeField]
+    private JackController m_jackController;            //ジャックコントローラー
+
     private Selectable_VRUI m_currentPointUI = null;    //現在選択中のUI
 
     private void Start()
@@ -66,4 +69,27 @@ public class Observer_JackUIPoint : MonoBehaviour
     }
 
     public bool IsClose() { return m_currentPointUI == null; }
+
+    public void StartJack()
+    {
+        //カレントUIがnullなら処理を飛ばす。
+        if(m_currentPointUI == null) {
+            return;
+        }
+
+        m_jackController.StartHijack(FindSomeJakable(m_currentPointUI));   //ジャック開始
+        Close();
+    }
+
+    private Jackable FindSomeJakable(Selectable_VRUI ui)
+    {
+        foreach(var data in m_factory.GetPariDatas())
+        {
+            if(data.ui == ui) {
+                return data.jakable;
+            }
+        }
+
+        return null;
+    }
 }

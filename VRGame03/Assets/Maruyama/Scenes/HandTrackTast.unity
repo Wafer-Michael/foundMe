@@ -5773,6 +5773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_eyeCamera: {fileID: 763414589}
   m_renderTexture: {fileID: 8400000, guid: bd3d9bae62b809b4d92af930bfc4ffbc, type: 2}
+  m_positionOffset: {x: 0, y: 1, z: 0}
 --- !u!1001 &1913574425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6223,6 +6224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_eyeCamera: {fileID: 1938213002}
   m_renderTexture: {fileID: 8400000, guid: bd3d9bae62b809b4d92af930bfc4ffbc, type: 2}
+  m_positionOffset: {x: 0, y: 1, z: 0}
 --- !u!1 &1989887131
 GameObject:
   m_ObjectHideFlags: 0

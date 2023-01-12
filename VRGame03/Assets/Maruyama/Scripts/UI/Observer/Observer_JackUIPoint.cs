@@ -77,6 +77,18 @@ public class Observer_JackUIPoint : MonoBehaviour
             return;
         }
 
-        m_jackController.StartHijack(m_currentPointUI.gameObject);   //ジャック開始
+        m_jackController.StartHijack(FindSomeJakable(m_currentPointUI).gameObject);   //ジャック開始
+    }
+
+    private Jackable FindSomeJakable(Selectable_VRUI ui)
+    {
+        foreach(var data in m_factory.GetPariDatas())
+        {
+            if(data.ui == ui) {
+                return data.jakable;
+            }
+        }
+
+        return null;
     }
 }

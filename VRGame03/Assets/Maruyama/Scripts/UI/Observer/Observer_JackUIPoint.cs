@@ -78,6 +78,7 @@ public class Observer_JackUIPoint : MonoBehaviour
         }
 
         m_jackController.StartHijack(FindSomeJakable(m_currentPointUI));   //ジャック開始
+        Close();
     }
 
     private Jackable FindSomeJakable(Selectable_VRUI ui)

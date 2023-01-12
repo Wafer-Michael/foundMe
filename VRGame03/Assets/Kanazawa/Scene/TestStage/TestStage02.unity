@@ -2256,7 +2256,7 @@ GameObject:
   - component: {fileID: 205445353}
   - component: {fileID: 205445352}
   m_Layer: 0
-  m_Name: Wall_38 (8)
+  m_Name: Wall_40
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2275,7 +2275,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354521851}
-  m_RootOrder: 193
+  m_RootOrder: 197
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &205445352
 BoxCollider:
@@ -4402,15 +4402,15 @@ Transform:
   - {fileID: 2047347592}
   - {fileID: 1824469941}
   - {fileID: 561314033}
+  - {fileID: 2146563408}
+  - {fileID: 1971117263}
+  - {fileID: 1535499755}
+  - {fileID: 562710234}
   - {fileID: 1619054218}
   - {fileID: 436460744}
   - {fileID: 1781008193}
   - {fileID: 2032217607}
   - {fileID: 205445351}
-  - {fileID: 2146563408}
-  - {fileID: 1971117263}
-  - {fileID: 1535499755}
-  - {fileID: 562710234}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5009,7 +5009,7 @@ GameObject:
   - component: {fileID: 436460746}
   - component: {fileID: 436460745}
   m_Layer: 0
-  m_Name: Wall_38 (5)
+  m_Name: Wall_40
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5028,7 +5028,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354521851}
-  m_RootOrder: 190
+  m_RootOrder: 194
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!65 &436460745
 BoxCollider:
@@ -5933,7 +5933,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354521851}
-  m_RootOrder: 197
+  m_RootOrder: 192
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &562710235
 BoxCollider:
@@ -13500,7 +13500,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354521851}
-  m_RootOrder: 196
+  m_RootOrder: 191
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1535499756
 BoxCollider:
@@ -14160,7 +14160,7 @@ GameObject:
   - component: {fileID: 1619054220}
   - component: {fileID: 1619054219}
   m_Layer: 0
-  m_Name: Wall_38 (3)
+  m_Name: Wall_40
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14179,7 +14179,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354521851}
-  m_RootOrder: 189
+  m_RootOrder: 193
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1619054219
 BoxCollider:
@@ -16197,7 +16197,7 @@ GameObject:
   - component: {fileID: 1781008195}
   - component: {fileID: 1781008194}
   m_Layer: 0
-  m_Name: Wall_38 (6)
+  m_Name: Wall_40
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16216,7 +16216,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354521851}
-  m_RootOrder: 191
+  m_RootOrder: 195
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!65 &1781008194
 BoxCollider:
@@ -18156,7 +18156,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354521851}
-  m_RootOrder: 195
+  m_RootOrder: 190
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &1971117264
 BoxCollider:
@@ -18719,7 +18719,7 @@ GameObject:
   - component: {fileID: 2032217609}
   - component: {fileID: 2032217608}
   m_Layer: 0
-  m_Name: Wall_38 (7)
+  m_Name: Wall_40
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18738,7 +18738,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354521851}
-  m_RootOrder: 192
+  m_RootOrder: 196
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2032217608
 BoxCollider:
@@ -20290,7 +20290,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 354521851}
-  m_RootOrder: 194
+  m_RootOrder: 189
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &2146563409
 BoxCollider:

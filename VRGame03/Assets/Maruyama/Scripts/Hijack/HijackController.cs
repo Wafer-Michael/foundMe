@@ -68,9 +68,6 @@ public class HijackController : MonoBehaviour
         get => m_isJack.Value;
     }
 
-    [SerializeField]
-    private GameObject DebugHiJackGameObject;
-
     private void Awake()
     {
         m_timer = new GameTimer(0.0f);    
@@ -84,11 +81,6 @@ public class HijackController : MonoBehaviour
 
     private void Update()
     {
-        //if (PlayerInputer.IsDebugKeyDown(KeyCode.K))
-        //{
-        //    StartHijack(DebugHiJackGameObject);
-        //}
-
         if (IsJack)
         {
             m_timer.UpdateTimer();

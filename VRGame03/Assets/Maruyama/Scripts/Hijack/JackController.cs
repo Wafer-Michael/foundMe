@@ -105,7 +105,7 @@ public class JackController : MonoBehaviour
     /// ハイジャック開始
     /// </summary>
     /// <param name="target">ハイジャックターゲット</param>
-    public void StartHijack(GameObject target)
+    public void StartHijack(Jackable target)
     {
         //Jack中なら処理を飛ばす。
         if (IsJack) {
@@ -133,9 +133,9 @@ public class JackController : MonoBehaviour
         m_camBackData.forward = transform.forward;
     }
 
-    private void Jack(GameObject target)
+    private void Jack(Jackable target)
     {
-        transform.position = target.transform.position;
+        transform.position = target.transform.position + target.PositionOffset;
         transform.forward = target.transform.forward;
     }
 }

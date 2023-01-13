@@ -2,13 +2,16 @@ Shader "Custom/BlendTextureShader"
 {
     Properties
     {
+        _MainColor("MainColor", Color) = (1,1,1,1)
         _MainTex("Texture", 2D) = "white" {}
+        _SubColor("SubColor", Color) = (1,1,1,1)
         _SubTex("SubTexture", 2D) = "white" {}
         _Blend("Blend",Range(0, 1)) = 1
     }
         SubShader
         {
-            Tags { "RenderType" = "Opaque" }
+            Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
+            Blend SrcAlpha OneMinusSrcAlpha
             LOD 100
 
             Pass
@@ -21,42 +24,44 @@ Shader "Custom/BlendTextureShader"
 
                 #include "UnityCG.cginc"
 
-                struct appdata
+                struct VSInput
                 {
                     float4 vertex : POSITION;
                     float2 uv : TEXCOORD0;
                 };
 
-                struct v2f
+                struct PSInput
                 {
                     float2 uv : TEXCOORD0;
                     UNITY_FOG_COORDS(1)
                     float4 vertex : SV_POSITION;
                 };
 
+                float4 _MainColor;
                 sampler2D _MainTex;
+                float4 _SubColor;
                 sampler2D _SubTex;
                 float _Blend;
                 float4 _MainTex_ST;
 
-                v2f vert(appdata v)
+                PSInput vert(VSInput input)
                 {
-                    v2f o;
-                    o.vertex = UnityObjectToClipPos(v.vertex);
-                    o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                    UNITY_TRANSFER_FOG(o,o.vertex);
-                    return o;
+                    PSInput output;
+                    output.vertex = UnityObjectToClipPos(input.vertex);
+                    output.uv = TRANSFORM_TEX(input.uv, _MainTex);
+                    UNITY_TRANSFER_FOG(output, output.vertex);
+                    return output;
                 }
 
-                fixed4 frag(v2f i) : SV_Target
+                fixed4 frag(PSInput input) : SV_Target
                 {
                     // sample the texture
-                    fixed4 main = tex2D(_MainTex, i.uv);
-                    fixed4 sub = tex2D(_SubTex, i.uv);
-                    fixed4 col = main * (1 - _Blend) + sub * _Blend;
+                    fixed4 main = tex2D(_MainTex, input.uv) * _MainColor;
+                    fixed4 sub = tex2D(_SubTex, input.uv) * _SubColor;
+                    fixed4 color = main * (1 - _Blend) + sub * _Blend;
                     // apply fog
-                    UNITY_APPLY_FOG(i.fogCoord, col);
-                    return col;
+                    UNITY_APPLY_FOG(input.fogCoord, color);
+                    return color;
                 }
                 ENDCG
             }

@@ -3,6 +3,8 @@ Shader "Custom/RandomNoiseSharder"
     Properties{
         _MainTex("Albedo (RGB)", 2D) = "white" {}
         _Alpha("Alpha", float) = 1
+        _SclorDirection("SclorDirection", Vector) = (0, 0, 0, 0)
+        _SclorSpeed("SclorSpeed", float) = 1
     }
 
     SubShader{
@@ -22,6 +24,8 @@ Shader "Custom/RandomNoiseSharder"
             sampler2D _MainTex;
             float _Alpha;
             float4 _MainTex_ST;
+            float2 _SclorDirection;
+            float _SclorSpeed;
 
             struct VSInput {
                 float4 vertex : POSITION;
@@ -41,7 +45,10 @@ Shader "Custom/RandomNoiseSharder"
             {
                 PSInput output;
                 output.vertex = UnityObjectToClipPos(input.vertex);
-                output.uv = TRANSFORM_TEX(input.uv, _MainTex);
+
+                float2 offset = (_SclorDirection * _Time.y * _SclorSpeed).xy;
+                output.uv = TRANSFORM_TEX(input.uv + offset, _MainTex);
+
                 return output;
             }
 

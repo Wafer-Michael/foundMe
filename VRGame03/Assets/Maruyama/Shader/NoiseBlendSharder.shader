@@ -87,7 +87,7 @@ Shader "Unlit/NoiseBlendSharder"
 
             fixed4 frag(PSInput input) : SV_Target
             {
-                //texture�̓ǂݍ���
+                //textureの合成
                 fixed4 main = tex2D(_MainTex, input.uv) * _MainColor;
                 fixed4 color = Blend(input, main);
                 return color;

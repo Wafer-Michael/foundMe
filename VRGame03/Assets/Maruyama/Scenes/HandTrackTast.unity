@@ -1762,7 +1762,7 @@ PrefabInstance:
     - target: {fileID: 495516822516542703, guid: 802f95579eb721d45a5a1dec93b98f7d,
         type: 3}
       propertyPath: m_Name
-      value: HijackData2 (1)
+      value: JackData
       objectReference: {fileID: 0}
     - target: {fileID: 6676566255855261819, guid: 802f95579eb721d45a5a1dec93b98f7d,
         type: 3}
@@ -2144,7 +2144,7 @@ PrefabInstance:
     - target: {fileID: 80224957949548577, guid: 7c66d8faef233da44ae3e0a4cbe99d59,
         type: 3}
       propertyPath: m_Name
-      value: JackData2
+      value: JackData
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c66d8faef233da44ae3e0a4cbe99d59, type: 3}

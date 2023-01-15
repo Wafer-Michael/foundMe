@@ -8,7 +8,8 @@ Shader "Unlit/PerlinNoiseSharder"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
+        Blend SrcAlpha OneMinusSrcAlpha
         LOD 100
 
         Pass
@@ -55,7 +56,7 @@ Shader "Unlit/PerlinNoiseSharder"
 
             sampler2D _MainTex;
             float _fineness;    //ノイズの細かさ
-            float _alpha;
+            float _alpha;       //α値
 
             float4 _MainTex_ST;
 

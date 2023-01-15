@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MapRenderTexture
-  m_Shader: {fileID: 4800000, guid: 779c0d39348bf524b8e9f11787e5b694, type: 3}
+  m_Shader: {fileID: 4800000, guid: 4f44d932312678543909283c4eeabc5d, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _ALPHAPREMULTIPLY_ON
@@ -22,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ea419780ba52c2e4bb5f602494da6b54, type: 3}
+        m_Texture: {fileID: 8400000, guid: 00a2a205fae335c45b5eb6f133a9ba71, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SubTex:
@@ -31,9 +31,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Blend: 0.547
+    - _Blend: 0
     - _Glossiness: 0.5
     - _Metallic: 0
+    - _NoiseAlpha: 0
+    - _NoiseUpdateSpeed: 0
     m_Colors:
     - _MainColor: {r: 1, g: 1, b: 1, a: 0.7176471}
     - _SubColor: {r: 1, g: 1, b: 1, a: 0.5019608}

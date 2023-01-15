@@ -77,7 +77,7 @@ Material:
     - _ZWrite: 0
     - _fineness: 8
     - _speed: 0.5
-    - _strength: 0.05
+    - _strength: 0
     - _testValue: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0.78431374}

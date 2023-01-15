@@ -8,16 +8,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CameraRenderUITexture
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ValidKeywords:
+  m_Shader: {fileID: 4800000, guid: 291969a1c70a5884db079d95ce159cbf, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _ALPHAPREMULTIPLY_ON
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -76,7 +75,12 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 0
+    - _fineness: 8
+    - _speed: 0.5
+    - _strength: 0
+    - _testValue: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0.78431374}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _mainColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -80,7 +80,7 @@ Material:
     - _ZWrite: 1
     - _fineness: 3
     - _speed: 1
-    - _strength: -1.03
+    - _strength: 0.88
     - _testValue: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

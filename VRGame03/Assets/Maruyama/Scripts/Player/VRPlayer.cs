@@ -5,7 +5,8 @@ using UnityEngine;
 public class VRPlayer : PlayerBase
 {
     [SerializeField]
-    OpenCloseUI m_openCloseUI;
+    //OpenCloseUI m_openCloseUI;
+    private VRUI_Ex m_ui;
 
     private Targeted m_targeted;
 
@@ -13,6 +14,6 @@ public class VRPlayer : PlayerBase
     {
         m_targeted = GetComponent<Targeted>();
 
-        m_targeted.AddIsTargetEvent(m_openCloseUI.IsDraw);  //ターゲット指定の処理(仮実装)
+        m_targeted.AddIsTargetEvent(m_ui.IsOpen);  //ターゲット指定の処理(仮実装)
     }
 }

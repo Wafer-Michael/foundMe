@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa433d109d40c3b43897bfb92eb3670d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sceneName: TestStage
+  m_sceneName: TestStage02
   m_keyCode: 32
 --- !u!4 &1400190187
 Transform:

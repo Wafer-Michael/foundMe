@@ -23,6 +23,6 @@ public class BatteryLight : MonoBehaviour
 
     private void Update()
     {
-        //m_light.intensity = m_batteryUser.GetBatteryRate();
+        m_light.intensity = m_batteryUser.GetBatteryRate();
     }
 }

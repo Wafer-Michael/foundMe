@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClearFlagArea : MonoBehaviour
 {
     [SerializeField]
-    HijackController m_jackController;
+    private JackController m_jackController;
 
     private void OnTriggerEnter(Collider other)
     {

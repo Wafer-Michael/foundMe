@@ -2,20 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-/// <summary>
-/// 乗っ取り制御
-/// </summary>
-public class HijackController : MonoBehaviour
+public class JackController : MonoBehaviour
 {
-    [System.Serializable]
-    public class ParentParingData
-    {
-        private GameObject parentObject;
-        public GameObject ParentObject { get => parentObject; set => parentObject = value; }
-        public GameObject selfObject;
-    }
-
     /// <summary>
     /// パラメータ
     /// </summary>
@@ -36,17 +24,9 @@ public class HijackController : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject m_modelObject;       //モデルのオブジェクト
-
-    [SerializeField]
-    private GameObject m_modelParentObject; //モデルの親オブジェクト
-
-    [SerializeField]
-    private List<ParentParingData> m_parentParingDatas = new List<ParentParingData>();
-
-    [SerializeField]
     Parametor m_param;  //パラメータ
-    public Parametor Param {
+    public Parametor Param
+    {
         get => m_param;
         set => m_param = value;
     }
@@ -63,14 +43,15 @@ public class HijackController : MonoBehaviour
     //ジャック中を表す。
     private UniRx.ReactiveProperty<bool> m_isJack = new UniRx.ReactiveProperty<bool>(false);
     public System.IObservable<bool> IsJackObserver => m_isJack;
-    public bool IsJack {
-        private set => m_isJack.Value = value; 
+    public bool IsJack
+    {
+        private set => m_isJack.Value = value;
         get => m_isJack.Value;
     }
 
     private void Awake()
     {
-        m_timer = new GameTimer(0.0f);    
+        m_timer = new GameTimer(0.0f);
     }
 
     private void Start()
@@ -117,15 +98,6 @@ public class HijackController : MonoBehaviour
         transform.position = m_camBackData.position;
         transform.forward = m_camBackData.forward;
 
-        foreach(var data in m_parentParingDatas)
-        {
-            if(data.ParentObject == null) {
-                continue;
-            }
-
-            data.selfObject.transform.parent = data.ParentObject.transform;
-        }
-
         IsJack = false;
     }
 
@@ -133,25 +105,20 @@ public class HijackController : MonoBehaviour
     /// ハイジャック開始
     /// </summary>
     /// <param name="target">ハイジャックターゲット</param>
-    public void StartHijack(GameObject target)
+    public void StartHijack(Jackable target)
     {
         //Jack中なら処理を飛ばす。
-        if (IsJack) {   
+        if (IsJack) {
             return;
         }
 
-        if(target == null) {
+        if (target == null) {   //ターゲットのnullCheck
             return;
         }
 
-        SaveCamBackData();
-        
-        foreach(var data in m_parentParingDatas)
-        {
-            data.ParentObject = data.selfObject.transform.parent.gameObject;
-            data.selfObject.transform.parent = null;
-        }
-        Warp(target);
+        SaveCamBackData();      //戻る場所を記録する。
+
+        Jack(target);
 
         m_timer.ResetTimer(m_param.time);       //タイマースタート
         IsJack = true;
@@ -166,9 +133,9 @@ public class HijackController : MonoBehaviour
         m_camBackData.forward = transform.forward;
     }
 
-    private void Warp(GameObject target)
+    private void Jack(Jackable target)
     {
-        transform.position = target.transform.position;
+        transform.position = target.transform.position + target.PositionOffset;
         transform.forward = target.transform.forward;
     }
 }

@@ -49,6 +49,7 @@ public class AccessItem : MonoBehaviour
             if (isInRange && item.CurrentState == Item.State.Idle)
             {
                 item.SetState(Item.State.Access);   //アクセス状態にする。
+                //Debug.Log("★アクセス");
                 return;
             }
 
@@ -56,6 +57,7 @@ public class AccessItem : MonoBehaviour
             if (!isInRange && item.CurrentState == Item.State.Access)
             {
                 item.SetState(Item.State.Idle);     //Idle状態にする。
+                //Debug.Log("★アイドル");
                 return;
             }
         }
@@ -75,6 +77,7 @@ public class AccessItem : MonoBehaviour
 
             item.SetState(Item.State.Getable);  //アイテムをゲット状態にする。
             m_itemBag.AddItem(item);            //アイテムをバッグにいれる。
+            //Debug.Log("★ゲッター");
             return item;
         }
 

@@ -12,6 +12,8 @@ public class BatteryLight : MonoBehaviour
 
     private Light m_light;              //ƒ‰ƒCƒg
 
+    private float m_maxIntensity;       //Å‘å’l‚ÌŒõ
+
     private void Awake()
     {
         m_light = GetComponent<Light>();
@@ -19,10 +21,12 @@ public class BatteryLight : MonoBehaviour
         if (!m_batteryUser) {
             m_batteryUser = GetComponentInParent<BatteryUser>();
         }
+
+        m_maxIntensity = m_light.intensity;
     }
 
     private void Update()
     {
-        m_light.intensity = m_batteryUser.GetBatteryRate();
+        m_light.intensity = m_maxIntensity * m_batteryUser.GetBatteryRate();
     }
 }

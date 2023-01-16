@@ -28,6 +28,11 @@ public class BatteryUser : MonoBehaviour
 
     protected void Update()
     {
+        //“ü—Í”»’è
+        if (PlayerInputer.IsBatteryCharge()) {
+            ChargeProcess();
+        }
+
         if (m_timer.IsTimeUp) {
             return;
         }
@@ -35,6 +40,14 @@ public class BatteryUser : MonoBehaviour
         m_timer.UpdateTimer();
 
         m_battery.SetValue(m_battery.MaxValue * m_timer.IntervalTimeRate);
+    }
+
+    private void ChargeProcess()
+    {
+        var battery = GetComponentInParent<ItemBag>().TakeItem<Battery>();
+        if (battery) {
+            Charge(battery);
+        }
     }
 
     /// <summary>

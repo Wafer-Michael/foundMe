@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class PCPlayer : PlayerBase
 {
-    
+    private void Start()
+    {
+        UnityEngine.XR.XRSettings.showDeviceView = false;
+    }
 }

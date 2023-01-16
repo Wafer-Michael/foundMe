@@ -33,8 +33,15 @@ public class AccessItem : MonoBehaviour
 
     private void UpdateAccessItems()
     {
+        System.Action removeAction = null;
+
         foreach (var item in m_items)
         {
+            if(item == null) {
+                removeAction += () => m_items.Remove(item);
+                continue;
+            }
+
             //アイテムが非アクティブなら処理をしない
             if (!item.gameObject.activeSelf)
             {
@@ -61,6 +68,8 @@ public class AccessItem : MonoBehaviour
                 return;
             }
         }
+
+        removeAction?.Invoke();
     }
 
     /// <summary>

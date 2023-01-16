@@ -63,6 +63,9 @@ public class BatteryUser : MonoBehaviour
         m_timer.ResetTimer(m_param.useTime * battery.GetBatteryRate()); //時間計測
     }
 
-
+    /// <summary>
+    /// バッテリーの残りレート
+    /// </summary>
+    /// <returns></returns>
     public float GetBatteryRate() { return m_battery.GetBatteryRate(); }
 }

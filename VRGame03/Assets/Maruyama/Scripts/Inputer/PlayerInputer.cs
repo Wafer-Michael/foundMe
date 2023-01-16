@@ -65,6 +65,11 @@ public class PlayerInputer : MonoBehaviour
 
     static public bool IsSence()
     {
+        return Input.GetKeyDown(KeyCode.R);
+    }
+
+    static public bool IsTakeNearItem()
+    {
         return Input.GetKeyDown(KeyCode.F);
     }
 

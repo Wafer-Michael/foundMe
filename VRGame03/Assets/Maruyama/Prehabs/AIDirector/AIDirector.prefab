@@ -47,7 +47,7 @@ MonoBehaviour:
   m_floorObject: {fileID: 0}
   m_isPlane: 1
   m_factoryParametor:
-    intervalRange: 3
+    intervalRange: 2
     rect:
       centerPosition: {x: 0, y: 0, z: 0}
       width: 0
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 106415846309480618}
   - component: {fileID: 106415846309480617}
   m_Layer: 0
-  m_Name: FieldCellMap
+  m_Name: FieldAreaCellMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
     widthCount: 0
     depthCount: 0
     centerPosition: {x: 0, y: 0.15, z: 0}
+  m_isDebug: 1
   m_debugDrawPrefab: {fileID: 8958858368370622777, guid: 4f3e52e92c45a0849a99053237d1de87,
     type: 3}
   m_debugDrawParam:

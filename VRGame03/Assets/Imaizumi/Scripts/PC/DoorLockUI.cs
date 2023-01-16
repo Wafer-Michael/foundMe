@@ -1,0 +1,74 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class DoorLockUI : MonoBehaviour
+{
+    uint m_digit = 0;
+
+    List<Text> m_texts = new List<Text>();
+
+    void Start()
+    {
+        foreach(var child in GetComponentsInChildren<Text>())
+        {
+            m_texts.Add(child);
+            child.text = "0";
+        }
+    }
+
+    void Update()
+    {
+       ChangeDigit();
+       NumberShift();
+    }
+
+    void ChangeDigit()
+    {
+        // 桁選択
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            m_digit -= 1;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            m_digit += 1;
+            if (m_digit > m_texts.Count)
+            {
+                m_digit = (uint)m_texts.Count;
+            }
+        }
+    }
+
+    void NumberShift()
+    {
+        // 数字送り
+        int text = int.Parse(m_texts[(int)m_digit].text);
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+
+            text += 1; // 数字を増やす
+
+            // 数字が最大値を超えたら
+            if (text > 9)
+            {
+                text = 0; // 0に戻る
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+
+            text -= 1; // 数字を減らす
+
+            // 数字が最小値を超えたら
+            if (text < 0)
+            {
+                text = 9; // 最大値にする
+            }
+        }
+
+        m_texts[(int)m_digit].text = text.ToString(); // 表示
+    }
+}

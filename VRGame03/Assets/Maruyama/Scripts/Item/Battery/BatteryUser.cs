@@ -43,7 +43,7 @@ public class BatteryUser : MonoBehaviour
     /// <param name="battrey">チャージするバッテリー</param>
     public void Charge(Battery battery) {
         if (m_battery) {    //バッテリーが存在するなら
-            Destroy(m_battery);     //現在のバッテリーを削除
+            Destroy(m_battery.gameObject);     //現在のバッテリーを削除
         }        
 
         m_battery = battery;    //バッテリーの交換

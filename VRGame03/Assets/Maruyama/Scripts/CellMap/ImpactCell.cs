@@ -18,7 +18,7 @@ public class ImpactCell : Cell
         base(index, parametor)
     { }
 
-    public ImpactCell(int index, Parametor parametor, ImpactData impactData):
+    public ImpactCell(int index, Parametor parametor, ImpactData impactData) :
         base(index, parametor)
     {
         m_impactData = impactData;

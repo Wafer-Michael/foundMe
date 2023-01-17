@@ -19,14 +19,19 @@ public class EyeScopeImpactCellManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateEyeScope_FloodFill();
+        var inScopeCells = FindEyeScopeCells_FloodFill();   //視界内のセルを取得
+
+        foreach(var cell in inScopeCells)
+        {
+            cell.SetDangerValue(0); //危険度を0にする。
+        }
     }
 
-    private void UpdateEyeScope_FloodFill()
+    private Queue<ImpactCell> FindEyeScopeCells_FloodFill()
     {
         //現在位置のCellが存在しないなら処理をしない
         if (!m_selfImpactCellController.HasCurrentCell()) {
-            return;
+            return null;
         }
 
         ImpactCell startCell = m_selfImpactCellController.GetCurrentCell();
@@ -55,10 +60,7 @@ public class EyeScopeImpactCellManager : MonoBehaviour
             }
         }
 
-        foreach(var c in closeCells)
-        {
-            c.SetDangerValue(0);
-        }
+        return closeCells;
     }
 
     private bool IsAddOpenCells(ImpactCell cell, Queue<ImpactCell> openCells, Queue<ImpactCell> closeCells)

@@ -7,16 +7,14 @@ public class FieldImpactCellMap : FieldMapBase
     [Header("FloorObjectを設定した場合、widthCountとdepthCountは自動で設定される"), SerializeField]
     private Factory.CellMap.Parametor m_factoryParametor;   //セルマップ生成用のパラメータ
 
-    private CellMap<ImpactCell> m_cellMap;  //セルマップ
+    private CellMap<ImpactCell> m_cellMap = new CellMap<ImpactCell>();  //セルマップ
 
     [SerializeField]
     private bool m_isDebug = true;
 
     private void Awake()
     {
-        m_cellMap = new CellMap<ImpactCell>();
-
-        CreateCells();  //セルの生成
+        CreateCellMap();
 
         if (m_isDebug)
         {
@@ -29,6 +27,14 @@ public class FieldImpactCellMap : FieldMapBase
         if (m_isDebug) {
             DebugColorUpdate(); //デバッグ表示のカラー更新
         }
+    }
+
+    private void CreateCellMap()
+    {
+        m_cellMap = new CellMap<ImpactCell>();
+
+        CreateCells();  //セルの生成
+        m_cellMap.SetFieldData(new CellMapFieldData(m_factoryParametor.widthCount, m_factoryParametor.depthCount));
     }
 
     /// <summary>

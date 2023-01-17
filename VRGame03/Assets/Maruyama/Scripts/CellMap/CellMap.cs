@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Linq;
+
 /// <summary>
 /// セルフィールドデータ
 /// </summary>
@@ -30,14 +32,12 @@ public class CellMap<CellType>
     }
 
     /// <summary>
-    /// 指定したインデックスの八方向のセルを取得する。
+    /// 八方向のインデックスを取得
     /// </summary>
-    /// <param name="currentIndex">開始セルの位置</param>
+    /// <param name="currentIndex"></param>
     /// <returns></returns>
-    public List<CellType> SerchEightDirectionCells(int currentIndex)
+    public int[] GetEightDirectionIndices(int currentIndex)
     {
-        var result = new List<CellType>();
-
         //設定したいインデックス配列
         int[] indices = {
             currentIndex - 1,
@@ -45,10 +45,46 @@ public class CellMap<CellType>
             currentIndex + (m_fieldData.widthCount),
             currentIndex + (m_fieldData.widthCount + 1),
             currentIndex + (m_fieldData.widthCount - 1),
-            currentIndex + (m_fieldData.depthCount),
-            currentIndex + (m_fieldData.depthCount + 1),
-            currentIndex + (m_fieldData.depthCount - 1)
+            currentIndex - (m_fieldData.widthCount),
+            currentIndex - (m_fieldData.widthCount + 1),
+            currentIndex - (m_fieldData.widthCount - 1)
         };
+
+        return indices;
+    }
+
+    /// <summary>
+    /// 八方向を取得する。
+    /// </summary>
+    /// <param name="currentIndex"></param>
+    /// <returns></returns>
+    public List<Vector3> GetEightDirections(int currentIndex)
+    {
+        var result = new List<Vector3>();
+
+        var currentCell = m_cells[currentIndex];
+        var cells = FindEightDirectionCells(currentIndex);
+
+        foreach(var cell in cells)
+        {
+            var toCellVec = cell.GetPosition() - currentCell.GetPosition();
+            result.Add(toCellVec.normalized);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// 指定したインデックスの八方向のセルを取得する。
+    /// </summary>
+    /// <param name="currentIndex">開始セルの位置</param>
+    /// <returns></returns>
+    public List<CellType> FindEightDirectionCells(int currentIndex)
+    {
+        var result = new List<CellType>();
+
+        //設定したいインデックス配列
+        var indices = GetEightDirectionIndices(currentIndex);
 
         //追加する。
         foreach(int index in indices)
@@ -61,6 +97,38 @@ public class CellMap<CellType>
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// 指定した方向のセルを取得
+    /// </summary>
+    /// <param name="currentIndex"></param>
+    /// <param name="forward"></param>
+    /// <returns></returns>
+    public CellType FindDirectionCell(int currentIndex, Vector3 forward)
+    {
+        var currentCell = m_cells[currentIndex];
+        var cells = FindEightDirectionCells(currentIndex);
+
+        if(cells.Count == 0) {
+            return null;
+        }
+
+        foreach (var cell in cells)
+        {
+            var toCellVec = cell.GetPosition() - currentCell.GetPosition();
+            var newDot = Vector3.Dot(forward.normalized, toCellVec.normalized);
+            var newRad = Mathf.Acos(newDot);
+        }
+
+        var sortCells = cells.OrderBy(cell => {
+            var toCellVec = cell.GetPosition() - currentCell.GetPosition();
+            var newDot = Vector3.Dot(forward.normalized, toCellVec.normalized);
+            var newRad = Mathf.Acos(newDot);
+            return newRad;
+        });
+
+        return sortCells.ToArray()[0];
     }
 
     //--------------------------------------------------------------------------------------

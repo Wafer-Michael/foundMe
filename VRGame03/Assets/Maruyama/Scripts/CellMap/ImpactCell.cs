@@ -42,4 +42,8 @@ public class ImpactCell : Cell
     public void SetImpactData(ImpactData data) { m_impactData = data; }
 
     public ImpactData GetImpactData() { return m_impactData; }
+
+    public void SetDangerValue(float value) { m_impactData.dangerValue = value; }
+
+    public float GetDangerValue() { return m_impactData.dangerValue; }
 }

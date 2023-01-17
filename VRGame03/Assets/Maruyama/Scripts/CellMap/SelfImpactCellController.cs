@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 自分自身のいるセルの情報を更新する
+/// </summary>
 public class SelfImpactCellController : MonoBehaviour
 {
     private ImpactCell m_currentCell;   //現在自分が所属しているセル
@@ -33,7 +36,7 @@ public class SelfImpactCellController : MonoBehaviour
     private ImpactCell SearchNextCell()
     {
         var cellMap = AIDirector.Instance.GetImpactCellMap();
-        var cells = cellMap.SerchEightDirectionCells(m_currentCell.GetIndex()); //八方向のセルを取得
+        var cells = cellMap.FindEightDirectionCells(m_currentCell.GetIndex()); //八方向のセルを取得
         foreach (var cell in cells)
         {
             //セルの範囲内なら
@@ -62,4 +65,8 @@ public class SelfImpactCellController : MonoBehaviour
     //--------------------------------------------------------------------------------------
     ///	アクセッサ
     //--------------------------------------------------------------------------------------
+
+    public ImpactCell GetCurrentCell() { return m_currentCell; }
+
+    public bool HasCurrentCell() { return m_currentCell != null; }
 }

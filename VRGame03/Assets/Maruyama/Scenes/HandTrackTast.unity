@@ -1574,12 +1574,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941465864}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &967992250 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 106415845335812682, guid: 84f793385bab61e46910a343f38fafd8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1523084797}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1044933919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,25 +2259,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
-        type: 3}
+    - target: {fileID: 1950203491, guid: 84f793385bab61e46910a343f38fafd8, type: 3}
       propertyPath: m_floorObject
       value: 
       objectReference: {fileID: 390294357}
     - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
         type: 3}
-      propertyPath: m_isDebugDraw
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: m_floorObject
+      value: 
+      objectReference: {fileID: 390294357}
     - target: {fileID: 106415845335812681, guid: 84f793385bab61e46910a343f38fafd8,
         type: 3}
       propertyPath: m_Name
       value: AIDirector
-      objectReference: {fileID: 0}
-    - target: {fileID: 106415845335812681, guid: 84f793385bab61e46910a343f38fafd8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 106415845335812682, guid: 84f793385bab61e46910a343f38fafd8,
         type: 3}
@@ -2340,27 +2328,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 106415845335812683, guid: 84f793385bab61e46910a343f38fafd8,
-        type: 3}
-      propertyPath: m_impactCellMap
-      value: 
-      objectReference: {fileID: 1950203491}
-    - target: {fileID: 106415846309480617, guid: 84f793385bab61e46910a343f38fafd8,
-        type: 3}
-      propertyPath: m_isDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 106415846309480617, guid: 84f793385bab61e46910a343f38fafd8,
         type: 3}
       propertyPath: m_floorObject
       value: 
       objectReference: {fileID: 390294357}
-    - target: {fileID: 106415846309480617, guid: 84f793385bab61e46910a343f38fafd8,
-        type: 3}
-      propertyPath: m_debugDrawPrefab
-      value: 
-      objectReference: {fileID: 8958858368370622780, guid: 4f3e52e92c45a0849a99053237d1de87,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84f793385bab61e46910a343f38fafd8, type: 3}
 --- !u!1 &1525189663
@@ -3350,68 +3322,6 @@ MonoBehaviour:
   m_eyeCamera: {fileID: 1938213002}
   m_renderTexture: {fileID: 8400000, guid: bd3d9bae62b809b4d92af930bfc4ffbc, type: 2}
   m_positionOffset: {x: 0, y: 1, z: 0}
---- !u!1 &1950203489
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1950203490}
-  - component: {fileID: 1950203491}
-  m_Layer: 0
-  m_Name: FieldImpactCellMap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1950203490
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1950203489}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 967992250}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1950203491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1950203489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d7e2f1145150e44ab0b6ca735ed29c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_floorObject: {fileID: 390294357}
-  m_isPlane: 1
-  m_factoryParametor:
-    oneCellRect:
-      centerPosition: {x: 0, y: 0, z: 0}
-      width: 1
-      depth: 1
-    widthCount: 0
-    depthCount: 0
-    centerPosition: {x: 0, y: 0.15, z: 0}
-  m_isDebug: 1
-  m_debugDrawPrefab: {fileID: 8958858368370622780, guid: 4f3e52e92c45a0849a99053237d1de87,
-    type: 3}
-  m_debugDrawParam:
-    isSelectDraw: 0
-    drawType: 0
-    color: {r: 1, g: 0, b: 0, a: 0.5882353}
-    sphereRadius: 0.5
 --- !u!1 &2006990797
 GameObject:
   m_ObjectHideFlags: 0

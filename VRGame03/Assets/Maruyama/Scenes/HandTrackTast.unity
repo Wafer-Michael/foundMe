@@ -2335,6 +2335,12 @@ PrefabInstance:
       propertyPath: m_floorObject
       value: 
       objectReference: {fileID: 390294357}
+    - target: {fileID: 106415846309480617, guid: 84f793385bab61e46910a343f38fafd8,
+        type: 3}
+      propertyPath: m_debugDrawPrefab
+      value: 
+      objectReference: {fileID: 8958858368370622780, guid: 4f3e52e92c45a0849a99053237d1de87,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84f793385bab61e46910a343f38fafd8, type: 3}
 --- !u!1 &1525189663
@@ -3357,7 +3363,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1950203489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f06f17135a9d3214f9aad018e885d9a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d7e2f1145150e44ab0b6ca735ed29c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_floorObject: {fileID: 390294357}
@@ -3371,12 +3377,12 @@ MonoBehaviour:
     depthCount: 0
     centerPosition: {x: 0, y: 0.15, z: 0}
   m_isDebug: 1
-  m_debugDrawPrefab: {fileID: 8958858368370622777, guid: 4f3e52e92c45a0849a99053237d1de87,
+  m_debugDrawPrefab: {fileID: 8958858368370622780, guid: 4f3e52e92c45a0849a99053237d1de87,
     type: 3}
   m_debugDrawParam:
     isSelectDraw: 0
     drawType: 0
-    color: {r: 0.9245283, g: 0.2863915, b: 0.24857599, a: 0.3}
+    color: {r: 1, g: 0, b: 0, a: 0.5882353}
     sphereRadius: 0.5
 --- !u!1 &2006990797
 GameObject:

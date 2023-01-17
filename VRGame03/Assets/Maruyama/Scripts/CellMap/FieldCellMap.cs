@@ -60,7 +60,7 @@ public class FieldCellMap : FieldMapBase
     //--------------------------------------------------------------------------------------
 
     [SerializeField]
-    private GameObject m_debugDrawPrefab;
+    private DebugDrawComponent m_debugDrawPrefab;
 
     [SerializeField]
     private DebugDrawComponent.Parametor m_debugDrawParam = DebugDrawComponent.DEFAULT_PARAMETOR;

@@ -89,6 +89,11 @@ public class SelfAstarNodeController : MonoBehaviour
         }
 
         var edges = GetWayPointsMap().GetGraph().GetEdges(m_node.GetIndex());
+        if(edges == null) {
+            InitializeNode();
+            return;
+        }
+
         if(edges.Count == 0) {
             InitializeNode();
             return;

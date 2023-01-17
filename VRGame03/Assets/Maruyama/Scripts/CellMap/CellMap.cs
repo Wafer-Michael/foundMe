@@ -24,10 +24,10 @@ public class CellMap<CellType>
     /// デバッグ
     //--------------------------------------------------------------------------------------
 
-    private GameObject m_parentDebugDrawObject; //デバッグオブジェクトの親オブジェクト
-    private List<GameObject> m_debugDrawObjects = new List<GameObject>();
+    private GameObject m_parentDebugDrawObject;                             //デバッグオブジェクトの親オブジェクト
+    private List<DebugDrawComponent> m_debugDrawObjects = new List<DebugDrawComponent>();   //生成したデバッグオブジェクト
 
-    public void CreateDebugDrawObjects(GameObject prefab, Factory.CellMap.Parametor factoryParametor, DebugDrawComponent.Parametor? drawParametor = null)
+    public void CreateDebugDrawObjects(DebugDrawComponent prefab, Factory.CellMap.Parametor factoryParametor, DebugDrawComponent.Parametor? drawParametor = null)
     {
         m_parentDebugDrawObject = new GameObject();
 
@@ -49,6 +49,12 @@ public class CellMap<CellType>
         }
     }
 
+    /// <summary>
+    /// デバッグオブジェクトのスケール計算
+    /// </summary>
+    /// <param name="factoryParametor">生成パラメータ</param>
+    /// <param name="scaleAdjust">スケールの調整値</param>
+    /// <returns>生成したいスケールを返す</returns>
     public Vector3 CalculateDebugObjectScale(Factory.CellMap.Parametor factoryParametor, float scaleAdjust = 0.95f)
     {
         float width = factoryParametor.oneCellRect.width * scaleAdjust;
@@ -56,5 +62,7 @@ public class CellMap<CellType>
 
         return new Vector3(width, 0.0f, depth);
     }
+
+    public List<DebugDrawComponent> GetDebugDrawObjects() { return m_debugDrawObjects; }
 
 }

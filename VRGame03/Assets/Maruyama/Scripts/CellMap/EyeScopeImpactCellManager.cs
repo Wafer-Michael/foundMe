@@ -7,9 +7,9 @@ using UnityEngine;
 /// </summary>
 public class EyeScopeImpactCellManager : MonoBehaviour
 {
-    private EyeSearchRange m_eyeRange;
+    private EyeSearchRange m_eyeRange;                              //視界範囲
 
-    private SelfImpactCellController m_selfImpactCellController;
+    private SelfImpactCellController m_selfImpactCellController;    //自分自身の影響マップ更新
 
     private void Awake()
     {
@@ -19,20 +19,24 @@ public class EyeScopeImpactCellManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateEyeScope_FloodFill();
+        var inScopeCells = FindEyeScopeCells_FloodFill();   //視界内のセルを取得
+
+        foreach(var cell in inScopeCells)
+        {
+            cell.SetDangerValue(0); //危険度を0にする。
+        }
     }
 
-    private void UpdateEyeScope_FloodFill()
+    private Queue<ImpactCell> FindEyeScopeCells_FloodFill()
     {
         //現在位置のCellが存在しないなら処理をしない
         if (!m_selfImpactCellController.HasCurrentCell()) {
-            return;
+            return null;
         }
 
         ImpactCell startCell = m_selfImpactCellController.GetCurrentCell();
         CellMap<ImpactCell> cellMap = AIDirector.Instance.GetImpactCellMap();
 
-        //startCell = cellMap.FindDirectionCell(m_selfImpactCellController.GetCurrentCell().GetIndex(), transform.forward);
         var openCells = new Queue<ImpactCell>();
         var closeCells = new Queue<ImpactCell>();
         openCells.Enqueue(startCell);
@@ -48,17 +52,13 @@ public class EyeScopeImpactCellManager : MonoBehaviour
             foreach(var cell in cells)
             {
                 //オープンデータに登録できるかどうか
-                if(IsAddOpenCells(cell, openCells, closeCells))
-                {
+                if(IsAddOpenCells(cell, openCells, closeCells)) {
                     openCells.Enqueue(cell);
                 }
             }
         }
 
-        foreach(var c in closeCells)
-        {
-            c.SetDangerValue(0);
-        }
+        return closeCells;
     }
 
     private bool IsAddOpenCells(ImpactCell cell, Queue<ImpactCell> openCells, Queue<ImpactCell> closeCells)

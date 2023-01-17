@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class DoorLockUI : MonoBehaviour
 {
-    uint m_digit = 0;
+    int m_digit = 0;
 
     List<Text> m_texts = new List<Text>();
 
     void Start()
     {
-        foreach(var child in GetComponentsInChildren<Text>())
+        foreach (var child in GetComponentsInChildren<Text>())
         {
             m_texts.Add(child);
             child.text = "0";
@@ -20,8 +20,8 @@ public class DoorLockUI : MonoBehaviour
 
     void Update()
     {
-       ChangeDigit();
-       NumberShift();
+        ChangeDigit();
+        NumberShift();
     }
 
     void ChangeDigit()
@@ -30,13 +30,18 @@ public class DoorLockUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             m_digit -= 1;
+            if (m_digit < 0)
+            {
+                m_digit = 0;
+            }
+
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             m_digit += 1;
-            if (m_digit > m_texts.Count)
+            if (m_digit >= m_texts.Count)
             {
-                m_digit = (uint)m_texts.Count;
+                m_digit = m_texts.Count - 1;
             }
         }
     }

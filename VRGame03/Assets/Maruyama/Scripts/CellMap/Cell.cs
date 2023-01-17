@@ -17,11 +17,11 @@ public class Cell : I_GraphNode
         }
 	}
 
-	private bool m_isActive;
+	private bool m_isActive;	//アクティブ状態
 
-	private int m_index;
+	private int m_index;		//自分のインデックス
 
-	private Parametor m_param;
+	private Parametor m_param;	//パラメータ
 
 	public Cell(int index, Parametor param)
     {

@@ -2,31 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CellMap
+public class CellMap<CellType>
+    where CellType : Cell
 {
-    private List<Cell> m_cells;	//セルマップのセル配列
+    private List<CellType> m_cells;	//セルマップのセル配列
 
     public CellMap() {
-        m_cells = new List<Cell>();
+        m_cells = new List<CellType>();
     }
 
     //--------------------------------------------------------------------------------------
     ///	アクセッサ
     //--------------------------------------------------------------------------------------
 
-    public void SetCells(List<Cell> cells) { m_cells = cells; }
+    public void SetCells(List<CellType> cells) { m_cells = cells; }
     
-    public List<Cell> GetCells() { return m_cells; }
+    public List<CellType> GetCells() { return m_cells; }
 
 
     //--------------------------------------------------------------------------------------
     /// デバッグ
     //--------------------------------------------------------------------------------------
 
-    private GameObject m_parentDebugDrawObject; //デバッグオブジェクトの親オブジェクト
-    private List<GameObject> m_debugDrawObjects = new List<GameObject>();
+    private GameObject m_parentDebugDrawObject;                             //デバッグオブジェクトの親オブジェクト
+    private List<DebugDrawComponent> m_debugDrawObjects = new List<DebugDrawComponent>();   //生成したデバッグオブジェクト
 
-    public void CreateDebugDrawObjects(GameObject prefab, Factory.CellMap.Parametor factoryParametor, DebugDrawComponent.Parametor? drawParametor = null)
+    public void CreateDebugDrawObjects(DebugDrawComponent prefab, Factory.CellMap.Parametor factoryParametor, DebugDrawComponent.Parametor? drawParametor = null)
     {
         m_parentDebugDrawObject = new GameObject();
 
@@ -48,6 +49,12 @@ public class CellMap
         }
     }
 
+    /// <summary>
+    /// デバッグオブジェクトのスケール計算
+    /// </summary>
+    /// <param name="factoryParametor">生成パラメータ</param>
+    /// <param name="scaleAdjust">スケールの調整値</param>
+    /// <returns>生成したいスケールを返す</returns>
     public Vector3 CalculateDebugObjectScale(Factory.CellMap.Parametor factoryParametor, float scaleAdjust = 0.95f)
     {
         float width = factoryParametor.oneCellRect.width * scaleAdjust;
@@ -55,5 +62,7 @@ public class CellMap
 
         return new Vector3(width, 0.0f, depth);
     }
+
+    public List<DebugDrawComponent> GetDebugDrawObjects() { return m_debugDrawObjects; }
 
 }

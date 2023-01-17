@@ -2,35 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldCellMap : FieldMapBase
+public class FieldImpactCellMap : FieldMapBase
 {
-    [Header("FloorObjectを設定した場合、widthCountとdepthCountは自動で設定される"),SerializeField]
+    [Header("FloorObjectを設定した場合、widthCountとdepthCountは自動で設定される"), SerializeField]
     private Factory.CellMap.Parametor m_factoryParametor;   //セルマップ生成用のパラメータ
 
-    private CellMap<Cell> m_cellMap;  //セルマップ
+    private CellMap<ImpactCell> m_cellMap;  //セルマップ
 
     [SerializeField]
     private bool m_isDebug = true;
 
     private void Awake()
     {
-        m_cellMap = new CellMap<Cell>();
+        m_cellMap = new CellMap<ImpactCell>();
 
         CreateCells();  //セルの生成
 
-        if (m_isDebug) {
+        if (m_isDebug)
+        {
             CreateDebugDrawObjects();   //デバッグ表示
         }
     }
 
+    private void Update()
+    {
+        if (m_isDebug) {
+            DebugColorUpdate(); //デバッグ表示のカラー更新
+        }
+    }
+
+    /// <summary>
+    /// セル配列の生成
+    /// </summary>
     private void CreateCells()
     {
         //床の設定があるなら、床に合わせたパラメータを生成する
-        if (HasFloorObject()) {
+        if (HasFloorObject())
+        {
             SettingFactoryParametorForFloor();
         }
 
-        var cells = Factory.CellMap.CreateCells(m_factoryParametor);
+        var cells = Factory.CellMap.CreateCells<ImpactCell>(m_factoryParametor);
 
         m_cellMap.SetCells(cells);
     }
@@ -53,7 +65,7 @@ public class FieldCellMap : FieldMapBase
     /// アクセッサ
     //--------------------------------------------------------------------------------------
 
-    public CellMap<Cell> GetCellMap() { return m_cellMap; }
+    public CellMap<ImpactCell> GetCellMap() { return m_cellMap; }
 
     //--------------------------------------------------------------------------------------
     /// デバッグ
@@ -67,8 +79,36 @@ public class FieldCellMap : FieldMapBase
 
     private void CreateDebugDrawObjects()
     {
-        if (m_debugDrawPrefab) {
+        if (m_debugDrawPrefab)
+        {
             m_cellMap.CreateDebugDrawObjects(m_debugDrawPrefab, m_factoryParametor, m_debugDrawParam);
+        }
+    }
+
+    private void DebugColorUpdate()
+    {
+        int index = 0;
+        var debugDrawObjects = m_cellMap.GetDebugDrawObjects();
+        if(debugDrawObjects.Count == 0) {
+            return;
+        }
+
+        foreach (var cell in m_cellMap.GetCells())
+        {
+            //セルの危険度に合わせた色を表示する
+            var drawObject = debugDrawObjects[index];
+
+            //カラー設定
+            //var alpha = m_debugDrawParam.color.a;   //α値は変えたくないから保存
+            //var color = m_debugDrawParam.color * cell.GetImpactData().dangerValue;  //カラーを危険度に合わせて変更
+            //color.a = alpha;    //α値の設定
+
+            float value = 1 - cell.GetImpactData().dangerValue;
+            var color = new Color(1, value, value, m_debugDrawParam.color.a);
+
+            drawObject.GizmosColor = color;         //カラーのアクセッサ
+
+            index++;    //インデックスの更新
         }
     }
 }

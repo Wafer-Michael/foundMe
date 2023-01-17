@@ -11,6 +11,7 @@ public class DoorLock : MonoBehaviour
 
     [SerializeField]
     bool m_isLock;
+    public bool IsLock {get;}
 
     [SerializeField]
     GameObject m_numberText;

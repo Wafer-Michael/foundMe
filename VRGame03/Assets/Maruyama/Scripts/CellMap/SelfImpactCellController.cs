@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 自分自身のいるセルの情報を更新する
+/// </summary>
 public class SelfImpactCellController : MonoBehaviour
 {
     private ImpactCell m_currentCell;   //現在自分が所属しているセル

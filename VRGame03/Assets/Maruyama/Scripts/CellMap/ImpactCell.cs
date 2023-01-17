@@ -7,6 +7,7 @@ public class ImpactCell : Cell
     /// <summary>
     /// 影響データ
     /// </summary>
+    [System.Serializable]
     public struct ImpactData
     {
         public float dangerValue;       //危険値

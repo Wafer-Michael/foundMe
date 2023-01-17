@@ -14,13 +14,18 @@ public class FieldCellMap : FieldMapBase
 
     private void Awake()
     {
-        m_cellMap = new CellMap<Cell>();
-
-        CreateCells();  //セルの生成
+        CreateCellMap();
 
         if (m_isDebug) {
             CreateDebugDrawObjects();   //デバッグ表示
         }
+    }
+    private void CreateCellMap()
+    {
+        m_cellMap = new CellMap<Cell>();
+
+        CreateCells();  //セルの生成
+        m_cellMap.SetFieldData(new CellMapFieldData(m_factoryParametor.widthCount, m_factoryParametor.depthCount));
     }
 
     private void CreateCells()

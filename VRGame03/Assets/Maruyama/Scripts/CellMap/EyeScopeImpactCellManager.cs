@@ -7,9 +7,9 @@ using UnityEngine;
 /// </summary>
 public class EyeScopeImpactCellManager : MonoBehaviour
 {
-    private EyeSearchRange m_eyeRange;
+    private EyeSearchRange m_eyeRange;                              //視界範囲
 
-    private SelfImpactCellController m_selfImpactCellController;
+    private SelfImpactCellController m_selfImpactCellController;    //自分自身の影響マップ更新
 
     private void Awake()
     {
@@ -37,7 +37,6 @@ public class EyeScopeImpactCellManager : MonoBehaviour
         ImpactCell startCell = m_selfImpactCellController.GetCurrentCell();
         CellMap<ImpactCell> cellMap = AIDirector.Instance.GetImpactCellMap();
 
-        //startCell = cellMap.FindDirectionCell(m_selfImpactCellController.GetCurrentCell().GetIndex(), transform.forward);
         var openCells = new Queue<ImpactCell>();
         var closeCells = new Queue<ImpactCell>();
         openCells.Enqueue(startCell);
@@ -53,8 +52,7 @@ public class EyeScopeImpactCellManager : MonoBehaviour
             foreach(var cell in cells)
             {
                 //オープンデータに登録できるかどうか
-                if(IsAddOpenCells(cell, openCells, closeCells))
-                {
+                if(IsAddOpenCells(cell, openCells, closeCells)) {
                     openCells.Enqueue(cell);
                 }
             }

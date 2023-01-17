@@ -50,6 +50,10 @@ public class Cell : I_GraphNode
 
 	public Parametor GetParametor() { return m_param; }
 
+	public void SetRectData(maru.Rect rect) { m_param.rect = rect; }
+
+	public maru.Rect GetRectData() { return m_param.rect; }
+
 	public void SetIndex(int index) { m_index = index; }
 
 	public int GetIndex() { return m_index; }

@@ -89,8 +89,6 @@ namespace Factory
 					var cell = maru.Generic.Construct<T, int, Cell.Parametor>(index, cellParam);			//Cellê∂ê¨
 					cell.SetPosition(position);									//CellÇÃà íuïœçX
 
-					//Debug.Log(position);
-
 					result.Add(cell); //resultÇ…í«â¡
 				}
 			}

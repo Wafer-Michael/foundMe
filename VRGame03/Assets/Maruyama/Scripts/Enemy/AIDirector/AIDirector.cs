@@ -73,7 +73,7 @@ public class AIDirector : SingletonMonoBehaviour<AIDirector>
 
     public List<FactionCoordinator> GetFactionCoordinators() { return m_factionCoordinators; }
 
-    public CellMap GetAreaCellMap() { return m_areaMap.GetCellMap(); }
+    public CellMap<Cell> GetAreaCellMap() { return m_areaMap.GetCellMap(); }
 
     public WayPointsMap GetWayPointsMap() { return m_wayPointsMap.GetWayPointsMap(); }
 

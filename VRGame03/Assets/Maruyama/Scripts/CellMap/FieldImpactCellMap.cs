@@ -14,9 +14,7 @@ public class FieldImpactCellMap : FieldMapBase
 
     private void Awake()
     {
-        m_cellMap = new CellMap<ImpactCell>();
-
-        CreateCells();  //セルの生成
+        CreateCellMap();
 
         if (m_isDebug)
         {
@@ -29,6 +27,14 @@ public class FieldImpactCellMap : FieldMapBase
         if (m_isDebug) {
             DebugColorUpdate(); //デバッグ表示のカラー更新
         }
+    }
+
+    private void CreateCellMap()
+    {
+        m_cellMap = new CellMap<ImpactCell>();
+
+        CreateCells();  //セルの生成
+        m_cellMap.SetFieldData(new CellMapFieldData(m_factoryParametor.widthCount, m_factoryParametor.depthCount));
     }
 
     /// <summary>

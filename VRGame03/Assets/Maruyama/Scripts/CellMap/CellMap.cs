@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CellMap
+public class CellMap<CellType>
+    where CellType : Cell
 {
-    private List<Cell> m_cells;	//セルマップのセル配列
+    private List<CellType> m_cells;	//セルマップのセル配列
 
     public CellMap() {
-        m_cells = new List<Cell>();
+        m_cells = new List<CellType>();
     }
 
     //--------------------------------------------------------------------------------------
     ///	アクセッサ
     //--------------------------------------------------------------------------------------
 
-    public void SetCells(List<Cell> cells) { m_cells = cells; }
+    public void SetCells(List<CellType> cells) { m_cells = cells; }
     
-    public List<Cell> GetCells() { return m_cells; }
+    public List<CellType> GetCells() { return m_cells; }
 
 
     //--------------------------------------------------------------------------------------

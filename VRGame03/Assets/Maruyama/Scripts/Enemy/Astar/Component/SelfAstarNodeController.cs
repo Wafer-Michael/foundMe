@@ -155,4 +155,6 @@ public class SelfAstarNodeController : MonoBehaviour
 
     public bool IsMover() { return m_isMover; }
 
+    public bool HasCurrentNode() { return m_node != null; }
+
 }

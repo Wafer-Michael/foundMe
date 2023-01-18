@@ -38,15 +38,13 @@ public class Observer_ImpactCellMap : MonoBehaviour
         }
 
         //戻りたい数値より、小さいなら
-        if(dangerValue < COMEBACK_DANGERVALUE)
-        {
+        if(dangerValue < COMEBACK_DANGERVALUE) {
             float value = dangerValue + (speed * Time.deltaTime);
             cell.SetDangerValue(Mathf.Clamp(value, 0, COMEBACK_DANGERVALUE));
         }
 
         //戻りたい数値より、大きいなら
-        if(dangerValue > COMEBACK_DANGERVALUE)
-        {
+        if(dangerValue > COMEBACK_DANGERVALUE) {
             float value = dangerValue - (speed * Time.deltaTime);
             cell.SetDangerValue(Mathf.Clamp(value, COMEBACK_DANGERVALUE, 1));
         }

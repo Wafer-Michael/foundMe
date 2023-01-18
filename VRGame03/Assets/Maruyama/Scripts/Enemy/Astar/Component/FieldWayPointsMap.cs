@@ -96,7 +96,7 @@ public class FieldWayPointsMap : FieldMapBase
             float value = 1 - node.GetImpactData().dangerValue;
             var color = new Color(value, value, 1, m_debugNodeDrawParametor.color.a);
 
-            draw.GizmosColor = color;         //カラーのアクセッサ
+            draw.GizmosColor = color;   //カラーのアクセッサ
 
             index++;    //インデックスの更新
         }

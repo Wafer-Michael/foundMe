@@ -17,6 +17,14 @@ public class EyeScopeImpactWayPointsManager : MonoBehaviour
     private void Update()
     {
         var nodes = FindEyeScopeNodes_FloodFill();
+        if(nodes == null) {
+            return;
+        }
+
+        foreach(var node in nodes)
+        {
+            node.SetDangerValue(0);
+        }
     }
 
     private Queue<AstarNode> FindEyeScopeNodes_FloodFill()
@@ -26,12 +34,12 @@ public class EyeScopeImpactWayPointsManager : MonoBehaviour
             return null;
         }
 
-        AstarNode startCell = m_selfAstarNodeController.GetNode();
+        AstarNode startNode = m_selfAstarNodeController.GetNode();
         var wayPointMap = AIDirector.Instance.GetWayPointsMap();
 
         var openNodes = new Queue<AstarNode>();
         var closeNodes = new Queue<AstarNode>();
-        openNodes.Enqueue(startCell);
+        openNodes.Enqueue(startNode);
 
         while(openNodes.Count != 0)
         {
@@ -40,6 +48,9 @@ public class EyeScopeImpactWayPointsManager : MonoBehaviour
 
             //”ª•ûŒü‚ÌƒZƒ‹‚ðŽæ“¾
             var edges = wayPointMap.GetGraph().GetEdges(currentNode.GetIndex());
+            if(edges == null) {
+                return null;
+            }
 
             foreach (var edge in edges)
             {

@@ -2268,6 +2268,37 @@ PrefabInstance:
       propertyPath: m_floorObject
       value: 
       objectReference: {fileID: 390294357}
+    - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
+        type: 3}
+      propertyPath: m_isDebugDraw
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
+        type: 3}
+      propertyPath: m_debugNodePrefab
+      value: 
+      objectReference: {fileID: 8958858368370622780, guid: 4f3e52e92c45a0849a99053237d1de87,
+        type: 3}
+    - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
+        type: 3}
+      propertyPath: m_debugNodeScaleAdjust
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
+        type: 3}
+      propertyPath: m_debugNodeDrawParametor.color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
+        type: 3}
+      propertyPath: m_factoryParametor.intervalRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
+        type: 3}
+      propertyPath: m_debugNodeDrawParametor.sphereRadius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 106415845335812681, guid: 84f793385bab61e46910a343f38fafd8,
         type: 3}
       propertyPath: m_Name

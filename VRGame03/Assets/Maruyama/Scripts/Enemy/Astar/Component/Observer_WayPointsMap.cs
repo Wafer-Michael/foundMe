@@ -15,7 +15,7 @@ public class Observer_WayPointsMap : MonoBehaviour
     private FieldWayPointsMap m_fieldWayPointMap;
 
     [SerializeField]
-    private Parametor m_param = new Parametor();
+    private Parametor m_param = new Parametor() { comebackTime = 20.0f };
 
     private void Awake()
     {
@@ -26,29 +26,38 @@ public class Observer_WayPointsMap : MonoBehaviour
 
     private void Update()
     {
-        var nodes = m_fieldWayPointMap.GetWayPointsMap().GetGraph().GetNodes();
+        var nodes = AIDirector.Instance.GetWayPointsMap().GetGraph().GetNodes();
+        foreach (var node in nodes) {
+            UpdateDangerValue(node);
+        }
+    }
 
-        foreach (var node in nodes)
+    private void UpdateDangerValue(AstarNode node)
+    {
+        const float COMEBACK_DANGERVALUE = 0.5f;                    //最終的に戻りたい数値
+        float speed = COMEBACK_DANGERVALUE / m_param.comebackTime;  //経過スピード
+        float dangerValue = node.GetDangerValue();
+
+        if (dangerValue == COMEBACK_DANGERVALUE)
         {
-            const float COMEBACK_DANGERVALUE = 0.5f;                    //最終的に戻りたい数値
-            float speed = COMEBACK_DANGERVALUE / m_param.comebackTime;  //経過スピード
-            float dangerValue = node.GetDangerValue();
+            //Debug.Log("★★★" + "更新必要なし");
+            return;
+        }
 
-            if (dangerValue == COMEBACK_DANGERVALUE) {
-                return;
-            }
+        //戻りたい数値より、小さいなら
+        if (dangerValue < COMEBACK_DANGERVALUE)
+        {
+            float value = dangerValue + (speed * Time.deltaTime);
+            //Debug.Log("★★★" + value);
+            node.SetDangerValue(Mathf.Clamp(value, 0, COMEBACK_DANGERVALUE));
+        }
 
-            //戻りたい数値より、小さいなら
-            if (dangerValue < COMEBACK_DANGERVALUE) {
-                float value = dangerValue + (speed * Time.deltaTime);
-                node.SetDangerValue(Mathf.Clamp(value, 0, COMEBACK_DANGERVALUE));
-            }
-
-            //戻りたい数値より、大きいなら
-            if (dangerValue > COMEBACK_DANGERVALUE) {
-                float value = dangerValue - (speed * Time.deltaTime);
-                node.SetDangerValue(Mathf.Clamp(value, COMEBACK_DANGERVALUE, 1));
-            }
+        //戻りたい数値より、大きいなら
+        if (dangerValue > COMEBACK_DANGERVALUE)
+        {
+            float value = dangerValue - (speed * Time.deltaTime);
+            //Debug.Log("★★★" + value);
+            node.SetDangerValue(Mathf.Clamp(value, COMEBACK_DANGERVALUE, 1));
         }
     }
 }

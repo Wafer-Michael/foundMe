@@ -61,20 +61,17 @@ public class EyeScopeImpactWayPointsManager : MonoBehaviour
     private bool IsAddOpenNodes(AstarNode node, Queue<AstarNode> openNodes, Queue<AstarNode> closeNodes)
     {
         //すでにオープンデータに登録されている場合
-        if (openNodes.Contains(node))
-        {
+        if (openNodes.Contains(node)) {
             return false;
         }
 
         //すでにクローズデータに登録されている場合
-        if (closeNodes.Contains(node))
-        {
+        if (closeNodes.Contains(node)) {
             return false;
         }
 
         //視界内に存在しない場合。
-        if (!m_eyeRange.IsInEyeRange(node.GetPosition()))
-        {
+        if (!m_eyeRange.IsInEyeRange(node.GetPosition())) {
             return false;
         }
 

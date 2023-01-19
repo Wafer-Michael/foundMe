@@ -6,7 +6,6 @@ public class EnemyBase : MonoBehaviour
 {
     EyeSearchRange m_eyeRange;
 
-    [SerializeField]
     private List<GameObject> m_observeIsInEyeTargetObjects = new List<GameObject>();
 
     private ObserveIsInEyeTargets m_observeIsInEyeTargets;  //視界範囲に入ったらターゲット判定を取るターゲット

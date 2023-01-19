@@ -47,6 +47,53 @@ MonoBehaviour:
   m_param:
     comebackTime: 20
   m_fieldCellMap: {fileID: 1950203491}
+--- !u!1 &1922269372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1922269373}
+  - component: {fileID: 1922269374}
+  m_Layer: 0
+  m_Name: Observer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1922269373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922269372}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 106415844619307815}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1922269374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922269372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b5b7528717bc44db962c4e608f1e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fieldWayPointMap: {fileID: 106415844619307814}
+  m_param:
+    comebackTime: 0
 --- !u!1 &1950203489
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +185,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1922269373}
   m_Father: {fileID: 106415845335812682}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -163,15 +211,15 @@ MonoBehaviour:
       width: 0
       depth: 0
     createHeight: 0.25
-  m_isDebugDraw: 0
-  m_debugNodePrefab: {fileID: 8958858368370622777, guid: 4f3e52e92c45a0849a99053237d1de87,
+  m_isDebugDraw: 1
+  m_debugNodePrefab: {fileID: 8958858368370622780, guid: 4f3e52e92c45a0849a99053237d1de87,
     type: 3}
   m_debugNodeScaleAdjust: 0.95
   m_debugNodeDrawParametor:
     isSelectDraw: 0
     drawType: 1
-    color: {r: 0, g: 0, b: 1, a: 0.3}
-    sphereRadius: 0.5
+    color: {r: 0, g: 0, b: 1, a: 0.78431374}
+    sphereRadius: 0.25
 --- !u!1 &106415845335812681
 GameObject:
   m_ObjectHideFlags: 0

@@ -2265,7 +2265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1950203491, guid: 84f793385bab61e46910a343f38fafd8, type: 3}
       propertyPath: m_isDebug
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1950203491, guid: 84f793385bab61e46910a343f38fafd8, type: 3}
       propertyPath: m_floorObject
@@ -2276,6 +2276,11 @@ PrefabInstance:
       propertyPath: m_floorObject
       value: 
       objectReference: {fileID: 390294357}
+    - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
+        type: 3}
+      propertyPath: m_isDebugDraw
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
         type: 3}
       propertyPath: m_factoryParametor.intervalRange

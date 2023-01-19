@@ -77,6 +77,10 @@ public class TargetManager : MonoBehaviour
     /// <returns>ターゲットを見失った場所</returns>
     public Vector3 GetLostTargetPosition() { return m_currentData.lostData.lostPosition; }
 
+    /// <summary>
+    /// 見失った場所への方向ベクトルを取得
+    /// </summary>
+    /// <returns>見失った場所への方向ベクトル</returns>
     public Vector3 CalculateSelfLostPositionVector() { return GetLostTargetPosition() - transform.position; }
 
     /// <summary>

@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class DoorLock : MonoBehaviour
 {
-    const int m_digit = 3;
+    int m_digit = 3;
 
-    int[] m_lockNumbers = new int[m_digit];
+    List<int> m_lockNumbers = new List<int>();
 
     [SerializeField]
     bool m_isLock;
@@ -16,102 +16,116 @@ public class DoorLock : MonoBehaviour
     [SerializeField]
     GameObject m_numberText;
 
+    private void Start()
+    {
+        m_digit = m_numberText.transform.childCount;
+    }
+
     void Update()
     {
+        Debug.Log(m_isLock);
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("locked");
             m_isLock = true;
-            AccessKey();
+            StartCoroutine("Unlock");
+            this.enabled = false;
         }
-    }
-
-    public void AccessKey()
-    {
-        MakePass();
-        StartCoroutine("Unlock");
-    }
-
-    void MakePass()
-    {
-        for (int i = 0; i < m_digit; i++)
-        {
-            m_lockNumbers[i] = (int)Random.Range(0, 9);
-        }
-
-        Debug.Log("Make Pass  " + m_lockNumbers[0] + m_lockNumbers[1] + m_lockNumbers[2]);
     }
 
     IEnumerator Unlock()
     {
         Debug.Log("Start Coroutine");
 
-        int[] numbers = new int[m_digit];
+        List<int> numbers = new List<int>();
 
         while (m_isLock)
         {
             yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Space));
-            //if (Input.GetKey(KeyCode.Space))
-            //{
-                InputPass(ref numbers);
-                StartCoroutine("Collation", numbers);
-            //}
-            yield return new WaitForEndOfFrame();
+            numbers.Clear();
+            InputPass(ref numbers);
+            StartCoroutine("Collation", numbers);
+
+            yield break;
         }
 
         Debug.Log("unlocked");
 
+        this.enabled = true;
         yield break;
     }
 
-    void InputPass(ref int[] numbers)
+    void InputPass(ref List<int> numbers)
     {
-        for (int i = 0; i < m_numberText.transform.childCount; i++)
+        for (int i = 0; i < m_digit; i++)
         {
             var numberText = m_numberText.transform.GetChild(i).gameObject;
 
             int textNum = int.Parse(numberText.GetComponent<Text>().text);
-            numbers[i] = textNum;
+            numbers.Add(textNum);
         }
 
         Debug.Log("input number" + numbers[0] + numbers[1] + numbers[2]);
     }
 
-    IEnumerator Collation(int[] numbers)
+    IEnumerator Collation(List<int> numbers)
     {
-        int correct = 0;
-        int almost = 0;
+        int correct = 0;    //àÍív
+        int almost = 0;     //ê…ÇµÇ¢
 
-        for (int i = 0; i < numbers.Length; i++)
+        foreach(int num in numbers)
         {
-            for (int j = 0; j < m_lockNumbers.Length; j++)
+            Debug.Log("number " + num);
+        }
+
+        for (int i = 0; i < numbers.Count; i++)
+        {
+            if (numbers[i] == m_lockNumbers[i])
+            {
+                correct += 1;
+                numbers[i]  = -1;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+        foreach (int num in numbers)
+        {
+            Debug.Log("number " + num);
+        }
+
+        for (int i = 0; i < numbers.Count; i++)
+        {
+            for (int j = 0; j < m_lockNumbers.Count; j++)
             {
                 if (numbers[i] == m_lockNumbers[j])
                 {
-                    if (i == j)
-                    {
-                        correct++;
-                    }
-                    else
-                    {
-                        almost++;
-                    }
+                    almost++;
                     break;
                 }
-
                 yield return new WaitForEndOfFrame();
             }
         }
 
+        Debug.Log(correct);
+
         if (correct == m_digit)
         {
             m_isLock = false;
+            StartCoroutine("Unlock");
             yield break;
         }
 
         Debug.Log("àÍív " + correct + "ÅA êîéöÇ™àÍív " + almost + "ÅA ïsàÍív " + (m_digit - correct - almost));
 
-
+        StartCoroutine("Unlock");
         yield break;
+    }
+
+    public void SetLockNumbers(List<int> numbers)
+    {
+        foreach(int num in numbers)
+        {
+            m_lockNumbers.Add(num);
+        }
     }
 }

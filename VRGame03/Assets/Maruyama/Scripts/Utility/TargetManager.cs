@@ -25,7 +25,7 @@ public struct TargetData
     public GameObject target;       //ターゲットのゲームオブジェクト
     public float priority;          //優先度
     public TargetLostData lostData; //見失ったときのデータ
-    public Targeted targeted;
+    public Targeted targeted;       //ターゲットの情報をまとめたコンポーネント
 
     public TargetData(GameObject target)
     {
@@ -61,11 +61,19 @@ public class TargetManager : MonoBehaviour
         m_currentData = new TargetData(target);
     }
 
+    /// <summary>
+    /// 現在のターゲット
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetCurrentTarget()
     {
         return m_currentData.target;
     }
 
+    /// <summary>
+    /// ターゲットへの方向ベクトルを取得
+    /// </summary>
+    /// <returns></returns>
     public Vector3 CalculateSelfToTargetVector()
     {
         return GetCurrentTarget().transform.position - transform.position;

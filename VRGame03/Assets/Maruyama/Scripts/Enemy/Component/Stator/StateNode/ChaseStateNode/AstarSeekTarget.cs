@@ -59,6 +59,7 @@ namespace StateNode
             }
 
             if (m_astarSeek.IsEnd()) {
+                Debug.Log("šAstarŠJn");
                 StartAstar();
             }
 
@@ -85,6 +86,7 @@ namespace StateNode
             var targetNode = GetTargetNode();
 
             m_astarSeek.StartAstar(selfNode, targetNode, wayPointsMap.GetGraph());
+            //m_astarSeek.StartAstar(selfNode, m_targetManager.GetCurrentTarget().transform.position, wayPointsMap.GetGraph(), 2);
         }
 
         private AstarNode GetTargetNode() {

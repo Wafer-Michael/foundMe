@@ -40,7 +40,6 @@ public class Observer_WayPointsMap : MonoBehaviour
 
         if (dangerValue == COMEBACK_DANGERVALUE)
         {
-            //Debug.Log("★★★" + "更新必要なし");
             return;
         }
 
@@ -48,7 +47,6 @@ public class Observer_WayPointsMap : MonoBehaviour
         if (dangerValue < COMEBACK_DANGERVALUE)
         {
             float value = dangerValue + (speed * Time.deltaTime);
-            //Debug.Log("★★★" + value);
             node.SetDangerValue(Mathf.Clamp(value, 0, COMEBACK_DANGERVALUE));
         }
 
@@ -56,7 +54,6 @@ public class Observer_WayPointsMap : MonoBehaviour
         if (dangerValue > COMEBACK_DANGERVALUE)
         {
             float value = dangerValue - (speed * Time.deltaTime);
-            //Debug.Log("★★★" + value);
             node.SetDangerValue(Mathf.Clamp(value, COMEBACK_DANGERVALUE, 1));
         }
     }

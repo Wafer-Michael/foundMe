@@ -80,6 +80,8 @@ public class AIDirector : SingletonMonoBehaviour<AIDirector>
 
     public WayPointsMap GetWayPointsMap() { return m_wayPointsMap.GetWayPointsMap(); }
 
+    public Factory.WayPointsMap_FloodFill.Parametor GetFieldWayPointsMap_FactoryParametor() { return m_wayPointsMap.GetFactoryParametor(); }
+
     public CellMap<ImpactCell> GetImpactCellMap() { return m_impactCellMap.GetCellMap(); }
 
     //--------------------------------------------------------------------------------------

@@ -7,19 +7,32 @@ using UnityEditor;
 public class Room : MonoBehaviour
 {
     [SerializeField]
-    GameObject m_mesh;
+    GameObject generator;
 
     // Start is called before the first frame update
     void Start()
     {
-        SetDoorNumber();
+        DecisionDoorNumber();
     }
 
-    void SetDoorNumber()
+    void DecisionDoorNumber()
     {
         var door = FindChildTag(this.gameObject, "Door");
         var doorTex = FetchTextureName(door);
-        Debug.Log(doorTex.name);
+
+        var wall = FindChildTag(this.gameObject, "Wall");
+        var wallTex = FetchTextureName(wall);
+
+        List<int> numbers = new List<int>();
+
+        var numbergene = generator.GetComponent<NumberLockGenerator>();
+        numbers.Add(numbergene.FetchNumber(wallTex, NumberLockGenerator.NumberType.WallPattern));
+        numbers.Add(numbergene.FetchNumber(wallTex, NumberLockGenerator.NumberType.WallColor));
+        numbers.Add(numbergene.FetchNumber(doorTex, NumberLockGenerator.NumberType.DoorColor));
+
+        Debug.Log("lock Number " + numbers[0] + numbers[1] + numbers[2]);
+
+        door.GetComponent<DoorLock>().SetLockNumbers(numbers);
     }
 
     GameObject FindChildTag(GameObject parentObj, string tag)

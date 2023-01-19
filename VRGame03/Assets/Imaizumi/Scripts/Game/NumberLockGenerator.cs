@@ -50,21 +50,21 @@ public class NumberLockGenerator : MonoBehaviour
         }
     }
 
-    public int SeekNumberList(Texture texName, NumberType type)
+    public int FetchNumber(Texture tex, NumberType type)
     {
         int result = 0;
         switch (type)
         {
             case NumberType.WallPattern:
-                result = m_keyWallPattern[texName];
+                result = m_keyWallPattern[tex];
                 break;
 
             case NumberType.WallColor:
-                result = m_keyWallColor[texName];
+                result = m_keyWallColor[tex];
                 break;
 
             case NumberType.DoorColor:
-                result = m_keyDoorColor[texName];
+                result = m_keyDoorColor[tex];
                 break;
         }
         return result;

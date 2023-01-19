@@ -4,19 +4,35 @@ using UnityEngine;
 
 public class AstarNode : GraphNode
 {
+    public struct ImpactData
+    {
+        public float dangerValue;   //脅威度
+
+        public ImpactData(float dangerValue)
+        {
+            this.dangerValue = dangerValue;
+        }
+    }
+
     [System.Serializable]
     public struct Parametor
     {
-        public Vector3 position;
+        public Vector3 position;        //位置
+        public ImpactData impactData;   //影響データ
 
-        public Parametor(Vector3 position)
+        public Parametor(Vector3 position) :
+            this(position, new ImpactData() { dangerValue = 0.5f })
+        { }
+
+        public Parametor(Vector3 position, ImpactData impactData)
         {
             this.position = position;
+            this.impactData = impactData;
         }
     }
 
     [SerializeField]
-    private Parametor m_param;  //パラメータ
+    private Parametor m_param;      //パラメータ
 
     private I_GraphNode m_parent;   //親ノード
 
@@ -27,9 +43,17 @@ public class AstarNode : GraphNode
     { }
 
     public AstarNode(int index, Vector3 position) :
+        this(index, new Parametor(position))
+    { }
+
+    public AstarNode(int index, Vector3 position, ImpactData impactData):
+        this(index, new Parametor(position, impactData))
+    { }
+
+    public AstarNode(int index, Parametor parametor) :
         base(index)
     {
-        m_param.position = position;
+        m_param = parametor;
     }
 
     #endregion
@@ -54,6 +78,12 @@ public class AstarNode : GraphNode
     public void SetParent(I_GraphNode node) { m_parent = node; }
     public I_GraphNode GetParent() { return m_parent; }
 
-    //public I_GraphNode GetGraphNode() { return m_parent; }
+    public void SetImpactData(ImpactData data) { m_param.impactData = data; }
+
+    public ImpactData GetImpactData() { return m_param.impactData; }
+
+    public void SetDangerValue(float value) { m_param.impactData.dangerValue = value; }
+
+    public float GetDangerValue() { return m_param.impactData.dangerValue; }
 
 }

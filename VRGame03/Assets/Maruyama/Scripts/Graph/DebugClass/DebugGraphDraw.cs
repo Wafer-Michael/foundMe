@@ -15,8 +15,8 @@ public class DebugGraphDraw
     private GameObject m_nodeParentObject;
     private GameObject m_edgeParentObject;
 
-    private List<GameObject> m_nodes = new List<GameObject>();  //デバッグ用のノード
-    private List<GameObject> m_edges = new List<GameObject>();  //デバッグ用のエッジ
+    private List<DebugDrawComponent> m_nodes = new List<DebugDrawComponent>();  //デバッグ用のノード
+    private List<DebugDrawComponent> m_edges = new List<DebugDrawComponent>();  //デバッグ用のエッジ
 
     public DebugGraphDraw(MonoBehaviour owner, GraphType graph)
     {
@@ -27,7 +27,14 @@ public class DebugGraphDraw
         m_edgeParentObject = new GameObject("DeubgEdges");
     }
 
-    public void CreateDebugNodes(GameObject prefab, Vector3? scale = null, DrawType drawType = DrawType.Cube, Color? color = null)
+    /// <summary>
+    /// デバッグノードの生成
+    /// </summary>
+    /// <param name="prefab"></param>
+    /// <param name="scale"></param>
+    /// <param name="drawType"></param>
+    /// <param name="color"></param>
+    public void CreateDebugNodes(DebugDrawComponent prefab, Vector3? scale = null, DrawType drawType = DrawType.Cube, Color? color = null)
     {
         var passColor = new Color(0.0f, 0.0f, 0.0f, 0.3f);
         if(color != null) {
@@ -37,35 +44,41 @@ public class DebugGraphDraw
         CreateDebugNodes(prefab, scale, new DebugDrawComponent.Parametor(drawType, passColor, 0.5f));
     }
 
+    /// <summary>
+    /// デバッグノードの生成
+    /// </summary>
+    /// <param name="prefab"></param>
+    /// <param name="scale"></param>
+    /// <param name="drawParam"></param>
     public void CreateDebugNodes(
-        GameObject prefab, 
+        DebugDrawComponent prefab, 
         Vector3? scale = null,
         DebugDrawComponent.Parametor? drawParam = null
     ) {
         foreach (var node in m_graph.GetNodes())
         {
-            var drawObject = Object.Instantiate(prefab, node.GetPosition(), Quaternion.identity, m_nodeParentObject.transform);
-            //スケール設定
-            if (scale != null)
-            {
-                drawObject.transform.localScale = (Vector3)scale;
+            var debugDrawComponent = Object.Instantiate(prefab, node.GetPosition(), Quaternion.identity, m_nodeParentObject.transform);
+
+            //スケール設定。
+            if (scale != null) {
+                debugDrawComponent.transform.localScale = (Vector3)scale;
             }
 
-            if(drawParam != null)
-            {
-                //ドロータイプを設定する。
-                var debugDrawComponent = drawObject.GetComponent<DebugDrawComponent>();
-                if (debugDrawComponent)
-                {
-                    debugDrawComponent.Param = drawParam.Value;
-                }
+            //表示パラメータを設定する。
+            if (drawParam != null) {
+                debugDrawComponent.Param = drawParam.Value;
             }
 
-            m_nodes.Add(drawObject);
+            m_nodes.Add(debugDrawComponent);
         }
     }
 
-    public void CreateDebugEdges(GameObject prefab, Color? color = null)
+    /// <summary>
+    /// デバッグエッジの生成
+    /// </summary>
+    /// <param name="prefab"></param>
+    /// <param name="color"></param>
+    public void CreateDebugEdges(DebugDrawComponent prefab, Color? color = null)
     {
         foreach(var pair in m_graph.GetEdgesMap())
         {
@@ -97,5 +110,9 @@ public class DebugGraphDraw
     //--------------------------------------------------------------------------------------
     ///	アクセッサ
     //--------------------------------------------------------------------------------------
+
+    public List<DebugDrawComponent> GetNodes() { return m_nodes; }
+
+    public List<DebugDrawComponent> GetEdges() { return m_edges; }
 
 }

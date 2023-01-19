@@ -7,20 +7,25 @@ public class FieldCellMap : FieldMapBase
     [Header("FloorObjectを設定した場合、widthCountとdepthCountは自動で設定される"),SerializeField]
     private Factory.CellMap.Parametor m_factoryParametor;   //セルマップ生成用のパラメータ
 
-    private CellMap m_cellMap;  //セルマップ
+    private CellMap<Cell> m_cellMap;  //セルマップ
 
     [SerializeField]
     private bool m_isDebug = true;
 
     private void Awake()
     {
-        m_cellMap = new CellMap();
-
-        CreateCells();  //セルの生成
+        CreateCellMap();
 
         if (m_isDebug) {
             CreateDebugDrawObjects();   //デバッグ表示
         }
+    }
+    private void CreateCellMap()
+    {
+        m_cellMap = new CellMap<Cell>();
+
+        CreateCells();  //セルの生成
+        m_cellMap.SetFieldData(new CellMapFieldData(m_factoryParametor.widthCount, m_factoryParametor.depthCount));
     }
 
     private void CreateCells()
@@ -53,14 +58,14 @@ public class FieldCellMap : FieldMapBase
     /// アクセッサ
     //--------------------------------------------------------------------------------------
 
-    public CellMap GetCellMap() { return m_cellMap; }
+    public CellMap<Cell> GetCellMap() { return m_cellMap; }
 
     //--------------------------------------------------------------------------------------
     /// デバッグ
     //--------------------------------------------------------------------------------------
 
     [SerializeField]
-    private GameObject m_debugDrawPrefab;
+    private DebugDrawComponent m_debugDrawPrefab;
 
     [SerializeField]
     private DebugDrawComponent.Parametor m_debugDrawParam = DebugDrawComponent.DEFAULT_PARAMETOR;

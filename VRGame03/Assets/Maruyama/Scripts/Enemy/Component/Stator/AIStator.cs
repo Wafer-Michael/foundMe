@@ -8,10 +8,12 @@ using TransitionMember = AIStator_TransitionMember;
 public enum AIStator_StateType 
 {
     None,
-    Patrol,
-    Find,   //”­Œ©
-    Chase,  //’Ç]
-    Buttle, //UŒ‚
+    Patrol,         //œpœj
+    Find,           //”­Œ©
+    Chase,          //’Ç]
+    Buttle,         //UŒ‚
+    LostPatrol,     //Œ©¸‚Á‚½Œã‚Ìƒpƒgƒ[ƒ‹ƒXƒe[ƒg
+    ComebackPatrol  //œpœjƒ‹[ƒg‚É–ß‚éˆ—
 }
 
 public struct AIStator_TransitionMember

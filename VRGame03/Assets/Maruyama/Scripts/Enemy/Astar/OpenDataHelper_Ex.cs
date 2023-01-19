@@ -6,48 +6,13 @@ using System.Linq;
 
 using GraphType = SparseGraph<AstarNode, AstarEdge>;
 
-public class OpenData
-{
-    public AstarNode parent;    //自分の前のノード
-    public AstarNode node;      //自分自身のノードポインタ
-    public float range;         //実距離
-    public float heuristic;     //ヒュースリック距離
-    public bool isOpen;
-
-    public OpenData(AstarNode parent, AstarNode selfNode, float range, float heuristic)
-    {
-        this.parent = parent;
-        this.node = selfNode;
-        this.range = range;
-        this.heuristic = heuristic;
-        this.isOpen = true;
-    }
-
-    public float GetSumRange() { return range + heuristic; }
-
-    public bool IsEqual(OpenData other)
-    {
-        return (this.parent == other.parent &&
-                this.node == other.node);
-    }
-
-    public void move(OpenData other)
-    {
-        this.parent = other.parent;
-        this.node = other.node;
-        this.range = other.range;
-        this.heuristic = other.heuristic;
-        this.isOpen = other.isOpen;
-    }
-}
-
-public class OpenDataHelper
+public class OpenDataHelper_Ex : MonoBehaviour
 {
     private Stack<AstarNode> m_route;   //生成したルート
 
     private AstarNode m_otherAreaNode;  //別エリアノード
 
-    public OpenDataHelper()
+    public OpenDataHelper_Ex()
     {
         m_route = new Stack<AstarNode>();
         m_otherAreaNode = null;
@@ -70,15 +35,17 @@ public class OpenDataHelper
         return (targetAreaIndex >= 0 && targetAreaIndex != startNode.GetParent().GetIndex());
     }
 
-    private bool CreateOpenDatas(
+    private AstarNode CreateOpenDatas(
         ref List<OpenData> openDatas,
         ref List<OpenData> closeDatas,
         OpenData openData,
         GraphType graph,
         AstarNode startNode,
-        AstarNode targetNode,
+        Vector3 targetPosition,
+        float nearTargetRange,
         int targetAreaIndex = -1
-    ) {
+    )
+    {
         var baseNode = openData.node;
         var edges = graph.GetEdges(baseNode.GetIndex());
         int baseIndex = baseNode.GetIndex();
@@ -92,14 +59,15 @@ public class OpenDataHelper
         {
             //var node = graph.GetNode(edge.GetToIndex());    //ノードの取得
             var node = edge.GetToNode() as AstarNode;
-            if (node == null) {
+            if (node == null)
+            {
                 continue;
             }
 
             var toNodeVec = node.GetPosition() - baseNode.GetPosition();
             float range = toNodeVec.magnitude;
             range += openData.range;
-            float heuristicRange = (targetNode.GetPosition() - node.GetPosition()).magnitude;
+            float heuristicRange = (targetPosition - node.GetPosition()).magnitude;
 
             int newIndex = node.GetIndex();
             var newData = new OpenData(baseNode, node, range, heuristicRange);
@@ -107,25 +75,25 @@ public class OpenDataHelper
             bool isAddData = AddOpenData(openDatas, closeDatas, newData);
 
             //目標ノードなら終わらせる
-            if(node == targetNode) {
-                return true;
+            if (IsNearTargetNode(node, targetPosition, nearTargetRange)) {
+                return node;
             }
 
             //目標エリアが他エリアで、かつ、目標エリアのノードならotherAreaOpenDatasに登録する
-            if (IsOtherAreaTarget(startNode, targetAreaIndex) && node.GetParent().GetIndex() == targetAreaIndex)
-            {
+            if (IsOtherAreaTarget(startNode, targetAreaIndex) && node.GetParent().GetIndex() == targetAreaIndex) {
                 otherAreaOpenDatas.Add(newData);
             }
         }
 
         //別エリアのデータが存在するなら、別エリアとの境目で探索終了
-        if(otherAreaOpenDatas.Count != 0) {
+        if (otherAreaOpenDatas.Count != 0)
+        {
             var sotrDatas = otherAreaOpenDatas.OrderBy(value => value.GetSumRange());
             m_otherAreaNode = sotrDatas.ToArray()[0].node;
             //return true;  //今回エリアごとの変更がうまくいくか判断できないから保留
         }
 
-        return false;
+        return null;
     }
 
     private bool CreateRoute(List<OpenData> openDatas, AstarNode targetNode)
@@ -135,9 +103,10 @@ public class OpenDataHelper
 
         var tempData = FindSomeNodeOpenData(openDatas, targetNode);
 
-        while(index <= TempMaxIndex)
+        while (index <= TempMaxIndex)
         {
-            if (tempData.parent == null) {  //親ノードが存在しないなら、処理を終了
+            if (tempData.parent == null)
+            {  //親ノードが存在しないなら、処理を終了
                 break;
             }
 
@@ -153,7 +122,8 @@ public class OpenDataHelper
     {
         foreach (var data in openDatas)
         {
-            if(data.node == node) {
+            if (data.node == node)
+            {
                 return data;
             }
         }
@@ -163,9 +133,10 @@ public class OpenDataHelper
 
     private bool IsRegisterData(List<OpenData> openDatas, OpenData openData)
     {
-        foreach(var data in openDatas)
+        foreach (var data in openDatas)
         {
-            if(data.IsEqual(openData)) {
+            if (data.IsEqual(openData))
+            {
                 return true;
             }
         }
@@ -174,15 +145,16 @@ public class OpenDataHelper
     }
 
     private bool AddOpenData(
-        List<OpenData> openDatas, 
-        List<OpenData> closeDatas, 
+        List<OpenData> openDatas,
+        List<OpenData> closeDatas,
         OpenData newData
-    ) {
+    )
+    {
         var someOpenData = FindSomeNodeOpenData(openDatas, newData.node);
         var someCloseData = FindSomeNodeOpenData(closeDatas, newData.node);
-        
+
         //オープンリストに登録されていない、かつ、クローズリストに登録されていない
-        if(someOpenData == null && someCloseData == null)
+        if (someOpenData == null && someCloseData == null)
         {
             openDatas.Add(newData);
             return true;
@@ -196,7 +168,7 @@ public class OpenDataHelper
         }
 
         //クローズリストに登録されていて、新規データの方が小さい合計値
-        if(someCloseData != null && !IsSmall_LeftOpenData(someCloseData, newData))
+        if (someCloseData != null && !IsSmall_LeftOpenData(someCloseData, newData))
         {
             openDatas.Add(newData);
             closeDatas.Remove(someCloseData);
@@ -207,10 +179,20 @@ public class OpenDataHelper
         return false;
     }
 
+    /// <summary>
+    /// Astarの処理を開始する。
+    /// </summary>
+    /// <param name="startNode">開始ノード</param>
+    /// <param name="targetPosition">目標位置</param>
+    /// <param name="graph">グラフデータ</param>
+    /// <param name="nearTargetRange">ターゲットとの近くと判断する距離</param>
+    /// <param name="targetAreaIndex">ターゲットのエリアインデックス</param>
+    /// <returns>Astarの処理が成功したかどうかを戻り値とする。</returns>
     public bool StartSearch(
         AstarNode startNode,
-        AstarNode targetNode,
+        Vector3 targetPosition,
         GraphType graph,
+        float nearTargetRange,
         int targetAreaIndex = -1
     ) {
         m_route.Clear();
@@ -221,28 +203,33 @@ public class OpenDataHelper
         var closeDatas = new List<OpenData>();
 
         //初期データの生成
-        openDatas.Add(new OpenData(null, startNode, 0.0f, CalculateHeuristicRange(startNode, targetNode)));
+        openDatas.Add(new OpenData(null, startNode, 0.0f, CalculateHeuristicRange(startNode, targetPosition)));
+        AstarNode targetNode = null;
 
         //オープンデータが存在する限りループする。
-        while(openDatas.Count != 0)
+        while (openDatas.Count != 0)
         {
             //オープンデータ生成用の基準ノードの生成
             var baseOpenData = FindBaseOpenData(openDatas);
 
             //オープンデータの生成。ターゲットノードにたどり着いたらtrueを返す。
-            if(CreateOpenDatas(ref openDatas, ref closeDatas, baseOpenData, graph, startNode, targetNode)) {
+            var endNode = CreateOpenDatas(ref openDatas, ref closeDatas, baseOpenData, graph, startNode, targetPosition, nearTargetRange);
+            if (endNode != null)   //終了ノードが帰ってきたら
+            {
+                targetNode = endNode;
                 break;
             }
         }
 
         bool isAstarSuccess = (openDatas.Count != 0);  //オープンデータが存在するなら、検索失敗
 
-        if (!isAstarSuccess) {  //失敗したら次の処理を飛ばす。
+        if (!isAstarSuccess)
+        {  //失敗したら次の処理を飛ばす。
             return isAstarSuccess;
         }
 
         //クローズデータをオープンデータに含める。
-        foreach(var closeData in closeDatas)
+        foreach (var closeData in closeDatas)
         {
             openDatas.Add(closeData);
         }
@@ -250,7 +237,8 @@ public class OpenDataHelper
         //var lastTargetNode = m_otherAreaNode != null ? m_otherAreaNode : targetNode;
         var lastTargetNode = targetNode;
         var isCreateRoute = CreateRoute(openDatas, lastTargetNode);
-        if (!isCreateRoute) {
+        if (!isCreateRoute)
+        {
             Debug.Log("ルート生成に失敗しました。");
         }
 
@@ -264,8 +252,40 @@ public class OpenDataHelper
         return left.GetSumRange() < right.GetSumRange();
     }
 
-    private float CalculateHeuristicRange(AstarNode targetNode, AstarNode selfMode)
+    private float CalculateHeuristicRange(AstarNode selfNode, AstarNode targetNode)
     {
-        return (targetNode.GetPosition() - selfMode.GetPosition()).magnitude;
+        return (targetNode.GetPosition() - selfNode.GetPosition()).magnitude;
+    }
+
+    private float CalculateHeuristicRange(AstarNode selfNode, Vector3 targetPosition)
+    {
+        return (targetPosition - selfNode.GetPosition()).magnitude;
+    }
+
+    /// <summary>
+    /// ターゲットノードの近くまで来たかどうか
+    /// </summary>
+    /// <param name="currentNode"></param>
+    /// <param name="targetPosition"></param>
+    /// <param name="nearTargetRange"></param>
+    /// <returns></returns>
+    private bool IsNearTargetNode(AstarNode currentNode, Vector3 targetPosition, float nearTargetRange)
+    {
+        //四角範囲内でないなら、まだ遠いから処理を飛ばす。
+        var rect = new maru.Rect(targetPosition, nearTargetRange, nearTargetRange);
+        if (!rect.IsInRect(currentNode.GetPosition())) {
+            return false;
+        }
+
+        //障害物の外かどうかを判断する。
+        var direction = targetPosition - currentNode.GetPosition();
+        var layerMask = LayerMask.GetMask(maru.UtilityObstacle.DEFAULT_RAY_OBSTACLE_LAYER_STRINGS);
+        if(Physics.Raycast(currentNode.GetPosition(), direction, nearTargetRange, layerMask))  
+        {
+            //当たったならターゲットノードでない
+            return false;
+        }
+
+        return true;
     }
 }

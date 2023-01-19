@@ -2259,13 +2259,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 349207615, guid: 84f793385bab61e46910a343f38fafd8, type: 3}
+      propertyPath: m_param.comebackTime
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1922269374, guid: 84f793385bab61e46910a343f38fafd8, type: 3}
       propertyPath: m_param.comebackTime
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1950203491, guid: 84f793385bab61e46910a343f38fafd8, type: 3}
       propertyPath: m_isDebug
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1950203491, guid: 84f793385bab61e46910a343f38fafd8, type: 3}
       propertyPath: m_floorObject
@@ -2276,6 +2280,11 @@ PrefabInstance:
       propertyPath: m_floorObject
       value: 
       objectReference: {fileID: 390294357}
+    - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
+        type: 3}
+      propertyPath: m_isDebugDraw
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 106415844619307814, guid: 84f793385bab61e46910a343f38fafd8,
         type: 3}
       propertyPath: m_factoryParametor.intervalRange
@@ -3404,7 +3413,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058102717}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 725fd37b1d374774d96f57f472626e53, type: 3}
   m_Name: 
@@ -3424,7 +3433,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058102717}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8d75146806e8fd4590a38041cec7f04, type: 3}
   m_Name: 
@@ -3436,7 +3445,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058102717}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3900635d08c21de4397748e65039593c, type: 3}
   m_Name: 

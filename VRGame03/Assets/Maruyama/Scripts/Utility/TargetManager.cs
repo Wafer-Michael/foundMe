@@ -7,7 +7,14 @@ using UnityEngine;
 /// </summary>
 public struct TargetLostData
 {
-    
+    public GameObject target;       //見失った相手
+    public Vector3 lostPosition;    //見失った場所
+
+    public TargetLostData(GameObject target, Vector3 lostPosition)
+    {
+        this.target = target;
+        this.lostPosition = lostPosition;
+    }
 }
 
 /// <summary>
@@ -36,17 +43,6 @@ public class TargetManager : MonoBehaviour
 {
     public TargetData m_currentData;    //現在のターゲット
 
-    private void Update()
-    {
-        //if (HasTarget() && m_currentData.targeted)
-        //{
-        //    if (!m_currentData.targeted.IsTarget())
-        //    {
-        //        SetCurrentTarget(null);
-        //    }
-        //}
-    }
-
     /// <summary>
     /// ターゲットを持っているかどうか
     /// </summary>
@@ -73,5 +69,27 @@ public class TargetManager : MonoBehaviour
     public Vector3 CalculateSelfToTargetVector()
     {
         return GetCurrentTarget().transform.position - transform.position;
+    }
+
+    /// <summary>
+    /// ターゲットを見失った場所を記録する。
+    /// </summary>
+    /// <returns>ターゲットを見失った場所</returns>
+    public Vector3 GetLostTargetPosition() { return m_currentData.lostData.lostPosition; }
+
+    public Vector3 CalculateSelfLostPositionVector() { return GetLostTargetPosition() - transform.position; }
+
+    /// <summary>
+    /// 対象が視界から外れたことを伝える。
+    /// </summary>
+    public void CallLostTarget()
+    {
+        //ターゲットを持っていなかったら処理が不可能
+        if (!HasTarget()) {
+            return;
+        }
+
+        var target = GetCurrentTarget();
+        m_currentData.lostData = new TargetLostData(target, target.transform.position);
     }
 }

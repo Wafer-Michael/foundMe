@@ -5,23 +5,11 @@ using UnityEngine.UI;
 
 public class NumberLockGenerator : MonoBehaviour
 {
-    enum FlowerPattern
+    public enum NumberType
     {
-        Large,
-        Small,
-        Plain
-    }
-
-    enum WallColor
-    {
-        Brown,
-        Orange
-    }
-
-    enum DoorColor
-    {
-        Brown,
-        white
+        WallPattern,
+        WallColor,
+        DoorColor
     }
 
     enum DoorType
@@ -31,32 +19,54 @@ public class NumberLockGenerator : MonoBehaviour
     }
 
     [SerializeField]
-    List<Texture2D> m_flowers = new List<Texture2D>();
-    Dictionary<Texture2D, int> m_keyFlowerPattern = new Dictionary<Texture2D, int>();
+    List<Texture> m_wallTextures = new List<Texture>();
+    Dictionary<Texture, int> m_keyWallPattern = new Dictionary<Texture, int>();
+    Dictionary<Texture, int> m_keyWallColor = new Dictionary<Texture, int>();
 
     [SerializeField]
-    List<Texture2D> m_wallcolors = new List<Texture2D>();
-    Dictionary<Texture2D, int> m_keyWallColor = new Dictionary<Texture2D, int>();
-
-    [SerializeField]
-    List<Texture2D> m_doorcolors = new List<Texture2D>();
-    Dictionary<Texture2D, int> m_keyDoorColor = new Dictionary<Texture2D, int>();
+    List<Texture> m_doorTextures = new List<Texture>();
+    Dictionary<Texture, int> m_keyDoorColor = new Dictionary<Texture, int>();
 
 
     void Start()
     {
-        MakeKeyPattern(ref m_keyFlowerPattern, in m_flowers);
-        MakeKeyPattern(ref m_keyWallColor, in m_wallcolors);
-        MakeKeyPattern(ref m_keyDoorColor, in m_doorcolors);
+        MakeKeyPattern(ref m_keyWallPattern, in m_wallTextures);
+        MakeKeyPattern(ref m_keyWallColor, in m_wallTextures);
+        MakeKeyPattern(ref m_keyDoorColor, in m_doorTextures);
     }
 
-    void MakeKeyPattern(ref Dictionary<Texture2D, int> numberList,in List<Texture2D> textureList)
+    void MakeKeyPattern(ref Dictionary<Texture, int> numberList,in List<Texture> textureList)
     {
-        foreach(var texture in textureList)
+        List<int> choicesNums = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+        foreach (var texture in textureList)
         {
-            int number = Random.Range(0, 9);
-            numberList.Add(texture, number);
-            Debug.Log("number" + texture + numberList[texture]);
+            int number = Random.Range(0, choicesNums.Count);
+
+            numberList.Add(texture, choicesNums[number]);
+            //Debug.Log("number" + texture + numberList[texture]);
+
+            choicesNums.RemoveAt(number);
         }
+    }
+
+    public int FetchNumber(Texture tex, NumberType type)
+    {
+        int result = 0;
+        switch (type)
+        {
+            case NumberType.WallPattern:
+                result = m_keyWallPattern[tex];
+                break;
+
+            case NumberType.WallColor:
+                result = m_keyWallColor[tex];
+                break;
+
+            case NumberType.DoorColor:
+                result = m_keyDoorColor[tex];
+                break;
+        }
+        return result;
     }
 }

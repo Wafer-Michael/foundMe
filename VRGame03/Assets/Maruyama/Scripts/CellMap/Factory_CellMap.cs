@@ -87,7 +87,20 @@ namespace Factory
 					//Cellのパラメータを設定
 					var cellParam = new Cell.Parametor(param.oneCellRect);
 					var cell = maru.Generic.Construct<T, int, Cell.Parametor>(index, cellParam);			//Cell生成
-					cell.SetPosition(position);									//Cellの位置変更
+					cell.SetPosition(position);                                 //Cellの位置変更
+
+					//障害物に重なっている場合は、非アクティブセルに変更
+					float quadOneRectWidth = halfOneRectWidth * 0.5f;	//1/4スケール分埋まっていたら、非アクティブにする。
+					float sphereRange = quadOneRectWidth;
+					var obstacleLayer = LayerMask.GetMask(maru.UtilityObstacle.DEFAULT_RAY_OBSTACLE_LAYER_STRINGS);
+					var colliders = Physics.OverlapSphere(position, sphereRange, obstacleLayer);  //オブジェクト内部に存在するかどうか
+					if(colliders.Length != 0) {		//一つでもあるなら、埋まっている
+						cell.SetIsActive(false);    //非アクティブ状態にする。
+						var impactCell = cell as ImpactCell;
+                        if (impactCell != null) {
+							impactCell.SetDangerValue(0);
+                        }
+					}
 
 					result.Add(cell); //resultに追加
 				}

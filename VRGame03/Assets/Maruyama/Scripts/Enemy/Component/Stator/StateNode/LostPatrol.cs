@@ -9,7 +9,7 @@ public class LostPatrol : EnemyStateNodeBase<EnemyBase>
 {
     private enum TaskEnum
     {
-           
+        
     }
 
     public struct Parametor 
@@ -91,19 +91,13 @@ public class LostPatrol : EnemyStateNodeBase<EnemyBase>
         var wayPointsMap = AIDirector.Instance.GetWayPointsMap();   //ウェイポイントマップ
         var selfNode = m_selfAstarNodeController.GetNode();         //自分が所属する開始ノード
 
-        //正面方向の危険度の影響マップを展開
-
-
-        //正面、斜め、横の順で、危険度が高い場所を検索。
+        //ロストした場所付近で危険度が高い(まだ確認を行っていない)場所を取得する。
         var openDatas = new Queue<AstarNode>();
         openDatas.Enqueue(selfNode);
 
         //openDataが空になるまで処理を続ける。
         while (openDatas.Count != 0) {
-            //その方向が正面でなかったら、処理を飛ばす。
-
-            //正面方向で一番危険度が高い位置を取得
-
+            //八方向のノードを取得する。
 
         }
 

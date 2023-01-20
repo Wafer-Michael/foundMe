@@ -104,10 +104,11 @@ public class FieldImpactCellMap : FieldMapBase
             //セルの危険度に合わせた色を表示する
             var drawObject = debugDrawObjects[index];
 
-            //カラー設定
-            //var alpha = m_debugDrawParam.color.a;   //α値は変えたくないから保存
-            //var color = m_debugDrawParam.color * cell.GetImpactData().dangerValue;  //カラーを危険度に合わせて変更
-            //color.a = alpha;    //α値の設定
+            if (!cell.IsActive()) {
+                drawObject.GizmosColor = Color.black;
+                index++;
+                continue;
+            }
 
             float value = 1 - cell.GetImpactData().dangerValue;
             var color = new Color(1, value, value, m_debugDrawParam.color.a);

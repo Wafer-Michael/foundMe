@@ -58,6 +58,9 @@ public class Cell : I_GraphNode
 
 	public int GetIndex() { return m_index; }
 
+	public void SetIsActive(bool isActive) { m_isActive = isActive; }
+
 	public bool IsActive() { return m_isActive; }
+
 
 }

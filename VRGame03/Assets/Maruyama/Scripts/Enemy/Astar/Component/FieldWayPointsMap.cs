@@ -41,6 +41,8 @@ public class FieldWayPointsMap : FieldMapBase
 
     public WayPointsMap GetWayPointsMap() { return m_wayPointsMap; }
 
+    public Factory.WayPointsMap_FloodFill.Parametor GetFactoryParametor() { return m_factoryParametor; }
+
     //--------------------------------------------------------------------------------------
     /// デバッグ
     //--------------------------------------------------------------------------------------

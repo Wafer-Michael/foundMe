@@ -7,17 +7,30 @@ using UnityEngine;
 /// </summary>
 public class LostPatrol : EnemyStateNodeBase<EnemyBase>
 {
+    private enum TaskEnum
+    {
+           
+    }
+
     public struct Parametor 
     {
-        public float time;      //探索をする最大時間
+        public float time;                      //探索をする最大時間
+        public AstarSeek.Parametor seekParam;   //追従パラメータ
     }
 
     private Parametor m_param;  //パラメータ
 
     private GameTimer m_timer;  //タイマー管理クラス
 
+    private TargetManager m_targetManager;                          //ターゲット管理
+    private AstarSeek m_astarSeek;                                  //AstarSeekの設定
+    private SelfAstarNodeController m_selfAstarNodeController;      //自分自身が所属するAstarNodeの検索
+    private SelfImpactCellController m_selfImpactCellController;    //自分が所属するセルを管理する。
+
+    private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
+
     public LostPatrol(EnemyBase owner) :
-        base(owner)
+        this(owner, new Parametor() { time = 10.0f, seekParam = AstarSeek.DEFAULT_PARAMETOR })
     { }
 
     public LostPatrol(EnemyBase owner, Parametor parametor) :
@@ -25,24 +38,76 @@ public class LostPatrol : EnemyStateNodeBase<EnemyBase>
     {
         m_param = parametor;
         m_timer = new GameTimer();
+
+        m_targetManager = owner.GetComponent<TargetManager>();
+        m_astarSeek = owner.GetComponent<AstarSeek>();
+        m_selfAstarNodeController = owner.GetComponent<SelfAstarNodeController>();
+    }
+
+    protected override void ReserveChangeComponents()
+    {
+        base.ReserveChangeComponents();
+
+        var owner = GetOwner();
+        AddChangeComp(owner, true, false);
     }
 
     public override void OnStart()
     {
         base.OnStart();
 
-        //影響マップを元に、徘徊ルートを決める。
-        
+        //AstarSeekのパラメータを設定
+        m_astarSeek.SetParametor(m_param.seekParam);
+
+        StartAstar();   //Astarの開始
     }
 
     public override bool OnUpdate()
+    {   
+        m_timer.UpdateTimer();      //時間計測
+
+        if (m_astarSeek.IsEnd()) {  //AstarSeekが終了したら
+            StartAstar();
+        }
+
+        return IsEnd();     //一定時間たったら、探索を終了する。
+    }
+
+    private void StartAstar()
     {
-        //常に影響マップを更新し続ける。
+        var factoryParametor = AIDirector.Instance.GetFieldWayPointsMap_FactoryParametor();
+        var wayPointsMap = AIDirector.Instance.GetWayPointsMap().GetGraph();
+        var selfNode = m_selfAstarNodeController.GetNode();
+        var targetPosition = CalculateTargetPosition();
 
-        
-        m_timer.UpdateTimer();   //時間計測
+        //Astarの開始
+        m_astarSeek.StartAstar(selfNode, targetPosition, wayPointsMap, factoryParametor.intervalRange);
+    }
 
-        return IsEnd();          //一定時間たったら、探索を終了する。
+    private Vector3 CalculateTargetPosition()
+    {
+        var result = Vector3.zero;
+
+        var wayPointsMap = AIDirector.Instance.GetWayPointsMap();   //ウェイポイントマップ
+        var selfNode = m_selfAstarNodeController.GetNode();         //自分が所属する開始ノード
+
+        //正面方向の危険度の影響マップを展開
+
+
+        //正面、斜め、横の順で、危険度が高い場所を検索。
+        var openDatas = new Queue<AstarNode>();
+        openDatas.Enqueue(selfNode);
+
+        //openDataが空になるまで処理を続ける。
+        while (openDatas.Count != 0) {
+            //その方向が正面でなかったら、処理を飛ばす。
+
+            //正面方向で一番危険度が高い位置を取得
+
+
+        }
+
+        return result;
     }
 
     private bool IsEnd() { return m_timer.IsTimeUp; }

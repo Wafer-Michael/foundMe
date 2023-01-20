@@ -15,6 +15,9 @@ public class Observer_JackUIPoint : MonoBehaviour
     [SerializeField]
     private JackController m_jackController;            //ジャックコントローラー
 
+    [SerializeField]
+    private StartJackEffect m_jackEffect;               //ジャックエフェクト
+
     private Selectable_VRUI m_currentPointUI = null;    //現在選択中のUI
 
     private void Start()
@@ -69,6 +72,16 @@ public class Observer_JackUIPoint : MonoBehaviour
     }
 
     public bool IsClose() { return m_currentPointUI == null; }
+
+    public void StartJackEffect()
+    {
+        //カレントUIがnullなら処理を飛ばす。
+        if (m_currentPointUI == null) {
+            return;
+        }
+
+        m_jackEffect.StartFade();
+    }
 
     public void StartJack()
     {

@@ -23,6 +23,10 @@ public class Observer_ImpactCellMap : MonoBehaviour
     {
         foreach(var cell in m_fieldCellMap.GetCellMap().GetCells())
         {
+            if (!cell.IsActive()) {
+                continue;
+            }
+
             UpdateDangerValue(cell);
         }
     }

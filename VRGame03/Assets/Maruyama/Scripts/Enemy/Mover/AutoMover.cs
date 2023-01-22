@@ -53,13 +53,11 @@ public class AutoMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsNotMove())
-        {
+        if (IsNotMove())  {
             return;
         }
 
-        if (IsRotation)
-        {
+        if (IsRotation) {
             RotationUpdate();
             //return;
         }
@@ -72,28 +70,6 @@ public class AutoMover : MonoBehaviour
         };
 
         action?.Invoke();
-    }
-
-    private void FixedUpdate()
-    {
-        //if (IsNotMove())
-        //{
-        //    return;
-        //}
-
-        //if (IsRotation)
-        //{
-        //    RotationUpdate();
-        //    //return;
-        //}
-
-        //System.Action action = m_moveType switch {
-        //    MoveType.Transform => TransformMove,
-        //    MoveType.Velocity => VelocityMove,
-        //    _ => null
-        //};
-
-        //action?.Invoke();
     }
 
     private void TransformMove()
@@ -131,8 +107,7 @@ public class AutoMover : MonoBehaviour
         var distance = (nextPosition - transform.position).magnitude;
 
         var changeRange = m_moveSpeedPerSecond * Time.deltaTime;
-        if (distance <= changeRange)
-        {
+        if (distance <= changeRange) {
             m_nowIndex = nextIndex;
         }
 
@@ -251,4 +226,15 @@ public class AutoMover : MonoBehaviour
 
         m_rotationController.SetDirection(direction);
     }
+
+    public Vector3 GetFirstPosition()
+    {
+        if(m_transforms.Count == 0) {
+            return transform.position;
+        }
+
+        return m_transforms[0].position;
+    }
+
+    public void ResetProcess() { m_nowIndex = 0; }
 }

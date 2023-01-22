@@ -64,6 +64,7 @@ namespace StateNode
             base.OnStart();
 
             //AstarSeekのパラメータを設定
+            m_timer.ResetTimer(m_param.time);
             m_astarSeek.SetParametor(m_param.seekParam);
 
             StartAstar();   //Astarの開始

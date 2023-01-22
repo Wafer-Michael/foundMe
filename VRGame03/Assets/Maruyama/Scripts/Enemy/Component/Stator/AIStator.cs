@@ -76,9 +76,11 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 
         //LostPatrol
         m_stateMachine.AddEdge(StateType.LostPatrol, StateType.ComebackPatrol, IsTrue, (int)StateType.ComebackPatrol, true);
+        m_stateMachine.AddEdge(StateType.LostPatrol, StateType.Chase, IsFindState, (int)StateType.Chase);
 
         //ComebackPatrol
         m_stateMachine.AddEdge(StateType.ComebackPatrol, StateType.Patrol, IsTrue, (int)StateType.Patrol, true);
+        m_stateMachine.AddEdge(StateType.ComebackPatrol, StateType.Chase, IsFindState, (int)StateType.Chase);
 
         //Buttle
         m_stateMachine.AddEdge(StateType.Buttle, StateType.Chase, IsTrue, (int)StateType.Chase, true);

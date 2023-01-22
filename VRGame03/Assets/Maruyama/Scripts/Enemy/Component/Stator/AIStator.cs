@@ -53,6 +53,10 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 
         m_stateMachine.AddNode(StateType.Chase, new StateNode.Chase(m_enemy));      //Chase
 
+        m_stateMachine.AddNode(StateType.LostPatrol, new StateNode.LostPatrol(m_enemy));    //LostPatrol
+
+        m_stateMachine.AddNode(StateType.ComebackPatrol, new StateNode.ComebackPatrol(m_enemy)); //ComebackPatrol
+
         m_stateMachine.AddNode(StateType.Buttle, new StateNode.Buttle(m_enemy));    //Buttle
     }
 
@@ -67,7 +71,16 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
 
         //Chase
         m_stateMachine.AddEdge(StateType.Chase, StateType.Buttle, IsButtleState, (int)StateType.Buttle);
-        m_stateMachine.AddEdge(StateType.Chase, StateType.Patrol, IsTrue, (int)StateType.Patrol, true);
+        //m_stateMachine.AddEdge(StateType.Chase, StateType.Patrol, IsTrue, (int)StateType.Patrol, true);
+        m_stateMachine.AddEdge(StateType.Chase, StateType.LostPatrol, IsTrue, (int)StateType.LostPatrol, true);
+
+        //LostPatrol
+        m_stateMachine.AddEdge(StateType.LostPatrol, StateType.ComebackPatrol, IsTrue, (int)StateType.ComebackPatrol, true);
+        m_stateMachine.AddEdge(StateType.LostPatrol, StateType.Chase, IsFindState, (int)StateType.Chase);
+
+        //ComebackPatrol
+        m_stateMachine.AddEdge(StateType.ComebackPatrol, StateType.Patrol, IsTrue, (int)StateType.Patrol, true);
+        m_stateMachine.AddEdge(StateType.ComebackPatrol, StateType.Chase, IsFindState, (int)StateType.Chase);
 
         //Buttle
         m_stateMachine.AddEdge(StateType.Buttle, StateType.Chase, IsTrue, (int)StateType.Chase, true);

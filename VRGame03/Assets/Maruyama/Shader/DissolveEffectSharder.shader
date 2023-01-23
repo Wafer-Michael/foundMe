@@ -61,12 +61,6 @@ Shader "Unlit/DissolveEffectSharder"
 
             fixed4 frag(v2f IN) : SV_Target
             {
-                //float maskHeight = tex2D(_MaskTex, IN.texcoord).r;
-                //if (maskHeight > _Height) {
-                    //discard;
-                //}
-                //return tex2D(_MainTex, IN.texcoord);
-
                 float maskHeight = tex2D(_MaskTex, IN.texcoord).r;
                 if (maskHeight > _Height) {
                     discard;

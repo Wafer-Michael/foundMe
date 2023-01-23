@@ -30,13 +30,6 @@ public class DissolveFadeSprite : FadeObject
     [SerializeField]
     private UnityEvent m_finishEvent;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            FadeStart();
-        }
-    }
 
     public override void FadeStart()
     {
@@ -51,6 +44,16 @@ public class DissolveFadeSprite : FadeObject
         if (!m_isFading)
         {
             m_fadeType = type;
+            StartCoroutine(Fading(m_fadeTime));
+        }
+    }
+    public void FadeStart(FadeType type, UnityAction finishEvent)
+    {
+        if (!m_isFading)
+        {
+            m_fadeType = type;
+            m_finishEvent.AddListener(finishEvent);
+            //m_finishEvent.AddListener(() => m_fadeType = FadeType.FadeOut);
             StartCoroutine(Fading(m_fadeTime));
         }
     }
@@ -89,7 +92,8 @@ public class DissolveFadeSprite : FadeObject
 
         m_isFading = false;
 
-        m_finishEvent.Invoke();
+        m_finishEvent?.Invoke();
+        m_finishEvent = new UnityEvent();
     }
 
     private void Reset()
@@ -99,6 +103,8 @@ public class DissolveFadeSprite : FadeObject
             //m_stretchController = GetComponentInParent<UIStretchController>();
         }
     }
+
+    public void SetFadeType(FadeType type) { m_fadeType = type; }
 
     private void Awake()
     {

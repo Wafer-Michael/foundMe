@@ -62,6 +62,8 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
     private void Update()
     {
         m_stateMachine.OnUpdate();
+
+
     }
 
     
@@ -92,8 +94,14 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
 
     public void Access(GameObject other)
     {
-        m_doorLock.AccessKey();
-        //Open(other);
+        //ƒƒbƒNó‘Ô‚È‚çA
+        if(m_doorLock.IsLock){
+            m_doorLock.AccessKey();
+            
+        }
+        else {
+            Open(other);
+        }
     }
 
     public GameObject GetGameObject() => gameObject;

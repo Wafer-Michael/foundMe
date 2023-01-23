@@ -352,7 +352,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_TargetDisplay: 0
+  m_TargetDisplay: 1
 --- !u!114 &2159125710767666256
 MonoBehaviour:
   m_ObjectHideFlags: 0

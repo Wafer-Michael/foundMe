@@ -51,7 +51,7 @@ public class AttackAnimationController : MonoBehaviour
 
     private void AnimationUpdate()
     {
-        transform.position += m_jumpVector;
+        transform.position += m_jumpVector * Time.deltaTime;
         m_jumpVector += new Vector3(0.0f, -m_gravitySpeed, 0.0f) * Time.deltaTime;
     }
 

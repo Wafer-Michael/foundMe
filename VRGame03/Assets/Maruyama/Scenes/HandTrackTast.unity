@@ -4857,6 +4857,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VRPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 7266189811413614306, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_dissolveFadeSprite
+      value: 
+      objectReference: {fileID: 1732826024}
     - target: {fileID: 8389773767073274582, guid: 28e17b2ce58866046a67bb2c3df275a0,
         type: 3}
       propertyPath: m_IsActive

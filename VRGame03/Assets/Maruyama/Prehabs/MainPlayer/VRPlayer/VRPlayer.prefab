@@ -8626,6 +8626,7 @@ MonoBehaviour:
   m_cameraUI: {fileID: 1986127561677055283}
   m_jackController: {fileID: 7266189811413614306}
   m_jackEffect: {fileID: 2093524807}
+  m_dissolveFadeSprite: {fileID: 1986127562601325413}
 --- !u!1 &1986127563495309995
 GameObject:
   m_ObjectHideFlags: 0
@@ -18113,6 +18114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_param:
     time: 5
+  m_dissolveFadeSprite: {fileID: 1986127562601325413}
 --- !u!1 &8777577967117937310
 GameObject:
   m_ObjectHideFlags: 0
@@ -18576,6 +18578,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6271948144681858738}
     m_Modifications:
+    - target: {fileID: 1510671079431615395, guid: 24c599c276bd1c5418f5ad57f2c8fcba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8069978519593637401, guid: 24c599c276bd1c5418f5ad57f2c8fcba,
         type: 3}
       propertyPath: m_Name
@@ -19936,6 +19943,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DissobleFadeSprite
       objectReference: {fileID: 0}
+    - target: {fileID: 8482129492568640382, guid: 071452fa13684ea4894e85f6e00880ed,
+        type: 3}
+      propertyPath: m_fadeType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8482129492568640383, guid: 071452fa13684ea4894e85f6e00880ed,
         type: 3}
       propertyPath: m_RootOrder
@@ -19999,3 +20011,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7937233340638029851}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1986127562601325413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8482129492568640382, guid: 071452fa13684ea4894e85f6e00880ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 7937233340638029851}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2aa499975d41d740b3539503540e7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AttackAnimationController : MonoBehaviour
 {
-    private Vector3 m_initializePosition;
-
     private GameTimer m_timer = new GameTimer();
 
     [SerializeField]
@@ -32,8 +30,6 @@ public class AttackAnimationController : MonoBehaviour
 
     private void Awake()
     {
-        m_initializePosition = transform.position;
-
         m_velocityManager = GetComponent<VelocityManager>();
         m_targetManager = GetComponent<TargetManager>();
     }
@@ -41,10 +37,6 @@ public class AttackAnimationController : MonoBehaviour
     private void Update()
     {
         if (!IsUpdate) {
-            return;
-        }
-
-        if (m_timer.IsTimeUp) {
             return;
         }
 
@@ -64,9 +56,12 @@ public class AttackAnimationController : MonoBehaviour
     }
 
     private void EndProccess() {
+        Debug.Log("ÅöÅöEnd");
         IsUpdate = false;
         var position = transform.position;
         transform.position = new Vector3(position.x, 0, position.z);
+
+        m_velocityManager.enabled = true;
     }
 
     public void AttackStart() {
@@ -77,7 +72,8 @@ public class AttackAnimationController : MonoBehaviour
         m_timer.ResetTimer(m_time);
         IsUpdate = true;
 
-        m_targetManager.SetCurrentTarget(testTarget);
+        m_velocityManager.ResetAll();
+        m_velocityManager.enabled = false;
 
         m_jumpVector = Vector3.zero;
         var toTarget = m_targetManager.GetCurrentTarget().transform.position - transform.position;
@@ -87,9 +83,14 @@ public class AttackAnimationController : MonoBehaviour
 
     private bool IsEnd() { return transform.position.y < 0; }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        var damaged = other.GetComponent<I_Damaged>();
-        damaged?.Damaged(new DamageData(1.0f, this.gameObject, other));
+        if (!IsUpdate)
+        {
+            return;
+        }
+
+        var damaged = other.gameObject.GetComponent<I_Damaged>();
+        damaged?.Damaged(new DamageData(1.0f, this.gameObject, other.collider));
     }
 }

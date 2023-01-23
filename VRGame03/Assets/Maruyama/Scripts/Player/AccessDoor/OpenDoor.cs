@@ -45,9 +45,9 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
 
     private void Awake()
     {
-        if (!m_doorLock) {
+        //if (!m_doorLock) {
             m_doorLock = GetComponent<DoorLock>();
-        }
+        //}
 
         //回転コントローラーがないなら
         if(m_param.rotationControllerAxis == null) {
@@ -92,8 +92,8 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
 
     public void Access(GameObject other)
     {
-        //m_doorLock.AccessKey();
-        Open(other);
+        m_doorLock.AccessKey();
+        //Open(other);
     }
 
     public GameObject GetGameObject() => gameObject;

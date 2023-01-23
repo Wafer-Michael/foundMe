@@ -13,7 +13,6 @@ public class JackController : MonoBehaviour
         public float time; //時間
     }
 
-
     /// <summary>
     /// 戻る用のデータ
     /// </summary>
@@ -49,8 +48,10 @@ public class JackController : MonoBehaviour
         get => m_isJack.Value;
     }
 
-    private void Awake()
-    {
+    [SerializeField]
+    private DissolveFadeSprite m_dissolveFadeSprite;
+
+    private void Awake() {
         m_timer = new GameTimer(0.0f);
     }
 
@@ -91,14 +92,19 @@ public class JackController : MonoBehaviour
     /// </summary>
     private void CamBack()
     {
-        if (!IsJack) {  //ジャック状態ならやる必要がない。
+        if (!IsJack) {  //ジャック状態でないなら、やる必要がない。
             return;
         }
 
-        transform.position = m_camBackData.position;
-        transform.forward = m_camBackData.forward;
+        //フェード開始
+        UnityEngine.Events.UnityAction finishAction = () => m_dissolveFadeSprite.FadeStart(FadeObject.FadeType.FadeIn);
+        finishAction += () => {
+            transform.position = m_camBackData.position;
+            transform.forward = m_camBackData.forward;
+            IsJack = false;
+        };
 
-        IsJack = false;
+        m_dissolveFadeSprite.FadeStart(FadeObject.FadeType.FadeOut, finishAction);  //フェードスタート
     }
 
     /// <summary>

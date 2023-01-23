@@ -41,6 +41,7 @@ public class DoorLock : MonoBehaviour
         DecisionDoorNumber();
         m_isLock = true;
         m_numberText.SetActive(true);
+        m_numberText.GetComponent<DoorLockUI>().ResetNumber();
         StartCoroutine("Unlock");
         this.enabled = false;
     }
@@ -211,7 +212,6 @@ public class DoorLock : MonoBehaviour
                 if (tex)
                 {
                     result = tex;
-                    Debug.Log(result.name);
                 }
             }
         }

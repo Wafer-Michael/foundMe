@@ -76,4 +76,12 @@ public class DoorLockUI : MonoBehaviour
 
         m_texts[(int)m_digit].text = text.ToString(); // •\Ž¦
     }
+
+    public void ResetNumber()
+    {
+        foreach(var text in m_texts)
+        {
+            text.text = "0";
+        }
+    }
 }

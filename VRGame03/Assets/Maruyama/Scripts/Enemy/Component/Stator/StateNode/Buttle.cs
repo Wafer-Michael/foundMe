@@ -13,6 +13,7 @@ namespace StateNode
 
         private TargetManager m_targetManager;  //ターゲット監視
         private VelocityManager m_velocityManager;
+        private AttackAnimationController m_attackAnimationController;
 
         private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
@@ -21,6 +22,7 @@ namespace StateNode
         {
             m_targetManager = owner.GetComponent<TargetManager>();
             m_velocityManager = owner.GetComponent<VelocityManager>();
+            m_attackAnimationController = owner.GetComponent<AttackAnimationController>();
 
             DefineTask();
         }
@@ -72,9 +74,7 @@ namespace StateNode
                     return;
                 }
 
-                const float AttackValue = 1.0f;
-                var damaged = target.GetComponent<I_Damaged>();
-                damaged?.Damaged(new DamageData(AttackValue, GetOwner().gameObject));
+                m_attackAnimationController.AttackStart();
             };
 
             m_taskList.DefineTask(TaskEnum.Attack, attackFunc, null, null);

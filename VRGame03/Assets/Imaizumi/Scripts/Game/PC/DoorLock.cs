@@ -27,7 +27,6 @@ public class DoorLock : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(m_isLock);
         if (Input.GetKeyDown(KeyCode.T))
         {
             AccessKey();
@@ -40,8 +39,8 @@ public class DoorLock : MonoBehaviour
     void AccessKey()
     {
         DecisionDoorNumber();
-        Debug.Log("locked");
         m_isLock = true;
+        m_numberText.SetActive(true);
         StartCoroutine("Unlock");
         this.enabled = false;
     }
@@ -67,6 +66,7 @@ public class DoorLock : MonoBehaviour
 
         Debug.Log("unlocked");
 
+        m_numberText.SetActive(false);
         this.enabled = true;
         yield break;
     }
@@ -146,7 +146,8 @@ public class DoorLock : MonoBehaviour
     /// </summary>
     void DecisionDoorNumber()
     {
-        var doorTex = FetchTextureName(this.gameObject); // ドアのテクスチャ
+        var door = FindChildTag(this.gameObject, "Door");
+        var doorTex = FetchTextureName(door); // ドアのテクスチャ
 
         var wall = FindChildTag(this.gameObject.transform.parent.gameObject, "Wall"); // 壁
         var wallTex = FetchTextureName(wall); // 壁のテクスチャ    

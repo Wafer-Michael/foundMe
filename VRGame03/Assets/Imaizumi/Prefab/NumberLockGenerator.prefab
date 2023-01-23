@@ -44,10 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb2ff9cd49a01f4fb5ebd98f522446a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_wallPatterns: []
-  m_wallColors: []
+  m_wallPatterns:
+  - {fileID: 2800000, guid: 897219dd2763d56489d90eaad661b96d, type: 3}
+  - {fileID: 2800000, guid: c144984de86b64540900a15375462b54, type: 3}
+  - {fileID: 2800000, guid: f722827773953b8458333ed4cc799249, type: 3}
+  m_wallColors:
+  - {fileID: 2800000, guid: 897219dd2763d56489d90eaad661b96d, type: 3}
+  - {fileID: 2800000, guid: c144984de86b64540900a15375462b54, type: 3}
+  - {fileID: 2800000, guid: f722827773953b8458333ed4cc799249, type: 3}
   m_doorTextures:
-  - {fileID: 2800000, guid: 153c8e15f7f6c452ca50f6795813ed39, type: 3}
-  - {fileID: 2800000, guid: 57dfdce0eaf2f48a9bd9e60e920e446b, type: 3}
-  - {fileID: 2800000, guid: 60706f973daf4764e81c846ce1a8e183, type: 3}
-  - {fileID: 2800000, guid: f9c6074c5a78e71448f9efd3013cadda, type: 3}
+  - {fileID: 2800000, guid: 40712d53604716f40af40cc8712a4183, type: 3}
+  - {fileID: 2800000, guid: 64fa103f2226ae943a17e15e1f91bb5a, type: 3}

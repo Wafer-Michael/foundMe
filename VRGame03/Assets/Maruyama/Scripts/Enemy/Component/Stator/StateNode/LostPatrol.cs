@@ -2,113 +2,173 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// playerを見失った時の徘徊ステート
-/// </summary>
-public class LostPatrol : EnemyStateNodeBase<EnemyBase>
+using System.Linq;
+
+namespace StateNode
 {
-    private enum TaskEnum
+    /// <summary>
+    /// playerを見失った時の徘徊ステート
+    /// </summary>
+    public class LostPatrol : EnemyStateNodeBase<EnemyBase>
     {
-           
-    }
-
-    public struct Parametor 
-    {
-        public float time;                      //探索をする最大時間
-        public AstarSeek.Parametor seekParam;   //追従パラメータ
-    }
-
-    private Parametor m_param;  //パラメータ
-
-    private GameTimer m_timer;  //タイマー管理クラス
-
-    private TargetManager m_targetManager;                          //ターゲット管理
-    private AstarSeek m_astarSeek;                                  //AstarSeekの設定
-    private SelfAstarNodeController m_selfAstarNodeController;      //自分自身が所属するAstarNodeの検索
-    private SelfImpactCellController m_selfImpactCellController;    //自分が所属するセルを管理する。
-
-    private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
-
-    public LostPatrol(EnemyBase owner) :
-        this(owner, new Parametor() { time = 10.0f, seekParam = AstarSeek.DEFAULT_PARAMETOR })
-    { }
-
-    public LostPatrol(EnemyBase owner, Parametor parametor) :
-        base(owner)
-    {
-        m_param = parametor;
-        m_timer = new GameTimer();
-
-        m_targetManager = owner.GetComponent<TargetManager>();
-        m_astarSeek = owner.GetComponent<AstarSeek>();
-        m_selfAstarNodeController = owner.GetComponent<SelfAstarNodeController>();
-    }
-
-    protected override void ReserveChangeComponents()
-    {
-        base.ReserveChangeComponents();
-
-        var owner = GetOwner();
-        AddChangeComp(owner, true, false);
-    }
-
-    public override void OnStart()
-    {
-        base.OnStart();
-
-        //AstarSeekのパラメータを設定
-        m_astarSeek.SetParametor(m_param.seekParam);
-
-        StartAstar();   //Astarの開始
-    }
-
-    public override bool OnUpdate()
-    {   
-        m_timer.UpdateTimer();      //時間計測
-
-        if (m_astarSeek.IsEnd()) {  //AstarSeekが終了したら
-            StartAstar();
-        }
-
-        return IsEnd();     //一定時間たったら、探索を終了する。
-    }
-
-    private void StartAstar()
-    {
-        var factoryParametor = AIDirector.Instance.GetFieldWayPointsMap_FactoryParametor();
-        var wayPointsMap = AIDirector.Instance.GetWayPointsMap().GetGraph();
-        var selfNode = m_selfAstarNodeController.GetNode();
-        var targetPosition = CalculateTargetPosition();
-
-        //Astarの開始
-        m_astarSeek.StartAstar(selfNode, targetPosition, wayPointsMap, factoryParametor.intervalRange);
-    }
-
-    private Vector3 CalculateTargetPosition()
-    {
-        var result = Vector3.zero;
-
-        var wayPointsMap = AIDirector.Instance.GetWayPointsMap();   //ウェイポイントマップ
-        var selfNode = m_selfAstarNodeController.GetNode();         //自分が所属する開始ノード
-
-        //正面方向の危険度の影響マップを展開
-
-
-        //正面、斜め、横の順で、危険度が高い場所を検索。
-        var openDatas = new Queue<AstarNode>();
-        openDatas.Enqueue(selfNode);
-
-        //openDataが空になるまで処理を続ける。
-        while (openDatas.Count != 0) {
-            //その方向が正面でなかったら、処理を飛ばす。
-
-            //正面方向で一番危険度が高い位置を取得
-
+        private enum TaskEnum
+        {
 
         }
 
-        return result;
+        public struct Parametor
+        {
+            public float time;                      //探索をする最大時間
+            public AstarSeek.Parametor seekParam;   //追従パラメータ
+        }
+
+        private Parametor m_param;  //パラメータ
+
+        private GameTimer m_timer;  //タイマー管理クラス
+
+        private TargetManager m_targetManager;                          //ターゲット管理
+        private AstarSeek m_astarSeek;                                  //AstarSeekの設定
+        private SelfAstarNodeController m_selfAstarNodeController;      //自分自身が所属するAstarNodeの検索
+        private SelfImpactCellController m_selfImpactCellController;    //自分が所属するセルを管理する。
+
+        private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
+
+        public LostPatrol(EnemyBase owner) :
+            this(owner, new Parametor() { time = 10.0f, seekParam = AstarSeek.DEFAULT_PARAMETOR })
+        { }
+
+        public LostPatrol(EnemyBase owner, Parametor parametor) :
+            base(owner)
+        {
+            m_param = parametor;
+            m_timer = new GameTimer();
+
+            m_targetManager = owner.GetComponent<TargetManager>();
+            m_astarSeek = owner.GetComponent<AstarSeek>();
+            m_selfAstarNodeController = owner.GetComponent<SelfAstarNodeController>();
+            m_selfImpactCellController = owner.GetComponent<SelfImpactCellController>();
+
+            Debug.Log("★LostPatrol");
+        }
+
+        protected override void ReserveChangeComponents()
+        {
+            base.ReserveChangeComponents();
+
+            var owner = GetOwner();
+            AddChangeComp(owner.GetComponent<AstarSeek>(), true, false);
+        }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+
+            //AstarSeekのパラメータを設定
+            m_timer.ResetTimer(m_param.time);
+            m_astarSeek.SetParametor(m_param.seekParam);
+
+            StartAstar();   //Astarの開始
+        }
+
+        public override bool OnUpdate()
+        {
+            Debug.Log("★LostPatrol");
+
+            m_timer.UpdateTimer();      //時間計測
+
+            if (m_astarSeek.IsEnd()) {  //AstarSeekが終了したら
+                StartAstar();
+            }
+
+            return IsEnd();     //一定時間たったら、探索を終了する。
+        }
+
+        private void StartAstar()
+        {
+            var factoryParametor = AIDirector.Instance.GetFieldWayPointsMap_FactoryParametor();
+            var wayPointsMap = AIDirector.Instance.GetWayPointsMap().GetGraph();
+            var selfNode = m_selfAstarNodeController.GetNode();
+            var targetPosition = CalculateTargetPosition();
+
+            //Astarの開始
+            m_astarSeek.StartAstar(selfNode, targetPosition, wayPointsMap, factoryParametor.intervalRange);
+        }
+
+        private Vector3 CalculateTargetPosition()
+        {
+            var result = Vector3.zero;
+
+            var cellMap = AIDirector.Instance.GetImpactCellMap();       //セルマップ
+            var selfCell = m_selfImpactCellController.GetCurrentCell(); //現在のセル
+
+            //ロストした場所付近で危険度が高い(まだ確認を行っていない)場所を取得する。
+            var openDatas = new Queue<ImpactCell>();
+            openDatas.Enqueue(selfCell);
+            var closeDatas = new Queue<ImpactCell>();
+
+            //openDataが空になるまで処理を続ける。
+            while (openDatas.Count != 0)
+            {
+                var currentCell = openDatas.Dequeue();
+                closeDatas.Enqueue(currentCell);
+                //八方向のノードを取得する。
+                var cells = cellMap.FindEightDirectionCells(currentCell.GetIndex());
+
+                foreach (var cell in cells)
+                {
+                    //追加OpenDataに追加できるかを判断
+                    if (IsAddOpenData(openDatas, closeDatas, cell))
+                    {
+                        openDatas.Enqueue(cell);
+                    }
+                }
+            }
+
+            //クローズデータが存在しないなら、処理を停止
+            if (closeDatas.Count == 0) {
+                return result;
+            }
+
+            //オープンデータの中で一番危険度の高い場所を検索
+            var sortCloseDatas = closeDatas.OrderByDescending(value => { return value.GetDangerValue(); });
+            result = sortCloseDatas.ToArray()[0].GetPosition();
+
+            //Debug.Log("★" + result.ToString());
+            //Debug.Log("★" + sortCloseDatas.ToArray()[0].GetDangerValue().ToString());
+
+            return result;
+        }
+
+        private bool IsAddOpenData(Queue<ImpactCell> openDatas, Queue<ImpactCell> closeDatas, ImpactCell currentCell)
+        {
+            if (!currentCell.IsActive()) {
+                //return false;
+            }
+
+            //一定距離以上なら追加しない
+            const float Range = 5.0f;
+            var range = (currentCell.GetPosition() - GetOwner().transform.position).magnitude;
+            if (range > Range)
+            {
+                return false;
+            }
+
+            if (openDatas.Contains(currentCell))
+            {
+                return false;
+            }
+
+            if (closeDatas.Contains(currentCell))
+            {
+                return false;
+            }
+
+            //後ろ側なら処理をしない。
+
+            return true;
+        }
+
+        private bool IsEnd() { return m_timer.IsTimeUp; }
     }
 
-    private bool IsEnd() { return m_timer.IsTimeUp; }
 }

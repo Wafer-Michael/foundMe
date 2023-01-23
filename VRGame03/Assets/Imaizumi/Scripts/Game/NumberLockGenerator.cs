@@ -19,8 +19,11 @@ public class NumberLockGenerator : MonoBehaviour
     }
 
     [SerializeField]
-    List<Texture> m_wallTextures = new List<Texture>();
+    List<Texture> m_wallPatterns = new List<Texture>();
     Dictionary<Texture, int> m_keyWallPattern = new Dictionary<Texture, int>();
+
+    [SerializeField]
+    List<Texture> m_wallColors = new List<Texture>();
     Dictionary<Texture, int> m_keyWallColor = new Dictionary<Texture, int>();
 
     [SerializeField]
@@ -30,8 +33,8 @@ public class NumberLockGenerator : MonoBehaviour
 
     void Start()
     {
-        MakeKeyPattern(ref m_keyWallPattern, in m_wallTextures);
-        MakeKeyPattern(ref m_keyWallColor, in m_wallTextures);
+        MakeKeyPattern(ref m_keyWallPattern, in m_wallPatterns);
+        MakeKeyPattern(ref m_keyWallColor, in m_wallColors);
         MakeKeyPattern(ref m_keyDoorColor, in m_doorTextures);
     }
 

@@ -121,7 +121,7 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
             return false;
         }
 
-        const float AttackRange = 2.0f;
+        const float AttackRange = 3.0f;
         if(m_eyeRange.IsInEyeRange(target, AttackRange)) {
             return true;
         }

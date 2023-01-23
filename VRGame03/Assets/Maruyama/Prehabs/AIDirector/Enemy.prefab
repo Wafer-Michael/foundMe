@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 2441896735161737633}
   - component: {fileID: 2441896735161737634}
   - component: {fileID: 2441896735161737635}
+  - component: {fileID: 902869422}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -372,6 +373,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isMover: 1
+--- !u!114 &902869422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5543782089005006320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed831d95a1b5e143b6fd2a2c29d94e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_time: 3.4028235e+38
+  m_jumpForce: 15
+  m_moveSpeed: 6
+  m_gravitySpeed: 0.48
+  testTarget: {fileID: 0}
 --- !u!1 &5543782089125053534
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,7 +774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9030498705882436655
 Transform:
   m_ObjectHideFlags: 0
@@ -1072,7 +1090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1179637952412708, guid: a007978aa14da3945b0f6655f65cc278, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4071798522976028, guid: a007978aa14da3945b0f6655f65cc278, type: 3}
       propertyPath: m_RootOrder

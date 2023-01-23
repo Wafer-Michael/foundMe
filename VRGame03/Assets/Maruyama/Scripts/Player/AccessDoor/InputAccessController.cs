@@ -18,7 +18,7 @@ public class InputAccessController : MonoBehaviour
                 float toAccessRange = (access.GetGameObject().transform.position - transform.position).magnitude;
                 if (toAccessRange < m_overRange)
                 {
-                    access.Access(this.gameObject);
+                    access?.Access(this.gameObject);
                 }
                 else
                 {

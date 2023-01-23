@@ -3,6 +3,7 @@ Shader "Unlit/DissolveEffectSharder"
     Properties
     {
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
+        _MainColor("Sprite Color", Color) = (1,1,1,1)
         _MaskTex("Mask Texture", 2D) = "white" {}
         _Height("Height", Float) = 0
     }
@@ -56,6 +57,7 @@ Shader "Unlit/DissolveEffectSharder"
             }
 
             sampler2D _MainTex;
+            float4 _MainColor;
             sampler2D _MaskTex;
             float _Height;
 
@@ -66,7 +68,7 @@ Shader "Unlit/DissolveEffectSharder"
                     discard;
                 }
 
-                fixed4 color = tex2D(_MainTex, IN.texcoord);
+                fixed4 color = tex2D(_MainTex, IN.texcoord) * _MainColor;
                 float edgeHeight = 0.015;
                 return lerp(
                     color,

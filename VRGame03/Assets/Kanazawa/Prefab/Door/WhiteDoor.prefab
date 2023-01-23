@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 43807231372744908}
   - component: {fileID: 43807231372744909}
   - component: {fileID: 43807231372744910}
+  - component: {fileID: -5478902739177238861}
   m_Layer: 0
   m_Name: WhiteDoor
   m_TagString: Untagged
@@ -71,6 +72,23 @@ MonoBehaviour:
   m_rotationTarget: {fileID: 0}
   m_rotationSpeed: 3
   m_type: 0
+--- !u!114 &-5478902739177238861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43807231372744907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef455c93d84d774392317c5c48e6c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isLock: 1
+  m_canvas: {fileID: 2159125710767666258, guid: b6768aecc8849254683758a5b91dd168,
+    type: 3}
+  generator: {fileID: 2957616738712023117, guid: f32828fcb1178de4d998a8ff02a93aa9,
+    type: 3}
 --- !u!1 &516598352260321309
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +436,7 @@ GameObject:
   - component: {fileID: 2728146219785105082}
   m_Layer: 0
   m_Name: Model
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

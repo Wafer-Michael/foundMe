@@ -45,13 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_wallPatterns:
-  - {fileID: 2800000, guid: 897219dd2763d56489d90eaad661b96d, type: 3}
-  - {fileID: 2800000, guid: c144984de86b64540900a15375462b54, type: 3}
-  - {fileID: 2800000, guid: f722827773953b8458333ed4cc799249, type: 3}
+  - BigFlower
+  - plain
+  - SmallFlower
   m_wallColors:
-  - {fileID: 2800000, guid: 897219dd2763d56489d90eaad661b96d, type: 3}
-  - {fileID: 2800000, guid: c144984de86b64540900a15375462b54, type: 3}
-  - {fileID: 2800000, guid: f722827773953b8458333ed4cc799249, type: 3}
+  - Brown
+  - White
   m_doorTextures:
-  - {fileID: 2800000, guid: 40712d53604716f40af40cc8712a4183, type: 3}
-  - {fileID: 2800000, guid: 64fa103f2226ae943a17e15e1f91bb5a, type: 3}
+  - BrownDoor
+  - WhiteDoor

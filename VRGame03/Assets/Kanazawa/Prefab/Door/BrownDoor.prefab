@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 5932682123245099506}
   - component: {fileID: 5932682123245099507}
   - component: {fileID: 5932682123245099504}
+  - component: {fileID: 4012299466645944654}
   m_Layer: 0
   m_Name: BrownDoor
   m_TagString: Untagged
@@ -628,6 +629,23 @@ MonoBehaviour:
   m_rotationTarget: {fileID: 0}
   m_rotationSpeed: 3
   m_type: 0
+--- !u!114 &4012299466645944654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5932682123245099509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef455c93d84d774392317c5c48e6c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_isLock: 1
+  m_canvas: {fileID: 2159125710767666258, guid: b6768aecc8849254683758a5b91dd168,
+    type: 3}
+  generator: {fileID: 2957616738712023117, guid: f32828fcb1178de4d998a8ff02a93aa9,
+    type: 3}
 --- !u!1 &6189617087292510499
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +827,7 @@ GameObject:
   - component: {fileID: 8580181979366485892}
   m_Layer: 0
   m_Name: Model
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

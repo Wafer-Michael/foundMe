@@ -15,6 +15,7 @@ public class DoorLock : MonoBehaviour
     public bool IsLock {get;}
 
     [SerializeField]
+    GameObject m_canvas;
     GameObject m_numberText;
 
     [SerializeField]
@@ -22,6 +23,18 @@ public class DoorLock : MonoBehaviour
 
     private void Start()
     {
+        var canvas = Instantiate(m_canvas);
+        canvas.transform.parent = this.transform.parent;
+        for(int i = 0; i < canvas.transform.childCount; i++)
+        {
+            var child = canvas.transform.GetChild(i);
+            var ui = child.GetComponent<DoorLockUI>();
+            if(ui)
+            {
+                m_numberText = child.gameObject;
+                break;
+            }
+        }
         m_digit = m_numberText.transform.childCount;
     }
 
@@ -39,7 +52,6 @@ public class DoorLock : MonoBehaviour
     void AccessKey()
     {
         DecisionDoorNumber();
-        m_isLock = true;
         m_numberText.SetActive(true);
         m_numberText.GetComponent<DoorLockUI>().ResetNumber();
         StartCoroutine("Unlock");

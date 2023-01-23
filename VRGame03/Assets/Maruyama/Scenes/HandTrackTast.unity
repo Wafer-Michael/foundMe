@@ -1028,18 +1028,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &646091048 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1986127563300877839, guid: 28e17b2ce58866046a67bb2c3df275a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1986127563305630186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e2ad71f646c96b48a1b84ee0ef2041f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &677226564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1040,7 @@ GameObject:
   - component: {fileID: 677226565}
   - component: {fileID: 677226567}
   m_Layer: 0
-  m_Name: StainedGlass
+  m_Name: FadeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1117,13 +1105,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677226564}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.732, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.732, z: 1.6400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_Father: {fileID: 2058102746}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &677226567
 MonoBehaviour:
@@ -3165,6 +3153,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683943774}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1732826024 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1986127562601325413, guid: 28e17b2ce58866046a67bb2c3df275a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1986127563305630186}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2aa499975d41d740b3539503540e7be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1818418195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3858,55 +3858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3900635d08c21de4397748e65039593c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2093524803 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7550048659347395429, guid: 28e17b2ce58866046a67bb2c3df275a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1986127563305630186}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2093524807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093524803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c25ccd388c1893b4996f7003a2df9ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_param:
-    time: 0.25
-    speed: 0.5
-    scaleFactor: 3
-    m_endFunction:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 646091048}
-          m_TargetAssemblyTypeName: Observer_JackUIPoint, Assembly-CSharp
-          m_MethodName: StartJack
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2093524807}
-          m_TargetAssemblyTypeName: StartJackEffect, Assembly-CSharp
-          m_MethodName: ReturnScale
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &2136927057
 GameObject:
   m_ObjectHideFlags: 0
@@ -4763,29 +4714,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1986127562368744835, guid: 28e17b2ce58866046a67bb2c3df275a0,
-        type: 3}
-      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.size
+    - target: {fileID: 2093524807, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}
+      propertyPath: m_param.m_endFunction.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1986127562368744835, guid: 28e17b2ce58866046a67bb2c3df275a0,
-        type: 3}
-      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+    - target: {fileID: 2093524807, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}
+      propertyPath: m_param.m_endFunction.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093524807, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}
+      propertyPath: m_param.m_endFunction.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 646091048}
-    - target: {fileID: 1986127562368744835, guid: 28e17b2ce58866046a67bb2c3df275a0,
-        type: 3}
-      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: StartJackEffect
+      objectReference: {fileID: 1732826024}
+    - target: {fileID: 2093524807, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}
+      propertyPath: m_param.m_endFunction.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1986127562368744835, guid: 28e17b2ce58866046a67bb2c3df275a0,
-        type: 3}
-      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Observer_JackUIPoint, Assembly-CSharp
+    - target: {fileID: 2093524807, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}
+      propertyPath: m_param.m_endFunction.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: FadeStart
       objectReference: {fileID: 0}
-    - target: {fileID: 1986127562368744835, guid: 28e17b2ce58866046a67bb2c3df275a0,
-        type: 3}
-      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+    - target: {fileID: 2093524807, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}
+      propertyPath: m_param.m_endFunction.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: DissolveFadeSprite, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093524807, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}
+      propertyPath: m_param.m_endFunction.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1986127562369587600, guid: 28e17b2ce58866046a67bb2c3df275a0,
@@ -4793,11 +4747,56 @@ PrefabInstance:
       propertyPath: m_floor
       value: 
       objectReference: {fileID: 390294357}
+    - target: {fileID: 1986127562601325412, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986127562601325413, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_fadeType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986127562601325413, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_finishEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986127562601325413, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_finishEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986127562601325413, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_finishEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1732826024}
+    - target: {fileID: 1986127562601325413, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_finishEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986127562601325413, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_finishEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FadeStart
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986127562601325413, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_finishEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DissolveFadeSprite, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986127562601325413, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_finishEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1986127563300877839, guid: 28e17b2ce58866046a67bb2c3df275a0,
         type: 3}
-      propertyPath: m_jackEffect
+      propertyPath: m_dissolveFadeSprite
       value: 
-      objectReference: {fileID: 2093524807}
+      objectReference: {fileID: 1732826024}
     - target: {fileID: 6271948144681858738, guid: 28e17b2ce58866046a67bb2c3df275a0,
         type: 3}
       propertyPath: m_RootOrder
@@ -4857,6 +4856,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VRPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8389773767073274582, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}

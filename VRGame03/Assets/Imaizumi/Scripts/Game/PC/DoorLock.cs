@@ -49,7 +49,7 @@ public class DoorLock : MonoBehaviour
     /// <summary>
     /// ŠJù‘O‚Ìˆ—
     /// </summary>
-    void AccessKey()
+    public void AccessKey()
     {
         DecisionDoorNumber();
         m_numberText.SetActive(true);

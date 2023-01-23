@@ -386,9 +386,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_time: 3.4028235e+38
-  m_jumpForce: 15
-  m_moveSpeed: 6
-  m_gravitySpeed: 0.48
+  m_jumpForce: 900
+  m_moveSpeed: 480
+  m_gravitySpeed: 28.8
   testTarget: {fileID: 0}
 --- !u!1 &5543782089125053534
 GameObject:

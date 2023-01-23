@@ -61,11 +61,24 @@ Shader "Unlit/DissolveEffectSharder"
 
             fixed4 frag(v2f IN) : SV_Target
             {
+                //float maskHeight = tex2D(_MaskTex, IN.texcoord).r;
+                //if (maskHeight > _Height) {
+                    //discard;
+                //}
+                //return tex2D(_MainTex, IN.texcoord);
+
                 float maskHeight = tex2D(_MaskTex, IN.texcoord).r;
                 if (maskHeight > _Height) {
                     discard;
                 }
-                return tex2D(_MainTex, IN.texcoord);
+
+                fixed4 color = tex2D(_MainTex, IN.texcoord);
+                float edgeHeight = 0.015;
+                return lerp(
+                    color,
+                    fixed4(0, 4, 2, 0),
+                    step(_Height - edgeHeight, maskHeight)
+                );
             }
                 ENDCG
         }

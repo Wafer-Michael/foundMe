@@ -100,7 +100,7 @@ public class PlayerInputer : MonoBehaviour
     }
 
     static public bool IsClose() {
-        return Input.GetKeyDown(KeyCode.E);
+        return Input.GetKeyDown(KeyCode.Q);
     }
 
     /// <summary>

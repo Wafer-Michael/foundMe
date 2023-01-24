@@ -10,6 +10,12 @@ public class InputAccessController : MonoBehaviour
     [SerializeField]
     private float m_overRange = 5.0f;   //あまりにも遠いなら処理を省く
 
+    private DoorLock m_currentAccessDoorLock = null;
+    public DoorLock CurrentAccessDoorLock { 
+        get => m_currentAccessDoorLock;
+        set => m_currentAccessDoorLock = value;
+    }
+
     private void Awake()
     {
         m_stator = GetComponent<PlayerStator>();
@@ -22,13 +28,11 @@ public class InputAccessController : MonoBehaviour
             foreach (var access in m_inputAccessList)
             {
                 float toAccessRange = (access.GetGameObject().transform.position - transform.position).magnitude;
-                if (toAccessRange < m_overRange)
-                {
+                if (toAccessRange < m_overRange) {
                     access?.Access(this.gameObject);    //アクセス
                     ChangeState(access);
                 }
-                else
-                {
+                else {
                     m_inputAccessList.Remove(access);
                 }
             }
@@ -37,23 +41,18 @@ public class InputAccessController : MonoBehaviour
 
     private void ChangeState(I_InputAccess access)
     {
-        //Debug.Log("★ChangeState");
-
         var door = access as OpenDoor;
         if(door == null) {
-            //Debug.Log("★DoorNull");
             return;
         }
 
         if (m_stator.GetCurrentState() == PlayerStator.StateType.Normal) {
-            //Debug.Log("★ChangeLock");
             m_stator.ChangeState(PlayerStator.StateType.DoorLock);
+            m_currentAccessDoorLock = access.GetGameObject().GetComponent<DoorLock>();
             return;
         }
 
         if(m_stator.GetCurrentState() == PlayerStator.StateType.DoorLock) {
-            //Debug.Log("★ChangeNormal");
-            //m_stator.ChangeState(PlayerStator.StateType.Normal);
             return;
         }
     }

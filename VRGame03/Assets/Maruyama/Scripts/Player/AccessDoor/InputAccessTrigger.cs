@@ -16,7 +16,7 @@ public class InputAccessTrigger : MonoBehaviour
     public string GetUIName() => m_uiName;
 
     [SerializeField]
-    private GameObject m_uiText;        //テキスト用のUI
+    private List<GameObject> m_uiTexts = new List<GameObject>();   //テキスト用のUI
 
     [SerializeField]
     private I_InputAccess m_inputAccess;    //アクセス
@@ -32,18 +32,26 @@ public class InputAccessTrigger : MonoBehaviour
         //ステートの切り替わり時に呼び出したい処理
         ObservableState
             .Where(value => value == State.Idle)
-            .Subscribe(value => m_uiText.SetActive(false))
+            .Subscribe(value => ChangeUITests(false))
             .AddTo(this);
 
         ObservableState
             .Where(value => value == State.Access)
-            .Subscribe(value => m_uiText.SetActive(true))
+            .Subscribe(value => ChangeUITests(true))
             .AddTo(this);
     }
 
     private void ChangeState(State state)
     {
         m_state.Value = state;
+    }
+
+    private void ChangeUITests(bool isActive)
+    {
+        foreach(var ui in m_uiTexts)
+        {
+            ui.SetActive(isActive);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

@@ -3803,18 +3803,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1167677321, guid: 4b103371f0bb1ce45baadfa000183e4c, type: 3}
-      propertyPath: m_animator
-      value: 
-      objectReference: {fileID: 2025572794}
-    - target: {fileID: 1167677323, guid: 4b103371f0bb1ce45baadfa000183e4c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1167677323, guid: 4b103371f0bb1ce45baadfa000183e4c, type: 3}
-      propertyPath: m_animator
-      value: 
-      objectReference: {fileID: 2025572794}
     - target: {fileID: 3491293274646688484, guid: 4b103371f0bb1ce45baadfa000183e4c,
         type: 3}
       propertyPath: m_RootOrder
@@ -3875,11 +3863,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PCPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 8162405594420565861, guid: 4b103371f0bb1ce45baadfa000183e4c,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: e7cffa562f056364fb289aa83ada666d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b103371f0bb1ce45baadfa000183e4c, type: 3}
 --- !u!1 &1606257138
@@ -4898,12 +4881,6 @@ Transform:
   m_Father: {fileID: 593282401}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2025572794 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8162405594420565861, guid: 4b103371f0bb1ce45baadfa000183e4c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1578046534}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2058102717 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3491293274646688487, guid: 4b103371f0bb1ce45baadfa000183e4c,

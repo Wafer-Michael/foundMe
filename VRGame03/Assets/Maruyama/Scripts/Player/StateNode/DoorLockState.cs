@@ -26,7 +26,7 @@ public class DoorLockState : EnemyStateNodeBase<PlayerBase>
 
     public override bool OnUpdate()
     {
-        if (PlayerInputer.IsAccess()) {
+        if (PlayerInputer.IsClose()) {
             m_stator.ChangeState(PlayerStator.StateType.Normal);
         }
 

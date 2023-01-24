@@ -27,16 +27,6 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
         m_clearUIs = new List<ClearUI>(FindObjectsOfType<ClearUI>());
     }
 
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
-
     public void ChangeState(GameState state)
     {
         //同じステートなら変更処理をしない。

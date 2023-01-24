@@ -16,12 +16,15 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
 
     private List<DissolveFadeSprite> m_dissolveFadeSprites;     //ディゾブルテクスチャ
 
+    private List<ClearUI> m_clearUIs = new List<ClearUI>();
+
     protected override void Awake()
     {
         base.Awake();
         ChangeState(GameState.Game);
 
         m_dissolveFadeSprites = new List<DissolveFadeSprite>(FindObjectsOfType<DissolveFadeSprite>());
+        m_clearUIs = new List<ClearUI>(FindObjectsOfType<ClearUI>());
     }
 
     private void Start()
@@ -48,6 +51,7 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
         {
             GameState.Reserve => null,
             GameState.Game => null,
+            GameState.Clear => ClearStart,
             GameState.GameOver => GameOver_Start,
             _ => null
         };
@@ -60,6 +64,13 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
         foreach(var sprite in m_dissolveFadeSprites)
         {
             sprite.FadeStart(FadeObject.FadeType.FadeOut);
+        }
+    }
+
+    private void ClearStart()
+    {
+        foreach (var ui in m_clearUIs) {
+            ui.ClearEvent();
         }
     }
 }

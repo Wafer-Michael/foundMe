@@ -12,14 +12,16 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
     }
 
     private GameState m_currentState = GameState.Reserve;
-
     public GameState CurrentState => m_currentState;
 
+    private List<DissolveFadeSprite> m_dissolveFadeSprites;     //ディゾブルテクスチャ
 
     protected override void Awake()
     {
         base.Awake();
         ChangeState(GameState.Game);
+
+        m_dissolveFadeSprites = new List<DissolveFadeSprite>(FindObjectsOfType<DissolveFadeSprite>());
     }
 
     private void Start()
@@ -55,6 +57,9 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
 
     private void GameOver_Start()
     {
-
+        foreach(var sprite in m_dissolveFadeSprites)
+        {
+            sprite.FadeStart(FadeObject.FadeType.FadeOut);
+        }
     }
 }

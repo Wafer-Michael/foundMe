@@ -38,14 +38,6 @@ public class DoorLock : MonoBehaviour
         m_digit = m_numberText.transform.childCount;
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            AccessKey();
-        }
-    }
-
     /// <summary>
     /// 開錠前の処理
     /// </summary>
@@ -55,7 +47,16 @@ public class DoorLock : MonoBehaviour
         m_numberText.SetActive(true);
         m_numberText.GetComponent<DoorLockUI>().ResetNumber();
         StartCoroutine("Unlock");
-        this.enabled = false;
+    }
+
+    /// <summary>
+    /// アクセス中断
+    /// </summary>
+    public void Interruption()
+    {
+        Debug.Log("Access Interruption");
+        m_numberText.SetActive(false);
+        StopCoroutine("Unlock");
     }
 
     /// <summary>
@@ -80,7 +81,6 @@ public class DoorLock : MonoBehaviour
         Debug.Log("unlocked");
 
         m_numberText.SetActive(false);
-        this.enabled = true;
         yield break;
     }
 

@@ -99,6 +99,10 @@ public class PlayerInputer : MonoBehaviour
         return Input.GetKeyDown(KeyCode.F);
     }
 
+    static public bool IsClose() {
+        return Input.GetKeyDown(KeyCode.Q);
+    }
+
     /// <summary>
     /// ‚Â‚Ü‚Şsˆ×
     /// </summary>

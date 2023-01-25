@@ -21,6 +21,11 @@ public class DoorLock : MonoBehaviour
     [SerializeField]
     GameObject generator;
 
+    int[] m_collationNumbers = new int[3];
+
+    int m_correct = 0;    //ˆê’v
+    int m_almost = 0;     //É‚µ‚¢
+
     private void Start()
     {
         var canvas = Instantiate(m_canvas);
@@ -32,10 +37,17 @@ public class DoorLock : MonoBehaviour
             if(ui)
             {
                 m_numberText = child.gameObject;
-                break;
             }
         }
         m_digit = m_numberText.transform.childCount;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            AccessKey();
+        }
     }
 
     /// <summary>
@@ -71,6 +83,8 @@ public class DoorLock : MonoBehaviour
         while (m_isLock)
         {
             yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Space));
+            m_correct = 0;
+            m_almost = 0;
             numbers.Clear(); // ”Ô†‚ğƒŠƒZƒbƒg
             InputPass(ref numbers); // ”Ô†“ü—Í
             StartCoroutine("Collation", numbers); // Æ‡
@@ -107,14 +121,12 @@ public class DoorLock : MonoBehaviour
     /// <param name="numbers">“ü—Í‚·‚é”Ô†</param>
     IEnumerator Collation(List<int> numbers)
     {
-        int correct = 0;    //ˆê’v
-        int almost = 0;     //É‚µ‚¢
 
         for (int i = 0; i < numbers.Count; i++)
         {
             if (numbers[i] == m_lockNumbers[i])
             {
-                correct += 1;
+                m_correct += 1;
                 numbers[i]  = -1;
             }
             yield return new WaitForEndOfFrame();
@@ -126,25 +138,27 @@ public class DoorLock : MonoBehaviour
             {
                 if (numbers[i] == m_lockNumbers[j])
                 {
-                    almost++;
+                    m_almost++;
                     break;
                 }
                 yield return new WaitForEndOfFrame();
             }
         }
 
-        if (correct == m_digit) // ˆê’v‚µ‚½”‚ªŒ…”‚Æˆê‚È‚ç
+        if (m_correct == m_digit) // ˆê’v‚µ‚½”‚ªŒ…”‚Æˆê‚È‚ç
         {
             m_isLock = false;
             StartCoroutine("Unlock");
             yield break;
         }
 
-        Debug.Log("ˆê’v " + correct + "A ”š‚ªˆê’v " + almost + "A •sˆê’v " + (m_digit - correct - almost));
+        m_numberText.GetComponent<DoorLockUI>().DisplayResult(m_correct, m_almost);
 
         StartCoroutine("Unlock");
         yield break;
     }
+
+
 
     public void SetLockNumbers(List<int> numbers)
     {

@@ -10,13 +10,18 @@ public class PlayerStatus : MonoBehaviour, I_Damaged
     }
 
     [SerializeField]
-    Parametor m_param;
+    private Parametor m_param;
 
     private DamageEffectController m_damageEffect;
 
     private void Awake()
     {
         m_damageEffect = GetComponent<DamageEffectController>();
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void Damaged(DamageData data)

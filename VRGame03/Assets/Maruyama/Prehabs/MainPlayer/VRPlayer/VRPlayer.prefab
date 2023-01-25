@@ -18383,7 +18383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_param:
-    time: 5
+    time: 10
   m_dissolveFadeSprite: {fileID: 1986127562601325413}
 --- !u!1 &8777577967117937310
 GameObject:

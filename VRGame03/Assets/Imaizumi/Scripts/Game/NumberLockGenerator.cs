@@ -34,7 +34,7 @@ public class NumberLockGenerator : MonoBehaviour
     Dictionary<string, int> m_keyDoorColor = new Dictionary<string, int>();
 
 
-    void Start()
+    void Awake()
     {
         MakeKeyPattern(ref m_keyWallPattern, in m_wallPatterns);
         MakeKeyPattern(ref m_keyWallColor, in m_wallColors);

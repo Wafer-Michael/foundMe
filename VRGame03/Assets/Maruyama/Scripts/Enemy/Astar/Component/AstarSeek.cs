@@ -8,7 +8,7 @@ using GraphType = SparseGraph<AstarNode, AstarEdge>;
 [RequireComponent(typeof(TargetManager))]
 public class AstarSeek : MonoBehaviour
 {
-    public static readonly Parametor DEFAULT_PARAMETOR = new Parametor(1.0f, 5.0f);
+    public static readonly Parametor DEFAULT_PARAMETOR = new Parametor(1.0f, 2.0f);
 
     [System.Serializable]
     public struct Parametor

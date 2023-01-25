@@ -32,7 +32,7 @@ public class VelocityManager : MonoBehaviour
     {
         m_velocity.y += m_rigid.velocity.y - m_velocity.y;  //重力分加算する。
         //m_velocity += m_force * Time.deltaTime;
-        m_velocity += m_force;
+        m_velocity += m_force;                              //力の加算
 
         if (maru.UtilityMath.IsNaN(m_velocity)) {  //速度がNaNなら処理をしない。
             return;
@@ -40,6 +40,7 @@ public class VelocityManager : MonoBehaviour
         
         m_rigid.velocity = m_velocity;
 
+        //力のリセット
         ResetForce();
 
         //減速処理

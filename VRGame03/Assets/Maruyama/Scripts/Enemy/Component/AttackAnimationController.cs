@@ -23,6 +23,7 @@ public class AttackAnimationController : MonoBehaviour
     public bool IsUpdate { get; set; } = false;
 
     private VelocityManager m_velocityManager;
+    private Rigidbody m_rigidbody;
     private TargetManager m_targetManager;
 
     [SerializeField]
@@ -33,6 +34,7 @@ public class AttackAnimationController : MonoBehaviour
     private void Awake()
     {
         m_velocityManager = GetComponent<VelocityManager>();
+        m_rigidbody = GetComponent<Rigidbody>();
         m_targetManager = GetComponent<TargetManager>();
     }
 
@@ -61,10 +63,11 @@ public class AttackAnimationController : MonoBehaviour
         Debug.Log("ÅöÅöEnd");
         IsUpdate = false;
         var position = transform.position;
-        transform.position = new Vector3(position.x, 0, position.z);
+        //transform.position = new Vector3(position.x, 0, position.z);
 
         m_velocityManager.enabled = true;
         m_velocityManager.ResetAll();
+        m_rigidbody.useGravity = true;
     }
 
     public void AttackStart() {
@@ -77,6 +80,7 @@ public class AttackAnimationController : MonoBehaviour
 
         m_velocityManager.ResetAll();
         m_velocityManager.enabled = false;
+        m_rigidbody.useGravity = false;
 
         m_jumpVector = Vector3.zero;
         var toTarget = m_targetManager.GetCurrentTarget().transform.position - transform.position;

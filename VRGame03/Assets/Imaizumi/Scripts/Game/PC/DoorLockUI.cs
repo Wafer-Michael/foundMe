@@ -87,11 +87,21 @@ public class DoorLockUI : MonoBehaviour
         text.text = "ˆê’v " + correct + " ”š‚ªˆê’v " + almost + " •sˆê’v " + (m_texts.Count - correct - almost) + "\n" + text.text;
     }
 
-    public void ResetNumber()
+    public void SetActiveUI(bool value)
+    {
+        var numChild = this.gameObject.transform.parent.childCount;
+        for(int i = 0; i < numChild; i++)
+        {
+            this.gameObject.transform.parent.GetChild(i).gameObject.SetActive(value);
+        }
+    }
+
+    public void ClearText()
     {
         foreach(var text in m_texts)
         {
             text.text = "0";
         }
+        m_resultText.GetComponent<Text>().text = "";
     }
 }

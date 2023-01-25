@@ -18,13 +18,17 @@ public class DoorLock : MonoBehaviour
     GameObject m_canvas;
     GameObject m_numberText;
 
-    [SerializeField]
-    GameObject generator;
+    GameObject m_generator;
 
     int[] m_collationNumbers = new int[3];
 
     int m_correct = 0;    //àÍív
     int m_almost = 0;     //ê…ÇµÇ¢
+
+    private void Awake()
+    {
+        m_generator = GameObject.Find("NumberLockGenerator");
+    }
 
     private void Start()
     {
@@ -56,8 +60,8 @@ public class DoorLock : MonoBehaviour
     public void AccessKey()
     {
         DecisionDoorNumber();
-        m_numberText.SetActive(true);
-        m_numberText.GetComponent<DoorLockUI>().ResetNumber();
+        m_numberText.GetComponent<DoorLockUI>().SetActiveUI(true);
+        m_numberText.GetComponent<DoorLockUI>().ClearText();
         StartCoroutine("Unlock");
     }
 
@@ -67,7 +71,7 @@ public class DoorLock : MonoBehaviour
     public void Interruption()
     {
         Debug.Log("Access Interruption");
-        m_numberText.SetActive(false);
+        m_numberText.GetComponent<DoorLockUI>().SetActiveUI(false);
         StopCoroutine("Unlock");
     }
 
@@ -94,7 +98,6 @@ public class DoorLock : MonoBehaviour
 
         Debug.Log("unlocked");
 
-        m_numberText.SetActive(false);
         yield break;
     }
 
@@ -182,7 +185,7 @@ public class DoorLock : MonoBehaviour
         List<int> numbers = new List<int>();
 
         // î‘çÜÇéÊìæ
-        var numbergene = generator.GetComponent<NumberLockGenerator>();
+        var numbergene = m_generator.GetComponent<NumberLockGenerator>();
         numbers.Add(numbergene.FetchNumber(wallTex, NumberLockGenerator.NumberType.WallPattern));
         numbers.Add(numbergene.FetchNumber(wallTex, NumberLockGenerator.NumberType.WallColor));
         numbers.Add(numbergene.FetchNumber(doorTex, NumberLockGenerator.NumberType.DoorColor));

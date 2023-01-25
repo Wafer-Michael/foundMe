@@ -4881,12 +4881,6 @@ Transform:
   m_Father: {fileID: 593282401}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2058102717 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3491293274646688487, guid: 4b103371f0bb1ce45baadfa000183e4c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1578046534}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2136927057
 GameObject:
   m_ObjectHideFlags: 0
@@ -5532,10 +5526,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 902869422, guid: 1e0aa40086920a243a4ea67e1dbcdc2c, type: 3}
-      propertyPath: testTarget
-      value: 
-      objectReference: {fileID: 2058102717}
     - target: {fileID: 5543782089005006320, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
         type: 3}
       propertyPath: m_Name
@@ -5549,12 +5539,12 @@ PrefabInstance:
     - target: {fileID: 5543782089005006321, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.93
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 5543782089005006321, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5543782089005006321, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
         type: 3}

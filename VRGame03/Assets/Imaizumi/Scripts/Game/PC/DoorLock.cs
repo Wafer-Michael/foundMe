@@ -59,10 +59,13 @@ public class DoorLock : MonoBehaviour
     /// </summary>
     public void AccessKey()
     {
-        DecisionDoorNumber();
-        m_numberText.GetComponent<DoorLockUI>().SetActiveUI(true);
-        m_numberText.GetComponent<DoorLockUI>().ClearText();
-        StartCoroutine("Unlock");
+        if (!m_numberText.gameObject.activeInHierarchy)
+        {
+            DecisionDoorNumber();
+            m_numberText.GetComponent<DoorLockUI>().SetActiveUI(true);
+            m_numberText.GetComponent<DoorLockUI>().ClearText();
+            StartCoroutine("Unlock");
+        }
     }
 
     /// <summary>

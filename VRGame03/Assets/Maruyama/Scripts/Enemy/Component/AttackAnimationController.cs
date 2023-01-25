@@ -64,6 +64,7 @@ public class AttackAnimationController : MonoBehaviour
         transform.position = new Vector3(position.x, 0, position.z);
 
         m_velocityManager.enabled = true;
+        m_velocityManager.ResetAll();
     }
 
     public void AttackStart() {

@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isLock: 1
-  m_canvas: {fileID: 2159125710767666258, guid: b6768aecc8849254683758a5b91dd168,
+  m_canvas: {fileID: 2142728669706428736, guid: b6768aecc8849254683758a5b91dd168,
     type: 3}
   generator: {fileID: 2957616738712023117, guid: f32828fcb1178de4d998a8ff02a93aa9,
     type: 3}

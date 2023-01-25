@@ -9,6 +9,9 @@ public class DoorLockUI : MonoBehaviour
 
     List<Text> m_texts = new List<Text>();
 
+    [SerializeField]
+    GameObject m_resultText;
+
     void Start()
     {
         foreach (var child in GetComponentsInChildren<Text>())
@@ -77,11 +80,28 @@ public class DoorLockUI : MonoBehaviour
         m_texts[(int)m_digit].text = text.ToString(); // •\¦
     }
 
-    public void ResetNumber()
+    public void DisplayResult(int correct, int almost)
+    {
+        var text = m_resultText.GetComponent<Text>();
+
+        text.text = "ˆê’v " + correct + " ”š‚ªˆê’v " + almost + " •sˆê’v " + (m_texts.Count - correct - almost) + "\n" + text.text;
+    }
+
+    public void SetActiveUI(bool value)
+    {
+        var numChild = this.gameObject.transform.parent.childCount;
+        for(int i = 0; i < numChild; i++)
+        {
+            this.gameObject.transform.parent.GetChild(i).gameObject.SetActive(value);
+        }
+    }
+
+    public void ClearText()
     {
         foreach(var text in m_texts)
         {
             text.text = "0";
         }
+        m_resultText.GetComponent<Text>().text = "";
     }
 }

@@ -18,8 +18,17 @@ public class DoorLock : MonoBehaviour
     GameObject m_canvas;
     GameObject m_numberText;
 
-    [SerializeField]
-    GameObject generator;
+    GameObject m_generator;
+
+    int[] m_collationNumbers = new int[3];
+
+    int m_correct = 0;    //àÍív
+    int m_almost = 0;     //ê…ÇµÇ¢
+
+    private void Awake()
+    {
+        m_generator = GameObject.Find("NumberLockGenerator");
+    }
 
     private void Start()
     {
@@ -32,10 +41,17 @@ public class DoorLock : MonoBehaviour
             if(ui)
             {
                 m_numberText = child.gameObject;
-                break;
             }
         }
         m_digit = m_numberText.transform.childCount;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            AccessKey();
+        }
     }
 
     /// <summary>
@@ -43,10 +59,13 @@ public class DoorLock : MonoBehaviour
     /// </summary>
     public void AccessKey()
     {
-        DecisionDoorNumber();
-        m_numberText.SetActive(true);
-        m_numberText.GetComponent<DoorLockUI>().ResetNumber();
-        StartCoroutine("Unlock");
+        if (!m_numberText.gameObject.activeInHierarchy)
+        {
+            DecisionDoorNumber();
+            m_numberText.GetComponent<DoorLockUI>().SetActiveUI(true);
+            m_numberText.GetComponent<DoorLockUI>().ClearText();
+            StartCoroutine("Unlock");
+        }
     }
 
     /// <summary>
@@ -55,7 +74,7 @@ public class DoorLock : MonoBehaviour
     public void Interruption()
     {
         Debug.Log("Access Interruption");
-        m_numberText.SetActive(false);
+        m_numberText.GetComponent<DoorLockUI>().SetActiveUI(false);
         StopCoroutine("Unlock");
     }
 
@@ -71,6 +90,8 @@ public class DoorLock : MonoBehaviour
         while (m_isLock)
         {
             yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Space));
+            m_correct = 0;
+            m_almost = 0;
             numbers.Clear(); // î‘çÜÇÉäÉZÉbÉg
             InputPass(ref numbers); // î‘çÜì¸óÕ
             StartCoroutine("Collation", numbers); // è∆çá
@@ -80,7 +101,6 @@ public class DoorLock : MonoBehaviour
 
         Debug.Log("unlocked");
 
-        m_numberText.SetActive(false);
         yield break;
     }
 
@@ -107,14 +127,12 @@ public class DoorLock : MonoBehaviour
     /// <param name="numbers">ì¸óÕÇ∑ÇÈî‘çÜ</param>
     IEnumerator Collation(List<int> numbers)
     {
-        int correct = 0;    //àÍív
-        int almost = 0;     //ê…ÇµÇ¢
 
         for (int i = 0; i < numbers.Count; i++)
         {
             if (numbers[i] == m_lockNumbers[i])
             {
-                correct += 1;
+                m_correct += 1;
                 numbers[i]  = -1;
             }
             yield return new WaitForEndOfFrame();
@@ -126,25 +144,27 @@ public class DoorLock : MonoBehaviour
             {
                 if (numbers[i] == m_lockNumbers[j])
                 {
-                    almost++;
+                    m_almost++;
                     break;
                 }
                 yield return new WaitForEndOfFrame();
             }
         }
 
-        if (correct == m_digit) // àÍívÇµÇΩêîÇ™åÖêîÇ∆àÍèèÇ»ÇÁ
+        if (m_correct == m_digit) // àÍívÇµÇΩêîÇ™åÖêîÇ∆àÍèèÇ»ÇÁ
         {
             m_isLock = false;
             StartCoroutine("Unlock");
             yield break;
         }
 
-        Debug.Log("àÍív " + correct + "ÅA êîéöÇ™àÍív " + almost + "ÅA ïsàÍív " + (m_digit - correct - almost));
+        m_numberText.GetComponent<DoorLockUI>().DisplayResult(m_correct, m_almost);
 
         StartCoroutine("Unlock");
         yield break;
     }
+
+
 
     public void SetLockNumbers(List<int> numbers)
     {
@@ -168,7 +188,7 @@ public class DoorLock : MonoBehaviour
         List<int> numbers = new List<int>();
 
         // î‘çÜÇéÊìæ
-        var numbergene = generator.GetComponent<NumberLockGenerator>();
+        var numbergene = m_generator.GetComponent<NumberLockGenerator>();
         numbers.Add(numbergene.FetchNumber(wallTex, NumberLockGenerator.NumberType.WallPattern));
         numbers.Add(numbergene.FetchNumber(wallTex, NumberLockGenerator.NumberType.WallColor));
         numbers.Add(numbergene.FetchNumber(doorTex, NumberLockGenerator.NumberType.DoorColor));

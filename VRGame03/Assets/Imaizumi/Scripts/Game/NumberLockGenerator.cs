@@ -92,4 +92,21 @@ public class NumberLockGenerator : MonoBehaviour
 
         return result;
     }
+
+    public Dictionary<string,int> GetDirectionary(NumberType type)
+    {
+        switch (type)
+        {
+            case NumberType.WallPattern:
+                return m_keyWallPattern;
+
+            case NumberType.WallColor:
+                return m_keyWallColor;
+
+            case NumberType.DoorColor:
+                return m_keyDoorColor;
+        }
+
+        return null;
+    }
 }

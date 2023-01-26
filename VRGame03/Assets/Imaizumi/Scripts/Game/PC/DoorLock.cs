@@ -25,6 +25,8 @@ public class DoorLock : MonoBehaviour
     int m_correct = 0;    //àÍív
     int m_almost = 0;     //ê…ÇµÇ¢
 
+    System.Action m_action;
+
     private void Awake()
     {
         m_generator = GameObject.Find("NumberLockGenerator");
@@ -100,10 +102,13 @@ public class DoorLock : MonoBehaviour
         }
 
         Debug.Log("unlocked");
+        m_action.Invoke();
         Interruption();
 
         yield break;
     }
+
+    public 
 
     /// <summary>
     /// ListÇ…î‘çÜÇì¸óÕÇ∑ÇÈ
@@ -250,5 +255,10 @@ public class DoorLock : MonoBehaviour
         }
 
         return result;
+    }
+
+    public void SetAction(System.Action action)
+    {
+        m_action = action;
     }
 }

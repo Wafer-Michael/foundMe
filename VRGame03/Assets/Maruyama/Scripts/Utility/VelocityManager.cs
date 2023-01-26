@@ -19,6 +19,9 @@ public class VelocityManager : MonoBehaviour
     private float m_deselerationPower = 1.0f;
     //private Vector3 m_deseleratironDirection = Vector3.zero;
 
+    [SerializeField]
+    private float m_maxSpeed = 2.0f;
+
     #endregion
 
     #region Awake,Update
@@ -124,6 +127,12 @@ public class VelocityManager : MonoBehaviour
     {
         m_isDeseleration = isDeseleration;
     }
+
+    /// <summary>
+    /// 最大スピード
+    /// </summary>
+    /// <returns>最大スピード</returns>
+    public float GetMaxSpeed() { return m_maxSpeed; }
 
     /// <summary>
     /// 減速の強さ

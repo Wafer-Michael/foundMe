@@ -93,7 +93,7 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
     public void Access(GameObject other)
     {
         //ÉçÉbÉNèÛë‘Ç»ÇÁÅA
-        if(!m_doorLock.IsLock){
+        if(m_doorLock.IsLock){
             m_doorLock.AccessKey();
         }
         else {

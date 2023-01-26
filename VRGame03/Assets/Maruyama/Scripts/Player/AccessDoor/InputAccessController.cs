@@ -54,6 +54,7 @@ public class InputAccessController : MonoBehaviour
         if (m_stator.GetCurrentState() == PlayerStator.StateType.Normal) {
             m_stator.ChangeState(PlayerStator.StateType.DoorLock);
             m_currentAccessDoorLock = access.GetGameObject().GetComponent<DoorLock>();
+            m_currentAccessDoorLock.SetAction(() => m_stator.ChangeState(PlayerStator.StateType.Normal));
             return;
         }
 

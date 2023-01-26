@@ -92,12 +92,10 @@ public class EyeSearchRange : MonoBehaviour
     {
         foreach(var param in m_targetParams)
         {
-            if (IsInEyeRange(param.target))
-            {  //ターゲットが視界に入っていたら。
+            if (IsInEyeRange(param.target)) {  //ターゲットが視界に入っていたら。
                 Hit(param);
             }
-            else
-            {
+            else {
                 param.isFind = false;
             }
         }

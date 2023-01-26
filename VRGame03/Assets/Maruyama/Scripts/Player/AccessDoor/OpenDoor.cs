@@ -60,8 +60,6 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
     private void Update()
     {
         m_stateMachine.OnUpdate();
-
-
     }
 
     

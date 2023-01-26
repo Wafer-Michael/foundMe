@@ -66,12 +66,10 @@ public class AIStator : StatorBase<EnemyBase, StateType, TransitionMember>
         m_stateMachine.AddEdge(StateType.None, StateType.Patrol, IsGameStartTransition, (int)StateType.Patrol);
 
         //Patrol
-        //m_stateMachine.AddEdge(StateType.Patrol, StateType.Find, IsFindState, (int)StateType.Find);
         m_stateMachine.AddEdge(StateType.Patrol, StateType.Chase, IsFindState, (int)StateType.Chase);
 
         //Chase
-        m_stateMachine.AddEdge(StateType.Chase, StateType.Buttle, IsButtleState, (int)StateType.Buttle);
-        //m_stateMachine.AddEdge(StateType.Chase, StateType.Patrol, IsTrue, (int)StateType.Patrol, true);
+        //m_stateMachine.AddEdge(StateType.Chase, StateType.Buttle, IsButtleState, (int)StateType.Buttle);
         m_stateMachine.AddEdge(StateType.Chase, StateType.LostPatrol, IsTrue, (int)StateType.LostPatrol, true);
 
         //LostPatrol

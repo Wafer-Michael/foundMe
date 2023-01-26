@@ -33,6 +33,8 @@ namespace StateNode
 
         private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
+        private Cell m_currentCell = null;
+
         public LostPatrol(EnemyBase owner) :
             this(owner, new Parametor() { time = 10.0f, seekParam = AstarSeek.DEFAULT_PARAMETOR })
         { }
@@ -135,6 +137,13 @@ namespace StateNode
 
             //Debug.Log("★" + result.ToString());
             //Debug.Log("★" + sortCloseDatas.ToArray()[0].GetDangerValue().ToString());
+
+            //デバッグ
+            if (m_currentCell != null) {
+                m_currentCell.IsTarget = false;
+            }
+            m_currentCell = sortCloseDatas.ToArray()[0];
+            m_currentCell.IsTarget = true;
 
             return result;
         }

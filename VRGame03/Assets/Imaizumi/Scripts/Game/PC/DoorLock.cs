@@ -100,6 +100,7 @@ public class DoorLock : MonoBehaviour
         }
 
         Debug.Log("unlocked");
+        Interruption();
 
         yield break;
     }

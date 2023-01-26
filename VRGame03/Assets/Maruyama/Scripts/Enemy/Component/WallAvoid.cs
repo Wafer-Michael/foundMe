@@ -108,7 +108,7 @@ public class WallAvoid : MonoBehaviour
             }
         }
 
-        Debug.Log("šš" + m_avoidVec.ToString());
+        //Debug.Log("šš" + m_avoidVec.ToString());
     }
 
     private Vector3 CalculateAvoidVec(WallAvoidTacticle tacticle)

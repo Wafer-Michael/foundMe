@@ -66,7 +66,6 @@ public class AstarSeek : MonoBehaviour
         var toVec = m_currentNode.GetPosition() - transform.position;
 
         var force = maru.CalculateVelocity.SeekVec(m_velocityManager.velocity, toVec.normalized, m_param.maxSpeed);
-        //m_velocityManager.AddForce(force);
 
         var velocity = m_velocityManager.velocity;              //速度の取得
         var moveDirection = velocity + force;                   //方向に新規ベクトルを追加

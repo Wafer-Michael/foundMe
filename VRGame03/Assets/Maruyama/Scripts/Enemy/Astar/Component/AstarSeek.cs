@@ -96,16 +96,36 @@ public class AstarSeek : MonoBehaviour
     {
         //次のルートが存在しないなら
         if(m_route.Count == 0) {
+            if(m_currentNode != null) {
+                m_currentNode.IsTarget = false;
+            }
+
             m_currentNode = null;
             return;
         }
 
+        //デバッグ
+        if(m_currentNode != null) {
+            m_currentNode.IsTarget = false;
+        }
+
         m_currentNode = m_route.Pop();
+
+        m_currentNode.IsTarget = true;
     }
 
     private float ToCurrentNodeRange()
     {
         return (m_currentNode.GetPosition() - transform.position).magnitude;
+    }
+
+    private void OnDisable()
+    {
+        if (m_currentNode != null) {
+            m_currentNode.IsTarget = false;
+        }
+
+        m_currentNode = null;
     }
 
     public void StartAstar(

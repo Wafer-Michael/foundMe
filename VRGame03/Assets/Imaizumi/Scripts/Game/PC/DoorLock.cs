@@ -11,8 +11,8 @@ public class DoorLock : MonoBehaviour
     List<int> m_lockNumbers = new List<int>();
 
     [SerializeField]
-    bool m_isLock;
-    public bool IsLock {get;}
+    bool m_isLock = true;
+    public bool IsLock { get { return m_isLock; }}
 
     [SerializeField]
     GameObject m_canvas;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIVirtualController : MonoBehaviour
 {
-    private Vector2 m_inputDirection;           //“ü—Í•ûŒü
+    private Vector2 m_inputDirection;   //“ü—Í•ûŒü
 
     /// <summary>
     /// “ü—Í•ûŒü‚Ìİ’è
@@ -17,7 +17,5 @@ public class AIVirtualController : MonoBehaviour
     /// </summary>
     /// <returns>“ü—Í•ûŒü</returns>
     public Vector2 GetInputDirection() { return m_inputDirection; }
-
-    
 
 }

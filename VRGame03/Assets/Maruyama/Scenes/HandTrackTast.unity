@@ -6580,18 +6580,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 902869422, guid: 1e0aa40086920a243a4ea67e1dbcdc2c, type: 3}
-      propertyPath: m_jumpForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 902869422, guid: 1e0aa40086920a243a4ea67e1dbcdc2c, type: 3}
-      propertyPath: m_moveSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 902869422, guid: 1e0aa40086920a243a4ea67e1dbcdc2c, type: 3}
-      propertyPath: m_gravitySpeed
-      value: 9.8
-      objectReference: {fileID: 0}
     - target: {fileID: 5543782089005006320, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
         type: 3}
       propertyPath: m_Name
@@ -6652,31 +6640,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5543782089005006322, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
-        type: 3}
-      propertyPath: m_transforms.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5543782089005006322, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
-        type: 3}
-      propertyPath: m_transforms.Array.data[0]
-      value: 
-      objectReference: {fileID: 88792144}
-    - target: {fileID: 5543782089005006322, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
-        type: 3}
-      propertyPath: m_transforms.Array.data[1]
-      value: 
-      objectReference: {fileID: 1374204203}
     - target: {fileID: 5543782090740626613, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
         type: 3}
       propertyPath: m_testerPrefab
       value: 
       objectReference: {fileID: 1859335104}
-    - target: {fileID: 5543782090740626613, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
-        type: 3}
-      propertyPath: m_param.avoidRange
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e0aa40086920a243a4ea67e1dbcdc2c, type: 3}
 --- !u!1 &2445307692763223514

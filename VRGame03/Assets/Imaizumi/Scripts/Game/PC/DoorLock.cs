@@ -25,7 +25,12 @@ public class DoorLock : MonoBehaviour
     int m_correct = 0;    //àÍív
     int m_almost = 0;     //ê…ÇµÇ¢
 
+    [SerializeField]
+    int m_maxNumError;
+    int m_numError;
+
     System.Action m_action;
+    System.Action m_errEvent;
 
     private void Awake()
     {
@@ -165,6 +170,11 @@ public class DoorLock : MonoBehaviour
         }
 
         m_numberText.GetComponent<DoorLockUI>().DisplayResult(m_correct, m_almost);
+        m_numError++;
+        if(m_numError >= m_maxNumError)
+        {
+            m_errEvent.Invoke();
+        }
 
         StartCoroutine("Unlock");
         yield break;
@@ -260,5 +270,9 @@ public class DoorLock : MonoBehaviour
     public void SetAction(System.Action action)
     {
         m_action = action;
+    }
+    public void SetErrorEvent(System.Action action)
+    {
+        m_errEvent = action;
     }
 }

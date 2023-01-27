@@ -51,6 +51,9 @@ public class JackController : MonoBehaviour
     [SerializeField]
     private DissolveFadeSprite m_dissolveFadeSprite;
 
+    [SerializeField]
+    private GameObject m_returnTouchUI;
+
     private void Awake() {
         m_timer = new GameTimer(0.0f);
     }
@@ -105,6 +108,7 @@ public class JackController : MonoBehaviour
         };
 
         m_dissolveFadeSprite.FadeStart(FadeObject.FadeType.FadeOut, finishAction);  //フェードスタート
+        m_returnTouchUI.SetActive(false);
     }
 
     /// <summary>
@@ -143,5 +147,7 @@ public class JackController : MonoBehaviour
     {
         transform.position = target.transform.position + target.PositionOffset;
         transform.forward = target.transform.forward;
+
+        m_returnTouchUI.SetActive(true);
     }
 }

@@ -7,8 +7,9 @@ namespace StateNode
     public class Buttle : EnemyStateNodeBase<EnemyBase>
     {
         private enum TaskEnum {
-            Attack,
-            Wait,
+            Preliminary,    //—\”õ“®ì
+            Attack,         //UŒ‚
+            Wait,           //‘Ò‹@
         }
 
         private TargetManager m_targetManager;  //ƒ^[ƒQƒbƒgŠÄ‹
@@ -32,8 +33,6 @@ namespace StateNode
             base.ReserveChangeComponents();
 
             var owner = GetOwner();
-
-            //AddChangeComp(owner.GetComponent<VelocityManager>(), false, true);
         }
 
         public override void OnStart()
@@ -95,4 +94,57 @@ namespace StateNode
             }
         }
     }
+
+}
+
+
+namespace TaskNode
+{
+    //—\”õ“®ì
+    class TacklePreliminary : TaskNodeBase<GameObject>
+    { 
+        public TacklePreliminary(GameObject owner):
+            base(owner)
+        { }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        public override bool OnUpdate()
+        {
+            return true;
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+    }
+
+    //ƒ^ƒbƒNƒ‹UŒ‚
+    class TackleAttack : TaskNodeBase<GameObject>
+    {
+        public TackleAttack(GameObject owner) :
+            base(owner)
+        { }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        public override bool OnUpdate()
+        {
+            return true;
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+    }
+    
+
 }

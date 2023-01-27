@@ -55,7 +55,9 @@ public class AttackAnimationController : MonoBehaviour
 
     private void AnimationUpdate()
     {
-        transform.position += m_jumpVector * Time.deltaTime;
+        //transform.position += m_jumpVector * Time.deltaTime;
+        m_rigidbody.velocity = m_jumpVector;
+        //m_velocityManager.velocity = m_jumpVector;
         m_jumpVector += new Vector3(0.0f, -m_gravitySpeed, 0.0f) * Time.deltaTime;
     }
 
@@ -63,7 +65,7 @@ public class AttackAnimationController : MonoBehaviour
         Debug.Log("ÅöÅöEnd");
         IsUpdate = false;
         var position = transform.position;
-        transform.position = new Vector3(position.x, 0.5f, position.z);
+        transform.position = new Vector3(position.x, 0.2f, position.z);
 
         m_velocityManager.enabled = true;
         m_velocityManager.ResetAll();
@@ -84,8 +86,8 @@ public class AttackAnimationController : MonoBehaviour
 
         m_jumpVector = Vector3.zero;
         var toTarget = m_targetManager.GetCurrentTarget().transform.position - transform.position;
-        m_jumpVector += toTarget.normalized * m_moveSpeed * Time.deltaTime;
-        m_jumpVector += new Vector3(0, m_jumpForce * Time.deltaTime, 0);
+        m_jumpVector += toTarget.normalized * m_moveSpeed;
+        m_jumpVector += new Vector3(0, m_jumpForce, 0);
         IsFloor = false;
     }
 

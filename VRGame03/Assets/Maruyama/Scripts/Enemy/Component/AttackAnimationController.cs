@@ -22,9 +22,9 @@ public class AttackAnimationController : MonoBehaviour
 
     public bool IsUpdate { get; set; } = false;
 
-    private VelocityManager m_velocityManager;
-    private Rigidbody m_rigidbody;
-    private TargetManager m_targetManager;
+    private VelocityManager m_velocityManager;  //速度管理
+    private Rigidbody m_rigidbody;              //リジッドボディ
+    private TargetManager m_targetManager;      //ターゲット管理
 
     [SerializeField]
     private TriggerAction m_triggerAction;      //トリガーイベント登録
@@ -63,7 +63,7 @@ public class AttackAnimationController : MonoBehaviour
         Debug.Log("★★End");
         IsUpdate = false;
         var position = transform.position;
-        //transform.position = new Vector3(position.x, 0, position.z);
+        transform.position = new Vector3(position.x, 0.5f, position.z);
 
         m_velocityManager.enabled = true;
         m_velocityManager.ResetAll();

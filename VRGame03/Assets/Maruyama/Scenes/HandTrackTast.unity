@@ -6657,6 +6657,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VRPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 8777577967116269920, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 5111
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}
 --- !u!4 &2420669258609573707

@@ -1818,6 +1818,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39a53ac9d69aea847b2a0d55f58eb322, type: 3}
+--- !u!1 &485266964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1308590332, guid: 28e17b2ce58866046a67bb2c3df275a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1986127563305630186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &491993990
 GameObject:
   m_ObjectHideFlags: 0
@@ -6657,6 +6663,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VRPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 7266189811413614306, guid: 28e17b2ce58866046a67bb2c3df275a0,
+        type: 3}
+      propertyPath: m_returnTouchUI
+      value: 
+      objectReference: {fileID: 485266964}
     - target: {fileID: 8777577967116269920, guid: 28e17b2ce58866046a67bb2c3df275a0,
         type: 3}
       propertyPath: m_CullingMask.m_Bits

@@ -36,6 +36,13 @@ public class AstarNode : GraphNode
 
     private I_GraphNode m_parent;   //親ノード
 
+    private bool m_isTarget;        //ターゲット指定されているノードかどうか
+    public bool IsTarget            //ターゲット指定されているかどうか
+    {
+        get => m_isTarget;          
+        set => m_isTarget = value;  
+    }
+
     #region コンストラクタ
 
     public AstarNode(int index) :

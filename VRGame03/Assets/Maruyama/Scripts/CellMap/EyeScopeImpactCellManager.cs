@@ -21,8 +21,7 @@ public class EyeScopeImpactCellManager : MonoBehaviour
     {
         var inScopeCells = FindEyeScopeCells_FloodFill();   //‹ŠE“à‚ÌƒZƒ‹‚ğæ“¾
 
-        foreach(var cell in inScopeCells)
-        {
+        foreach(var cell in inScopeCells) {
             cell.SetDangerValue(0); //ŠëŒ¯“x‚ğ0‚É‚·‚éB
         }
     }

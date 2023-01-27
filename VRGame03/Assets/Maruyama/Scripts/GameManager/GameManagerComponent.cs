@@ -87,6 +87,5 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
         {
             controller.enabled = false;
         }
-
     }
 }

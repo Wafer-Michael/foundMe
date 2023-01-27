@@ -12,6 +12,9 @@ public class DoorLockUI : MonoBehaviour
     [SerializeField]
     GameObject m_resultText;
 
+    [SerializeField]
+    GameObject m_select;
+
     void Start()
     {
         foreach (var child in GetComponentsInChildren<Text>())
@@ -37,7 +40,7 @@ public class DoorLockUI : MonoBehaviour
             {
                 m_digit = 0;
             }
-
+            MoveSelect();
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -46,6 +49,7 @@ public class DoorLockUI : MonoBehaviour
             {
                 m_digit = m_texts.Count - 1;
             }
+            MoveSelect();
         }
     }
 
@@ -78,6 +82,12 @@ public class DoorLockUI : MonoBehaviour
         }
 
         m_texts[(int)m_digit].text = text.ToString(); // •\Ž¦
+    }
+
+    void MoveSelect()
+    {
+        var pos = m_select.GetComponent<RectTransform>();
+        pos.anchoredPosition = new Vector2((m_digit - 1) * 70.0f, pos.anchoredPosition.y);
     }
 
     public void DisplayResult(int correct, int almost)

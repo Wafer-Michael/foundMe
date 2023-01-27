@@ -20,6 +20,7 @@ namespace StateNode
             private TargetManager m_targetManager;           //ターゲット監視
             private VelocityManager m_velocityManager;
             private RotationController m_rotationController;
+            private WallAvoid m_wallAvoid;
 
             public NormalSeekTarget(EnemyBase owner) :
                 base(owner)
@@ -27,6 +28,7 @@ namespace StateNode
                 m_targetManager = owner.GetComponent<TargetManager>();
                 m_velocityManager = owner.GetComponent<VelocityManager>();
                 m_rotationController = owner.GetComponent<RotationController>();
+                m_wallAvoid = owner.GetComponent<WallAvoid>();
 
                 //仮パラメータ
                 m_param.maxSpeed = 2.0f;
@@ -61,7 +63,10 @@ namespace StateNode
                 float maxSpeed = m_param.maxSpeed;
                 float turningPower = m_param.turingPower;
                 Vector3 force = maru.CalculateVelocity.SeekVec(m_velocityManager.velocity, toVec, maxSpeed);
-                m_velocityManager.AddForce(force * turningPower);
+                //m_velocityManager.AddForce(force * turningPower);
+
+                var velocity = maru.CalculateVelocity.CalculateAddWallAvoidVelocity(m_velocityManager, force, m_wallAvoid.TakeAvoidVector(), maxSpeed);
+                m_velocityManager.velocity = velocity;
 
                 m_rotationController.SetDirection(m_velocityManager.velocity);
             }

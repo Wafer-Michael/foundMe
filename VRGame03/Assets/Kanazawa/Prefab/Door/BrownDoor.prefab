@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isLock: 1
-  m_canvas: {fileID: 2142728669706428736, guid: b6768aecc8849254683758a5b91dd168,
+  m_canvas: {fileID: 1832730152029893238, guid: 5d8be3714a89c4e458c08952cf71563c,
     type: 3}
 --- !u!1 &6189617087292510499
 GameObject:

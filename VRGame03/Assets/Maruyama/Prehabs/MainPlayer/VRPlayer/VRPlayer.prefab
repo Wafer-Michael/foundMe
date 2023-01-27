@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31733833}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.05, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0.025, y: -0.075, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -104,6 +104,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2113063497}
         m_TargetAssemblyTypeName: Oculus.Interaction.AudioTrigger, Oculus.Interaction.Samples
         m_MethodName: PlayAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7266189811413614306}
+        m_TargetAssemblyTypeName: JackController, Assembly-CSharp
+        m_MethodName: ForceCamBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19488,7 +19500,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1015
+    m_Bits: 5111
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -19703,6 +19715,7 @@ MonoBehaviour:
   m_param:
     time: 10
   m_dissolveFadeSprite: {fileID: 1986127562601325413}
+  m_returnTouchUI: {fileID: 1308590332}
 --- !u!1 &8777577967117937310
 GameObject:
   m_ObjectHideFlags: 0

@@ -184,25 +184,30 @@ namespace maru
 
 		public static Vector3 CalculateAddWallAvoidVelocity(VelocityManager velocityManager, Vector3 force, Vector3 avoidForce)
         {
+			return CalculateAddWallAvoidVelocity(velocityManager, force, avoidForce, velocityManager.GetMaxSpeed());
+		}
+
+		public static Vector3 CalculateAddWallAvoidVelocity(VelocityManager velocityManager, Vector3 force, Vector3 avoidForce, float maxSpeed)
+		{
 			var velocity = velocityManager.velocity;    //速度の取得
 			var moveDirection = velocity + force;       //方向に新規ベクトルを追加
 			moveDirection += avoidForce;				//壁回避方向
 
-			moveDirection /= velocityManager.GetMaxSpeed();       //0 ～ 1の間に変更。
+			moveDirection /= maxSpeed;       //0 ～ 1の間に変更。
 
 			var input = new Vector2(moveDirection.x, moveDirection.z);
 
-			return moveDirection * velocityManager.GetMaxSpeed();
+			return moveDirection * maxSpeed;
 		}
 
-		/// <summary>
-		/// 指定した角度より大きくないかどうか
-		/// </summary>
-		/// <param name="velocity">現在の速度</param>
-		/// <param name="toVec">行きたい方向</param>
-		/// <param name="turningDegree">曲がる最大角度</param>
-		/// <returns>角度差が小さいならtrueを返す</returns>
-		static public bool IsTurningVector(Vector3 velocity, Vector3 toVec, float turningDegree)
+			/// <summary>
+			/// 指定した角度より大きくないかどうか
+			/// </summary>
+			/// <param name="velocity">現在の速度</param>
+			/// <param name="toVec">行きたい方向</param>
+			/// <param name="turningDegree">曲がる最大角度</param>
+			/// <returns>角度差が小さいならtrueを返す</returns>
+			static public bool IsTurningVector(Vector3 velocity, Vector3 toVec, float turningDegree)
         {
 			var newDot = Vector3.Dot(velocity.normalized, toVec.normalized);
 			var rad = Mathf.Acos(newDot);

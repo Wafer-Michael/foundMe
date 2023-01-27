@@ -81,7 +81,7 @@ public class WallAvoid : MonoBehaviour
     private void SettingDefaultTacticles()
     {
         const float DEGREE_VALUE = 15.0f;
-        const float DEGREE_VALUE_Side = 40.0f;
+        const float DEGREE_VALUE_Side = 60.0f;
         float[] degrees = new float[]{
             +DEGREE_VALUE,
             -DEGREE_VALUE,

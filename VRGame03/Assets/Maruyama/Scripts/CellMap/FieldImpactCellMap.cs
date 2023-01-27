@@ -104,6 +104,12 @@ public class FieldImpactCellMap : FieldMapBase
             //セルの危険度に合わせた色を表示する
             var drawObject = debugDrawObjects[index];
 
+            if (cell.IsTarget) {
+                drawObject.GizmosColor = Color.green;
+                index++;
+                continue;
+            }
+
             if (!cell.IsActive()) {
                 drawObject.GizmosColor = Color.black;
                 index++;

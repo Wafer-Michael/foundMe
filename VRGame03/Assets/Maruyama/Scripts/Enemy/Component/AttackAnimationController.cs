@@ -65,7 +65,7 @@ public class AttackAnimationController : MonoBehaviour
         Debug.Log("ÅöÅöEnd");
         IsUpdate = false;
         var position = transform.position;
-        transform.position = new Vector3(position.x, 0.2f, position.z);
+        transform.position = new Vector3(position.x, 0.15f, position.z);
 
         m_velocityManager.enabled = true;
         m_velocityManager.ResetAll();

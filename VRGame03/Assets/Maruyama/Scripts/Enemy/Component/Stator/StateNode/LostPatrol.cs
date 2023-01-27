@@ -207,7 +207,7 @@ namespace StateNode
             }
 
             //ˆê’è‹——£ˆÈã‚È‚çˆ—‚ğ‚µ‚È‚¢B
-            const float Range = 5.0f;
+            const float Range = 15.0f;
             var range = (node.GetPosition() - GetOwner().transform.position).magnitude;
             if(range > Range) {
                 return false;

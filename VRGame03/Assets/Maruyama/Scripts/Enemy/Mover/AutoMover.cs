@@ -36,6 +36,11 @@ public class AutoMover : MonoBehaviour
 
     private RotationController m_rotationController;
 
+    private WallAvoid m_wallAvoid;
+
+    [SerializeField]
+    private float m_nearRange = 0.25f;
+
     bool IsRotation { get; set; } = false;
 
     private Vector3 m_initializePosition;
@@ -44,6 +49,7 @@ public class AutoMover : MonoBehaviour
     {
         m_rotationController = GetComponent<RotationController>();
         m_velocityManager = GetComponent<VelocityManager>();
+        m_wallAvoid = GetComponent<WallAvoid>();
 
         m_initializePosition = transform.position;
     }
@@ -93,8 +99,10 @@ public class AutoMover : MonoBehaviour
         m_rotationController.SetDirection(toTargetVec);
 
         var force = maru.CalculateVelocity.SeekVec(m_velocityManager.velocity, toTargetVec, m_moveSpeedPerSecond);
-        
-        m_velocityManager.AddForce(force);
+        var velocity =  maru.CalculateVelocity.CalculateAddWallAvoidVelocity(m_velocityManager, force, m_wallAvoid.TakeAvoidVector());
+
+        m_velocityManager.velocity = velocity;
+        //m_velocityManager.AddForce(force);
     }
 
     private Vector3 CalculateVelocityNextPosition()
@@ -141,7 +149,7 @@ public class AutoMover : MonoBehaviour
         {
             length = (m_transforms[nextIndex].position - m_transforms[m_nowIndex].position).magnitude;
 
-            if(m_countRange < length)
+            if(m_nearRange < length)
             {
                 break;
             }

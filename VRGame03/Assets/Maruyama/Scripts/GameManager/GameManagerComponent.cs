@@ -18,6 +18,9 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
 
     private List<ClearUI> m_clearUIs = new List<ClearUI>();
 
+    private List<TesterMover> m_movers = new List<TesterMover>();
+    private List<FPSController> m_fpsController = new List<FPSController>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -25,6 +28,8 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
 
         m_dissolveFadeSprites = new List<DissolveFadeSprite>(FindObjectsOfType<DissolveFadeSprite>());
         m_clearUIs = new List<ClearUI>(FindObjectsOfType<ClearUI>());
+        m_movers = new List<TesterMover>(FindObjectsOfType<TesterMover>());
+        m_fpsController = new List<FPSController>(FindObjectsOfType<FPSController>());
     }
 
     public void ChangeState(GameState state)
@@ -55,12 +60,32 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
         {
             sprite.FadeStart(FadeObject.FadeType.FadeOut);
         }
+
+        foreach (var mover in m_movers)
+        {
+            mover.enabled = false;
+        }
+
+        foreach (var controller in m_fpsController)
+        {
+            controller.enabled = false;
+        }
     }
 
     private void ClearStart()
     {
         foreach (var ui in m_clearUIs) {
             ui.ClearEvent();
+        }
+
+        foreach (var mover in m_movers)
+        {
+            mover.enabled = false;
+        }
+
+        foreach (var controller in m_fpsController)
+        {
+            controller.enabled = false;
         }
     }
 }

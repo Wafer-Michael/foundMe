@@ -38,10 +38,14 @@ public class AutoMover : MonoBehaviour
 
     bool IsRotation { get; set; } = false;
 
+    private Vector3 m_initializePosition;
+
     private void Awake()
     {
         m_rotationController = GetComponent<RotationController>();
         m_velocityManager = GetComponent<VelocityManager>();
+
+        m_initializePosition = transform.position;
     }
 
     // Start is called before the first frame update
@@ -230,7 +234,7 @@ public class AutoMover : MonoBehaviour
     public Vector3 GetFirstPosition()
     {
         if(m_transforms.Count == 0) {
-            return transform.position;
+            return m_initializePosition;
         }
 
         return m_transforms[0].position;

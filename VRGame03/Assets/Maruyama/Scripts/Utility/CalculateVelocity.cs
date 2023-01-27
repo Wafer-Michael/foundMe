@@ -182,6 +182,19 @@ namespace maru
 			return Mathf.Abs(relativeHeading) > sub ? true : false;
 		}
 
+		public static Vector3 CalculateAddWallAvoidVelocity(VelocityManager velocityManager, Vector3 force, Vector3 avoidForce)
+        {
+			var velocity = velocityManager.velocity;    //速度の取得
+			var moveDirection = velocity + force;       //方向に新規ベクトルを追加
+			moveDirection += avoidForce;				//壁回避方向
+
+			moveDirection /= velocityManager.GetMaxSpeed();       //0 ～ 1の間に変更。
+
+			var input = new Vector2(moveDirection.x, moveDirection.z);
+
+			return moveDirection * velocityManager.GetMaxSpeed();
+		}
+
 		/// <summary>
 		/// 指定した角度より大きくないかどうか
 		/// </summary>

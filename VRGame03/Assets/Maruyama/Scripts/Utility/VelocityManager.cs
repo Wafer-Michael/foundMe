@@ -33,7 +33,7 @@ public class VelocityManager : MonoBehaviour
 
     private void Update()
     {
-        m_velocity.y += m_rigid.velocity.y - m_velocity.y;  //重力分加算する。
+        //m_velocity.y += m_rigid.velocity.y - m_velocity.y;  //重力分加算する。
         //m_velocity += m_force * Time.deltaTime;
         m_velocity += m_force;                              //力の加算
 

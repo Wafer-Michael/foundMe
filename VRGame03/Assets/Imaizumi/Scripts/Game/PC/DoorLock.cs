@@ -4,33 +4,36 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 
+/// <summary>
+/// ドアの暗証番号と鍵の状態を管理する
+/// </summary>
 public class DoorLock : MonoBehaviour
 {
-    int m_digit = 3;
+    int m_digit = 3; // 暗証番号の桁数
 
-    List<int> m_lockNumbers = new List<int>();
+    List<int> m_lockNumbers = new List<int>(); // 暗証番号
 
     [SerializeField]
-    bool m_isLock = true;
+    bool m_isLock = true; // 鍵がかかっているかどうか
     public bool IsLock { get { return m_isLock; }}
 
     [SerializeField]
-    GameObject m_canvas;
-    GameObject m_numberText;
+    GameObject m_canvas; // NumberTextの親オブジェクト
+    GameObject m_numberText; // 生成したNumberText
 
-    GameObject m_generator;
+    GameObject m_generator; // 番号生成機
 
-    int[] m_collationNumbers = new int[3];
+    //int[] m_collationNumbers = new int[3];
 
     int m_correct = 0;    //一致
     int m_almost = 0;     //惜しい
 
     [SerializeField]
-    int m_maxNumError;
-    int m_numError;
+    int m_maxNumError; // 失敗できる最大数
+    int m_numError; // 失敗した数
 
-    System.Action m_action;
-    System.Action m_errEvent;
+    System.Action m_action; // 開錠時のイベント
+    System.Action m_errEvent; // エラー時のイベント
 
     private void Awake()
     {
@@ -39,8 +42,10 @@ public class DoorLock : MonoBehaviour
 
     private void Start()
     {
-        var canvas = Instantiate(m_canvas);
-        canvas.transform.parent = this.transform.parent;
+        var canvas = Instantiate(m_canvas); // キャンバス生成
+        canvas.transform.parent = this.transform.parent; // キャンバスの親をRoomに設定
+
+        // NumberTextを取得    
         for(int i = 0; i < canvas.transform.childCount; i++)
         {
             var child = canvas.transform.GetChild(i);
@@ -50,15 +55,8 @@ public class DoorLock : MonoBehaviour
                 m_numberText = child.gameObject;
             }
         }
-        m_digit = m_numberText.transform.childCount;
-    }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            AccessKey();
-        }
+        m_digit = m_numberText.transform.childCount; // 桁数を更新
     }
 
     /// <summary>
@@ -80,7 +78,6 @@ public class DoorLock : MonoBehaviour
     /// </summary>
     public void Interruption()
     {
-        Debug.Log("Access Interruption");
         m_numberText.GetComponent<DoorLockUI>().SetActiveUI(false);
         StopCoroutine("Unlock");
     }
@@ -90,30 +87,27 @@ public class DoorLock : MonoBehaviour
     /// </summary>
     IEnumerator Unlock()
     {
-        Debug.Log("Start Coroutine");
-
         List<int> numbers = new List<int>();
 
-        while (m_isLock)
+        while (m_isLock) // 開錠されてなかったら
         {
-            yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Space));
+            yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Space)); // スペースが押されるまで待機
+            // 各項目をリセット
             m_correct = 0;
             m_almost = 0;
-            numbers.Clear(); // 番号をリセット
+            numbers.Clear();
+
             InputPass(ref numbers); // 番号入力
             StartCoroutine("Collation", numbers); // 照合
 
             yield break;
         }
 
-        Debug.Log("unlocked");
-        m_action.Invoke();
-        Interruption();
+        m_action.Invoke(); // イベント呼び出し
+        Interruption(); // アクセス中断
 
         yield break;
     }
-
-    public 
 
     /// <summary>
     /// Listに番号を入力する
@@ -123,13 +117,11 @@ public class DoorLock : MonoBehaviour
     {
         for (int i = 0; i < m_digit; i++)
         {
-            var numberText = m_numberText.transform.GetChild(i).gameObject;
+            var numberText = m_numberText.transform.GetChild(i).gameObject; // NumberTextを取得
 
             int textNum = int.Parse(numberText.GetComponent<Text>().text);
-            numbers.Add(textNum);
+            numbers.Add(textNum); // 数字を追加
         }
-
-        Debug.Log("input number" + numbers[0] + numbers[1] + numbers[2]);
     }
 
     /// <summary>
@@ -138,7 +130,7 @@ public class DoorLock : MonoBehaviour
     /// <param name="numbers">入力する番号</param>
     IEnumerator Collation(List<int> numbers)
     {
-
+        // 正答数を判定
         for (int i = 0; i < numbers.Count; i++)
         {
             if (numbers[i] == m_lockNumbers[i])
@@ -149,6 +141,7 @@ public class DoorLock : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
+        // 惜しかった数を判定
         for (int i = 0; i < numbers.Count; i++)
         {
             for (int j = 0; j < m_lockNumbers.Count; j++)
@@ -164,30 +157,22 @@ public class DoorLock : MonoBehaviour
 
         if (m_correct == m_digit) // 一致した数が桁数と一緒なら
         {
-            m_isLock = false;
+            m_isLock = false; // 開錠
             StartCoroutine("Unlock");
             yield break;
         }
 
-        m_numberText.GetComponent<DoorLockUI>().DisplayResult(m_correct, m_almost);
-        m_numError++;
-        if(m_numError >= m_maxNumError)
+        // 以下開錠失敗時
+
+        m_numberText.GetComponent<DoorLockUI>().DisplayResult(m_correct, m_almost); // フィードバック表示
+        m_numError++; // エラー回数更新
+        if(m_numError >= m_maxNumError) // エラーが最大数に達したら
         {
-            m_errEvent.Invoke();
+            m_errEvent.Invoke(); // イベント呼び出し
         }
 
         StartCoroutine("Unlock");
         yield break;
-    }
-
-
-
-    public void SetLockNumbers(List<int> numbers)
-    {
-        foreach(int num in numbers)
-        {
-            m_lockNumbers.Add(num);
-        }
     }
 
     /// <summary>
@@ -212,6 +197,18 @@ public class DoorLock : MonoBehaviour
         Debug.Log("lock Number " + numbers[0] + numbers[1] + numbers[2]);
 
         SetLockNumbers(numbers);
+    }
+
+    /// <summary>
+    /// 暗証番号を設定する
+    /// </summary>
+    /// <param name="numbers">暗証番号</param>
+    public void SetLockNumbers(List<int> numbers)
+    {
+        foreach (int num in numbers)
+        {
+            m_lockNumbers.Add(num);
+        }
     }
 
     /// <summary>
@@ -267,10 +264,19 @@ public class DoorLock : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// 開錠時のイベント設定
+    /// </summary>
+    /// <param name="action">イベント</param>
     public void SetAction(System.Action action)
     {
         m_action = action;
     }
+
+    /// <summary>
+    /// エラー発生時のイベント設定
+    /// </summary>
+    /// <param name="action">イベント</param>
     public void SetErrorEvent(System.Action action)
     {
         m_errEvent = action;

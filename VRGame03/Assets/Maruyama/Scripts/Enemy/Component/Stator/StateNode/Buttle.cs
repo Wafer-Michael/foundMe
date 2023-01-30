@@ -7,13 +7,14 @@ namespace StateNode
     public class Buttle : EnemyStateNodeBase<EnemyBase>
     {
         private enum TaskEnum {
-            Attack,
-            Wait,
+            Preliminary,    //ó\îıìÆçÏ
+            Attack,         //çUåÇ
+            Wait,           //ë“ã@
         }
 
         private TargetManager m_targetManager;  //É^Å[ÉQÉbÉgäƒéã
         private VelocityManager m_velocityManager;
-        private AttackAnimationController m_attackAnimationController;
+        private AttackAnimationController m_attackAnimation;
 
         private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
@@ -22,7 +23,7 @@ namespace StateNode
         {
             m_targetManager = owner.GetComponent<TargetManager>();
             m_velocityManager = owner.GetComponent<VelocityManager>();
-            m_attackAnimationController = owner.GetComponent<AttackAnimationController>();
+            m_attackAnimation = owner.GetComponent<AttackAnimationController>();
 
             DefineTask();
         }
@@ -32,8 +33,6 @@ namespace StateNode
             base.ReserveChangeComponents();
 
             var owner = GetOwner();
-
-            //AddChangeComp(owner.GetComponent<VelocityManager>(), false, true);
         }
 
         public override void OnStart()
@@ -49,7 +48,7 @@ namespace StateNode
         public override bool OnUpdate()
         {
             //ìGÇÃäƒéã
-            Debug.Log("Buttle");
+            Debug.Log("ÅöButtle");
 
             m_taskList.UpdateTask();
 
@@ -66,19 +65,16 @@ namespace StateNode
 
         private void DefineTask()
         {
-            //âºçUåÇ
-            System.Action attackFunc = () =>
-            {
-                var target = m_targetManager.GetCurrentTarget();
-                if (!target) {
-                    return;
-                }
+            //ó\îıìÆçÏ
+            m_taskList.DefineTask(TaskEnum.Preliminary, new TaskNode.TacklePreliminary(GetOwner()));
 
-                m_attackAnimationController.AttackStart();
-            };
 
-            m_taskList.DefineTask(TaskEnum.Attack, attackFunc, null, null);
 
+            //çUåÇ
+            //m_taskList.DefineTask(TaskEnum.Attack, new TaskNode.TackleAttack(GetOwner()));
+            m_taskList.DefineTask(TaskEnum.Attack, () => m_attackAnimation.AttackStart(), null, null);
+
+            //ë“ã@
             const float WaitTime = 3.0f;
             m_taskList.DefineTask(TaskEnum.Wait, new TaskNode.Task_Wait(WaitTime));
         }
@@ -86,6 +82,7 @@ namespace StateNode
         private void SelectTask()
         {
             TaskEnum[] tasks = { 
+                //TaskEnum.Preliminary,
                 TaskEnum.Attack,
                 TaskEnum.Wait,
             };
@@ -95,4 +92,77 @@ namespace StateNode
             }
         }
     }
+
+}
+
+
+namespace TaskNode
+{
+    //ó\îıìÆçÏ
+    class TacklePreliminary : TaskNodeBase<EnemyBase>
+    { 
+        public struct Parametor
+        {
+            public float speed;
+            
+        }
+
+        public TacklePreliminary(EnemyBase owner):
+            base(owner)
+        { }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        public override bool OnUpdate()
+        {
+            
+
+            //var owner = GetOwner();
+            //owner.transform.rotation = Quaternion.Lerp(owner.transform.rotation,
+            //             Quaternion.LookRotation(direct),
+            //             m_rotationSpeed * Time.deltaTime);
+
+            return IsEnd();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+
+        public bool IsEnd()
+        {
+            return true;
+        }
+    }
+
+    //É^ÉbÉNÉãçUåÇ
+    class TackleAttack : TaskNodeBase<EnemyBase>
+    {
+        public TackleAttack(EnemyBase owner) :
+            base(owner)
+        { }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        public override bool OnUpdate()
+        {
+
+
+            return true;
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+    }
+    
+
 }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 
 /// <summary>
 /// ドアの暗証番号と鍵の状態を管理する
@@ -246,13 +245,13 @@ public class DoorLock : MonoBehaviour
         var mat = gameObj.GetComponent<Renderer>().material; // オブジェクトのマテリアル
         var shader = mat.shader; // マテリアルが使用しているシェーダー
 
-        var count = ShaderUtil.GetPropertyCount(shader);
+        var count = shader.GetPropertyCount();
         for (int i = 0; i < count; i++)
         {
-            var type = ShaderUtil.GetPropertyType(shader, i);
-            if (type == ShaderUtil.ShaderPropertyType.TexEnv)
+            var type = shader.GetPropertyType(i);
+            if (type ==UnityEngine.Rendering.ShaderPropertyType.Texture)
             {
-                var proName = ShaderUtil.GetPropertyName(shader, i);
+                var proName = shader.GetPropertyName(i);
                 var tex = mat.GetTexture(proName);
                 if (tex)
                 {

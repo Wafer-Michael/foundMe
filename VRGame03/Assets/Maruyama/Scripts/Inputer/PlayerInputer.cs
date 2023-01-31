@@ -35,7 +35,17 @@ public class PlayerInputer : MonoBehaviour
             moveVec += Vector3.right;
         }
 
+        return GetControllerInput();
+
         return moveVec;
+    }
+
+    static public Vector3 GetControllerInput()
+    {
+        var vertical = Input.GetAxisRaw("Vertical");
+        var horizontal = Input.GetAxisRaw("Horizontal");
+
+        return new Vector3(horizontal, 0.0f, vertical);
     }
 
     /// <summary>

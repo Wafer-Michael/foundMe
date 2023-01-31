@@ -649,6 +649,7 @@ MonoBehaviour:
   m_isLock: 1
   m_canvas: {fileID: 1832730152029893238, guid: 5d8be3714a89c4e458c08952cf71563c,
     type: 3}
+  m_maxNumError: 3
 --- !u!1 &6189617087292510499
 GameObject:
   m_ObjectHideFlags: 0

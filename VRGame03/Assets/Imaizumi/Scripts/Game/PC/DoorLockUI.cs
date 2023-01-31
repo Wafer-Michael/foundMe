@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// ドア鍵のUI制御
+/// </summary>
 public class DoorLockUI : MonoBehaviour
 {
-    int m_digit = 0;
+    int m_digit = 0; // 選択中の桁数
 
-    List<Text> m_texts = new List<Text>();
-
-    [SerializeField]
-    GameObject m_resultText;
+    List<Text> m_texts = new List<Text>(); // 数字を表示するText
 
     [SerializeField]
-    GameObject m_select;
+    GameObject m_resultText; // フィードバックを表示するText
+
+    [SerializeField]
+    GameObject m_select; // 選択中の桁を強調表示する
 
     void Start()
     {
-        foreach (var child in GetComponentsInChildren<Text>())
-        {
-            m_texts.Add(child);
-            child.text = "0";
-        }
+        ClearText();        
     }
 
     void Update()
@@ -30,21 +29,26 @@ public class DoorLockUI : MonoBehaviour
         NumberShift();
     }
 
+    /// <summary>
+    /// 桁を選択する
+    /// </summary>
     void ChangeDigit()
     {
         // 桁選択
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) // ←を押した場合
         {
             m_digit -= 1;
+            // 移動制限
             if (m_digit < 0)
             {
                 m_digit = 0;
             }
             MoveSelect();
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow)) // →を押した場合
         {
             m_digit += 1;
+            // 移動制限
             if (m_digit >= m_texts.Count)
             {
                 m_digit = m_texts.Count - 1;
@@ -53,12 +57,15 @@ public class DoorLockUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  数字を選択する
+    /// </summary>
     void NumberShift()
     {
         // 数字送り
         int text = int.Parse(m_texts[(int)m_digit].text);
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow)) // ↑を押した場合
         {
 
             text += 1; // 数字を増やす
@@ -69,7 +76,7 @@ public class DoorLockUI : MonoBehaviour
                 text = 0; // 0に戻る
             }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow)) // ↓を押した場合
         {
 
             text -= 1; // 数字を減らす
@@ -84,12 +91,20 @@ public class DoorLockUI : MonoBehaviour
         m_texts[(int)m_digit].text = text.ToString(); // 表示
     }
 
+    /// <summary>
+    /// 選択中の桁を強調する
+    /// </summary>
     void MoveSelect()
     {
         var pos = m_select.GetComponent<RectTransform>();
         pos.anchoredPosition = new Vector2((m_digit - 1) * 70.0f, pos.anchoredPosition.y);
     }
 
+    /// <summary>
+    /// 結果を表示する
+    /// </summary>
+    /// <param name="correct">正答数</param>
+    /// <param name="almost">惜しかった数</param>
     public void DisplayResult(int correct, int almost)
     {
         var text = m_resultText.GetComponent<Text>();
@@ -97,6 +112,10 @@ public class DoorLockUI : MonoBehaviour
         text.text = "一致 " + correct + " 数字が一致 " + almost + " 不一致 " + (m_texts.Count - correct - almost) + "\n" + text.text;
     }
 
+    /// <summary>
+    /// UIの表示状態を設定
+    /// </summary>
+    /// <param name="value">表示状態</param>
     public void SetActiveUI(bool value)
     {
         var numChild = this.gameObject.transform.parent.childCount;
@@ -106,6 +125,9 @@ public class DoorLockUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// テキストをリセット
+    /// </summary>
     public void ClearText()
     {
         foreach(var text in m_texts)

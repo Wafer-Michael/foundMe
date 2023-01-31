@@ -49,10 +49,10 @@ public class JackController : MonoBehaviour
     }
 
     [SerializeField]
-    private DissolveFadeSprite m_dissolveFadeSprite;
+    private DissolveFadeSprite m_dissolveFadeSprite;    //ディゾブルシェーダー
 
     [SerializeField]
-    private GameObject m_returnTouchUI;
+    private GameObject m_returnTouchUI;                 //戻るUI判定処理
 
     private void Awake() {
         m_timer = new GameTimer(0.0f);

@@ -36,6 +36,8 @@ public class AttackAnimationController : MonoBehaviour
         m_velocityManager = GetComponent<VelocityManager>();
         m_rigidbody = GetComponent<Rigidbody>();
         m_targetManager = GetComponent<TargetManager>();
+
+        m_rigidbody.useGravity = false;
     }
 
     private void Update()
@@ -65,11 +67,11 @@ public class AttackAnimationController : MonoBehaviour
         Debug.Log("ÅöÅöEnd");
         IsUpdate = false;
         var position = transform.position;
-        transform.position = new Vector3(position.x, 0.15f, position.z);
+        transform.position = new Vector3(position.x, 0.0f, position.z);
 
         m_velocityManager.enabled = true;
         m_velocityManager.ResetAll();
-        m_rigidbody.useGravity = true;
+        //m_rigidbody.useGravity = true;
     }
 
     public void AttackStart() {

@@ -16,6 +16,12 @@ public class SelfImpactCellController : MonoBehaviour
 
     private void Update()
     {
+        if (m_currentCell == null) {
+            Debug.Log("CurrentCell‚ªNull‚Å‚·");
+            InitializeCell();
+            return;
+        }
+
         //Œ»İ‚ÌƒZƒ‹‚æ‚èŠO‚É‚Å‚½‚ç
         if (!m_currentCell.GetRectData().IsInRect(transform.position)) {
             UpdateCell();

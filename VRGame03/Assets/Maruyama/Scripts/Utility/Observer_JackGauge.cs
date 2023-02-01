@@ -12,7 +12,7 @@ public class Observer_JackGauge : MonoBehaviour
     [SerializeField]
     private FillAmoutGauge m_gaugeUI;           //ゲージUI
 
-    private void Awake()
+    private void Start()
     {
         //ジャックコントローラーの状態変化によって、変更する。
         SettingJackObserve();
@@ -21,7 +21,8 @@ public class Observer_JackGauge : MonoBehaviour
     private void Update()
     {
         //ゲージのオブジェクトが生きている状態だったら。
-        if (m_gaugeUI.gameObject.activeSelf) {
+        if (m_gaugeUI.gameObject.activeSelf)
+        {
             m_gaugeUI.FillAmoutValue = m_jackController.GetIntervalTimeRate();
         }
     }

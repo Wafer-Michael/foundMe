@@ -6448,10 +6448,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1308590332, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1986127562369587600, guid: 28e17b2ce58866046a67bb2c3df275a0,
         type: 3}
       propertyPath: m_floor
@@ -6519,32 +6515,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e17b2ce58866046a67bb2c3df275a0, type: 3}
---- !u!1 &1986127563305630187 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1668921863, guid: 28e17b2ce58866046a67bb2c3df275a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1986127563305630186}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1986127563305630188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986127563305630187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63fbf9c4168f4754e899890c6776c345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_maxRange: 1
-  m_fadeObject: {fileID: 1986127563305630187}
-  m_fadeTime: 0.25
-  m_playOnAwake: 0
-  m_fadeType: 1
-  m_finishEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &2420669258609573707
 Transform:
   m_ObjectHideFlags: 0

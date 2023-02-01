@@ -583,7 +583,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6271948144681858738}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &644887689
 SpriteRenderer:
@@ -738,8 +738,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6271948144681858738}
-  m_RootOrder: 6
+  m_Father: {fileID: 8779456776373171935}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &909374808
 Camera:
@@ -807,7 +807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1308590333
 Transform:
   m_ObjectHideFlags: 0
@@ -1129,6 +1129,7 @@ GameObject:
   - component: {fileID: 1668921867}
   - component: {fileID: 1668921866}
   - component: {fileID: 1668921865}
+  - component: {fileID: 1986127563305630188}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -1201,6 +1202,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1986127563305630188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668921863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63fbf9c4168f4754e899890c6776c345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxRange: 1
+  m_fadeObject: {fileID: 1668921863}
+  m_fadeTime: 0.25
+  m_playOnAwake: 0
+  m_fadeType: 1
+  m_finishEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1758983811
 GameObject:
   m_ObjectHideFlags: 0
@@ -10413,6 +10434,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2289967186867823089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8779456776373171935}
+  m_Layer: 0
+  m_Name: ComebackCameraFile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8779456776373171935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2289967186867823089}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 909374806}
+  m_Father: {fileID: 6271948144681858738}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2308542793558425854
 GameObject:
   m_ObjectHideFlags: 0
@@ -17450,8 +17503,8 @@ Transform:
   - {fileID: 1986127561595072021}
   - {fileID: 3989533544360848845}
   - {fileID: 1577596518}
-  - {fileID: 909374806}
   - {fileID: 644887687}
+  - {fileID: 8779456776373171935}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

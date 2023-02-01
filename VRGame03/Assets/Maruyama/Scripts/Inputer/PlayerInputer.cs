@@ -75,14 +75,23 @@ public class PlayerInputer : MonoBehaviour
 
     static public bool IsSence()
     {
+        return false;
         return Input.GetKeyDown(KeyCode.P);
     }
 
+    /// <summary>
+    /// 近くのアイテム取得
+    /// </summary>
+    /// <returns></returns>
     static public bool IsTakeNearItem()
     {
         return Input.GetKeyDown(KeyCode.F);
     }
 
+    /// <summary>
+    /// バッテリーリロード
+    /// </summary>
+    /// <returns></returns>
     static public bool IsBatteryCharge()
     {
         return Input.GetKeyDown(KeyCode.R);
@@ -99,16 +108,19 @@ public class PlayerInputer : MonoBehaviour
         return true;
     }
 
-    static public bool IsDebugKeyDown(KeyCode key)
-    {
-        return Input.GetKeyDown(key);
-    }
-
+    /// <summary>
+    /// ロック系にアクセスする。
+    /// </summary>
+    /// <returns></returns>
     static public bool IsAccess()
     {
         return Input.GetKeyDown(KeyCode.F);
     }
 
+    /// <summary>
+    /// UIクローズボタン
+    /// </summary>
+    /// <returns></returns>
     static public bool IsClose() {
         return Input.GetKeyDown(KeyCode.Q);
     }
@@ -201,6 +213,17 @@ public class PlayerInputer : MonoBehaviour
     static public bool IsChangeColor()
     {
         return Input.GetKeyDown(KeyCode.P);
+    }
+
+    /// <summary>
+    /// デバッグ用
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    static public bool IsDebugKeyDown(KeyCode key)
+    {
+        return false;
+        return Input.GetKeyDown(key);
     }
 
 }

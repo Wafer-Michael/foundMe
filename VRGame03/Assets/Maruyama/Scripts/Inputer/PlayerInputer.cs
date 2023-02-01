@@ -70,8 +70,8 @@ public class PlayerInputer : MonoBehaviour
         //var moveVec = new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0.0f);
 
         var mouseAxis = Input.GetAxis("Mouse X");
-        float stickAxis = 0.0f;
-        //var stickAxis = Input.GetAxis("4th-Axis");
+        //float stickAxis = 0.0f;
+        var stickAxis = Input.GetAxis("RHorizontal");
 
         var moveVec = new Vector3(0.0f, mouseAxis + stickAxis, 0.0f);
 

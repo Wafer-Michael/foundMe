@@ -20,6 +20,12 @@ public class DoorLockUI : MonoBehaviour
 
     void Start()
     {
+        // 子オブジェクトのTextコンポーネントを格納
+        for(int i = 0; i < this.transform.childCount; i++)
+        {
+            var chlildObj = this.transform.GetChild(i).gameObject;
+            m_texts.Add(chlildObj.GetComponent<Text>());
+        }
         ClearText();        
     }
 

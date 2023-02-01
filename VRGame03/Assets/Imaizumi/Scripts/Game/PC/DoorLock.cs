@@ -102,7 +102,7 @@ public class DoorLock : MonoBehaviour
             yield break;
         }
 
-        m_action.Invoke(); // イベント呼び出し
+        m_action?.Invoke(); // イベント呼び出し
         Interruption(); // アクセス中断
 
         yield break;
@@ -167,7 +167,7 @@ public class DoorLock : MonoBehaviour
         m_numError++; // エラー回数更新
         if(m_numError >= m_maxNumError) // エラーが最大数に達したら
         {
-            m_errEvent.Invoke(); // イベント呼び出し
+            m_errEvent?.Invoke(); // イベント呼び出し
         }
 
         StartCoroutine("Unlock");

@@ -68,7 +68,12 @@ public class PlayerInputer : MonoBehaviour
     static public Vector3 CalculateMouseCameraMoveVec()
     {
         //var moveVec = new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0.0f);
-        var moveVec = new Vector3(0.0f, Input.GetAxis("Mouse X"), 0.0f);
+
+        var mouseAxis = Input.GetAxis("Mouse X");
+        float stickAxis = 0.0f;
+        //var stickAxis = Input.GetAxis("4th-Axis");
+
+        var moveVec = new Vector3(0.0f, mouseAxis + stickAxis, 0.0f);
 
         return moveVec;
     }
@@ -85,7 +90,7 @@ public class PlayerInputer : MonoBehaviour
     /// <returns></returns>
     static public bool IsTakeNearItem()
     {
-        return Input.GetKeyDown(KeyCode.F);
+        return Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 0");
     }
 
     /// <summary>
@@ -94,7 +99,8 @@ public class PlayerInputer : MonoBehaviour
     /// <returns></returns>
     static public bool IsBatteryCharge()
     {
-        return Input.GetKeyDown(KeyCode.R);
+        //Xボタン
+        return Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown("joystick button 2");
     }
 
 
@@ -114,7 +120,8 @@ public class PlayerInputer : MonoBehaviour
     /// <returns></returns>
     static public bool IsAccess()
     {
-        return Input.GetKeyDown(KeyCode.F);
+        //Aボタン
+        return Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 0");
     }
 
     /// <summary>
@@ -122,7 +129,8 @@ public class PlayerInputer : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     static public bool IsClose() {
-        return Input.GetKeyDown(KeyCode.Q);
+        //Bボタン
+        return Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown("joystick button 1");
     }
 
     /// <summary>
@@ -184,11 +192,13 @@ public class PlayerInputer : MonoBehaviour
     /// <returns></returns>
     static public bool IsShot()
     {
+        return false;
         return Input.GetMouseButton(0);
     }
 
     static public bool IsShotDown()
     {
+        return false;
         return Input.GetMouseButtonDown(0);
     }
 
@@ -207,11 +217,13 @@ public class PlayerInputer : MonoBehaviour
     /// <returns></returns>
     static public bool IsTesterDamage()
     {
+        return false;
         return Input.GetMouseButtonDown(1);
     }
 
     static public bool IsChangeColor()
     {
+        return false;
         return Input.GetKeyDown(KeyCode.P);
     }
 

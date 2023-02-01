@@ -150,4 +150,10 @@ public class JackController : MonoBehaviour
 
         m_returnTouchUI.SetActive(true);
     }
+
+    /// <summary>
+    /// インターバルタイムレートの取得
+    /// </summary>
+    /// <returns></returns>
+    public float GetIntervalTimeRate() => m_timer.IntervalTimeRate;
 }

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 625677862501237043}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.27771425, y: -0.10776192, z: -1.7667701}
-  m_LocalScale: {x: 1, y: 1.5, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2816781821671607383}
@@ -98,7 +98,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &235696797
@@ -133,7 +133,7 @@ MonoBehaviour:
   Thickness: 1
   MinBreakArea: 0.01
   m_minImpactToBreak: 1
-  m_isCollision: 1
+  m_isCollision: 0
 --- !u!1 &1532195701389695470
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 5053377046326350061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.252079, y: 0.8577619, z: 3.2554798}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3283298720938863616}
@@ -245,4 +245,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_param:
-    hp: 3
+    hp: 80

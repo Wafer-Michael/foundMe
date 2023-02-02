@@ -95,7 +95,7 @@ public class DoorLock : MonoBehaviour
 
         while (m_isLock) // 開錠されてなかったら
         {
-            yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Space)); // スペースが押されるまで待機
+            yield return new WaitWhile(() => !PlayerInputer.IsEnter()); // スペースが押されるまで待機
             // 各項目をリセット
             m_correct = 0;
             m_almost = 0;

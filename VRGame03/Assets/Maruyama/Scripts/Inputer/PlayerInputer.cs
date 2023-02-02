@@ -122,6 +122,16 @@ public class PlayerInputer : MonoBehaviour
     }
 
     /// <summary>
+    /// 決定する。
+    /// </summary>
+    /// <returns></returns>
+    static public bool IsEnter()
+    {
+        //Aボタン
+        return Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 2");
+    }
+
+    /// <summary>
     /// UIクローズボタン
     /// </summary>
     /// <returns></returns>

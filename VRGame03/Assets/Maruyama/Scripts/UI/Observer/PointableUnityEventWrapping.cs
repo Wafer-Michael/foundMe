@@ -15,20 +15,22 @@ public class PointableUnityEventWrapping : MonoBehaviour
     private HashSet<int> _pointers;
 
     [SerializeField]
-    private UnityEvent<PointerEvent> _whenRelease;
+    private UnityEvent<PointerEvent> _whenRelease;  //触れた瞬間のイベント
 
     [SerializeField]
-    private UnityEvent<PointerEvent> _whenHover;
+    private UnityEvent<PointerEvent> _whenHover;    //触れている間のイベント
     [SerializeField]
-    private UnityEvent<PointerEvent> _whenUnhover;
+    private UnityEvent<PointerEvent> _whenUnhover;  //離れた時のイベント
     [SerializeField]
-    private UnityEvent<PointerEvent> _whenSelect;
+    private UnityEvent<PointerEvent> _whenSelect;   //選択(押し込み)した時のイベント
     [SerializeField]
-    private UnityEvent<PointerEvent> _whenUnselect;
+    private UnityEvent<PointerEvent> _whenUnselect; //選択終了時のイベント
     [SerializeField]
-    private UnityEvent<PointerEvent> _whenMove;
+    private UnityEvent<PointerEvent> _whenMove;     //触れた瞬間から離れるまでのアップデートイベント
     [SerializeField]
     private UnityEvent<PointerEvent> _whenCancel;
+
+    //プロパティ
 
     public UnityEvent<PointerEvent> WhenRelease => _whenRelease;
 

@@ -130,6 +130,10 @@ namespace StateNode
 
                 var edges = wayPointsMap.GetGraph().GetEdges(curretNode.GetIndex());
                 
+                if(edges == null) {
+                    continue;
+                }
+
                 foreach (var edge in edges)
                 {
                     //’Ç‰ÁOpenData‚É’Ç‰Á‚Å‚«‚é‚©‚ð”»’f

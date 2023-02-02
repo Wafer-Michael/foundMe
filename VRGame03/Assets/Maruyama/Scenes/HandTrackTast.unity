@@ -6807,7 +6807,7 @@ PrefabInstance:
     - target: {fileID: 5543782089005006322, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
         type: 3}
       propertyPath: m_transforms.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5543782089005006322, guid: 1e0aa40086920a243a4ea67e1dbcdc2c,
         type: 3}

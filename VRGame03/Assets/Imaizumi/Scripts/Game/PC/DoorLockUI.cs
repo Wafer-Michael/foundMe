@@ -40,8 +40,9 @@ public class DoorLockUI : MonoBehaviour
     /// </summary>
     void ChangeDigit()
     {
+        var input = PlayerInputer.CalculateMoveVector();
         // Œ…‘I‘ğ
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) // ©‚ğ‰Ÿ‚µ‚½ê‡
+        if (input.x <= -0.19f) // ©‚ğ‰Ÿ‚µ‚½ê‡
         {
             m_digit -= 1;
             // ˆÚ“®§ŒÀ
@@ -51,7 +52,7 @@ public class DoorLockUI : MonoBehaviour
             }
             MoveSelect();
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow)) // ¨‚ğ‰Ÿ‚µ‚½ê‡
+        if (input.x >= 0.19f) // ¨‚ğ‰Ÿ‚µ‚½ê‡
         {
             m_digit += 1;
             // ˆÚ“®§ŒÀ
@@ -70,8 +71,9 @@ public class DoorLockUI : MonoBehaviour
     {
         // ”š‘—‚è
         int text = int.Parse(m_texts[(int)m_digit].text);
+        var input = PlayerInputer.CalculateMoveVector();
 
-        if (Input.GetKeyDown(KeyCode.UpArrow)) // ª‚ğ‰Ÿ‚µ‚½ê‡
+        if (input.z >= 0.19f) // ª‚ğ‰Ÿ‚µ‚½ê‡
         {
 
             text += 1; // ”š‚ğ‘‚â‚·
@@ -82,7 +84,7 @@ public class DoorLockUI : MonoBehaviour
                 text = 0; // 0‚É–ß‚é
             }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow)) // «‚ğ‰Ÿ‚µ‚½ê‡
+        if (input.z <= -0.19f) // «‚ğ‰Ÿ‚µ‚½ê‡
         {
 
             text -= 1; // ”š‚ğŒ¸‚ç‚·

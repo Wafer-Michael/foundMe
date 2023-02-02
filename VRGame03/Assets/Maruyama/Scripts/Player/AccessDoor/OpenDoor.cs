@@ -43,6 +43,9 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
 
     private DoorLock m_doorLock = null;
 
+    [SerializeField]
+    AudioSource m_openSE; // ŠJ•ÂŽž‚ÌSE
+
     private void Awake()
     {
         m_doorLock = GetComponent<DoorLock>();
@@ -95,6 +98,7 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
             m_doorLock.AccessKey();
         }
         else {
+            m_openSE.PlayOneShot(m_openSE.clip);
             Open(other);
         }
     }

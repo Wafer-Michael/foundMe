@@ -34,6 +34,11 @@ public class DoorLock : MonoBehaviour
     System.Action m_action; // 開錠時のイベント
     System.Action m_errEvent; // エラー時のイベント
 
+    [SerializeField]
+    AudioSource m_unlockSE; // 開錠時のSE
+    [SerializeField]
+    AudioSource m_errSE; // エラー時のSE
+
     private void Awake()
     {
         m_generator = GameObject.Find("NumberLockGenerator");
@@ -102,7 +107,9 @@ public class DoorLock : MonoBehaviour
             yield break;
         }
 
+        // 開錠時の処理
         m_action?.Invoke(); // イベント呼び出し
+        m_unlockSE.PlayOneShot(m_unlockSE.clip);
         Interruption(); // アクセス中断
 
         yield break;
@@ -165,6 +172,7 @@ public class DoorLock : MonoBehaviour
 
         m_numberText.GetComponent<DoorLockUI>().DisplayResult(m_correct, m_almost); // フィードバック表示
         m_numError++; // エラー回数更新
+        m_errSE.PlayOneShot(m_errSE.clip);
         if(m_numError >= m_maxNumError) // エラーが最大数に達したら
         {
             m_errEvent?.Invoke(); // イベント呼び出し

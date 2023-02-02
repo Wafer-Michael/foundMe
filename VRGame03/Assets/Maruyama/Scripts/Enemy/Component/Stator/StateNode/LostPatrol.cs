@@ -11,11 +11,6 @@ namespace StateNode
     /// </summary>
     public class LostPatrol : EnemyStateNodeBase<EnemyBase>
     {
-        private enum TaskEnum
-        {
-
-        }
-
         public struct Parametor
         {
             public float time;                      //探索をする最大時間
@@ -26,12 +21,9 @@ namespace StateNode
 
         private GameTimer m_timer;  //タイマー管理クラス
 
-        private TargetManager m_targetManager;                          //ターゲット管理
         private AstarSeek m_astarSeek;                                  //AstarSeekの設定
         private SelfAstarNodeController m_selfAstarNodeController;      //自分自身が所属するAstarNodeの検索
         private SelfImpactCellController m_selfImpactCellController;    //自分が所属するセルを管理する。
-
-        private TaskList<TaskEnum> m_taskList = new TaskList<TaskEnum>();
 
         private Cell m_currentCell = null;
 
@@ -45,7 +37,6 @@ namespace StateNode
             m_param = parametor;
             m_timer = new GameTimer();
 
-            m_targetManager = owner.GetComponent<TargetManager>();
             m_astarSeek = owner.GetComponent<AstarSeek>();
             m_selfAstarNodeController = owner.GetComponent<SelfAstarNodeController>();
             m_selfImpactCellController = owner.GetComponent<SelfImpactCellController>();
@@ -235,7 +226,7 @@ namespace StateNode
             }
 
             //一定距離以上なら追加しない
-            const float Range = 5.0f;
+            const float Range = 15.0f;
             var range = (currentCell.GetPosition() - GetOwner().transform.position).magnitude;
             if (range > Range)
             {

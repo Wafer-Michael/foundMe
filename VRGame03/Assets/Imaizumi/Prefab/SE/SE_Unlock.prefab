@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2533594700862237488}
   - component: {fileID: 8499544438198334848}
   m_Layer: 0
-  m_Name: SEUnlock
+  m_Name: SE_Unlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

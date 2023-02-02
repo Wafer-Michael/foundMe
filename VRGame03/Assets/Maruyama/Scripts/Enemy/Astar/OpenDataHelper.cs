@@ -86,7 +86,11 @@ public class OpenDataHelper
         openDatas.Remove(openData); //使用するオープンデータをリストから削除
         closeDatas.Add(openData);   //使用するオープンデータをクローズリストに追加
 
-        List<OpenData> otherAreaOpenDatas = new List<OpenData>();
+        var otherAreaOpenDatas = new List<OpenData>();
+
+        if(edges == null) {
+            return false;
+        }
 
         foreach (var edge in edges)
         {

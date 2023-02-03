@@ -15,13 +15,13 @@ public class Item : MonoBehaviour
     }
 
     [SerializeField]
-    private UnityEvent m_idleEvent = new UnityEvent();
+    private UnityEvent m_idleEvent = new UnityEvent();      //待機中イベント
 
     [SerializeField]
-    private UnityEvent m_accessEvent = new UnityEvent();
+    private UnityEvent m_accessEvent = new UnityEvent();    //アクセスイベント
 
     [SerializeField]
-    private UnityEvent m_getableEvent = new UnityEvent();
+    private UnityEvent m_getableEvent = new UnityEvent();   //ゲットイベント
     
     private void Awake()
     {

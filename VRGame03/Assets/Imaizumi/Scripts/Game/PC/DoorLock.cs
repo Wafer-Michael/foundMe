@@ -82,11 +82,11 @@ public class DoorLock : MonoBehaviour
             //m_numberText.transform.parent.transform.position = transform.position + new Vector3(-0.625f, -2.75f, 0.15f);
             if(convart == 1) {
                 m_numberText.transform.parent.transform.position = m_front.transform.position;
-                m_numberText.transform.parent.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+                m_numberText.transform.parent.transform.rotation = m_front.transform.rotation;
             }
             else {
                 m_numberText.transform.parent.transform.position = m_back.transform.position;
-                m_numberText.transform.parent.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                m_numberText.transform.parent.transform.rotation = m_back.transform.rotation;
             }
             
             m_numberText.GetComponent<DoorLockUI>().SetActiveUI(true);

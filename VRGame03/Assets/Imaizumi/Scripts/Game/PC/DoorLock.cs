@@ -73,9 +73,15 @@ public class DoorLock : MonoBehaviour
             DecisionDoorNumber();
             //ドアの場所を設定。
             float convart = ConvartDirection(other);
-            Debug.Log("Convart" + convart.ToString());
+            Debug.Log("★Convart: " + convart.ToString());
             m_numberText.transform.parent.transform.position = transform.position + new Vector3(-0.625f, -2.75f, 0.15f);
-            m_numberText.transform.parent.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+            if(convart == 1) {
+                m_numberText.transform.parent.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+            }
+            else {
+                m_numberText.transform.parent.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            }
+            
             m_numberText.GetComponent<DoorLockUI>().SetActiveUI(true);
             m_numberText.GetComponent<DoorLockUI>().ClearText();
             StartCoroutine("Unlock");
@@ -85,10 +91,12 @@ public class DoorLock : MonoBehaviour
     private int ConvartDirection(GameObject other)
     {
         var requesterToOwner = transform.position - other.transform.position;
-        float newDot = Vector3.Dot(requesterToOwner, transform.right);
+        float newDot = Vector3.Dot(requesterToOwner, transform.forward);
 
         return newDot > 0 ? -1 : 1;
     }
+
+
 
     /// <summary>
     /// アクセス中断

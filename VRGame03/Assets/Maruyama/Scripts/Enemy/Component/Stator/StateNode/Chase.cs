@@ -91,6 +91,10 @@ namespace StateNode
 
         private void SettingStartTarget()
         {
+            if (m_targetManager.HasTarget()) {
+                return;
+            }
+
             var target = GetOwner().GetObserveIsInEyeTargets().SerachNearIsInEyeTarget();
             m_targetManager.SetCurrentTarget(target);
         }

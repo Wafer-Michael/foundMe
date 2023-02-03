@@ -39,6 +39,11 @@ public class DoorLock : MonoBehaviour
     [SerializeField]
     AudioSource m_errSE; // エラー時のSE
 
+    [SerializeField]
+    GameObject m_front;
+    [SerializeField]
+    GameObject m_back;
+
     private void Awake()
     {
         m_generator = GameObject.Find("NumberLockGenerator");
@@ -66,16 +71,39 @@ public class DoorLock : MonoBehaviour
     /// <summary>
     /// 開錠前の処理
     /// </summary>
-    public void AccessKey()
+    public void AccessKey(GameObject other)
     {
         if (!m_numberText.gameObject.activeInHierarchy)
         {
             DecisionDoorNumber();
+            //ドアの場所を設定。
+            float convart = ConvartDirection(other);
+            
+            //m_numberText.transform.parent.transform.position = transform.position + new Vector3(-0.625f, -2.75f, 0.15f);
+            if(convart == 1) {
+                m_numberText.transform.parent.transform.position = m_front.transform.position;
+                m_numberText.transform.parent.transform.rotation = m_front.transform.rotation;
+            }
+            else {
+                m_numberText.transform.parent.transform.position = m_back.transform.position;
+                m_numberText.transform.parent.transform.rotation = m_back.transform.rotation;
+            }
+            
             m_numberText.GetComponent<DoorLockUI>().SetActiveUI(true);
             m_numberText.GetComponent<DoorLockUI>().ClearText();
             StartCoroutine("Unlock");
         }
     }
+
+    private int ConvartDirection(GameObject other)
+    {
+        var requesterToOwner = transform.position - other.transform.position;
+        float newDot = Vector3.Dot(requesterToOwner, transform.forward);
+
+        return newDot > 0 ? -1 : 1;
+    }
+
+
 
     /// <summary>
     /// アクセス中断

@@ -139,6 +139,42 @@ public class PlayerInputer : MonoBehaviour
         //Bボタン
         return Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown("joystick button 1");
     }
+    
+    /// <summary>
+    /// 右入力
+    /// </summary>
+    /// <returns></returns>
+    static public bool IsRightDown() {
+        var input = Input.GetAxis("CrossHorizontal");
+        return Input.GetKeyDown(KeyCode.RightArrow) || input >= 1.0f;
+    }    
+
+    /// <summary>
+    /// 左入力
+    /// </summary>
+    /// <returns></returns>
+    static public bool IsLeftDown() {
+        var input = Input.GetAxis("CrossHorizontal"); Debug.Log(input);
+        return Input.GetKeyDown(KeyCode.LeftArrow) || input <= -1.0f;
+    }    
+
+    /// <summary>
+    /// 上入力
+    /// </summary>
+    /// <returns></returns>
+    static public bool IsUpDown() {
+        var input = Input.GetAxis("CrossVirtical");
+        return Input.GetKeyDown(KeyCode.UpArrow) || input >= 1.0f;
+    }    
+
+    /// <summary>
+    /// 下入力
+    /// </summary>
+    /// <returns></returns>
+    static public bool IsDownDown() {
+        var input = Input.GetAxis("CrossVirtical");
+        return Input.GetKeyDown(KeyCode.DownArrow)||  input <= -1.0f;
+    }
 
     /// <summary>
     /// つまむ行為

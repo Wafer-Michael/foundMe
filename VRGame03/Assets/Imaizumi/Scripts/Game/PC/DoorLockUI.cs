@@ -17,7 +17,6 @@ public class DoorLockUI : MonoBehaviour
 
     [SerializeField]
     GameObject m_select; // 選択中の桁を強調表示する
-
     void Start()
     {
         // 子オブジェクトのTextコンポーネントを格納
@@ -40,9 +39,8 @@ public class DoorLockUI : MonoBehaviour
     /// </summary>
     void ChangeDigit()
     {
-        var input = PlayerInputer.CalculateMoveVector();
         // 桁選択
-        if (input.x <= -0.19f) // ←を押した場合
+        if (PlayerInputer.IsLeftDown()) // ←を押した場合
         {
             m_digit -= 1;
             // 移動制限
@@ -52,7 +50,7 @@ public class DoorLockUI : MonoBehaviour
             }
             MoveSelect();
         }
-        if (input.x >= 0.19f) // →を押した場合
+        if (PlayerInputer.IsRightDown()) // →を押した場合
         {
             m_digit += 1;
             // 移動制限
@@ -71,11 +69,9 @@ public class DoorLockUI : MonoBehaviour
     {
         // 数字送り
         int text = int.Parse(m_texts[(int)m_digit].text);
-        var input = PlayerInputer.CalculateMoveVector();
 
-        if (input.z >= 0.19f) // ↑を押した場合
+        if (PlayerInputer.IsUpDown()) // ↑を押した場合
         {
-
             text += 1; // 数字を増やす
 
             // 数字が最大値を超えたら
@@ -84,9 +80,8 @@ public class DoorLockUI : MonoBehaviour
                 text = 0; // 0に戻る
             }
         }
-        if (input.z <= -0.19f) // ↓を押した場合
+        if (PlayerInputer.IsDownDown()) // ↓を押した場合
         {
-
             text -= 1; // 数字を減らす
 
             // 数字が最小値を超えたら

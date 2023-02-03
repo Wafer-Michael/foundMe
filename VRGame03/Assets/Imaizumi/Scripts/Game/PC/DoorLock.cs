@@ -66,15 +66,28 @@ public class DoorLock : MonoBehaviour
     /// <summary>
     /// 開錠前の処理
     /// </summary>
-    public void AccessKey()
+    public void AccessKey(GameObject other)
     {
         if (!m_numberText.gameObject.activeInHierarchy)
         {
             DecisionDoorNumber();
+            //ドアの場所を設定。
+            float convart = ConvartDirection(other);
+            Debug.Log("Convart" + convart.ToString());
+            m_numberText.transform.parent.transform.position = transform.position + new Vector3(-0.625f, -2.75f, 0.15f);
+            m_numberText.transform.parent.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
             m_numberText.GetComponent<DoorLockUI>().SetActiveUI(true);
             m_numberText.GetComponent<DoorLockUI>().ClearText();
             StartCoroutine("Unlock");
         }
+    }
+
+    private int ConvartDirection(GameObject other)
+    {
+        var requesterToOwner = transform.position - other.transform.position;
+        float newDot = Vector3.Dot(requesterToOwner, transform.right);
+
+        return newDot > 0 ? -1 : 1;
     }
 
     /// <summary>

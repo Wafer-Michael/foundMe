@@ -37,7 +37,7 @@ public class PlayerStatus : MonoBehaviour, I_Damaged
             return;
         }
 
-        m_stator.ChangeState(PlayerStator.StateType.Normal);
+        m_stator?.ChangeState(PlayerStator.StateType.Normal);
         m_damageEffect.EffectStart();
         
         //Debug.Log("hp: " + m_param.hp.ToString());

@@ -7517,21 +7517,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ActiveGlassEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 6872166821570291224, guid: dba65872cbe6c1541a5ff79dd8afee94,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6872166821570291224, guid: dba65872cbe6c1541a5ff79dd8afee94,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6872166821570291224, guid: dba65872cbe6c1541a5ff79dd8afee94,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dba65872cbe6c1541a5ff79dd8afee94, type: 3}
 --- !u!1001 &7046190585802932939
@@ -7742,26 +7727,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StayGlassEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8481802351725811864, guid: d62101999cf03b140b964b85b31548e4,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8481802351725811864, guid: d62101999cf03b140b964b85b31548e4,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8481802351725811864, guid: d62101999cf03b140b964b85b31548e4,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8481802351725811864, guid: d62101999cf03b140b964b85b31548e4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d62101999cf03b140b964b85b31548e4, type: 3}

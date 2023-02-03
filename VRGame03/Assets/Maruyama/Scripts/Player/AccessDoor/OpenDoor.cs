@@ -95,7 +95,7 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
     {
         //ÉçÉbÉNèÛë‘Ç»ÇÁÅA
         if(m_doorLock.IsLock){
-            m_doorLock.AccessKey();
+            m_doorLock.AccessKey(other);
         }
         else {
             m_openSE.PlayOneShot(m_openSE.clip);

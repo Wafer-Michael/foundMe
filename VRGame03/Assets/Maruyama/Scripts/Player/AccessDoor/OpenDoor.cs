@@ -11,6 +11,7 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
         public float speed;    //‰ñ“]‚³‚¹‚é‘¬“x
         public RotationController rotationControllerAxis;   //‰ñ“]‚³‚¹‚½‚¢Ž²
         public float openIdleTime;
+        public bool isOpenDirectionReverse;
 
         public float Radian => degree * Mathf.Deg2Rad; 
         public Vector3 DefaultDirection { get; set; }        //‰Šú•ûŒü
@@ -120,6 +121,8 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
         m_stateMachine.ChangeState(state, (int)state);
     }
 
+    public bool IsOpenDirectionReverse => m_param.isOpenDirectionReverse;
+
 }
 
 namespace StateNode
@@ -160,7 +163,8 @@ namespace StateNode
         {
             var param = GetOwner().Param;
             var requesterToOwner = GetOwner().transform.position - param.openRequester.transform.position;
-            float newDot = Vector3.Dot(requesterToOwner, GetOwner().transform.right);
+            var forward = GetOwner().IsOpenDirectionReverse ? -GetOwner().transform.forward : GetOwner().transform.forward;
+            float newDot = Vector3.Dot(requesterToOwner, forward);
 
             return newDot > 0 ? -1 : 1;
         }
@@ -213,6 +217,7 @@ namespace StateNode
         {
             return !GetOwner().Param.rotationControllerAxis.IsRotation;
         }
+
     }
 
 

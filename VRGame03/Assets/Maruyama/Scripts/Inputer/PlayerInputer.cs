@@ -7,6 +7,11 @@ public class PlayerInputer : MonoBehaviour
     [SerializeField]
     OVRHand m_ovrHand;
 
+    static bool m_isRigftCrossButtom = false;
+    static bool m_isLeftCrossButtom = false;
+    static bool m_isDownCrossButtom = false;
+    static bool m_isUpCrossButtom = false;
+
     /// <summary>
     /// キーボードからの移動入力処理
     /// </summary>
@@ -146,7 +151,18 @@ public class PlayerInputer : MonoBehaviour
     /// <returns></returns>
     static public bool IsRightDown() {
         var input = Input.GetAxis("CrossHorizontal");
-        return Input.GetKeyDown(KeyCode.RightArrow) || input >= 1.0f;
+        bool isDown = Input.GetKeyDown(KeyCode.RightArrow) || input >= 1.0f;
+        Debug.Log("●●●●" + (Input.GetKeyDown(KeyCode.RightArrow) || input >= 1.0f) + "●●●●");
+        Debug.Log("■■■■" + m_isRigftCrossButtom + "■■■■");
+        if(!m_isRigftCrossButtom && isDown)
+        {
+            m_isRigftCrossButtom = true;
+            return true;
+        }
+
+        m_isRigftCrossButtom = isDown;
+
+        return false;
     }    
 
     /// <summary>
@@ -155,8 +171,19 @@ public class PlayerInputer : MonoBehaviour
     /// <returns></returns>
     static public bool IsLeftDown() {
         var input = Input.GetAxis("CrossHorizontal"); Debug.Log(input);
-        return Input.GetKeyDown(KeyCode.LeftArrow) || input <= -1.0f;
-    }    
+        bool isDown = Input.GetKeyDown(KeyCode.LeftArrow) || input <= -1.0f;
+
+        if (!m_isLeftCrossButtom && isDown)
+        {
+            m_isLeftCrossButtom = true;
+            return true;
+        }
+
+        m_isLeftCrossButtom = isDown;
+
+        return false;
+
+    }
 
     /// <summary>
     /// 上入力
@@ -164,8 +191,19 @@ public class PlayerInputer : MonoBehaviour
     /// <returns></returns>
     static public bool IsUpDown() {
         var input = Input.GetAxis("CrossVirtical");
-        return Input.GetKeyDown(KeyCode.UpArrow) || input >= 1.0f;
-    }    
+        bool isDown = Input.GetKeyDown(KeyCode.UpArrow) || input >= 1.0f;
+
+        if (!m_isUpCrossButtom && isDown)
+        {
+            m_isUpCrossButtom = true;
+            return true;
+        }
+
+        m_isUpCrossButtom = isDown;
+
+        return false;
+
+    }
 
     /// <summary>
     /// 下入力
@@ -173,7 +211,18 @@ public class PlayerInputer : MonoBehaviour
     /// <returns></returns>
     static public bool IsDownDown() {
         var input = Input.GetAxis("CrossVirtical");
-        return Input.GetKeyDown(KeyCode.DownArrow)||  input <= -1.0f;
+        bool isDown = Input.GetKeyDown(KeyCode.DownArrow)||  input <= -1.0f;
+
+        if (!m_isDownCrossButtom && isDown)
+        {
+            m_isDownCrossButtom = true;
+            return true;
+        }
+
+        m_isDownCrossButtom = isDown;
+
+        return false;
+
     }
 
     /// <summary>

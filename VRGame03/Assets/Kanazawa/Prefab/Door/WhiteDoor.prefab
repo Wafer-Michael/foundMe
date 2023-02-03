@@ -59,6 +59,7 @@ MonoBehaviour:
     speed: 5
     rotationControllerAxis: {fileID: 43807231372744910}
     openIdleTime: 3
+    isOpenDirectionReverse: 1
   m_openSE: {fileID: 295125892743348325}
 --- !u!114 &43807231372744910
 MonoBehaviour:

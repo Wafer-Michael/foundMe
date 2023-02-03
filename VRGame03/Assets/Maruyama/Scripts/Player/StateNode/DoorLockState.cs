@@ -42,6 +42,11 @@ public class DoorLockState : EnemyStateNodeBase<PlayerBase>
 
     public override void OnExit()
     {
+        var currentLock = m_inputAccess.CurrentAccessDoorLock;
+        if (currentLock) {
+            currentLock.Interruption();
+        }
+
         base.OnExit();
     }
 }

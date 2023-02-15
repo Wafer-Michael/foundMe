@@ -21,9 +21,9 @@ namespace Factory
 		public struct Parametor
 		{
 			public maru.Rect oneCellRect;       //一つのCellの生成情報。
-			public int widthCount;         //横に展開するセルの数。
-			public int depthCount;         //奥行きに展開するセルの数。
-			public Vector3 centerPosition;    //マップの中心位置。
+			public int widthCount;				//横に展開するセルの数。
+			public int depthCount;				//奥行きに展開するセルの数。
+			public Vector3 centerPosition;		//マップの中心位置。
 
 			public Parametor(
 				maru.Rect oneCellRect,
@@ -45,7 +45,19 @@ namespace Factory
 		/// <returns>生成されたセル配列</returns>
 		public static List<Cell> CreateCells(Parametor param)
         {
-			var result = new List<Cell>();
+			return CreateCells<Cell>(param);
+		}
+
+		/// <summary>
+		/// セルマップの生成
+		/// </summary>
+		/// <typeparam name="T">セルタイプ</typeparam>
+		/// <param name="param">生成パラメータ</param>
+		/// <returns>生成されたセル配列</returns>
+		public static List<T> CreateCells<T>(Parametor param)
+			where T : Cell
+		{
+			var result = new List<T>();
 
 			float halfOneRectWidth = param.oneCellRect.width * 0.5f;
 			float halfOneRectDepth = param.oneCellRect.depth * 0.5f;
@@ -53,7 +65,7 @@ namespace Factory
 			float fieldRectWidth = (float)param.widthCount * param.oneCellRect.width;
 			float fieldRectDepth = (float)param.depthCount * param.oneCellRect.depth;
 			var fieldRect = new maru.Rect(param.centerPosition, fieldRectWidth, fieldRectDepth);
-			var startPosition = fieldRect.CalculateStartPosition();	//マップの左上の原点を取得
+			var startPosition = fieldRect.CalculateStartPosition(); //マップの左上の原点を取得
 
 			//ループして生成
 			for (int i = 0; i < param.depthCount; i++)
@@ -69,15 +81,26 @@ namespace Factory
 					float width = startPosition.x + (param.oneCellRect.width * j);
 					width += halfOneRectWidth;
 
-					int index = j + (i * param.widthCount);	//インデックス設定
+					int index = j + (i * param.widthCount); //インデックス設定
 					var position = new Vector3(width, param.centerPosition.y, depth); //位置情報の決定
 
 					//Cellのパラメータを設定
 					var cellParam = new Cell.Parametor(param.oneCellRect);
-					var cell = new Cell(index, cellParam);          //Cell生成
-					cell.SetPosition(position);                            //Cellの位置変更
+					var cell = maru.Generic.Construct<T, int, Cell.Parametor>(index, cellParam);			//Cell生成
+					cell.SetPosition(position);                                 //Cellの位置変更
 
-					//Debug.Log(position);
+					//障害物に重なっている場合は、非アクティブセルに変更
+					float quadOneRectWidth = halfOneRectWidth * 0.5f;	//1/4スケール分埋まっていたら、非アクティブにする。
+					float sphereRange = quadOneRectWidth;
+					var obstacleLayer = LayerMask.GetMask(maru.UtilityObstacle.DEFAULT_RAY_OBSTACLE_LAYER_STRINGS);
+					var colliders = Physics.OverlapSphere(position, sphereRange, obstacleLayer);  //オブジェクト内部に存在するかどうか
+					if(colliders.Length != 0) {		//一つでもあるなら、埋まっている
+						cell.SetIsActive(false);    //非アクティブ状態にする。
+						var impactCell = cell as ImpactCell;
+                        if (impactCell != null) {
+							impactCell.SetDangerValue(0);
+                        }
+					}
 
 					result.Add(cell); //resultに追加
 				}

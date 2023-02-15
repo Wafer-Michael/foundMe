@@ -26,7 +26,6 @@ public class AstarSeek : MonoBehaviour
     private Stack<AstarNode> m_route;   //現在のルート
     private AstarNode m_currentNode;    //現在ターゲットにしているノード
 
-    private TargetManager m_targetManager;
     private VelocityManager m_velocityManager;
     private RotationController m_rotationController;
 
@@ -35,7 +34,6 @@ public class AstarSeek : MonoBehaviour
 
     private void Awake()
     {
-        m_targetManager = GetComponent<TargetManager>();
         m_velocityManager = GetComponent<VelocityManager>();
         m_rotationController = GetComponent<RotationController>();
 
@@ -117,6 +115,33 @@ public class AstarSeek : MonoBehaviour
         var helper = new OpenDataHelper();
 
         helper.StartSearch(startNode, targetNode, graph, targetAreaIndex);
+
+        var route = helper.GetRoute();
+        SetRoute(helper.GetRoute());
+
+        NextRoute();    //ルートの設定
+    }
+
+    public void StartAstar(
+        AstarNode startNode,
+        Vector3 targetPosition,
+        GraphType graph,
+        float nearTargetRange,
+        int targetAreaIndex = -1
+    ) {
+        if (startNode == null)
+        {
+            Debug.Log("AstarNodeが存在しません");
+            return;
+        }
+
+        //状態のリセット
+        m_currentNode = null;
+        m_route.Clear();
+
+        var helper = new OpenDataHelper_Ex();
+
+        helper.StartSearch(startNode, targetPosition, graph, nearTargetRange, targetAreaIndex);
 
         var route = helper.GetRoute();
         SetRoute(helper.GetRoute());

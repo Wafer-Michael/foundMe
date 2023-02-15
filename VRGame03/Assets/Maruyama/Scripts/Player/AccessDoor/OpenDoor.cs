@@ -41,10 +41,12 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
 
     private StateMachine<OpenDoor, State, TransitionMember> m_stateMachine = new StateMachine<OpenDoor, State, TransitionMember>();
 
-    //private RotationController m_rotationController;
+    private DoorLock m_doorLock = null;
 
     private void Awake()
     {
+        m_doorLock = GetComponent<DoorLock>();
+
         //回転コントローラーがないなら
         if(m_param.rotationControllerAxis == null) {
             m_param.rotationControllerAxis = GetComponent<RotationController>();
@@ -57,16 +59,9 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
     }
     private void Update()
     {
-        //if (PlayerInputer.IsDebugKeyDown(KeyCode.Y))
-        //{
-        //    Open(FindObjectOfType<PCPlayer>().gameObject);
-        //}
-
-        //var requesterToOwner = transform.position - FindObjectOfType<PCPlayer>().gameObject.transform.position;
-        //float newDot = Vector3.Dot(requesterToOwner, transform.forward);
-        //Debug.Log(newDot);
-
         m_stateMachine.OnUpdate();
+
+
     }
 
     
@@ -74,11 +69,11 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
     {
         m_stateMachine.AddNode(State.Idle, null);
 
-        m_stateMachine.AddNode(State.Open, new StateNode.Door_Open(this));  //ドアを開く
+        m_stateMachine.AddNode(State.Open, new StateNode.Door_Open(this));              //ドアを開く
 
-        m_stateMachine.AddNode(State.OpenIdle, new StateNode.Door_OpenIdle(this));    //開いた状態
+        m_stateMachine.AddNode(State.OpenIdle, new StateNode.Door_OpenIdle(this));      //開いた状態
 
-        m_stateMachine.AddNode(State.Close, new StateNode.Door_Close(this)); //閉じた状態
+        m_stateMachine.AddNode(State.Close, new StateNode.Door_Close(this));            //閉じた状態
     }
 
     private void CreateEdge()
@@ -97,7 +92,13 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
 
     public void Access(GameObject other)
     {
-        Open(other);
+        //ロック状態なら、
+        if(!m_doorLock.IsLock){
+            m_doorLock.AccessKey();
+        }
+        else {
+            Open(other);
+        }
     }
 
     public GameObject GetGameObject() => gameObject;

@@ -25,25 +25,6 @@ public class OpenData
 
     public float GetSumRange() { return range + heuristic; }
 
-    //public static bool operator ==(OpenData left, OpenData right) {
-    //    //e‚Æ©•ª©g‚ª“¯‚¶‚È‚ç
-
-    //    if(left.parent == null && right.parent == null) {
-    //        return left.node == right.node;
-    //    }
-
-    //    if(left.parent == null || right.parent == null) {
-    //        return false;
-    //    }
-
-    //    return ( left.parent == right.parent &&
-    //             left.node == right.node);
-    //}
-
-    //public static bool operator !=(OpenData left, OpenData right) { 
-    //    return !(left == right); 
-    //}
-
     public bool IsEqual(OpenData other)
     {
         return (this.parent == other.parent &&

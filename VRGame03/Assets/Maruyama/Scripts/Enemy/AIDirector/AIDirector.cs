@@ -12,6 +12,9 @@ public class AIDirector : SingletonMonoBehaviour<AIDirector>
     [Header("フィールドのウェイポイントマップ"), SerializeField]
     private FieldWayPointsMap m_wayPointsMap;
 
+    [Header("フィールドの影響セルマップ"), SerializeField]
+    private FieldImpactCellMap m_impactCellMap;
+
     private List<FactionCoordinator> m_factionCoordinators = new List<FactionCoordinator>();    //ファクションコーディネーター群
 
     protected override void Awake()
@@ -73,9 +76,13 @@ public class AIDirector : SingletonMonoBehaviour<AIDirector>
 
     public List<FactionCoordinator> GetFactionCoordinators() { return m_factionCoordinators; }
 
-    public CellMap GetAreaCellMap() { return m_areaMap.GetCellMap(); }
+    public CellMap<Cell> GetAreaCellMap() { return m_areaMap.GetCellMap(); }
 
     public WayPointsMap GetWayPointsMap() { return m_wayPointsMap.GetWayPointsMap(); }
+
+    public Factory.WayPointsMap_FloodFill.Parametor GetFieldWayPointsMap_FactoryParametor() { return m_wayPointsMap.GetFactoryParametor(); }
+
+    public CellMap<ImpactCell> GetImpactCellMap() { return m_impactCellMap.GetCellMap(); }
 
     //--------------------------------------------------------------------------------------
     /// 初期セッティング
@@ -120,6 +127,12 @@ public class AIDirector : SingletonMonoBehaviour<AIDirector>
         if (m_wayPointsMap == null)
         {
             m_wayPointsMap = GetComponentInChildren<FieldWayPointsMap>();
+        }
+
+        //影響マップを取得
+        if(m_impactCellMap == null)
+        {
+            m_impactCellMap = GetComponentInChildren<FieldImpactCellMap>();
         }
     }
 

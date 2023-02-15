@@ -65,8 +65,19 @@ public class PlayerInputer : MonoBehaviour
 
     static public bool IsSence()
     {
+        return Input.GetKeyDown(KeyCode.P);
+    }
+
+    static public bool IsTakeNearItem()
+    {
         return Input.GetKeyDown(KeyCode.F);
     }
+
+    static public bool IsBatteryCharge()
+    {
+        return Input.GetKeyDown(KeyCode.R);
+    }
+
 
     static public bool IsVRUIOpen()
     {
@@ -86,6 +97,10 @@ public class PlayerInputer : MonoBehaviour
     static public bool IsAccess()
     {
         return Input.GetKeyDown(KeyCode.F);
+    }
+
+    static public bool IsClose() {
+        return Input.GetKeyDown(KeyCode.Q);
     }
 
     /// <summary>

@@ -70,8 +70,6 @@ namespace StateNode
         {
             m_stateMachine.OnUpdate();
 
-            //WallAvoidUpdate();
-
             return IsEnd();
         }
 
@@ -101,7 +99,7 @@ namespace StateNode
         {
             m_stateMachine.AddNode(StateType.None, null);
 
-            m_stateMachine.AddNode(StateType.Normal, new StateNode.NormalSeekTarget(GetOwner()));
+            m_stateMachine.AddNode(StateType.Normal, new StateNode.ChaseStateNode.NormalSeekTarget(GetOwner()));
 
             //m_stateMachine.AddNode(StateType.BreadCrumb, new StateNode.BreadSeekTarget(GetOwner(), m_nearRange, m_maxSpeed, m_turningPower, m_lostSeekTime));
 

@@ -15,6 +15,12 @@ public class Observer_JackUIPoint : MonoBehaviour
     [SerializeField]
     private JackController m_jackController;            //ジャックコントローラー
 
+    [SerializeField]
+    private StartJackEffect m_jackEffect;               //ジャックエフェクト
+
+    [SerializeField]
+    private DissolveFadeSprite m_dissolveFadeSprite;    //ディゾブルフェード用のスプライト
+
     private Selectable_VRUI m_currentPointUI = null;    //現在選択中のUI
 
     private void Start()
@@ -70,6 +76,16 @@ public class Observer_JackUIPoint : MonoBehaviour
 
     public bool IsClose() { return m_currentPointUI == null; }
 
+    public void StartJackEffect()
+    {
+        //カレントUIがnullなら処理を飛ばす。
+        if (m_currentPointUI == null) {
+            return;
+        }
+
+        m_jackEffect.StartFade();
+    }
+
     public void StartJack()
     {
         //カレントUIがnullなら処理を飛ばす。
@@ -77,8 +93,14 @@ public class Observer_JackUIPoint : MonoBehaviour
             return;
         }
 
-        m_jackController.StartHijack(FindSomeJakable(m_currentPointUI));   //ジャック開始
-        Close();
+        UnityEngine.Events.UnityAction finishAction = () => m_dissolveFadeSprite.FadeStart(FadeObject.FadeType.FadeIn);
+        finishAction += () => { m_jackController.StartHijack(FindSomeJakable(m_currentPointUI)); }; //ジャック開始
+        finishAction += () => { Close(); };
+
+        m_dissolveFadeSprite.FadeStart(FadeObject.FadeType.FadeOut, finishAction);         //フェード開始
+
+        //m_jackController.StartHijack(FindSomeJakable(m_currentPointUI));   //ジャック開始
+        //Close();
     }
 
     private Jackable FindSomeJakable(Selectable_VRUI ui)

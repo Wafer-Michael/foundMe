@@ -27,11 +27,21 @@ public class FieldWayPointsMap : FieldMapBase
         CreateGraphDebugDraw();
     }
 
+    private void Update()
+    {
+        //デバッグ処理が必要なら
+        if (m_isDebugDraw) {
+            UpdateGraphDebugDrawNode();
+        }
+    }
+
     //--------------------------------------------------------------------------------------
     /// アクセッサ
     //--------------------------------------------------------------------------------------
 
     public WayPointsMap GetWayPointsMap() { return m_wayPointsMap; }
+
+    public Factory.WayPointsMap_FloodFill.Parametor GetFactoryParametor() { return m_factoryParametor; }
 
     //--------------------------------------------------------------------------------------
     /// デバッグ
@@ -43,7 +53,7 @@ public class FieldWayPointsMap : FieldMapBase
     private DebugGraphDraw m_debugGraphDraw;        //グラフのデバッグ表示用
 
     [SerializeField]
-    private GameObject m_debugNodePrefab;           //デバッグ用のノードPrefab
+    private DebugDrawComponent m_debugNodePrefab;           //デバッグ用のノードPrefab
 
     [SerializeField]
     private float m_debugNodeScaleAdjust = 0.95f;   //デバッグ用のノード表示の大きさ調整(少し小さめにするとわかりやすい)
@@ -66,5 +76,31 @@ public class FieldWayPointsMap : FieldMapBase
         m_debugGraphDraw = new DebugGraphDraw(this, m_wayPointsMap.GetGraph());
         m_debugGraphDraw.CreateDebugNodes(m_debugNodePrefab, scale, m_debugNodeDrawParametor);
         m_debugGraphDraw.CreateDebugEdges(m_debugNodePrefab, new Color(1.0f, 1.0f, 1.0f, 0.3f));
+    }
+
+    /// <summary>
+    /// デバッグ表示のノードを更新する。
+    /// </summary>
+    private void UpdateGraphDebugDrawNode()
+    {
+        var nodes = m_wayPointsMap.GetGraph().GetNodes();
+        var draws = m_debugGraphDraw.GetNodes();
+        if(draws.Count == 0) {
+            return;
+        }
+
+        int index = 0;
+        foreach (var node in nodes)
+        {
+            //セルの危険度に合わせた色を表示する
+            var draw = draws[index];
+
+            float value = 1 - node.GetImpactData().dangerValue;
+            var color = new Color(value, value, 1, m_debugNodeDrawParametor.color.a);
+
+            draw.GizmosColor = color;   //カラーのアクセッサ
+
+            index++;    //インデックスの更新
+        }
     }
 }

@@ -29,4 +29,15 @@ public class WayPointsMap
     public void SetGraph(GraphType graph) { m_graph = graph; }
 
     public GraphType GetGraph() { return m_graph; }
+
+    public float GetIntervalRange() { 
+        if(m_graph.GetNodes().Count <= 1) { //ƒm[ƒh‚ªˆêŒÂ‚µ‚©‚È‚¢‚È‚çAƒm[ƒhŠÔ‚Ì’·‚³‚àŠÖŒW‚È‚¢
+            return 0.0f;
+        }
+
+        var oneNode = m_graph.GetNode(0);
+        var twoNode = m_graph.GetNode(1);
+
+        return (oneNode.GetPosition() - twoNode.GetPosition()).magnitude;
+    }
 }

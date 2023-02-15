@@ -74,7 +74,7 @@ namespace StateNode
 
                 const float AttackValue = 1.0f;
                 var damaged = target.GetComponent<I_Damaged>();
-                damaged?.Damaged(new DamageData(AttackValue));
+                damaged?.Damaged(new DamageData(AttackValue, GetOwner().gameObject));
             };
 
             m_taskList.DefineTask(TaskEnum.Attack, attackFunc, null, null);

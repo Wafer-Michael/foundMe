@@ -34,6 +34,21 @@ namespace maru {
 
             return angle;
         }
+
+        /// <summary>
+        /// ‘Š‘ÎˆÊ’u‚ÉÀ•W‚ğ•ÏŠ·‚·‚é
+        /// </summary>
+        /// <param name="selfPosition"></param>
+        /// <param name="selfQuaternion"></param>
+        /// <param name="targetPosition"></param>
+        /// <returns></returns>
+        static public Vector3 InverseTransformPoint(Vector3 selfPosition, Quaternion selfQuaternion, Vector3 targetPosition)
+        {
+            var toTargetVec = targetPosition - selfPosition;
+
+            var inverseVec = Quaternion.Inverse(selfQuaternion) * toTargetVec;
+            return inverseVec;
+        }
     }
 
 }

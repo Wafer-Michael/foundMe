@@ -148,6 +148,10 @@ public class HijackController : MonoBehaviour
             return;
         }
 
+        if(target == null) {
+            return;
+        }
+
         SaveCamBackData();
         
         foreach(var data in m_parentParingDatas)

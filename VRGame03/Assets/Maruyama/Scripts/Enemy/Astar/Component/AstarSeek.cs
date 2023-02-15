@@ -8,7 +8,7 @@ using GraphType = SparseGraph<AstarNode, AstarEdge>;
 [RequireComponent(typeof(TargetManager))]
 public class AstarSeek : MonoBehaviour
 {
-    public static readonly Parametor DEFAULT_PARAMETOR = new Parametor(1.0f, 5.0f);
+    public static readonly Parametor DEFAULT_PARAMETOR = new Parametor(1.0f, 2.0f);
 
     [System.Serializable]
     public struct Parametor
@@ -28,6 +28,7 @@ public class AstarSeek : MonoBehaviour
 
     private VelocityManager m_velocityManager;
     private RotationController m_rotationController;
+    private WallAvoid m_wallAvoid;
 
     [SerializeField]
     private Parametor m_param = DEFAULT_PARAMETOR;
@@ -36,6 +37,7 @@ public class AstarSeek : MonoBehaviour
     {
         m_velocityManager = GetComponent<VelocityManager>();
         m_rotationController = GetComponent<RotationController>();
+        m_wallAvoid = GetComponent<WallAvoid>();
 
         m_route = new Stack<AstarNode>();
         m_currentNode = null;
@@ -64,7 +66,16 @@ public class AstarSeek : MonoBehaviour
         var toVec = m_currentNode.GetPosition() - transform.position;
 
         var force = maru.CalculateVelocity.SeekVec(m_velocityManager.velocity, toVec.normalized, m_param.maxSpeed);
-        m_velocityManager.AddForce(force);
+
+        var velocity = m_velocityManager.velocity;              //速度の取得
+        var moveDirection = velocity + force;                   //方向に新規ベクトルを追加
+        moveDirection += m_wallAvoid.TakeAvoidVector();         //
+
+        moveDirection /= m_velocityManager.GetMaxSpeed();       //0 ～ 1の間に変更。
+
+        var input = new Vector2(moveDirection.x, moveDirection.z);
+
+        m_velocityManager.velocity = moveDirection * m_velocityManager.GetMaxSpeed();
     }
 
     private void UpdateRotation()
@@ -85,16 +96,36 @@ public class AstarSeek : MonoBehaviour
     {
         //次のルートが存在しないなら
         if(m_route.Count == 0) {
+            if(m_currentNode != null) {
+                m_currentNode.IsTarget = false;
+            }
+
             m_currentNode = null;
             return;
         }
 
+        //デバッグ
+        if(m_currentNode != null) {
+            m_currentNode.IsTarget = false;
+        }
+
         m_currentNode = m_route.Pop();
+
+        m_currentNode.IsTarget = true;
     }
 
     private float ToCurrentNodeRange()
     {
         return (m_currentNode.GetPosition() - transform.position).magnitude;
+    }
+
+    private void OnDisable()
+    {
+        if (m_currentNode != null) {
+            m_currentNode.IsTarget = false;
+        }
+
+        m_currentNode = null;
     }
 
     public void StartAstar(

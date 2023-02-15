@@ -2,29 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 
+/// <summary>
+/// ドアの暗証番号と鍵の状態を管理する
+/// </summary>
 public class DoorLock : MonoBehaviour
 {
-    int m_digit = 3;
+    int m_digit = 3; // 暗証番号の桁数
 
-    List<int> m_lockNumbers = new List<int>();
-
-    [SerializeField]
-    bool m_isLock;
-    public bool IsLock {get;}
+    List<int> m_lockNumbers = new List<int>(); // 暗証番号
 
     [SerializeField]
-    GameObject m_canvas;
-    GameObject m_numberText;
+    bool m_isLock = true; // 鍵がかかっているかどうか
+    public bool IsLock { get { return m_isLock; }}
 
     [SerializeField]
-    GameObject generator;
+    GameObject m_canvas; // NumberTextの親オブジェクト
+    GameObject m_numberText; // 生成したNumberText
+
+    GameObject m_generator; // 番号生成機
+
+    //int[] m_collationNumbers = new int[3];
+
+    int m_correct = 0;    //一致
+    int m_almost = 0;     //惜しい
+
+    [SerializeField]
+    int m_maxNumError; // 失敗できる最大数
+    int m_numError; // 失敗した数
+
+    System.Action m_action; // 開錠時のイベント
+    System.Action m_errEvent; // エラー時のイベント
+
+    [SerializeField]
+    AudioSource m_unlockSE; // 開錠時のSE
+    [SerializeField]
+    AudioSource m_errSE; // エラー時のSE
+
+    [SerializeField]
+    GameObject m_front;
+    [SerializeField]
+    GameObject m_back;
+
+    private void Awake()
+    {
+        m_generator = GameObject.Find("NumberLockGenerator");
+    }
 
     private void Start()
     {
-        var canvas = Instantiate(m_canvas);
-        canvas.transform.parent = this.transform.parent;
+        var canvas = Instantiate(m_canvas); // キャンバス生成
+        canvas.transform.parent = this.transform.parent; // キャンバスの親をRoomに設定
+
+        // NumberTextを取得    
         for(int i = 0; i < canvas.transform.childCount; i++)
         {
             var child = canvas.transform.GetChild(i);
@@ -32,30 +62,56 @@ public class DoorLock : MonoBehaviour
             if(ui)
             {
                 m_numberText = child.gameObject;
-                break;
             }
         }
-        m_digit = m_numberText.transform.childCount;
-    }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            AccessKey();
-        }
+        m_digit = m_numberText.transform.childCount; // 桁数を更新
     }
 
     /// <summary>
     /// 開錠前の処理
     /// </summary>
-    public void AccessKey()
+    public void AccessKey(GameObject other)
     {
-        DecisionDoorNumber();
-        m_numberText.SetActive(true);
-        m_numberText.GetComponent<DoorLockUI>().ResetNumber();
-        StartCoroutine("Unlock");
-        this.enabled = false;
+        if (!m_numberText.gameObject.activeInHierarchy)
+        {
+            DecisionDoorNumber();
+            //ドアの場所を設定。
+            float convart = ConvartDirection(other);
+            
+            //m_numberText.transform.parent.transform.position = transform.position + new Vector3(-0.625f, -2.75f, 0.15f);
+            if(convart == 1) {
+                m_numberText.transform.parent.transform.position = m_front.transform.position;
+                m_numberText.transform.parent.transform.rotation = m_front.transform.rotation;
+            }
+            else {
+                m_numberText.transform.parent.transform.position = m_back.transform.position;
+                m_numberText.transform.parent.transform.rotation = m_back.transform.rotation;
+            }
+            
+            m_numberText.GetComponent<DoorLockUI>().SetActiveUI(true);
+            m_numberText.GetComponent<DoorLockUI>().ClearText();
+            StartCoroutine("Unlock");
+        }
+    }
+
+    private int ConvartDirection(GameObject other)
+    {
+        var requesterToOwner = transform.position - other.transform.position;
+        float newDot = Vector3.Dot(requesterToOwner, transform.forward);
+
+        return newDot > 0 ? -1 : 1;
+    }
+
+
+
+    /// <summary>
+    /// アクセス中断
+    /// </summary>
+    public void Interruption()
+    {
+        m_numberText.GetComponent<DoorLockUI>().SetActiveUI(false);
+        StopCoroutine("Unlock");
     }
 
     /// <summary>
@@ -63,24 +119,27 @@ public class DoorLock : MonoBehaviour
     /// </summary>
     IEnumerator Unlock()
     {
-        Debug.Log("Start Coroutine");
-
         List<int> numbers = new List<int>();
 
-        while (m_isLock)
+        while (m_isLock) // 開錠されてなかったら
         {
-            yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Space));
-            numbers.Clear(); // 番号をリセット
+            yield return new WaitWhile(() => !PlayerInputer.IsEnter()); // スペースが押されるまで待機
+            // 各項目をリセット
+            m_correct = 0;
+            m_almost = 0;
+            numbers.Clear();
+
             InputPass(ref numbers); // 番号入力
             StartCoroutine("Collation", numbers); // 照合
 
             yield break;
         }
 
-        Debug.Log("unlocked");
+        // 開錠時の処理
+        m_action?.Invoke(); // イベント呼び出し
+        m_unlockSE.PlayOneShot(m_unlockSE.clip);
+        Interruption(); // アクセス中断
 
-        m_numberText.SetActive(false);
-        this.enabled = true;
         yield break;
     }
 
@@ -92,13 +151,11 @@ public class DoorLock : MonoBehaviour
     {
         for (int i = 0; i < m_digit; i++)
         {
-            var numberText = m_numberText.transform.GetChild(i).gameObject;
+            var numberText = m_numberText.transform.GetChild(i).gameObject; // NumberTextを取得
 
             int textNum = int.Parse(numberText.GetComponent<Text>().text);
-            numbers.Add(textNum);
+            numbers.Add(textNum); // 数字を追加
         }
-
-        Debug.Log("input number" + numbers[0] + numbers[1] + numbers[2]);
     }
 
     /// <summary>
@@ -107,51 +164,50 @@ public class DoorLock : MonoBehaviour
     /// <param name="numbers">入力する番号</param>
     IEnumerator Collation(List<int> numbers)
     {
-        int correct = 0;    //一致
-        int almost = 0;     //惜しい
-
+        // 正答数を判定
         for (int i = 0; i < numbers.Count; i++)
         {
             if (numbers[i] == m_lockNumbers[i])
             {
-                correct += 1;
+                m_correct += 1;
                 numbers[i]  = -1;
             }
             yield return new WaitForEndOfFrame();
         }
 
+        // 惜しかった数を判定
         for (int i = 0; i < numbers.Count; i++)
         {
             for (int j = 0; j < m_lockNumbers.Count; j++)
             {
                 if (numbers[i] == m_lockNumbers[j])
                 {
-                    almost++;
+                    m_almost++;
                     break;
                 }
                 yield return new WaitForEndOfFrame();
             }
         }
 
-        if (correct == m_digit) // 一致した数が桁数と一緒なら
+        if (m_correct == m_digit) // 一致した数が桁数と一緒なら
         {
-            m_isLock = false;
+            m_isLock = false; // 開錠
             StartCoroutine("Unlock");
             yield break;
         }
 
-        Debug.Log("一致 " + correct + "、 数字が一致 " + almost + "、 不一致 " + (m_digit - correct - almost));
+        // 以下開錠失敗時
+
+        m_numberText.GetComponent<DoorLockUI>().DisplayResult(m_correct, m_almost); // フィードバック表示
+        m_numError++; // エラー回数更新
+        m_errSE.PlayOneShot(m_errSE.clip);
+        if(m_numError >= m_maxNumError) // エラーが最大数に達したら
+        {
+            m_errEvent?.Invoke(); // イベント呼び出し
+        }
 
         StartCoroutine("Unlock");
         yield break;
-    }
-
-    public void SetLockNumbers(List<int> numbers)
-    {
-        foreach(int num in numbers)
-        {
-            m_lockNumbers.Add(num);
-        }
     }
 
     /// <summary>
@@ -168,7 +224,7 @@ public class DoorLock : MonoBehaviour
         List<int> numbers = new List<int>();
 
         // 番号を取得
-        var numbergene = generator.GetComponent<NumberLockGenerator>();
+        var numbergene = m_generator.GetComponent<NumberLockGenerator>();
         numbers.Add(numbergene.FetchNumber(wallTex, NumberLockGenerator.NumberType.WallPattern));
         numbers.Add(numbergene.FetchNumber(wallTex, NumberLockGenerator.NumberType.WallColor));
         numbers.Add(numbergene.FetchNumber(doorTex, NumberLockGenerator.NumberType.DoorColor));
@@ -176,6 +232,18 @@ public class DoorLock : MonoBehaviour
         Debug.Log("lock Number " + numbers[0] + numbers[1] + numbers[2]);
 
         SetLockNumbers(numbers);
+    }
+
+    /// <summary>
+    /// 暗証番号を設定する
+    /// </summary>
+    /// <param name="numbers">暗証番号</param>
+    public void SetLockNumbers(List<int> numbers)
+    {
+        foreach (int num in numbers)
+        {
+            m_lockNumbers.Add(num);
+        }
     }
 
     /// <summary>
@@ -213,13 +281,13 @@ public class DoorLock : MonoBehaviour
         var mat = gameObj.GetComponent<Renderer>().material; // オブジェクトのマテリアル
         var shader = mat.shader; // マテリアルが使用しているシェーダー
 
-        var count = ShaderUtil.GetPropertyCount(shader);
+        var count = shader.GetPropertyCount();
         for (int i = 0; i < count; i++)
         {
-            var type = ShaderUtil.GetPropertyType(shader, i);
-            if (type == ShaderUtil.ShaderPropertyType.TexEnv)
+            var type = shader.GetPropertyType(i);
+            if (type ==UnityEngine.Rendering.ShaderPropertyType.Texture)
             {
-                var proName = ShaderUtil.GetPropertyName(shader, i);
+                var proName = shader.GetPropertyName(i);
                 var tex = mat.GetTexture(proName);
                 if (tex)
                 {
@@ -229,5 +297,23 @@ public class DoorLock : MonoBehaviour
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// 開錠時のイベント設定
+    /// </summary>
+    /// <param name="action">イベント</param>
+    public void SetAction(System.Action action)
+    {
+        m_action = action;
+    }
+
+    /// <summary>
+    /// エラー発生時のイベント設定
+    /// </summary>
+    /// <param name="action">イベント</param>
+    public void SetErrorEvent(System.Action action)
+    {
+        m_errEvent = action;
     }
 }

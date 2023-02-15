@@ -64,6 +64,9 @@ public class WallAvoid : MonoBehaviour
 
     private List<WallAvoidTacticle> m_tacticles = new List<WallAvoidTacticle>();
 
+    [SerializeField]
+    private GameObject m_testerPrefab;
+
     private void Start()
     {
         //触覚の生成
@@ -73,14 +76,12 @@ public class WallAvoid : MonoBehaviour
     private void Update()
     {
         AvoidUpdate();
-
-        //Debug.Log("★" + TakeAvoidVector().ToString());
     }
 
-    void SettingDefaultTacticles()
+    private void SettingDefaultTacticles()
     {
         const float DEGREE_VALUE = 15.0f;
-        const float DEGREE_VALUE_Side = 40.0f;
+        const float DEGREE_VALUE_Side = 60.0f;
         float[] degrees = new float[]{
             +DEGREE_VALUE,
             -DEGREE_VALUE,
@@ -101,12 +102,13 @@ public class WallAvoid : MonoBehaviour
         foreach (var tacticle in m_tacticles)
         {
             var avoidVec = CalculateAvoidVec(tacticle);
-            if (avoidVec != Vector3.zero)
-            {
+            if (avoidVec != Vector3.zero) {
                 m_avoidVec = avoidVec;  //入力に力を加える。
                 break;
             }
         }
+
+        //Debug.Log("★★" + m_avoidVec.ToString());
     }
 
     private Vector3 CalculateAvoidVec(WallAvoidTacticle tacticle)
@@ -117,8 +119,18 @@ public class WallAvoid : MonoBehaviour
         var targetPosition = startPosition + rayDirection;
 
         //レイがヒットしたら、減衰距離を返す。
-        if (maru.UtilityObstacle.IsRayObstacle(startPosition, targetPosition))
-        {
+        int obstacleLayer = LayerMask.GetMask(maru.UtilityObstacle.DEFAULT_RAY_OBSTACLE_LAYER_STRINGS);
+        var toVec = targetPosition - startPosition;
+
+        //Instantiate(m_testerPrefab, (startPosition + rayDirection), Quaternion.identity);
+        
+        const float SphereRange = 0.5f;
+        var colliders = Physics.OverlapSphere(transform.position, SphereRange, obstacleLayer);  //オブジェクトに接触時に透けるバグ解消用
+        RaycastHit hitData;
+        var hit = Physics.Raycast(startPosition, rayDirection, out hitData, m_param.avoidRange, obstacleLayer);
+
+        if (hit) {
+            Debug.Log("★★Hit");
             result += -rayDirection;
         }
 
@@ -128,8 +140,8 @@ public class WallAvoid : MonoBehaviour
     private Vector3 CalculateRayDirection(WallAvoidTacticle tacticle)
     {
         var forward = transform.forward;
-        //var direction = maru::Mathf::RotationDegreeVec(forward, tacticle.GetDegree(), Vector3.up);
-        var direction = Quaternion.AngleAxis(tacticle.GetRad(), Vector3.up) * forward;
+        var direction = Quaternion.AngleAxis(tacticle.GetRad() * Mathf.Rad2Deg, Vector3.up) * forward;
+
         return direction.normalized * tacticle.GetRange();
     }
 

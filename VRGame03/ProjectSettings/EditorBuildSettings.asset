@@ -5,24 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Maruyama/Scenes/MaruTestScene.unity
-    guid: 63984c2b2031fd94fa95aafcf719a321
-  - enabled: 0
-    path: Assets/Maruyama/Scenes/MaruTestScene02.unity
-    guid: d068f6088ca2d7141a7d1491baa5aa15
-  - enabled: 0
-    path: Assets/Oculus/SampleFramework/Usage/HandsInteractionTrainScene.unity
-    guid: a9c41884ef0c347628dfd8a4af4a022e
-  - enabled: 1
-    path: Assets/Kanazawa/Scene/TestStage/TestStage.unity
-    guid: c9fd4033daa71424f9e087b94905a54f
   - enabled: 1
     path: Assets/Imaizumi/Scene/TitleScene.unity
     guid: 037ec2d55c4983a498a3e969c061a3f2
   - enabled: 1
-    path: Assets/Kanazawa/Scene/TestStage/TestStage02.unity
-    guid: 777c61cc1938c6943a65affbff273fcd
+    path: Assets/Kanazawa/Scene/TestStage/MainStage.unity
+    guid: da790a262f3abb34398a5037b047a4b3
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260,
       type: 2}

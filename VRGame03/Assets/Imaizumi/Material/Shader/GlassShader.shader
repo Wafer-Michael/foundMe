@@ -17,7 +17,7 @@ Shader "Custom/GlassShader"
         }
         LOD 200
 
-        Cull Off
+        Cull Off // 隠面消去なし
         
         CGPROGRAM
 
@@ -37,12 +37,15 @@ Shader "Custom/GlassShader"
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            o.Albedo = _BaseColor.rgb;
+            o.Albedo = _BaseColor.rgb; // テクスチャのカラー
+
+            // 視線に対して平行であるほど透明に見えるようにする
             float border = 1 - abs(dot(IN.viewDir, IN.worldNormal));
             float alpha = (border * (1 - _Adjustment) + _Adjustment);
-            o.Alpha = _BaseColor.a * alpha;
-            o.Smoothness = _Glossiness;
-            o.Metallic = _Metallic;
+            o.Alpha = _BaseColor.a * alpha; // 透明度
+            
+            o.Smoothness = _Glossiness; // 反射の滑らかさ
+            o.Metallic = _Metallic; // 金属光沢
         }
         ENDCG
     }

@@ -15,22 +15,27 @@ public class Title : MonoBehaviour
     GameObject m_lights;
 
     [SerializeField]
+    GameObject m_canvas;
+
+    [SerializeField]
     float m_lightOffTime;
+
 
     private void Start()
     {
-        StartCoroutine("LightOff");
+        StartCoroutine("StartDirection");
     }
 
     void Update()
     {
         if(m_lights.transform.childCount <= 0)
         {
+            m_canvas.SetActive(false);
             ChangeScene();
         }
     }
 
-    IEnumerator LightOff()
+    IEnumerator StartDirection()
     {
         yield return new WaitWhile(() => !Input.GetKeyDown(m_keyCode));
 

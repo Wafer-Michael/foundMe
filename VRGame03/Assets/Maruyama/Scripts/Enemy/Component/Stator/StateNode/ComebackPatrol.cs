@@ -32,7 +32,9 @@ namespace StateNode
             var wayPointsMap = AIDirector.Instance.GetWayPointsMap();
             var factoryParam = AIDirector.Instance.GetFieldWayPointsMap_FactoryParametor();
             var targetPosition = m_autoMover.GetFirstPosition();
-            m_astarSeek.StartAstar(m_selfAstar.GetNode(), targetPosition, wayPointsMap.GetGraph(), factoryParam.intervalRange);
+            var targetNode = maru.UtilityAstar.FindNearAstarNode(wayPointsMap.GetGraph(), targetPosition);
+            //m_astarSeek.StartAstar(m_selfAstar.GetNode(), targetPosition, wayPointsMap.GetGraph(), factoryParam.intervalRange);
+            m_astarSeek.StartAstar(m_selfAstar.GetNode(), targetNode, wayPointsMap.GetGraph());
         }
 
         public override bool OnUpdate()

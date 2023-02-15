@@ -16,22 +16,20 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
 
     private List<DissolveFadeSprite> m_dissolveFadeSprites;     //ディゾブルテクスチャ
 
+    private List<ClearUI> m_clearUIs = new List<ClearUI>();
+
+    private List<TesterMover> m_movers = new List<TesterMover>();
+    private List<FPSController> m_fpsController = new List<FPSController>();
+
     protected override void Awake()
     {
         base.Awake();
         ChangeState(GameState.Game);
 
         m_dissolveFadeSprites = new List<DissolveFadeSprite>(FindObjectsOfType<DissolveFadeSprite>());
-    }
-
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
+        m_clearUIs = new List<ClearUI>(FindObjectsOfType<ClearUI>());
+        m_movers = new List<TesterMover>(FindObjectsOfType<TesterMover>());
+        m_fpsController = new List<FPSController>(FindObjectsOfType<FPSController>());
     }
 
     public void ChangeState(GameState state)
@@ -48,6 +46,7 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
         {
             GameState.Reserve => null,
             GameState.Game => null,
+            GameState.Clear => ClearStart,
             GameState.GameOver => GameOver_Start,
             _ => null
         };
@@ -60,6 +59,33 @@ public class GameManagerComponent : SingletonMonoBehaviour<GameManagerComponent>
         foreach(var sprite in m_dissolveFadeSprites)
         {
             sprite.FadeStart(FadeObject.FadeType.FadeOut);
+        }
+
+        foreach (var mover in m_movers)
+        {
+            mover.enabled = false;
+        }
+
+        foreach (var controller in m_fpsController)
+        {
+            controller.enabled = false;
+        }
+    }
+
+    private void ClearStart()
+    {
+        foreach (var ui in m_clearUIs) {
+            ui.ClearEvent();
+        }
+
+        foreach (var mover in m_movers)
+        {
+            mover.enabled = false;
+        }
+
+        foreach (var controller in m_fpsController)
+        {
+            controller.enabled = false;
         }
     }
 }

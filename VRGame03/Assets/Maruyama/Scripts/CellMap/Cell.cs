@@ -11,17 +11,18 @@ public class Cell : I_GraphNode
 	{
 		public maru.Rect rect;
 
-		public Parametor(maru.Rect rect)
-        {
+		public Parametor(maru.Rect rect) {
 			this.rect = rect;
         }
 	}
 
-	private bool m_isActive;	//アクティブ状態
+	private bool m_isActive;			//アクティブ状態
 
-	private int m_index;		//自分のインデックス
+	private bool m_isTarget = false;	//ターゲット編成
 
-	private Parametor m_param;	//パラメータ
+	private int m_index;				//自分のインデックス
+
+	private Parametor m_param;			//パラメータ
 
 	public Cell(int index, Parametor param)
     {
@@ -62,5 +63,10 @@ public class Cell : I_GraphNode
 
 	public bool IsActive() { return m_isActive; }
 
+	public bool IsTarget
+    {
+		get => m_isTarget;
+		set => m_isTarget = value;
+    }
 
 }

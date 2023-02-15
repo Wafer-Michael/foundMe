@@ -10,7 +10,21 @@ public class PlayerStatus : MonoBehaviour, I_Damaged
     }
 
     [SerializeField]
-    Parametor m_param;
+    private Parametor m_param;
+
+    private DamageEffectController m_damageEffect;
+    private PlayerStator m_stator;
+
+    private void Awake()
+    {
+        m_stator = GetComponent<PlayerStator>();
+        m_damageEffect = GetComponent<DamageEffectController>();
+    }
+
+    private void Update()
+    {
+        
+    }
 
     public void Damaged(DamageData data)
     {
@@ -20,9 +34,13 @@ public class PlayerStatus : MonoBehaviour, I_Damaged
         {
             m_param.hp = 0.0f;
             GameManagerComponent.Instance.ChangeState(GameManagerComponent.GameState.GameOver);     //ゲームオーバー処理
+            return;
         }
 
-        Debug.Log("hp: " + m_param.hp.ToString());
+        m_stator?.ChangeState(PlayerStator.StateType.Normal);
+        m_damageEffect.EffectStart();
+        
+        //Debug.Log("hp: " + m_param.hp.ToString());
     }
 
     public bool IsDeath() { return m_param.hp <= 0; }

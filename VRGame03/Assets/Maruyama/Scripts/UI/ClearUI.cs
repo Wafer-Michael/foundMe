@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class ClearUI : MonoBehaviour
 {
-    TMPro.TextMeshProUGUI m_debugText;
+    //TMPro.TextMeshProUGUI m_debugText;
+    private SpriteRenderer m_spriteRender;
 
     private void Awake()
     {
-        m_debugText = GetComponent<TMPro.TextMeshProUGUI>();
+        m_spriteRender = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    public void ClearEvent()
     {
-        if (GameManagerComponent.Instance.CurrentState == GameManagerComponent.GameState.Clear)
-        {
-            m_debugText.enabled = true;
+        if (!m_spriteRender) {
+            return;
         }
+
+        m_spriteRender.enabled = true;
     }
 }

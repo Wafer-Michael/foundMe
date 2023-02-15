@@ -80,7 +80,9 @@ namespace GK {
 		/// </summary>
 		public void BreakSplit()
 		{
-			Rigidbody.isKinematic = false;
+            if (Rigidbody) {
+				Rigidbody.isKinematic = false;
+			}
 			//Collider.enabled = false;
 
 			//フェード処理

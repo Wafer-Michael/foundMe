@@ -95,6 +95,12 @@ public class FieldWayPointsMap : FieldMapBase
             //セルの危険度に合わせた色を表示する
             var draw = draws[index];
 
+            if (node.IsTarget) {
+                draw.GizmosColor = Color.green;
+                index++;
+                continue;
+            }
+
             float value = 1 - node.GetImpactData().dangerValue;
             var color = new Color(value, value, 1, m_debugNodeDrawParametor.color.a);
 

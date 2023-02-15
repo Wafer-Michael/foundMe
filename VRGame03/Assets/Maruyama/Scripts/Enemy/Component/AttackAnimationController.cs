@@ -22,16 +22,22 @@ public class AttackAnimationController : MonoBehaviour
 
     public bool IsUpdate { get; set; } = false;
 
-    private VelocityManager m_velocityManager;
-    private TargetManager m_targetManager;
+    private VelocityManager m_velocityManager;  //速度管理
+    private Rigidbody m_rigidbody;              //リジッドボディ
+    private TargetManager m_targetManager;      //ターゲット管理
 
     [SerializeField]
-    private GameObject testTarget;
+    private TriggerAction m_triggerAction;      //トリガーイベント登録
+
+    public bool IsFloor { get; set; } = true;   //床にいるかどうかを設定
 
     private void Awake()
     {
         m_velocityManager = GetComponent<VelocityManager>();
+        m_rigidbody = GetComponent<Rigidbody>();
         m_targetManager = GetComponent<TargetManager>();
+
+        m_rigidbody.useGravity = false;
     }
 
     private void Update()
@@ -51,7 +57,9 @@ public class AttackAnimationController : MonoBehaviour
 
     private void AnimationUpdate()
     {
-        transform.position += m_jumpVector * Time.deltaTime;
+        //transform.position += m_jumpVector * Time.deltaTime;
+        m_rigidbody.velocity = m_jumpVector;
+        //m_velocityManager.velocity = m_jumpVector;
         m_jumpVector += new Vector3(0.0f, -m_gravitySpeed, 0.0f) * Time.deltaTime;
     }
 
@@ -59,9 +67,11 @@ public class AttackAnimationController : MonoBehaviour
         Debug.Log("★★End");
         IsUpdate = false;
         var position = transform.position;
-        transform.position = new Vector3(position.x, 0, position.z);
+        transform.position = new Vector3(position.x, 0.0f, position.z);
 
         m_velocityManager.enabled = true;
+        m_velocityManager.ResetAll();
+        //m_rigidbody.useGravity = true;
     }
 
     public void AttackStart() {
@@ -74,23 +84,28 @@ public class AttackAnimationController : MonoBehaviour
 
         m_velocityManager.ResetAll();
         m_velocityManager.enabled = false;
+        m_rigidbody.useGravity = false;
 
         m_jumpVector = Vector3.zero;
         var toTarget = m_targetManager.GetCurrentTarget().transform.position - transform.position;
-        m_jumpVector += toTarget.normalized * m_moveSpeed * Time.deltaTime;
-        m_jumpVector += new Vector3(0, m_jumpForce * Time.deltaTime, 0);
+        m_jumpVector += toTarget.normalized * m_moveSpeed;
+        m_jumpVector += new Vector3(0, m_jumpForce, 0);
+        IsFloor = false;
     }
 
-    private bool IsEnd() { return transform.position.y < 0; }
+    private bool IsEnd() { return m_jumpVector.y <= 0.0f && IsFloor; }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!IsUpdate)
-        {
+        if (!IsUpdate) {
             return;
         }
 
         var damaged = other.gameObject.GetComponent<I_Damaged>();
         damaged?.Damaged(new DamageData(1.0f, this.gameObject, other.collider));
+    }
+
+    public void TestDebugLog() {
+        Debug.Log("★★トリガー");
     }
 }

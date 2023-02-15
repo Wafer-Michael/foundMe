@@ -11,6 +11,7 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
         public float speed;    //回転させる速度
         public RotationController rotationControllerAxis;   //回転させたい軸
         public float openIdleTime;
+        public bool isOpenDirectionReverse;
 
         public float Radian => degree * Mathf.Deg2Rad; 
         public Vector3 DefaultDirection { get; set; }        //初期方向
@@ -43,6 +44,9 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
 
     private DoorLock m_doorLock = null;
 
+    [SerializeField]
+    AudioSource m_openSE; // 開閉時のSE
+
     private void Awake()
     {
         m_doorLock = GetComponent<DoorLock>();
@@ -60,8 +64,6 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
     private void Update()
     {
         m_stateMachine.OnUpdate();
-
-
     }
 
     
@@ -93,10 +95,11 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
     public void Access(GameObject other)
     {
         //ロック状態なら、
-        if(!m_doorLock.IsLock){
-            m_doorLock.AccessKey();
+        if(m_doorLock.IsLock){
+            m_doorLock.AccessKey(other);
         }
         else {
+            m_openSE.PlayOneShot(m_openSE.clip);
             Open(other);
         }
     }
@@ -117,6 +120,8 @@ public class OpenDoor : MonoBehaviour, I_InputAccess
     {
         m_stateMachine.ChangeState(state, (int)state);
     }
+
+    public bool IsOpenDirectionReverse => m_param.isOpenDirectionReverse;
 
 }
 
@@ -158,7 +163,8 @@ namespace StateNode
         {
             var param = GetOwner().Param;
             var requesterToOwner = GetOwner().transform.position - param.openRequester.transform.position;
-            float newDot = Vector3.Dot(requesterToOwner, GetOwner().transform.right);
+            var forward = GetOwner().IsOpenDirectionReverse ? -GetOwner().transform.forward : GetOwner().transform.forward;
+            float newDot = Vector3.Dot(requesterToOwner, forward);
 
             return newDot > 0 ? -1 : 1;
         }
@@ -211,6 +217,7 @@ namespace StateNode
         {
             return !GetOwner().Param.rotationControllerAxis.IsRotation;
         }
+
     }
 
 

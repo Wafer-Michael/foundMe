@@ -24,13 +24,14 @@ public class VRUIObserver : MonoBehaviour
         }
 
         //Open状態になったときのイベント群
-        m_vrUI.IsOpenObservable.
+        m_vrUI.IsOpenObservable. 
            Where(value => value).
            Subscribe(value => m_openEvents?.Invoke()).
            AddTo(this);
 
         //Close状態になったときのイベント群
         m_vrUI.IsOpenObservable
+            .Skip(1)
             .Where(value => !value)
             .Subscribe(value => m_closeEvents?.Invoke())
             .AddTo(this);

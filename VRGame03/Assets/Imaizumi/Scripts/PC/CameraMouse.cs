@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CamCtrl : MonoBehaviour
+public class CameraMouse : MonoBehaviour
 {
     private Camera cam;
     private Vector3 startPos;

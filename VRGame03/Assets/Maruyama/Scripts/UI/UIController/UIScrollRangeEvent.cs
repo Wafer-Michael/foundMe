@@ -57,4 +57,11 @@ public class UIScrollRangeEvent : MonoBehaviour
 
         return currentRange >= m_range;
     }
+
+    //--------------------------------------------------------------------------------------
+    /// アクセッサ
+    //--------------------------------------------------------------------------------------
+
+    public float GetRange() { return m_range; }
+
 }
